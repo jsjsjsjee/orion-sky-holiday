@@ -1,0 +1,447 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discover Nepal | Orlon Sky Holiday</title>
+<style>
+:root {
+  --mountain:#102B46;
+  --blue:#245A82;
+  --sky:#A9D8F0;
+  --red:#C74646;
+  --gold:#E9C783;
+  --cream:#FFFCF5;
+  --ink:#263F54;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;color:white;background:var(--mountain)}
+button{font:inherit;cursor:pointer}
+.scene{
+ min-height:100vh;padding-bottom:35px;
+ background:
+ linear-gradient(125deg,#091D35E8,#245A82B8,#102B46E0),
+ url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2000&q=85")
+ center/cover fixed;
+}
+header{
+ max-width:1200px;margin:auto;padding:22px;
+ display:flex;justify-content:space-between;align-items:center;
+ border-bottom:1px solid #ffffff35
+}
+.brand{font: bold 19px Georgia,serif}
+.brand span{color:var(--gold)}
+.back{
+ color:white;text-decoration:none;border:1px solid #ffffff65;
+ padding:10px 15px;border-radius:30px;font-size:12px
+}
+.intro{text-align:center;padding:35px 15px 20px}
+.eyebrow{
+ text-transform:uppercase;letter-spacing:4px;font-size:11px;
+ font-weight:bold;color:var(--gold)
+}
+.intro h1{font:clamp(38px,6vw,65px) Georgia,serif;margin:13px 0}
+.intro p{max-width:680px;margin:auto;color:#e3effa;line-height:1.7}
+.book-area{width:min(1000px,calc(100% - 30px));margin:25px auto 0}
+.book{
+ position:relative;display:grid;grid-template-columns:1fr 1fr;
+ aspect-ratio:1.6;min-height:450px;
+ filter:drop-shadow(0 25px 35px #0007)
+}
+.page{
+ min-width:0;overflow:hidden;position:relative;color:var(--ink);
+ padding:clamp(20px,3.5vw,38px);
+ background:radial-gradient(circle at top left,#A9D8F030,transparent 55%),var(--cream);
+ border:1px solid #c8d9e6
+}
+.left{border-radius:8px 0 0 8px;border-right:1px solid #b7cadb}
+.right{border-radius:0 8px 8px 0}
+.book::after{
+ content:"";position:absolute;z-index:3;top:0;bottom:0;left:50%;
+ width:18px;transform:translateX(-50%);pointer-events:none;
+ background:linear-gradient(90deg,#23445b33,#b7cadbaa,#fffdf5,#526b8033)
+}
+.page-label{
+ font-size:10px;font-weight:bold;letter-spacing:2px;
+ text-transform:uppercase;color:var(--red);margin-bottom:15px
+}
+.page h2{font:clamp(25px,3.3vw,36px) Georgia,serif;line-height:1.1;color:var(--mountain);margin:0 0 15px}
+.page p{color:#536879;font-size:13px;line-height:1.8}
+.page ul{list-style:none;padding:0;margin-top:15px}
+.page li{
+ border-bottom:1px solid #102B4616;padding:9px 0 9px 19px;
+ position:relative;color:#365269;font-size:12px;line-height:1.5
+}
+.page li::before{content:"✦";color:var(--red);position:absolute;left:0}
+.photo-wrap{height:100%;min-height:300px;position:relative}
+.photo{width:100%;height:100%;min-height:300px;max-height:480px;object-fit:cover;border-radius:4px}
+.caption{
+ position:absolute;bottom:10px;left:10px;right:10px;
+ padding:25px 12px 12px;background:linear-gradient(transparent,#091D35ED);
+ color:white;font:15px Georgia,serif
+}
+.page-no{position:absolute;bottom:12px;color:#718ba0;font-size:10px}
+.left .page-no{left:25px}.right .page-no{right:25px}
+.cover{
+ position:absolute;z-index:5;inset:0 50% 0 0;transform-origin:left center;
+ transition:transform 1.3s cubic-bezier(.2,.7,.2,1);backface-visibility:hidden;
+ border-radius:8px 0 0 8px;
+ background:linear-gradient(140deg,#102B46E8,#245A82D9),
+ url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=85") center/cover;
+ border:2px solid #E9C78399;box-shadow:inset -10px 0 20px #0004;
+ display:grid;place-items:center;text-align:center;padding:25px
+}
+.cover::after{content:"";position:absolute;inset:13px;border:1px solid var(--gold);pointer-events:none}
+.cover-content{position:relative;z-index:1}
+.cover h2{color:var(--cream);font:clamp(30px,4vw,48px) Georgia,serif;margin:18px 0 12px}
+.cover p{font-size:12px;color:#e3effa;line-height:1.7}
+.price{font-weight:bold;font-size:15px!important;color:var(--gold)!important}
+.primary{
+ background:var(--gold);color:var(--mountain);border:none;
+ padding:13px 17px;margin-top:12px;border-radius:4px;
+ font-size:11px;font-weight:bold;text-transform:uppercase;letter-spacing:1px
+}
+.primary:hover{background:#f8e4b6}
+.book.open .cover{transform:rotateY(-170deg);pointer-events:none}
+.controls{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:15px;margin-top:22px}
+.nav-btn{background:#ffffff12;color:white;border:1px solid #ffffff65;border-radius:30px;padding:11px 17px;font-size:12px}
+.nav-btn:hover:not(:disabled){background:#ffffff30}
+.nav-btn:disabled{opacity:.35;cursor:not-allowed}
+.status{min-width:150px;text-align:center;font-size:11px;color:#e3effa}
+.progress{width:min(260px,70%);height:3px;background:#ffffff30;margin:15px auto}
+.progress div{height:100%;width:0;background:var(--gold);transition:width .3s}
+.chapters{max-width:950px;margin:25px auto;padding:0 15px;display:flex;justify-content:center;flex-wrap:wrap;gap:8px}
+.chapters button{background:#ffffff10;border:1px solid #ffffff45;color:white;padding:9px 12px;border-radius:25px;font-size:10px}
+.chapters button.active{border-color:var(--gold);color:var(--gold);background:#E9C7831C}
+.checklist{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.checklist label{color:#365269;font-size:12px}
+.checklist input{accent-color:var(--blue)}
+.footer{text-align:center;color:#ffffff9c;font-size:11px;padding:10px}
+.footer span{color:var(--gold)}
+@media(max-width:700px){
+ header{padding:17px}.brand{font-size:15px}.intro{padding-top:25px}
+ .book{display:flex;flex-direction:column;aspect-ratio:auto;min-height:0}
+ .book::after{display:none}
+ .left,.right{border-radius:5px}.right{margin-top:8px}
+ .page{padding:23px}.photo-wrap{min-height:240px}
+ .photo{min-height:240px;max-height:330px}
+ .cover{inset:0;transform-origin:center bottom;border-radius:5px}
+ .book.open .cover{transform:rotateX(90deg)}
+ .cover h2{font-size:38px}.controls{gap:8px}.nav-btn{padding:10px 12px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="scene">
+<header>
+ <div class="brand"><span>✧</span> Orlon Sky Holiday</div>
+ <a class="back" href="javascript:history.back()">← Back to Destinations</a>
+</header>
+
+<section class="intro">
+ <div class="eyebrow">Himalayas · Culture · Adventure</div>
+ <h1>Discover Nepal</h1>
+ <p>Explore Kathmandu's heritage, Pokhara's peaceful lakes, Everest's legendary mountains and Chitwan's incredible wildlife through your personal travel book.</p>
+</section>
+
+<main class="book-area">
+ <div class="book" id="book">
+  <section class="page left" id="leftPage"></section>
+  <section class="page right" id="rightPage"></section>
+  <div class="cover">
+   <div class="cover-content">
+    <div class="eyebrow">Orlon Sky Holiday presents</div>
+    <h2>Discover<br>Nepal</h2>
+    <p>Kathmandu · Pokhara<br>Everest · Chitwan</p>
+    <p class="price">From ₹24,999 / person*</p>
+    <button class="primary" id="openBtn">Open Your Travel Book ↗</button>
+   </div>
+  </div>
+ </div>
+ <div class="controls">
+  <button class="nav-btn" id="prevBtn" disabled>← Previous</button>
+  <div class="status" id="status">Your journey awaits</div>
+  <button class="nav-btn" id="nextBtn">Next Chapter →</button>
+ </div>
+ <div class="progress"><div id="progressBar"></div></div>
+</main>
+<nav class="chapters" id="chapters"></nav>
+<div class="footer">Discover more. Travel beautifully.<br><br> <span>Orlon Sky Holiday</span></div>
+</div>
+
+<script>
+const chapters = [
+{
+ title:"Welcome to Nepal",label:"Chapter 01 · The destination",
+ heading:"Where the mountains touch the sky",
+ image:"photo-1464822759023-fed622ff2c3b",
+ caption:"The majestic Himalayan landscape",
+ text:"Nepal is a land of Himalayan peaks, ancient temples, tranquil lakes and rich cultural traditions. Explore lively historic cities, peaceful mountain towns and wildlife-rich lowlands on one memorable journey.",
+ items:[
+  "Kathmandu — historic squares and sacred temples",
+  "Pokhara — Phewa Lake and mountain panoramas",
+  "Everest region — legendary Himalayan scenery",
+  "Chitwan — wildlife and jungle experiences"
+ ],
+ note:"The Everest region requires careful planning, suitable fitness and weather-aware itineraries."
+},
+{
+ title:"Why visit Nepal?",label:"Chapter 02 · Find your experience",
+ heading:"Adventure meets ancient culture",
+ image:"photo-1544735716-392fe2489ffa",
+ caption:"Traditional architecture and mountain culture",
+ text:"Nepal offers experiences for culture lovers, nature enthusiasts, photographers and adventure travellers. Enjoy heritage walks, lakeside relaxation, scenic viewpoints and guided outdoor excursions.",
+ items:[
+  "Culture — historic temples and traditional architecture",
+  "Nature — lakes, forests and Himalayan views",
+  "Adventure — trekking and mountain excursions",
+  "Wildlife — guided safaris in Chitwan National Park"
+ ],
+ note:"Choose excursions that match your fitness, available time and travel conditions."
+},
+{
+ title:"Places to visit",label:"Chapter 03 · The highlights",
+ heading:"Four unforgettable destinations",
+ image:"photo-1544735716-392fe2489ffa",
+ caption:"Discover Nepal's spectacular diversity",
+ text:"These four highlights offer a blend of heritage, scenery, mountain adventure and wildlife. Distances and travel conditions mean the route should be planned carefully.",
+ items:[
+  "Kathmandu — Kathmandu Durbar Square, Boudhanath and Pashupatinath",
+  "Pokhara — Phewa Lake, World Peace Pagoda and Sarangkot",
+  "Everest — Himalayan viewpoints or a trek, depending on your itinerary",
+  "Chitwan — guided wildlife experiences and nature walks"
+ ],
+ note:"Trekking permits, park rules, local guides and weather may affect the activities available."
+},
+{
+ title:"Best time to travel",label:"Chapter 04 · Choose your season",
+ heading:"Find your Himalayan season",
+ image:"photo-1464822759023-fed622ff2c3b",
+ caption:"Clear mountain views on a beautiful day",
+ text:"Spring and autumn are popular for many Nepal journeys. Conditions vary significantly between the lowlands, Kathmandu Valley and high-altitude Everest region.",
+ items:[
+  "Spring — flowers and popular trekking conditions",
+  "Autumn — often clear skies and excellent mountain views",
+  "Monsoon — rain can affect roads, trails and flights",
+  "Winter — cold conditions, especially at high elevations"
+ ],
+ note:"Check regional forecasts and trekking advice for your specific dates."
+},
+{
+ title:"Budget & prices",label:"Chapter 05 · Plan your spend",
+ heading:"Your Nepal holiday budget",
+ image:"photo-1517849845537-4d257902454a",
+ caption:"Make room for memorable experiences",
+ text:"The advertised starting price is ₹24,999 per person. The final package price depends on departure city, travel dates, flights, hotel category, transfers, meals and selected excursions.",
+ items:[
+  "Starting package price: ₹24,999 per person",
+  "Confirm flights, baggage and ground transfers",
+  "Check hotels, meals and sightseeing inclusions",
+  "Ask whether Everest-region transport or flights are included",
+  "Budget separately for permits and optional activities"
+ ],
+ note:"₹24,999 is the supplied starting price, not a guaranteed live quote. Confirm all inclusions before booking."
+},
+{
+ title:"History & culture",label:"Chapter 06 · Stories of Nepal",
+ heading:"A heritage shaped by the Himalayas",
+ image:"photo-1544735716-392fe2489ffa",
+ caption:"Nepal's historic temples and architecture",
+ text:"Nepal's history includes ancient kingdoms, distinctive Newari architecture, Hindu and Buddhist traditions, and communities with their own languages, customs and festivals.",
+ items:[
+  "Explore historic squares in Kathmandu Valley",
+  "Discover Buddhist stupas and Hindu temples",
+  "Learn about traditional crafts and local festivals",
+  "Dress respectfully at religious sites and follow visitor rules"
+ ],
+ note:"Ask permission before photographing people or religious ceremonies."
+},
+{
+ title:"Taste of Nepal",label:"Chapter 07 · At the table",
+ heading:"Warm hospitality and local flavours",
+ image:"photo-1547592180-85f173990554",
+ caption:"Explore traditional Nepali cuisine",
+ text:"Nepali food features comforting meals, regional specialities and influences from neighbouring Himalayan cultures. Local dishes offer a delicious way to learn about everyday life.",
+ items:[
+  "Dal bhat — rice, lentils and accompaniments",
+  "Momos — dumplings with different fillings",
+  "Thukpa — warming noodle soup",
+  "Sel roti — a traditional ring-shaped rice bread"
+ ],
+ note:"Ask about spice levels and ingredients if you have food allergies."
+},
+{
+ title:"Packing checklist",label:"Chapter 08 · Be prepared",
+ heading:"Pack for cities and mountains",
+ image:"photo-1551632811-561732d1e306",
+ caption:"Prepare for changing mountain conditions",
+ text:"Nepal's weather changes with altitude and season. City sightseeing, jungle visits and high-altitude trekking all require different equipment.",
+ checklist:[
+  "Comfortable walking shoes",
+  "Warm layers and jacket",
+  "Rain protection",
+  "Sun hat and sunglasses",
+  "Sunscreen and insect repellent",
+  "Reusable water bottle",
+  "Passport and travel documents",
+  "Personal medicines and basic first aid"
+ ],
+ note:"For high-altitude trekking, arrange suitable gear and consult a qualified professional about altitude safety."
+},
+{
+ title:"Suggested itinerary",label:"Chapter 09 · Make it yours",
+ heading:"From heritage to the Himalayas",
+ image:"photo-1472396961693-142e6e269027",
+ caption:"A journey through Nepal's varied landscapes",
+ text:"A multi-region Nepal trip needs enough time for road journeys, internal transport and possible weather delays. Treat this as a sample route to customise.",
+ items:[
+  "Days 1–2: Kathmandu sightseeing and heritage",
+  "Days 3–4: Pokhara, lakeside time and viewpoints",
+  "Days 5–6: Everest-region experience, if transport and timing allow",
+  "Days 7–8: Chitwan wildlife experiences and departure"
+ ],
+ note:"This sample route may need more days, especially for an Everest trek. Confirm transport feasibility before selling the itinerary."
+},
+{
+ title:"Travel thoughtfully",label:"Chapter 10 · Travel with care",
+ heading:"Protect the mountains and wildlife",
+ image:"photo-1472396961693-142e6e269027",
+ caption:"Respect Nepal's natural beauty",
+ text:"Responsible travel helps protect fragile mountain environments, local communities and wildlife habitats. Follow park guidance and respect local traditions wherever you go.",
+ items:[
+  "Carry waste out of trekking areas",
+  "Follow marked trails and local safety guidance",
+  "Respect wildlife viewing distances",
+  "Choose responsible local guides",
+  "Be mindful of water use and local customs"
+ ],
+ note:"Follow current park rules, trail conditions and guidance from qualified local operators."
+},
+{
+ title:"Your Nepal story",label:"Final chapter · Begin your journey",
+ heading:"Ready to discover Nepal?",
+ image:"photo-1464822759023-fed622ff2c3b",
+ caption:"Your Himalayan adventure starts here",
+ text:"From Kathmandu's heritage to Pokhara's lakes, Everest's spectacular mountain landscapes and Chitwan's wildlife, Nepal offers a remarkable range of experiences.",
+ items:[
+  "Choose your travel dates and departure city",
+  "Select your preferred hotels and destinations",
+  "Confirm package price and inclusions",
+  "Plan transport, sightseeing and optional adventures"
+ ],
+ note:"Use your website's actual enquiry or booking process to confirm dates and availability."
+}
+];
+
+let current=0;
+let opened=false;
+
+const book=document.getElementById("book");
+const left=document.getElementById("leftPage");
+const right=document.getElementById("rightPage");
+const prev=document.getElementById("prevBtn");
+const next=document.getElementById("nextBtn");
+const status=document.getElementById("status");
+const progress=document.getElementById("progressBar");
+const chapterMenu=document.getElementById("chapters");
+
+function safe(value){
+ return String(value).replace(/[&<>"']/g,c=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ })[c]);
+}
+function imageUrl(id){
+ return "https://images.unsplash.com/"+id+"?auto=format&fit=crop&w=1100&q=85";
+}
+
+function render(){
+ const c=chapters[current];
+
+ left.innerHTML=`
+  <div class="page-label">${safe(c.label)}</div>
+  <h2>${safe(c.heading)}</h2>
+  <p>${safe(c.text)}</p>
+  ${c.checklist?`
+   <div class="checklist">
+    ${c.checklist.map(item=>`<label><input type="checkbox"> ${safe(item)}</label>`).join("")}
+   </div>`:`
+   <ul>${c.items.map(item=>`<li>${safe(item)}</li>`).join("")}</ul>`}
+  <p><small>${safe(c.note)}</small></p>
+  <div class="page-no">${current*2+1}</div>
+ `;
+
+ right.innerHTML=`
+  <div class="photo-wrap">
+   <img class="photo" src="${imageUrl(c.image)}" alt="${safe(c.caption)}"
+    onerror="this.onerror=null;this.style.background='#245A82';this.removeAttribute('src')">
+   <div class="caption">${safe(c.caption)}</div>
+  </div>
+  ${current===chapters.length-1?`
+   `:""}
+  <div class="page-no">${current*2+2}</div>
+ `;
+
+ prev.disabled=current===0;
+ next.disabled=current===chapters.length-1;
+ next.textContent=current===chapters.length-1?"End of Book":"Next Chapter →";
+ status.textContent=c.title+" · "+(current+1)+" of "+chapters.length;
+ progress.style.width=((current+1)/chapters.length*100)+"%";
+
+ document.querySelectorAll(".chapters button").forEach((btn,i)=>{
+  btn.classList.toggle("active",i===current);
+ });
+
+ const plan=document.getElementById("planBtn");
+ if(plan){
+  plan.onclick=()=>{
+   const subject=encodeURIComponent("Nepal holiday enquiry");
+   const body=encodeURIComponent(
+    "Hello Orlon Sky Holiday,\n"+
+    "I am interested in the Nepal tour starting from ₹24,999 per person.\n"+
+    "Please share the itinerary, package inclusions, dates and availability."
+   );
+   // Replace with your real business email.
+   window.location.href="mailto:YOUR-EMAIL@example.com?subject="+subject+"&body="+body;
+  };
+ }
+ const restart=document.getElementById("restartBtn");
+ if(restart)restart.onclick=()=>{current=0;render()};
+}
+
+function goTo(index){
+ if(index<0||index>=chapters.length)return;
+ current=index;
+ render();
+}
+function openBook(){
+ opened=true;
+ book.classList.add("open");
+ setTimeout(render,300);
+}
+
+chapters.forEach((c,i)=>{
+ const btn=document.createElement("button");
+ btn.textContent=c.title;
+ btn.onclick=()=>{
+  if(!opened)openBook();
+  goTo(i);
+  book.scrollIntoView({behavior:"smooth",block:"center"});
+ };
+ chapterMenu.appendChild(btn);
+});
+
+document.getElementById("openBtn").addEventListener("click",openBook);
+prev.addEventListener("click",()=>goTo(current-1));
+next.addEventListener("click",()=>goTo(current+1));
+
+document.addEventListener("keydown",event=>{
+ if(!opened||event.target.matches("input,textarea"))return;
+ if(event.key==="ArrowRight")goTo(current+1);
+ if(event.key==="ArrowLeft")goTo(current-1);
+});
+render();
+</script>
+</body>
+</html>

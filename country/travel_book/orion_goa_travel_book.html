@@ -1,0 +1,407 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Goa Beaches & Heritage | Orlon Sky Holiday</title>
+<style>
+:root{
+  --ocean:#087e8b;
+  --deep:#064b59;
+  --aqua:#42c9bd;
+  --sun:#ff9b54;
+  --sand:#fff0d9;
+  --ink:#183b43;
+  --paper:#fffaf1;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Georgia,"Times New Roman",serif;
+  color:var(--ink);
+  background:#073f50;
+}
+.scene{
+  min-height:100vh;
+  padding:24px;
+  background:
+  radial-gradient(circle at 10% 15%,#ffe1ad 0,transparent 25%),
+  radial-gradient(circle at 90% 85%,#ff9b54 0,transparent 24%),
+  linear-gradient(135deg,#064b59,#087e8b 48%,#42c9bd);
+}
+header{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  color:white;
+  gap:15px;
+}
+.brand{font-size:21px;font-weight:bold;letter-spacing:1px}
+.back{color:white;text-decoration:none;font:14px Arial,sans-serif}
+.intro{
+  text-align:center;
+  color:white;
+  max-width:760px;
+  margin:35px auto 28px;
+}
+.eyebrow{
+  font:12px Arial,sans-serif;
+  text-transform:uppercase;
+  letter-spacing:4px;
+  color:#ffe0a9;
+}
+.intro h1{font-size:clamp(34px,5vw,56px);margin:12px 0}
+.intro p{font:15px/1.7 Arial,sans-serif;color:#e7ffff}
+.book-area{max-width:1120px;margin:auto}
+.book{
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  min-height:550px;
+  perspective:1800px;
+  box-shadow:0 25px 65px #002a3566;
+}
+.page{
+  position:relative;
+  background:var(--paper);
+  padding:42px 38px;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+}
+.left-page{border-right:1px solid #d9c9ac}
+.right-page{padding:22px;background:#f5e8d0}
+.spine{
+  position:absolute;
+  z-index:3;
+  top:0;bottom:0;left:50%;
+  width:12px;
+  transform:translateX(-50%);
+  background:linear-gradient(90deg,#704b2b,#e7c58d,#704b2b);
+  opacity:.7;
+}
+.cover{
+  position:absolute;
+  z-index:5;
+  inset:0 50% 0 0;
+  transform-origin:right center;
+  transition:transform 1s cubic-bezier(.2,.7,.2,1);
+  background:
+    linear-gradient(145deg,#063f4dE8,#087e8bdc 60%,#ff9850e8),
+    url("https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1400&q=85") center/cover;
+  color:white;
+  padding:40px 32px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  backface-visibility:hidden;
+  border:5px solid #f6d69b;
+  box-shadow:inset 0 0 0 2px #ffffff55;
+}
+.book.open .cover{transform:rotateY(-170deg);pointer-events:none}
+.cover-top{text-align:center}
+.cover-mark{font-size:30px;color:#ffdc9d}
+.cover h2{font-size:clamp(30px,4vw,47px);line-height:1.08;margin:18px 0}
+.cover p{font:13px/1.6 Arial,sans-serif;color:#f3ffff}
+.cover-bottom{text-align:center}
+.cover-dest{font:13px/1.8 Arial,sans-serif;letter-spacing:1px}
+.price{font-size:27px;font-weight:bold;color:#ffe0a4;margin:12px 0}
+.cover button,.controls button,.restart{
+  border:0;border-radius:30px;padding:12px 22px;
+  background:var(--sun);color:#3e2818;
+  font-weight:bold;cursor:pointer;
+}
+.cover button{background:#ffe1a9}
+.chapter-kicker{
+  font:11px Arial,sans-serif;
+  text-transform:uppercase;letter-spacing:3px;
+  color:var(--ocean);margin-bottom:13px;
+}
+.page h2{font-size:30px;line-height:1.15;margin:0 0 17px;color:var(--deep)}
+.page p,.page li{font:14px/1.75 Arial,sans-serif}
+.page ul{padding-left:19px;margin:7px 0}
+.page li{margin:5px 0}
+.note{
+  margin-top:auto;padding:14px 15px;
+  background:#f5e5c8;border-left:3px solid var(--sun);
+  font:13px/1.6 Arial,sans-serif;
+}
+.page-no{
+  margin-top:20px;text-align:right;
+  font:11px Arial,sans-serif;color:#987e5e;
+}
+.photo-wrap{height:100%;min-height:300px;display:flex;flex-direction:column}
+.photo{display:block;width:100%;height:100%;min-height:300px;max-height:480px;object-fit:cover;border-radius:4px}
+.caption{font:12px/1.5 Arial,sans-serif;color:#685c49;margin-top:10px}
+.controls{
+  display:flex;align-items:center;justify-content:center;
+  gap:12px;margin:20px 0 10px;flex-wrap:wrap;
+}
+.controls button{background:#fff0d9;color:var(--deep);font:13px Arial,sans-serif}
+.controls button:disabled{opacity:.4;cursor:not-allowed}
+.status{font:13px Arial,sans-serif;color:white;min-width:115px;text-align:center}
+.progress{height:5px;background:#ffffff50;border-radius:8px;overflow:hidden;max-width:500px;margin:12px auto}
+.progress-fill{height:100%;width:0;background:#ffe0a4;transition:width .3s}
+.chapter-nav{
+  display:flex;justify-content:center;gap:8px;flex-wrap:wrap;
+  max-width:850px;margin:20px auto 0;
+}
+.chapter-nav button{
+  border:1px solid #ffffff75;background:#ffffff18;color:white;
+  border-radius:20px;padding:8px 12px;font:11px Arial,sans-serif;cursor:pointer
+}
+.chapter-nav button.active{background:#ffe0a4;color:#064b59;border-color:#ffe0a4}
+.checklist{list-style:none!important;padding:0!important}
+.checklist li:before{content:"✓";color:var(--ocean);font-weight:bold;margin-right:8px}
+.final-note{text-align:center;padding:18px 0}
+@media(max-width:700px){
+  .scene{padding:15px}
+  .intro{margin:25px auto 20px}
+  .book{grid-template-columns:1fr;min-height:0}
+  .page{min-height:390px;padding:28px 24px}
+  .right-page{min-height:300px}
+  .spine{display:none}
+  .cover{
+    inset:0 0 auto 0;height:390px;
+    transform-origin:top center;
+  }
+  .book.open .cover{transform:rotateX(90deg)}
+  .photo{min-height:240px;max-height:330px}
+  .page h2{font-size:26px}
+  .cover h2{font-size:35px}
+  .controls{gap:8px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+<div class="scene">
+<header>
+  <div class="brand">✧ Orlon Sky Holiday</div>
+  <a class="back" href="index.html">← Back to Tours</a>
+</header>
+
+<section class="intro">
+  <div class="eyebrow">Sunshine • Sea • Culture</div>
+  <h1>Discover Beautiful Goa</h1>
+  <p>Golden beaches, Portuguese-era heritage, colourful streets and unforgettable coastal experiences. Turn the pages and begin your Goa journey.</p>
+</section>
+
+<main class="book-area">
+<div class="book" id="book">
+  <section class="page left-page" id="leftPage">
+    <div class="chapter-kicker" id="kicker">Your journey begins</div>
+    <h2 id="chapterTitle">Welcome to Goa</h2>
+    <div id="chapterText"></div>
+    <div class="note" id="chapterNote"></div>
+    <div class="page-no" id="leftNo">01</div>
+  </section>
+
+  <section class="page right-page">
+    <div class="photo-wrap">
+      <img class="photo" id="chapterImage" src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1100&q=85" alt="Goa coastline and beach">
+      <div class="caption" id="chapterCaption">The beautiful coastline of Goa</div>
+    </div>
+    <div class="page-no" id="rightNo">02</div>
+  </section>
+
+  <div class="spine"></div>
+
+  <section class="cover" id="cover">
+    <div class="cover-top">
+      <div class="cover-mark">✧</div>
+      <div class="eyebrow">Orlon Sky Holiday presents</div>
+      <h2>GOA<br>BEACHES &<br>HERITAGE</h2>
+      <p>A coastal escape filled with sunshine, history and unforgettable memories.</p>
+    </div>
+    <div class="cover-bottom">
+      <div class="cover-dest">NORTH GOA • SOUTH GOA • OLD GOA</div>
+      <div class="price">₹14,999 <small style="font-size:13px">/ person</small></div>
+      <button onclick="openBook()">Open Your Travel Book →</button>
+    </div>
+  </section>
+</div>
+
+<div class="controls">
+  <button id="prevBtn" onclick="goTo(current-1)" disabled>← Previous</button>
+  <div class="status" id="status">Chapter 1 of 14</div>
+  <button id="nextBtn" onclick="goTo(current+1)">Next →</button>
+</div>
+<div class="progress"><div class="progress-fill" id="progress"></div></div>
+<nav class="chapter-nav" id="chapterNav"></nav>
+</main>
+</div>
+
+<script>
+const chapters=[
+{
+title:"Welcome to Goa",
+kicker:"Chapter 01 • The coastal escape",
+text:"<p>Welcome to Goa, India's sunshine state! Known for its palm-fringed beaches, lively markets, historic churches and relaxed coastal lifestyle, Goa offers something for every traveller.</p><p>From energetic beach towns in the north to peaceful shores in the south, every corner has a story to tell.</p>",
+note:"Get ready for sea views, heritage walks, local flavours and memorable sunsets.",
+image:"https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1100&q=85",
+caption:"Goa's tropical beaches and beautiful Arabian Sea coastline."
+},
+{
+title:"North Goa Beaches",
+kicker:"Chapter 02 • Sun and sand",
+text:"<p>North Goa is famous for its lively beach atmosphere, beach shacks, water activities and vibrant nightlife.</p><ul><li>Baga Beach – popular for its energetic atmosphere.</li><li>Calangute Beach – a long stretch of golden sand.</li><li>Candolim Beach – a relaxed coastal escape.</li><li>Anjuna Beach – famous for its bohemian vibe.</li></ul>",
+note:"Enjoy the coastline responsibly and follow local water-sport safety instructions.",
+image:"https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1100&q=85",
+caption:"A beautiful tropical beach with turquoise water."
+},
+{
+title:"Baga Beach",
+kicker:"Chapter 03 • Beachside fun",
+text:"<p>Baga is one of Goa's best-known beach destinations. Spend your day by the sea, explore beachside cafés and enjoy the lively atmosphere.</p><ul><li>Relax beside the Arabian Sea.</li><li>Try permitted water sports.</li><li>Explore the beach shacks and cafés.</li><li>Enjoy the evening beach atmosphere.</li></ul>",
+note:"Water-sport activities are subject to weather, availability and operator safety rules.",
+image:"https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=1100&q=85",
+caption:"A sunny coastal escape with inviting beach scenery."
+},
+{
+title:"Fort Aguada",
+kicker:"Chapter 04 • Stories of the past",
+text:"<p>Fort Aguada is a historic Portuguese-era fort overlooking the Arabian Sea. Built in the early 17th century, it offers impressive coastal views and a glimpse into Goa's maritime history.</p><ul><li>Explore the old fort walls.</li><li>Admire the sea views.</li><li>Discover the historic lighthouse area.</li></ul>",
+note:"Wear comfortable footwear while exploring the fort grounds.",
+image:"https://images.unsplash.com/photo-1606293926075-69a00dbfde81?auto=format&fit=crop&w=1100&q=85",
+caption:"Historic coastal architecture and fort-like heritage scenery."
+},
+{
+title:"Anjuna & Vagator",
+kicker:"Chapter 05 • Coastal character",
+text:"<p>Anjuna and Vagator offer a distinctive side of Goa, with dramatic rocky coastlines, scenic viewpoints, cafés and a relaxed creative atmosphere.</p><ul><li>Explore Anjuna's famous beach area.</li><li>Enjoy the dramatic Vagator coastline.</li><li>Discover local markets and cafés.</li><li>Watch the changing colours of the sunset.</li></ul>",
+note:"Check local market days and event schedules before visiting.",
+image:"https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?auto=format&fit=crop&w=1100&q=85",
+caption:"A dramatic tropical shoreline and scenic coastal views."
+},
+{
+title:"Old Goa Heritage",
+kicker:"Chapter 06 • A historic heart",
+text:"<p>Old Goa is a UNESCO World Heritage area known for its remarkable churches and convents. Its architecture reflects the region's Portuguese colonial history.</p><ul><li>Visit the Basilica of Bom Jesus.</li><li>Explore the Se Cathedral.</li><li>Admire historic architecture.</li><li>Learn about Goa's cultural past.</li></ul>",
+note:"Dress respectfully and observe visitor rules at religious sites.",
+image:"https://images.unsplash.com/photo-1714203101116-b5e56a8f03aa?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+caption:"Historic church architecture in a heritage setting."
+},
+{
+title:"Basilica of Bom Jesus",
+kicker:"Chapter 07 • Sacred heritage",
+text:"<p>The Basilica of Bom Jesus is among Goa's most celebrated landmarks. Its historic architecture and religious significance make it an essential stop for visitors interested in art, culture and heritage.</p><ul><li>Admire the Baroque architectural details.</li><li>Explore the historic church interior.</li><li>Learn about its cultural significance.</li></ul>",
+note:"Maintain silence and follow photography restrictions where displayed.",
+image:"https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+caption:"A grand historic religious landmark."
+},
+{
+title:"South Goa Beaches",
+kicker:"Chapter 08 • Peaceful shores",
+text:"<p>South Goa is loved for its quieter beaches, scenic stretches of sand and laid-back atmosphere. It is ideal for travellers seeking a slower coastal holiday.</p><ul><li>Palolem Beach – scenic crescent-shaped bay.</li><li>Colva Beach – a popular long beach.</li><li>Agonda Beach – peaceful coastal scenery.</li><li>Benaulim Beach – relaxed seaside charm.</li></ul>",
+note:"Respect beach conservation rules and avoid leaving waste behind.",
+image:"https://images.unsplash.com/photo-1476673160081-cf065607f449?auto=format&fit=crop&w=1100&q=85",
+caption:"Peaceful tropical beach scenery in South Goa."
+},
+{
+title:"Palolem Beach",
+kicker:"Chapter 09 • A tropical favourite",
+text:"<p>Palolem is known for its beautiful bay, palm-lined shore and relaxed seaside setting. It is a wonderful place to slow down and enjoy Goa's natural beauty.</p><ul><li>Take a leisurely beach walk.</li><li>Enjoy the coastal cafés.</li><li>Explore the bay by permitted boat trips.</li><li>Capture the beautiful scenery.</li></ul>",
+note:"Boat trips and wildlife excursions should always follow responsible tourism guidelines.",
+image:"https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1100&q=85",
+caption:"A peaceful tropical bay framed by palms."
+},
+{
+title:"Goa's Colourful Streets",
+kicker:"Chapter 10 • Culture and colour",
+text:"<p>Goa's heritage neighbourhoods are filled with colourful Portuguese-style houses, narrow lanes, traditional balconies and charming local cafés.</p><ul><li>Explore Fontainhas in Panaji.</li><li>Admire colourful heritage homes.</li><li>Discover local art and cafés.</li><li>Take a relaxed heritage walk.</li></ul>",
+note:"Be considerate when photographing homes and residential streets.",
+image:"https://plus.unsplash.com/premium_photo-1733259641816-a66818a4cdcd?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+caption:"Colourful architecture and charming heritage streets."
+},
+{
+title:"Goan Food & Flavours",
+kicker:"Chapter 11 • Taste of Goa",
+text:"<p>Goan cuisine is a delicious blend of coastal ingredients, local spices and Portuguese influences. Explore its distinctive flavours at local restaurants and traditional eateries.</p><ul><li>Goan fish curry and rice.</li><li>Traditional prawn dishes.</li><li>Vegetarian Goan preparations.</li><li>Bebinca, a traditional layered dessert.</li></ul>",
+note:"Ask about ingredients and spice levels, especially if you have dietary restrictions.",
+image:"https://images.unsplash.com/photo-1682862279256-b2a9e4f3d22c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+caption:"A delicious spread inspired by coastal cuisine."
+},
+{
+title:"Best Time to Visit",
+kicker:"Chapter 12 • Plan your escape",
+text:"<p>October to March is generally a popular time to visit Goa, with pleasant weather for sightseeing and beach activities.</p><ul><li>October–November: post-monsoon greenery.</li><li>December–February: popular holiday season.</li><li>March–May: hotter weather and quieter beaches.</li><li>June–September: monsoon landscapes and seasonal changes.</li></ul>",
+note:"Check weather forecasts and sea conditions before planning outdoor activities.",
+image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1100&q=85",
+caption:"Sunshine, blue water and a perfect coastal holiday mood."
+},
+{
+title:"Your Goa Package",
+kicker:"Chapter 13 • Your holiday details",
+text:"<p>Experience Goa's famous beaches and heritage attractions with the Orlon Sky Holiday Goa package.</p><ul><li>Destination: Goa, India.</li><li>Experience: Beaches and heritage.</li><li>Explore North and South Goa highlights.</li><li>Discover historic churches and forts.</li><li>Enjoy local food and coastal culture.</li></ul>",
+note:"<strong>Package price: ₹14,999 per person.</strong><br>Confirm travel dates, inclusions, hotel category, transport and availability with Orlon Sky Holiday before booking.",
+image:"https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1100&q=85",
+caption:"A memorable holiday along Goa's beautiful coastline."
+},
+{
+title:"Your Travel Checklist",
+kicker:"Chapter 14 • Pack and prepare",
+text:"<p>Pack smart and get ready for a comfortable Goa holiday.</p><ul class='checklist'><li>Light cotton clothes and beachwear.</li><li>Comfortable sandals and walking shoes.</li><li>Sunscreen, sunglasses and a hat.</li><li>Swimwear and a quick-dry towel.</li><li>Personal medicines and ID documents.</li><li>Reusable water bottle and phone charger.</li></ul>",
+note:"Keep valuables secure and follow local beach and water-safety advice.",
+image:"https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1100&q=85",
+caption:"Get ready for a relaxed and memorable holiday."
+}
+];
+
+let current=0;
+const $=id=>document.getElementById(id);
+
+function imageUrl(url){
+  return url;
+}
+function render(){
+  const c=chapters[current];
+  $("kicker").textContent=c.kicker;
+  $("chapterTitle").textContent=c.title;
+  $("chapterText").innerHTML=c.text;
+  $("chapterNote").innerHTML=c.note;
+  $("chapterImage").src=imageUrl(c.image);
+  $("chapterImage").alt=c.title+" - Goa";
+  $("chapterCaption").textContent=c.caption;
+  $("leftNo").textContent=String(current*2+1).padStart(2,"0");
+  $("rightNo").textContent=String(current*2+2).padStart(2,"0");
+  $("status").textContent=`Chapter ${current+1} of ${chapters.length}`;
+  $("progress").style.width=((current+1)/chapters.length*100)+"%";
+  $("prevBtn").disabled=current===0;
+  $("nextBtn").disabled=current===chapters.length-1;
+  document.querySelectorAll(".chapter-nav button").forEach((b,i)=>{
+    b.classList.toggle("active",i===current);
+  });
+}
+function openBook(){
+  $("book").classList.add("open");
+}
+function goTo(index){
+  if(index<0||index>=chapters.length)return;
+  openBook();
+  current=index;
+  render();
+}
+function buildNav(){
+  chapters.forEach((c,i)=>{
+    const b=document.createElement("button");
+    b.textContent=c.title;
+    b.type="button";
+    b.onclick=()=>goTo(i);
+    $("chapterNav").appendChild(b);
+  });
+}
+document.addEventListener("keydown",e=>{
+  if(e.key==="ArrowRight")goTo(current+1);
+  if(e.key==="ArrowLeft")goTo(current-1);
+});
+buildNav();
+render();
+</script>
+</body>
+</html>

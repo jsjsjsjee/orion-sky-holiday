@@ -1,0 +1,780 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discover Malaysia | Orion Sky Holiday</title>
+
+<style>
+:root {
+  --navy: #142D4E;
+  --blue: #347C9D;
+  --gold: #D6B779;
+  --ivory: #FFF8EB;
+  --ink: #26384D;
+  --muted: #68778A;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+  background: var(--navy);
+}
+
+button { font: inherit; cursor: pointer; }
+
+.scene {
+  min-height: 100vh;
+  padding-bottom: 35px;
+  background:
+    linear-gradient(120deg, rgba(8,25,49,.84),
+      rgba(20,66,102,.67), rgba(9,29,54,.86)),
+    url("https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=2000&q=85")
+    center/cover fixed;
+}
+
+header {
+  max-width: 1200px;
+  margin: auto;
+  padding: 23px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ffffff35;
+}
+
+.brand {
+  font-family: Georgia, serif;
+  font-weight: bold;
+  font-size: 19px;
+}
+
+.brand span { color: var(--gold); }
+
+.back {
+  color: white;
+  text-decoration: none;
+  border: 1px solid #ffffff65;
+  padding: 10px 15px;
+  border-radius: 30px;
+  font-size: 12px;
+}
+
+.intro {
+  text-align: center;
+  padding: 35px 15px 20px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--gold);
+}
+
+.intro h1 {
+  font: clamp(38px, 6vw, 65px) Georgia, serif;
+  margin: 13px 0;
+}
+
+.intro p {
+  max-width: 650px;
+  margin: auto;
+  color: #f0f3f8;
+  line-height: 1.7;
+}
+
+.book-area {
+  width: min(1000px, calc(100% - 30px));
+  margin: 25px auto 0;
+  perspective: 1800px;
+}
+
+.book {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  aspect-ratio: 1.6;
+  min-height: 450px;
+  filter: drop-shadow(0 25px 35px #0007);
+}
+
+.page {
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
+  color: var(--ink);
+  padding: clamp(20px, 3.5vw, 38px);
+  background:
+    radial-gradient(circle at top left, #e9d7af45, transparent 50%),
+    var(--ivory);
+  border: 1px solid #cbbd9c;
+}
+
+.left {
+  border-radius: 8px 0 0 8px;
+  border-right: 1px solid #c4b28f;
+}
+
+.right {
+  border-radius: 0 8px 8px 0;
+}
+
+.book::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 18px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  background: linear-gradient(90deg, #6b593322, #9b8b6c70,
+    #fff9e7, #74614330);
+}
+
+.page-label {
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #98733d;
+  margin-bottom: 15px;
+}
+
+.page h2 {
+  font: clamp(25px, 3.3vw, 36px) Georgia, serif;
+  line-height: 1.1;
+  color: var(--navy);
+  margin: 0 0 15px;
+}
+
+.page p {
+  color: #5b6877;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.page ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+}
+
+.page li {
+  border-bottom: 1px solid #142d4e16;
+  padding: 9px 0 9px 19px;
+  position: relative;
+  color: #45576a;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.page li::before {
+  content: "✦";
+  color: #b38a49;
+  position: absolute;
+  left: 0;
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  max-height: 480px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.photo-wrap {
+  height: 100%;
+  min-height: 300px;
+  position: relative;
+}
+
+.caption {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  padding: 25px 12px 12px;
+  background: linear-gradient(transparent, #071a30dd);
+  color: white;
+  font: 15px Georgia, serif;
+}
+
+.page-no {
+  position: absolute;
+  bottom: 12px;
+  color: #a18b64;
+  font-size: 10px;
+}
+
+.left .page-no { left: 25px; }
+.right .page-no { right: 25px; }
+
+.cover {
+  position: absolute;
+  z-index: 5;
+  inset: 0 50% 0 0;
+  transform-origin: left center;
+  transition: transform 1.3s cubic-bezier(.2,.7,.2,1);
+  backface-visibility: hidden;
+  border-radius: 8px 0 0 8px;
+  background:
+    linear-gradient(140deg, #0b2442aa, #123c5be8),
+    url("https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1000&q=85")
+    center/cover;
+  border: 2px solid #d6b77999;
+  box-shadow: inset -10px 0 20px #0004;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 25px;
+}
+
+.cover::after {
+  content: "";
+  position: absolute;
+  inset: 13px;
+  border: 1px solid var(--gold);
+  pointer-events: none;
+}
+
+.cover-content { position: relative; z-index: 1; }
+
+.cover h2 {
+  color: var(--ivory);
+  font: clamp(30px, 4vw, 48px) Georgia, serif;
+  margin: 18px 0 12px;
+}
+
+.cover p {
+  font-size: 12px;
+  color: #f0e7d5;
+  line-height: 1.7;
+}
+
+.price {
+  font-weight: bold;
+  font-size: 15px !important;
+  color: var(--gold) !important;
+}
+
+.primary {
+  background: #D6B779;
+  color: #142D4E;
+  border: none;
+  padding: 13px 17px;
+  margin-top: 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.primary:hover { background: #f0d69e; }
+
+.book.open .cover {
+  transform: rotateY(-170deg);
+  pointer-events: none;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 22px;
+}
+
+.nav-btn {
+  background: #ffffff12;
+  color: white;
+  border: 1px solid #ffffff65;
+  border-radius: 30px;
+  padding: 11px 17px;
+  font-size: 12px;
+}
+
+.nav-btn:hover:not(:disabled) { background: #ffffff30; }
+.nav-btn:disabled { opacity: .35; cursor: not-allowed; }
+
+.status {
+  min-width: 150px;
+  text-align: center;
+  font-size: 11px;
+  color: #f1dfb9;
+}
+
+.progress {
+  width: min(260px, 70%);
+  height: 3px;
+  background: #ffffff30;
+  margin: 15px auto;
+}
+
+.progress div {
+  height: 100%;
+  width: 0;
+  background: var(--gold);
+  transition: width .3s;
+}
+
+.chapters {
+  max-width: 950px;
+  margin: 25px auto;
+  padding: 0 15px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chapters button {
+  background: #ffffff10;
+  border: 1px solid #ffffff45;
+  color: white;
+  padding: 9px 12px;
+  border-radius: 25px;
+  font-size: 10px;
+}
+
+.chapters button.active {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: #d6b7791c;
+}
+
+.checklist {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.checklist label {
+  color: #45576a;
+  font-size: 12px;
+}
+
+.checklist input { accent-color: var(--blue); }
+
+.footer {
+  text-align: center;
+  color: #ffffff9c;
+  font-size: 11px;
+  padding: 10px;
+}
+
+.footer span { color: var(--gold); }
+
+@media(max-width:700px) {
+  header { padding: 17px; }
+  .brand { font-size: 15px; }
+  .intro { padding-top: 25px; }
+  .book {
+    display: flex;
+    flex-direction: column;
+    aspect-ratio: auto;
+    min-height: 0;
+  }
+  .book::after { display: none; }
+  .left, .right { border-radius: 5px; }
+  .left { border-right: 1px solid #c4b28f; }
+  .right { margin-top: 8px; }
+  .page { padding: 23px; }
+  .photo-wrap { min-height: 240px; }
+  .photo { min-height: 240px; max-height: 330px; }
+  .cover {
+    inset: 0;
+    transform-origin: center bottom;
+    border-radius: 5px;
+  }
+  .book.open .cover { transform: rotateX(90deg); }
+  .cover h2 { font-size: 38px; }
+  .controls { gap: 8px; }
+  .nav-btn { padding: 10px 12px; }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+}
+</style>
+</head>
+
+<body>
+<div class="scene">
+
+<header>
+  <div class="brand"><span>✧</span> Orion Sky Holiday</div>
+<a class="back" href="javascript:history.back()">← Back to Destinations</a>
+  </header>
+
+<section class="intro">
+  <div class="eyebrow">Southeast Asia · Your next adventure</div>
+  <h1>Discover Malaysia</h1>
+  <p>
+    Explore dazzling city skylines, tropical islands, rich heritage
+    and mist-covered mountain escapes through your personal travel book.
+  </p>
+</section>
+
+<main class="book-area">
+  <div class="book" id="book">
+
+    <section class="page left" id="leftPage"></section>
+    <section class="page right" id="rightPage"></section>
+
+    <div class="cover" id="cover">
+      <div class="cover-content">
+        <div class="eyebrow">Orion Sky Holiday presents</div>
+        <h2>Discover<br>Malaysia</h2>
+        <p>Kuala Lumpur · Langkawi · Penang<br>Genting Highlands</p>
+        <p class="price">From ₹42,999 / person*</p>
+        <button class="primary" id="openBtn">
+          Open Your Travel Book ↗
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="controls">
+    <button class="nav-btn" id="prevBtn" disabled>← Previous</button>
+    <div class="status" id="status">Your journey awaits</div>
+    <button class="nav-btn" id="nextBtn">Next Chapter →</button>
+  </div>
+
+  <div class="progress"><div id="progressBar"></div></div>
+</main>
+
+<nav class="chapters" id="chapters"></nav>
+
+<div class="footer">
+  Discover more. Travel beautifully.
+<br>
+<br>
+  <span>Orion Sky Holiday</span>
+</div>
+</div>
+
+<script>
+const chapters = [
+{
+ title:"Welcome to Malaysia",
+ label:"Chapter 01 · The destination",
+ heading:"A world of contrasts",
+ image:"photo-1596422846543-75c6fc197f07",
+ caption:"Kuala Lumpur's iconic skyline",
+ text:"Malaysia brings together modern cities, tropical rainforests, beautiful islands and a remarkable mix of cultures. Discover lively markets, delicious food, historic neighbourhoods and scenic mountain escapes.",
+ items:[
+  "Kuala Lumpur's spectacular skyline",
+  "Langkawi's tropical beaches",
+  "Penang's food and heritage",
+  "Genting Highlands' cool mountain air"
+ ],
+ note:"Allow enough time between regions when planning your route."
+},
+{
+ title:"Why visit Malaysia?",
+ label:"Chapter 02 · Find your experience",
+ heading:"Many journeys in one",
+ image:"photo-1501785888041-af3ef285b470",
+ caption:"Nature, relaxation and adventure",
+ text:"Malaysia offers something for different travel styles, whether you want a relaxing island break, a family holiday, cultural exploration or a city adventure.",
+ items:[
+  "Couples: island resorts and sunset views",
+  "Families: attractions and wildlife experiences",
+  "Food lovers: local markets and hawker food",
+  "Adventure seekers: rainforests and hiking"
+ ],
+ note:"Choose experiences according to your interests and travel season."
+},
+{
+ title:"Places to visit",
+ label:"Chapter 03 · The highlights",
+ heading:"Four popular destinations",
+ image:"photo-1596422846543-75c6fc197f07",
+ caption:"From glittering towers to tropical shores",
+ text:"Combine city attractions, island relaxation and cultural experiences. These popular places make a good starting point for a first visit.",
+ items:[
+  "Kuala Lumpur — Petronas Twin Towers and city life",
+  "Langkawi — beaches, island views and cable car",
+  "Penang — George Town heritage and local food",
+  "Genting Highlands — mountain resort and attractions"
+ ],
+ note:"Check ticket requirements and local opening times before travelling."
+},
+{
+ title:"Best time to travel",
+ label:"Chapter 04 · Choose your season",
+ heading:"Know before you go",
+ image:"photo-1500530855697-b586d89ba3ee",
+ caption:"Choose the right season for your route",
+ text:"Malaysia has a tropical climate throughout the year. Weather varies between the west and east coasts, so the best time depends on which destinations and activities you choose.",
+ items:[
+  "West coast: often popular from November to March",
+  "East coast: many island trips suit April to September",
+  "Expect warm, humid conditions year-round",
+  "Rain can affect boats and outdoor activities"
+ ],
+ note:"These are general patterns, not guarantees. Check forecasts for your dates."
+},
+{
+ title:"Budget & prices",
+ label:"Chapter 05 · Plan your spend",
+ heading:"Plan your holiday budget",
+ image:"photo-1556742049-0cfed4f6a45d",
+ caption:"A trip to suit your travel style",
+ text:"The advertised starting price is ₹42,999 per person. The final cost depends on departure city, travel dates, hotel category, inclusions, group size and availability.",
+ items:[
+  "Starting package price: ₹42,999 per person",
+  "Confirm flights and baggage inclusions",
+  "Check hotel category and meal plans",
+  "Budget separately for shopping and optional activities"
+ ],
+ note:"₹42,999 is the supplied starting price, not a guaranteed live quote. Confirm all package details before booking."
+},
+{
+ title:"History & culture",
+ label:"Chapter 06 · Stories of Malaysia",
+ heading:"A meeting of cultures",
+ image:"photo-1565967511849-76a60a516170",
+ caption:"Heritage shaped by many influences",
+ text:"Malaysia's history includes regional kingdoms, maritime trade, migration and colonial-era influences. Malay, Chinese, Indian and Indigenous communities contribute to its diverse cultural landscape.",
+ items:[
+  "Explore George Town's historic streets",
+  "Discover traditional arts and crafts",
+  "Visit cultural and religious landmarks respectfully",
+  "Look for local festivals and community events"
+ ],
+ note:"Festival dates change each year. Check local schedules before your visit."
+},
+{
+ title:"Taste of Malaysia",
+ label:"Chapter 07 · At the table",
+ heading:"A delicious adventure",
+ image:"photo-1563245372-f21724e3856d",
+ caption:"Bold flavours and local favourites",
+ text:"Malaysian food reflects the country's varied communities and regional traditions. Hawker centres and local eateries offer a wonderful way to discover familiar favourites and new flavours.",
+ items:[
+  "Nasi lemak — fragrant coconut rice",
+  "Char kway teow — stir-fried rice noodles",
+  "Satay — grilled skewers with sauce",
+  "Laksa — a richly flavoured noodle soup"
+ ],
+ note:"Ask about ingredients, allergens and spice levels; recipes vary."
+},
+{
+ title:"Packing checklist",
+ label:"Chapter 08 · Be prepared",
+ heading:"Pack for the tropics",
+ image:"photo-1553062407-98eeb64c6a62",
+ caption:"Travel light and stay comfortable",
+ text:"Malaysia is generally warm and humid. Pack for walking, sudden rain and visits to both urban attractions and natural places.",
+ checklist:[
+  "Lightweight clothing",
+  "Comfortable walking shoes",
+  "Umbrella or rain jacket",
+  "Sunscreen and sunglasses",
+  "Insect repellent",
+  "Travel adapter",
+  "Passport and bookings",
+  "Personal medicines"
+ ],
+ note:"Pack modest clothing for religious sites and check your airline's baggage rules."
+},
+{
+ title:"Suggested itinerary",
+ label:"Chapter 09 · Make it yours",
+ heading:"A trip to remember",
+ image:"photo-1464822759023-fed622ff2c3b",
+ caption:"Build your own Malaysian adventure",
+ text:"A balanced itinerary gives you time to enjoy each destination without rushing. Adjust these sample routes to your arrival city, budget and interests.",
+ items:[
+  "3 days: Kuala Lumpur city highlights",
+  "5 days: Kuala Lumpur + Genting Highlands",
+  "7 days: Kuala Lumpur + Penang or Langkawi",
+  "Longer holidays: combine city, island and nature"
+ ],
+ note:"Check transfer times and transport availability before finalising your itinerary."
+},
+{
+ title:"Travel thoughtfully",
+ label:"Chapter 10 · Travel with care",
+ heading:"Leave a positive footprint",
+ image:"photo-1441974231531-c6227db76b6e",
+ caption:"Respect nature and local communities",
+ text:"Responsible travel helps protect Malaysia's natural landscapes and cultural heritage. Small choices can make a difference throughout your trip.",
+ items:[
+  "Follow wildlife and park guidance",
+  "Reduce single-use plastic where practical",
+  "Respect local customs and religious sites",
+  "Support local businesses and guides",
+  "Keep beaches and trails clean"
+ ],
+ note:"Follow current local rules and safety advice at each attraction."
+},
+{
+ title:"Your Malaysia story",
+ label:"Final chapter · Begin your journey",
+ heading:"Ready to discover?",
+ image:"photo-1596422846543-75c6fc197f07",
+ caption:"Your Malaysian adventure starts here",
+ text:"From the Petronas Twin Towers to Langkawi's turquoise waters and Penang's heritage streets, Malaysia offers a memorable blend of discovery and relaxation.",
+ items:[
+  "Choose your travel dates",
+  "Select the places you want to explore",
+  "Confirm your budget and package inclusions",
+  "Arrange hotels, transport and activities"
+ ],
+ note:"Use your website's real booking or enquiry process to confirm your trip."
+}
+];
+
+let current = 0;
+let opened = false;
+
+const book = document.getElementById("book");
+const left = document.getElementById("leftPage");
+const right = document.getElementById("rightPage");
+const prev = document.getElementById("prevBtn");
+const next = document.getElementById("nextBtn");
+const status = document.getElementById("status");
+const progress = document.getElementById("progressBar");
+const chapterMenu = document.getElementById("chapters");
+
+function safe(text) {
+  return String(text).replace(/[&<>"']/g, c => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;",
+    '"':"&quot;", "'":"&#39;"
+  })[c]);
+}
+
+function imageUrl(id) {
+  return "https://images.unsplash.com/" + id +
+    "?auto=format&fit=crop&w=1100&q=85";
+}
+
+function render() {
+  const c = chapters[current];
+
+  left.innerHTML = `
+    <div class="page-label">${safe(c.label)}</div>
+    <h2>${safe(c.heading)}</h2>
+    <p>${safe(c.text)}</p>
+    ${c.checklist ? `
+      <div class="checklist">
+        ${c.checklist.map(item => `
+          <label>
+            <input type="checkbox">
+            ${safe(item)}
+          </label>
+        `).join("")}
+      </div>
+    ` : `
+      <ul>${c.items.map(item => `<li>${safe(item)}</li>`).join("")}</ul>
+    `}
+    <p><small>${safe(c.note)}</small></p>
+    <div class="page-no">${current * 2 + 1}</div>
+  `;
+
+  right.innerHTML = `
+    <div class="photo-wrap">
+      <img class="photo"
+        src="${imageUrl(c.image)}"
+        alt="${safe(c.caption)}"
+        onerror="this.onerror=null;this.style.background='#347C9D';this.removeAttribute('src')">
+      <div class="caption">${safe(c.caption)}</div>
+    </div>
+    ${current === chapters.length - 1 ? `
+
+    ` : ""}
+    <div class="page-no">${current * 2 + 2}</div>
+  `;
+
+  prev.disabled = current === 0;
+  next.disabled = current === chapters.length - 1;
+  next.textContent = current === chapters.length - 1
+    ? "End of Book" : "Next Chapter →";
+
+  status.textContent = c.title + " · " +
+    (current + 1) + " of " + chapters.length;
+
+  progress.style.width =
+    ((current + 1) / chapters.length * 100) + "%";
+
+  document.querySelectorAll(".chapters button").forEach((btn, i) => {
+    btn.classList.toggle("active", i === current);
+  });
+
+  const plan = document.getElementById("planBtn");
+  if (plan) {
+    plan.onclick = () => {
+      const subject = encodeURIComponent("Malaysia holiday enquiry");
+      const body = encodeURIComponent(
+        "Hello Orion Sky Holiday,\n" +
+        "I am interested in the Malaysia tour starting from ₹42,999 per person.\n" +
+        "Please share the itinerary, inclusions, dates and availability."
+      );
+      window.location.href =
+        "mailto:hello@orionskyholiday.com?subject=" +
+        subject + "&body=" + body;
+    };
+  }
+
+  const restart = document.getElementById("restartBtn");
+  if (restart) {
+    restart.onclick = () => {
+      current = 0;
+      render();
+    };
+  }
+}
+
+function goTo(index) {
+  if (index < 0 || index >= chapters.length) return;
+  current = index;
+  render();
+}
+
+function openBook() {
+  opened = true;
+  book.classList.add("open");
+  setTimeout(render, 300);
+}
+
+chapters.forEach((c, i) => {
+  const btn = document.createElement("button");
+  btn.textContent = c.title;
+  btn.onclick = () => {
+    if (!opened) openBook();
+    goTo(i);
+    book.scrollIntoView({ behavior:"smooth", block:"center" });
+  };
+  chapterMenu.appendChild(btn);
+});
+
+document.getElementById("openBtn").addEventListener("click", openBook);
+prev.addEventListener("click", () => goTo(current - 1));
+next.addEventListener("click", () => goTo(current + 1));
+
+document.addEventListener("keydown", event => {
+  if (!opened || event.target.matches("input, textarea")) return;
+  if (event.key === "ArrowRight") goTo(current + 1);
+  if (event.key === "ArrowLeft") goTo(current - 1);
+});
+
+render();
+</script>
+</body>
+</html>

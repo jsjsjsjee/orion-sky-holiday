@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Discover Kerala | Orion Sky Holiday</title>
+<style>
+  :root {
+    --forest: #123f35;
+    --deep: #082d28;
+    --leaf: #47785b;
+    --gold: #c49a55;
+    --paper: #fff9ec;
+    --ink: #263b32;
+    --muted: #68756c;
+    --coral: #f06445;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    color: white;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #0c3932;
+  }
+  button, a { font: inherit; }
+  button { cursor: pointer; }
+  .scene {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+      linear-gradient(120deg, rgba(5, 39, 32, .84), rgba(8, 50, 41, .54) 48%, rgba(10, 43, 37, .8)),
+      url("https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=2200&q=85") center/cover fixed;
+  }
+  .scene::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(180, 205, 144, .18), transparent 32%),
+      radial-gradient(circle at 88% 80%, rgba(224, 176, 93, .14), transparent 28%);
+    pointer-events: none;
+  }
+  .topbar {
+    width: min(1240px, calc(100% - 44px));
+    margin: auto;
+    min-height: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    border-bottom: 1px solid rgba(255,255,255,.18);
+  }
+  .brand { display:flex; align-items:center; gap:10px; font-family: Georgia, serif; font-weight:700; }
+  .brand-mark {
+    width: 34px; height: 34px; border: 1px solid #ff7250; color: #ff7250;
+    border-radius: 50%; display:grid; place-items:center; font-size:20px;
+  }
+  .top-actions { display:flex; align-items:center; gap:18px; }
+  .top-actions a { color:rgba(255,255,255,.9); text-decoration:none; font-size:13px; }
+  .top-actions a:hover { color:#ffd9a0; }
+  .back-link {
+    border: 1px solid rgba(255,255,255,.4); color:white; background:rgba(255,255,255,.08);
+    border-radius:999px; padding:10px 15px; text-decoration:none; font-size:12px;
+  }
+  .intro { text-align:center; padding: 34px 18px 8px; }
+  .eyebrow { color:#e8c78c; text-transform:uppercase; letter-spacing:.22em; font-size:10px; font-weight:800; }
+  h1 { margin:10px 0 7px; font: clamp(35px, 5vw, 58px)/1.02 Georgia, "Times New Roman", serif; letter-spacing:-.035em; }
+  .intro p { color:rgba(255,255,255,.82); max-width:610px; margin:0 auto; line-height:1.6; font-size:14px; }
+  .book-area { padding: 24px 18px 48px; display:flex; justify-content:center; perspective:1800px; }
+  .book-shell { width:min(1000px, 100%); }
+  .book {
+    position:relative; width:100%; min-height:480px; aspect-ratio: 1.62 / 1;
+    display:grid; grid-template-columns:1fr 1fr;
+    filter:drop-shadow(0 28px 38px rgba(0,0,0,.34));
+    transform-style:preserve-3d;
+  }
+  .book::after {
+    content:""; position:absolute; z-index:4; top:1.3%; bottom:1.3%; left:50%; width:24px;
+    transform:translateX(-50%);
+    background:linear-gradient(90deg, rgba(65,45,25,.08), rgba(73,49,25,.22), rgba(255,255,255,.4), rgba(63,44,25,.14));
+    pointer-events:none;
+  }
+  .page {
+    position:relative; min-width:0; overflow:hidden; color:var(--ink);
+    background:
+      radial-gradient(ellipse at 0 0, rgba(199,168,107,.13), transparent 55%),
+      linear-gradient(135deg, #fffdf5, var(--paper));
+    border:1px solid rgba(110,82,45,.22);
+    padding: clamp(18px, 3.2vw, 36px);
+    box-shadow: inset 0 0 25px rgba(111,77,35,.055);
+  }
+  .page.left { border-radius:9px 2px 2px 9px; }
+  .page.right { border-radius:2px 9px 9px 2px; }
+  .page.left::before, .page.right::before {
+    content:""; position:absolute; top:0; bottom:0; width:14px; pointer-events:none;
+  }
+  .page.left::before { right:0; background:linear-gradient(90deg, transparent, rgba(76,54,30,.08)); }
+  .page.right::before { left:0; background:linear-gradient(90deg, rgba(76,54,30,.08), transparent); }
+  .page-kicker { text-transform:uppercase; color:#9a6e34; letter-spacing:.17em; font-size:9px; font-weight:800; margin-bottom:11px; }
+  .page h2 { font: clamp(23px, 3vw, 34px)/1.05 Georgia, serif; margin:0 0 12px; color:#214b3c; }
+  .page h3 { font: 19px/1.15 Georgia,serif; margin:0 0 8px; color:#214b3c; }
+  .page p { color:#5c695f; font-size:clamp(11px, 1.3vw, 13px); line-height:1.65; margin:0 0 12px; }
+  .page-photo {
+    width:100%; height:100%; min-height:250px; object-fit:cover; display:block;
+    border-radius:4px; filter:saturate(.9);
+  }
+  .photo-wrap { position:relative; height:100%; min-height:300px; }
+  .photo-caption {
+    position:absolute; bottom:12px; left:12px; right:12px; color:white; font-size:10px;
+    letter-spacing:.04em; padding:10px 12px; border-radius:4px;
+    background:linear-gradient(transparent, rgba(0,0,0,.72));
+  }
+  .small-note { font-size:10px!important; color:#8b8c7e!important; font-style:italic; }
+  .chapter-number { position:absolute; bottom:17px; color:#9d8a68; font:12px Georgia,serif; }
+  .left .chapter-number { left:clamp(18px, 3.2vw, 36px); }
+  .right .chapter-number { right:clamp(18px, 3.2vw, 36px); }
+  .cover {
+    position:absolute; z-index:8; inset:0 50% 0 0; transform-origin:left center;
+    transform-style:preserve-3d; transition:transform 1.25s cubic-bezier(.2,.72,.15,1);
+    border-radius:9px 3px 3px 9px;
+    background:
+      linear-gradient(120deg, rgba(7,46,37,.35), rgba(5,40,33,.91)),
+      url("https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1100&q=85") center/cover;
+    box-shadow:inset -10px 0 18px rgba(0,0,0,.22), inset 5px 0 0 rgba(226,196,133,.24);
+    display:flex; align-items:center; justify-content:center; text-align:center; padding:30px;
+    backface-visibility:hidden;
+  }
+  .cover::after { content:""; position:absolute; inset:13px; border:1px solid rgba(233,204,145,.58); border-radius:5px; pointer-events:none; }
+  .cover-content { position:relative; z-index:1; max-width:310px; }
+  .cover .eyebrow { color:#e5c98e; }
+  .cover h2 { color:#fff9e9; font:clamp(30px,4vw,48px)/1 Georgia,serif; margin:14px 0 12px; }
+  .cover p { color:rgba(255,255,255,.83); font:italic 14px/1.6 Georgia,serif; }
+  .open-btn, .primary-btn {
+    border:0; background:var(--coral); color:white; font-weight:800; font-size:11px;
+    letter-spacing:.06em; text-transform:uppercase; border-radius:4px; padding:14px 19px;
+    box-shadow:0 8px 18px rgba(140,52,28,.22); transition:transform .2s, background .2s;
+  }
+  .open-btn { margin-top:12px; }
+  .open-btn:hover, .primary-btn:hover { background:#dc5034; transform:translateY(-2px); }
+  .book.is-open .cover { transform:rotateY(-168deg); pointer-events:none; }
+  .book.is-open .cover-content { opacity:0; transition:opacity .25s; }
+  .controls {
+    display:flex; justify-content:center; align-items:center; gap:13px; margin:19px auto 0;
+    flex-wrap:wrap;
+  }
+  .nav-btn {
+    border:1px solid rgba(255,255,255,.38); color:white; background:rgba(255,255,255,.1);
+    border-radius:999px; padding:11px 17px; font-size:12px; transition:background .2s, opacity .2s;
+  }
+  .nav-btn:hover:not(:disabled) { background:rgba(255,255,255,.2); }
+  .nav-btn:disabled { opacity:.35; cursor:not-allowed; }
+  .page-status { min-width:120px; text-align:center; color:rgba(255,255,255,.8); font-size:11px; }
+  .progress { width:min(260px,65vw); height:3px; background:rgba(255,255,255,.2); border-radius:9px; overflow:hidden; margin:12px auto 0; }
+  .progress span { display:block; height:100%; width:0; background:#e5c98e; transition:width .35s; }
+  .chapter-nav { display:flex; justify-content:center; gap:7px; flex-wrap:wrap; max-width:900px; margin:22px auto 0; padding:0 18px; }
+  .chapter-chip {
+    border:1px solid rgba(255,255,255,.25); background:rgba(6,37,31,.25); color:rgba(255,255,255,.82);
+    border-radius:999px; padding:8px 11px; font-size:10px; transition:all .2s;
+  }
+  .chapter-chip:hover, .chapter-chip.active { background:rgba(232,199,140,.17); border-color:#e5c98e; color:#ffe3ae; }
+  .list { list-style:none; padding:0; margin:13px 0 0; }
+  .list li { position:relative; padding:8px 0 8px 19px; border-bottom:1px solid rgba(80,100,78,.13); color:#4d6255; font-size:12px; line-height:1.45; }
+  .list li::before { content:"✦"; position:absolute; left:0; top:8px; color:#bb8a45; font-size:11px; }
+  .mini-grid { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-top:14px; }
+  .mini-card { padding:10px; background:rgba(81,121,80,.08); border:1px solid rgba(81,121,80,.13); border-radius:5px; }
+  .mini-card strong { display:block; color:#315844; font:15px Georgia,serif; margin-bottom:4px; }
+  .mini-card span { color:#6d796d; font-size:10px; line-height:1.4; }
+  .checklist { display:grid; grid-template-columns:1fr 1fr; gap:7px 12px; margin-top:12px; }
+  .checklist label { display:flex; align-items:flex-start; gap:7px; color:#52675a; font-size:11px; line-height:1.4; cursor:pointer; }
+  .checklist input { accent-color:#427452; margin-top:2px; }
+  .cta-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:17px; }
+  .secondary-btn { border:1px solid #9aa58e; background:transparent; color:#315844; border-radius:4px; padding:12px 14px; font-size:10px; font-weight:800; text-transform:uppercase; }
+  .footer { text-align:center; padding:0 18px 35px; color:rgba(255,255,255,.58); font-size:10px; }
+  .footer span { color:#e5c98e; }
+  .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  @media (max-width:700px) {
+    .topbar { width:calc(100% - 28px); min-height:65px; }
+    .brand { font-size:13px; }
+    .top-actions a:not(.back-link) { display:none; }
+    .intro { padding-top:28px; }
+    .intro p { font-size:12px; }
+    .book-area { padding:18px 12px 35px; }
+    .book { aspect-ratio:auto; min-height:0; display:flex; flex-direction:column; gap:0; filter:drop-shadow(0 18px 25px rgba(0,0,0,.28)); }
+    .book::after { display:none; }
+    .page { min-height:315px; padding:22px; border-radius:6px!important; }
+    .page.left { display:block; }
+    .page.right { border-radius:6px; }
+    .page-photo { min-height:245px; max-height:310px; }
+    .photo-wrap { min-height:245px; }
+    .cover { inset:0; border-radius:6px; transform-origin:center bottom; }
+    .book.is-open .cover { transform:rotateX(85deg); }
+    .book.is-open .cover-content { opacity:0; }
+    .cover::after { inset:10px; }
+    .cover h2 { font-size:37px; }
+    .chapter-nav { margin-top:15px; }
+    .chapter-chip { font-size:9px; padding:7px 9px; }
+    .controls { gap:8px; }
+    .nav-btn { padding:10px 13px; }
+  }
+/* CSS */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background-color: #f4f4f5;
+  color: #18181b;
+  text-decoration: none;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+/* Smooth hover effect */
+.back-btn:hover {
+  background-color: #e4e4e7;
+  transform: translateX(-4px); /* Moves slightly left to emphasize "back" */
+}
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { scroll-behavior:auto!important; transition:none!important; animation:none!important; }
+  }
+</style>
+</head>
+<body>
+<div class="scene">
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">⌃</span><span>Orion Sky Holiday</span></div>
+
+<a class="back-btn" href="javascript:history.back()">← Back to Destination</a>
+
+  </header>
+
+  <section class="intro">
+    <div class="eyebrow">Your next chapter begins here</div>
+    <h1>Discover Kerala</h1>
+    <p>Open your travel journal and wander through misty hills, emerald tea gardens, quiet backwaters and timeless traditions.</p>
+  </section>
+
+  <main class="book-area" id="book">
+    <div class="book-shell">
+      <div class="book" id="bookElement" aria-label="Interactive Kerala travel book">
+        <section class="page left" id="leftPage" aria-live="polite"></section>
+        <section class="page right" id="rightPage" aria-live="polite"></section>
+        <div class="cover" id="cover">
+          <div class="cover-content">
+            <div class="eyebrow">Orion Sky Holiday presents</div>
+            <h2>Discover<br>Kerala</h2>
+            <p>God's Own Country<br>Nature · Culture · Slow Travel</p>
+            <button class="open-btn" id="openBook">Open Your Travel Book ↗</button>
+          </div>
+        </div>
+      </div>
+      <div class="controls">
+        <button class="nav-btn" id="prevBtn" disabled>← Previous</button>
+        <div class="page-status" id="pageStatus">Your journey awaits</div>
+        <button class="nav-btn" id="nextBtn">Next Chapter →</button>
+      </div>
+      <div class="progress"><span id="progressBar"></span></div>
+    </div>
+  </main>
+
+  <nav class="chapter-nav" id="chapters" aria-label="Travel book chapters"></nav>
+<br>
+  <div class="footer">A little inspiration for your next journey ·<br> <span><br>Orion Sky Holiday</span></div>
+</div>
+
+<script>
+const chapters = [
+  {
+    title: "Welcome to Kerala", kicker: "Chapter 01 · The destination",
+    image: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1100&q=85",
+    caption: "Where water, forests and hills meet",
+    heading: "A world of green",
+    text: "Kerala, on India's southwestern coast, is known for its palm-lined backwaters, tea-covered hills, rich traditions and relaxed coastal life. Each region offers a different rhythm—from the mist of Munnar to the quiet waterways of Alappuzha.",
+    bullets: ["Backwaters and houseboat stays", "Hill stations and tea gardens", "Coastal towns and golden beaches", "Food, festivals and living heritage"],
+    note: "Travel note: distances can take longer than they look on a map. Leave room for the journey."
+  },
+  {
+    title: "Why travel here?", kicker: "Chapter 02 · Find your feeling",
+    image: "https://images.unsplash.com/photo-1593693411515-c20261bcad6e?auto=format&fit=crop&w=1100&q=85",
+    caption: "Take the scenic route",
+    heading: "Come for the feeling",
+    text: "Kerala suits travellers who want a balance of nature, culture and downtime. Build a trip around one interest or combine several experiences at a comfortable pace.",
+    bullets: ["Couples: private stays and sunset cruises", "Families: wildlife, beaches and easy nature walks", "Solo travellers: culture, cafés and guided trails", "Slow travellers: village life and wellness experiences"],
+    note: "Choose responsible local operators and confirm activity details before booking."
+  },
+  {
+    title: "Places to visit", kicker: "Chapter 03 · The highlights",
+    image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1100&q=85",
+    caption: "A landscape for every kind of traveller",
+    heading: "Seven lovely stops",
+    text: "Pick a few regions rather than trying to see everything at once. These favourites offer a good mix of hills, heritage, wildlife and coastline.",
+    bullets: ["Munnar — tea gardens and misty hills", "Alappuzha — canals and houseboats", "Kochi — heritage streets and coastal culture", "Wayanad — forests and waterfalls", "Thekkady — wildlife and spice gardens", "Varkala — cliffs and sea views", "Kovalam — beaches and seaside stays"],
+    note: "Check local conditions and access before travelling to waterfalls, parks or remote trails."
+  },
+  {
+    title: "When to travel", kicker: "Chapter 04 · Choose your season",
+    image: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1100&q=85",
+    caption: "Every season paints a different Kerala",
+    heading: "Find your season",
+    text: "October to March is generally popular for sightseeing, with comparatively comfortable conditions in many areas. April and May can be hot, while the June–September monsoon brings dramatic greenery and heavy rain.",
+    bullets: ["Oct–Mar: sightseeing and varied itineraries", "Apr–May: consider cooler hill stations", "Jun–Sep: monsoon scenery; plan flexibly", "Weather varies by region and year"],
+    note: "Seasonal guidance is general. Check a current forecast and local advisories before departure."
+  },
+  {
+    title: "Budget & prices", kicker: "Chapter 05 · Plan your spend",
+    image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1100&q=85",
+    caption: "Plan a trip that fits your pace",
+    heading: "A practical budget",
+    text: "Your total cost depends on dates, room type, transport, meal choices and activities. Use these broad sample ranges for early planning—not as live quotes.",
+    bullets: ["Budget: ₹1,500–₹3,000 per person/day", "Mid-range: ₹3,000–₹7,000 per person/day", "Premium: ₹7,000+ per person/day", "Flights, long-distance travel and shopping may be extra"],
+    note: "Illustrative estimates only. Confirm current prices, inclusions, taxes and availability before booking."
+  },
+  {
+    title: "History & culture", kicker: "Chapter 06 · Stories of the coast",
+    image: "https://images.unsplash.com/photo-1606293926075-69a00dbfde81?auto=format&fit=crop&w=1100&q=85",
+    caption: "A heritage shaped by many journeys",
+    heading: "A meeting of worlds",
+    text: "For centuries, Kerala's coast was connected to Indian Ocean spice-trading routes. Its ports, architecture, performing arts, faith traditions and food reflect many layers of local history and overseas contact.",
+    bullets: ["Explore historic neighbourhoods in Kochi", "Look for Kathakali and other performing arts", "Learn about Onam and regional customs", "Visit heritage sites with respect and curiosity"],
+    note: "Festival dates and performances change; check local schedules before you go."
+  },
+  {
+    title: "Taste of Kerala", kicker: "Chapter 07 · At the table",
+    image: "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1100&q=85",
+    caption: "Fresh flavours, regional traditions",
+    heading: "Follow the flavours",
+    text: "Kerala cuisine brings together rice, coconut, spices, vegetables and coastal ingredients. Dishes vary across communities and regions, so ask locals what is in season.",
+    bullets: ["Sadya — a festive meal served with many sides", "Appam with stew — soft rice pancakes and curry", "Puttu with kadala curry — a classic breakfast", "Malabar biryani and regional seafood dishes"],
+    note: "Tell restaurants about allergies and dietary needs; recipes and ingredients vary."
+  },
+  {
+    title: "Packing checklist", kicker: "Chapter 08 · Be ready",
+    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=1100&q=85",
+    caption: "Pack light, leave room for discovery",
+    heading: "Your travel checklist",
+    text: "Use this practical checklist as a starting point, then adapt it to your season, itinerary and planned activities.",
+    checklist: ["Lightweight clothing", "Comfortable walking shoes", "Umbrella or raincoat", "Sunscreen and sunglasses", "Insect repellent", "Personal medicines", "ID and booking details", "Reusable water bottle"],
+    note: "For temples and cultural sites, carry clothing that suits local dress expectations."
+  },
+  {
+    title: "Suggested itinerary", kicker: "Chapter 09 · Make it yours",
+    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1100&q=85",
+    caption: "A little planning, plenty of breathing room",
+    heading: "Three ways to explore",
+    text: "A good itinerary balances travel time with time to enjoy each place. These are starting points; adjust them to your arrival city and interests.",
+    bullets: ["3 days: Kochi + Alappuzha backwaters", "5 days: Kochi + Munnar + Alappuzha", "7 days: Kochi + Munnar + Thekkady + backwaters", "Add beach time if you have extra days"],
+    note: "Route times vary with traffic, weather and road conditions. Avoid overpacking each day."
+  },
+  {
+    title: "Travel thoughtfully", kicker: "Chapter 10 · Good journeys",
+    image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1100&q=85",
+    caption: "Leave the place as beautiful as you found it",
+    heading: "Travel with care",
+    text: "Small choices can make a trip better for you and for the people who call Kerala home. Respect nature, local customs and the communities you visit.",
+    bullets: ["Use refillable bottles where safe and practical", "Follow wildlife and forest-park guidance", "Ask before photographing people", "Choose local businesses and responsible stays", "Carry waste out of natural areas"],
+    note: "Follow current local rules, park guidance and safety advice."
+  },
+  {
+    title: "Your Kerala story", kicker: "The final chapter · Begin your journey",
+    image: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1100&q=85",
+    caption: "Your Kerala story begins here",
+    heading: "Ready to discover?",
+    text: "From misty mornings in the hills to slow journeys across the backwaters, Kerala invites you to travel at your own pace. Make a plan that leaves space for the unexpected.",
+    bullets: ["Choose your travel dates", "Select the places that interest you", "Set a comfortable budget", "Confirm transport, stays and activities"],
+    note: "This demo button opens an enquiry email. Replace it with your website's actual booking or trip-planner route."
+  }
+];
+
+let current = 0;
+let isOpen = false;
+const book = document.getElementById("bookElement");
+const leftPage = document.getElementById("leftPage");
+const rightPage = document.getElementById("rightPage");
+const openBookBtn = document.getElementById("openBook");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const pageStatus = document.getElementById("pageStatus");
+const progressBar = document.getElementById("progressBar");
+const chapterNav = document.getElementById("chapters");
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, ch => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+  }[ch]));
+}
+function renderLeft(chapter, index) {
+  return `
+    <div class="page-kicker">${escapeHtml(chapter.kicker)}</div>
+    <h2>${escapeHtml(chapter.heading)}</h2>
+    <p>${escapeHtml(chapter.text)}</p>
+    ${chapter.checklist ? `
+      <div class="checklist">
+        ${chapter.checklist.map((item, i) => `<label><input type="checkbox" data-check="${i}"> <span>${escapeHtml(item)}</span></label>`).join("")}
+      </div>` : `
+      <ul class="list">${chapter.bullets.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+    `}
+    <p class="small-note" style="margin-top:14px">${escapeHtml(chapter.note)}</p>
+    <div class="chapter-number">${String(index + 1).padStart(2, "0")} / ${String(chapters.length).padStart(2, "0")}</div>
+  `;
+}
+function renderRight(chapter, index) {
+  return `
+    <div class="photo-wrap">
+      <img class="page-photo" src="${escapeHtml(chapter.image)}" alt="${escapeHtml(chapter.caption)}" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1000&q=80'">
+      <div class="photo-caption">${escapeHtml(chapter.caption)}</div>
+    </div>
+    ${index === chapters.length - 1 ? `
+
+    ` : ""}
+    <div class="chapter-number">${index * 2 + 2}</div>
+  `;
+}
+function render() {
+  const chapter = chapters[current];
+  leftPage.innerHTML = renderLeft(chapter, current);
+  rightPage.innerHTML = renderRight(chapter, current);
+  leftPage.style.display = "";
+  document.querySelectorAll(".chapter-chip").forEach((button, i) => {
+    button.classList.toggle("active", i === current);
+    button.setAttribute("aria-current", i === current ? "step" : "false");
+  });
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === chapters.length - 1;
+  nextBtn.textContent = current === chapters.length - 1 ? "Last Chapter" : "Next Chapter →";
+  pageStatus.textContent = `${chapter.title} · ${current + 1} of ${chapters.length}`;
+  progressBar.style.width = `${((current + 1) / chapters.length) * 100}%`;
+  const planBtn = document.getElementById("planBtn");
+  const restartBtn = document.getElementById("restartBtn");
+  if (planBtn) planBtn.addEventListener("click", () => {
+    window.location.href = "mailto:hello@orionskyholiday.com?subject=" + encodeURIComponent("Plan my Kerala trip") +
+      "&body=" + encodeURIComponent("Hello Orion Sky Holiday,\\nI would like to plan a trip to Kerala. Please share itinerary and package details.");
+  });
+  if (restartBtn) restartBtn.addEventListener("click", () => {
+    current = 0; render(); book.scrollIntoView({behavior:"smooth", block:"center"});
+  });
+}
+function goTo(index) {
+  if (index < 0 || index >= chapters.length) return;
+  current = index;
+  book.classList.remove("turning");
+  void book.offsetWidth;
+  book.classList.add("turning");
+  render();
+}
+chapters.forEach((chapter, index) => {
+  const button = document.createElement("button");
+  button.className = "chapter-chip";
+  button.textContent = chapter.title;
+  button.type = "button";
+  button.addEventListener("click", () => {
+    if (!isOpen) openBook();
+    goTo(index);
+    book.scrollIntoView({behavior:"smooth", block:"center"});
+  });
+  chapterNav.appendChild(button);
+});
+function openBook() {
+  isOpen = true;
+  book.classList.add("is-open");
+  pageStatus.textContent = "Chapter 1 · Your journey begins";
+  prevBtn.disabled = true;
+  openBookBtn.blur();
+  setTimeout(() => { render(); }, 250);
+}
+openBookBtn.addEventListener("click", openBook);
+prevBtn.addEventListener("click", () => goTo(current - 1));
+nextBtn.addEventListener("click", () => goTo(current + 1));
+document.addEventListener("keydown", event => {
+  if (!isOpen || event.target.matches("input, textarea, select")) return;
+  if (event.key === "ArrowRight") goTo(current + 1);
+  if (event.key === "ArrowLeft") goTo(current - 1);
+});
+render();
+</script>
+</body>
+</html>

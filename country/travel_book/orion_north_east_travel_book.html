@@ -1,0 +1,530 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>North East India Tour | Orlon Sky Holiday</title>
+
+<style>
+:root{
+ --mountain:#123D36;
+ --green:#23765D;
+ --teal:#48A99A;
+ --orange:#E77D43;
+ --gold:#F3C879;
+ --cream:#FFFCF5;
+ --ink:#29483F;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;color:white;background:var(--mountain)}
+button{font:inherit;cursor:pointer}
+
+.scene{
+ min-height:100vh;padding-bottom:35px;
+ background:
+ linear-gradient(125deg,#092C28ED,#23765DD9,#D66D3DBB),
+ url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2000&q=85")
+ center/cover fixed;
+}
+header{
+ max-width:1200px;margin:auto;padding:22px;
+ display:flex;justify-content:space-between;align-items:center;
+ border-bottom:1px solid #ffffff35
+}
+.brand{font:bold 19px Georgia,serif}
+.brand span{color:var(--gold)}
+.back{
+ color:white;text-decoration:none;border:1px solid #ffffff65;
+ padding:10px 15px;border-radius:30px;font-size:12px
+}
+.intro{text-align:center;padding:35px 15px 20px}
+.eyebrow{
+ text-transform:uppercase;letter-spacing:4px;font-size:11px;
+ font-weight:bold;color:var(--gold)
+}
+.intro h1{font:clamp(38px,6vw,65px) Georgia,serif;margin:13px 0}
+.intro p{max-width:700px;margin:auto;color:#e5f5ed;line-height:1.7}
+
+.book-area{width:min(1000px,calc(100% - 30px));margin:25px auto 0}
+.book{
+ position:relative;display:grid;grid-template-columns:1fr 1fr;
+ aspect-ratio:1.6;min-height:450px;
+ filter:drop-shadow(0 25px 35px #0007)
+}
+.page{
+ min-width:0;overflow:hidden;position:relative;color:var(--ink);
+ padding:clamp(20px,3.5vw,38px);
+ background:radial-gradient(circle at top left,#48A99A30,transparent 55%),var(--cream);
+ border:1px solid #c9dfd4
+}
+.left{border-radius:8px 0 0 8px;border-right:1px solid #b7d0c4}
+.right{border-radius:0 8px 8px 0}
+.book::after{
+ content:"";position:absolute;z-index:3;top:0;bottom:0;left:50%;
+ width:18px;transform:translateX(-50%);pointer-events:none;
+ background:linear-gradient(90deg,#234b3c33,#b7d4c5aa,#fffdf5,#526b8033)
+}
+.page-label{
+ font-size:10px;font-weight:bold;letter-spacing:2px;
+ text-transform:uppercase;color:var(--orange);margin-bottom:15px
+}
+.page h2{
+ font:clamp(25px,3.3vw,36px) Georgia,serif;
+ line-height:1.1;color:var(--mountain);margin:0 0 15px
+}
+.page p{color:#536d62;font-size:13px;line-height:1.8}
+.page ul{list-style:none;padding:0;margin-top:15px}
+.page li{
+ border-bottom:1px solid #123D3616;padding:9px 0 9px 19px;
+ position:relative;color:#36594b;font-size:12px;line-height:1.5
+}
+.page li::before{content:"✦";color:var(--orange);position:absolute;left:0}
+.photo-wrap{height:100%;min-height:300px;position:relative}
+.photo{
+ display:block;width:100%;height:100%;min-height:300px;
+ max-height:480px;object-fit:cover;border-radius:4px
+}
+.caption{
+ position:absolute;bottom:10px;left:10px;right:10px;
+ padding:25px 12px 12px;background:linear-gradient(transparent,#092C28ED);
+ color:white;font:15px Georgia,serif
+}
+.page-no{position:absolute;bottom:12px;color:#718b7e;font-size:10px}
+.left .page-no{left:25px}.right .page-no{right:25px}
+
+.cover{
+ position:absolute;z-index:5;inset:0 50% 0 0;
+ transform-origin:left center;
+ transition:transform 1.3s cubic-bezier(.2,.7,.2,1);
+ backface-visibility:hidden;border-radius:8px 0 0 8px;
+ background:
+ linear-gradient(140deg,#123D36ED,#23765DD9,#D66D3DCC),
+ url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1000&q=85")
+ center/cover;
+ border:2px solid #F3C87999;box-shadow:inset -10px 0 20px #0004;
+ display:grid;place-items:center;text-align:center;padding:25px
+}
+.cover::after{
+ content:"";position:absolute;inset:13px;border:1px solid var(--gold);
+ pointer-events:none
+}
+.cover-content{position:relative;z-index:1}
+.cover h2{
+ color:var(--cream);font:clamp(30px,4vw,48px) Georgia,serif;
+ margin:18px 0 12px
+}
+.cover p{font-size:12px;color:#e5f5ed;line-height:1.7}
+.price{font-weight:bold;font-size:15px!important;color:var(--gold)!important}
+.primary{
+ background:var(--gold);color:var(--mountain);border:none;
+ padding:13px 17px;margin-top:12px;border-radius:4px;
+ font-size:11px;font-weight:bold;text-transform:uppercase;letter-spacing:1px
+}
+.primary:hover{background:#ffe5ad}
+.book.open .cover{transform:rotateY(-170deg);pointer-events:none}
+
+.controls{
+ display:flex;justify-content:center;align-items:center;
+ flex-wrap:wrap;gap:15px;margin-top:22px
+}
+.nav-btn{
+ background:#ffffff12;color:white;border:1px solid #ffffff65;
+ border-radius:30px;padding:11px 17px;font-size:12px
+}
+.nav-btn:hover:not(:disabled){background:#ffffff30}
+.nav-btn:disabled{opacity:.35;cursor:not-allowed}
+.status{min-width:150px;text-align:center;font-size:11px;color:#e5f5ed}
+.progress{width:min(260px,70%);height:3px;background:#ffffff30;margin:15px auto}
+.progress div{height:100%;width:0;background:var(--gold);transition:width .3s}
+.chapters{
+ max-width:950px;margin:25px auto;padding:0 15px;
+ display:flex;justify-content:center;flex-wrap:wrap;gap:8px
+}
+.chapters button{
+ background:#ffffff10;border:1px solid #ffffff45;color:white;
+ padding:9px 12px;border-radius:25px;font-size:10px
+}
+.chapters button.active{
+ border-color:var(--gold);color:var(--gold);background:#F3C8791C
+}
+.checklist{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.checklist label{color:#36594b;font-size:12px}
+.checklist input{accent-color:var(--green)}
+.footer{text-align:center;color:#ffffff9c;font-size:11px;padding:10px}
+.footer span{color:var(--gold)}
+
+@media(max-width:700px){
+ header{padding:17px}.brand{font-size:15px}.intro{padding-top:25px}
+ .book{display:flex;flex-direction:column;aspect-ratio:auto;min-height:0}
+ .book::after{display:none}
+ .left,.right{border-radius:5px}.right{margin-top:8px}
+ .page{padding:23px}.photo-wrap{min-height:240px}
+ .photo{min-height:240px;max-height:330px}
+ .cover{
+  inset:0;transform-origin:center bottom;border-radius:5px
+ }
+ .book.open .cover{transform:rotateX(90deg)}
+ .cover h2{font-size:38px}
+ .controls{gap:8px}.nav-btn{padding:10px 12px}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{transition:none!important}
+}
+</style>
+</head>
+
+<body>
+<div class="scene">
+
+<header>
+ <div class="brand"><span>✧</span> Orlon Sky Holiday</div>
+ <a class="back" href="javascript:history.back()">← Back to Destinations</a>
+</header>
+
+<section class="intro">
+ <div class="eyebrow">Nature · Mountains · Culture</div>
+ <h1>Discover North East India</h1>
+ <p>Explore Assam's tea gardens and wildlife, Meghalaya's waterfalls and living root bridges, and Sikkim's Himalayan beauty through your personal travel book.</p>
+</section>
+
+<main class="book-area">
+ <div class="book" id="book">
+  <section class="page left" id="leftPage"></section>
+  <section class="page right" id="rightPage"></section>
+
+  <div class="cover">
+   <div class="cover-content">
+    <div class="eyebrow">Orlon Sky Holiday presents</div>
+    <h2>North East<br>India Tour</h2>
+    <p>Assam · Meghalaya<br>Sikkim</p>
+    <p class="price">₹26,999 / person*</p>
+    <button class="primary" id="openBtn">Open Your Travel Book ↗</button>
+   </div>
+  </div>
+ </div>
+
+ <div class="controls">
+  <button class="nav-btn" id="prevBtn" disabled>← Previous</button>
+  <div class="status" id="status">Your journey awaits</div>
+  <button class="nav-btn" id="nextBtn">Next Chapter →</button>
+ </div>
+
+ <div class="progress"><div id="progressBar"></div></div>
+</main>
+
+<nav class="chapters" id="chapters"></nav>
+
+<div class="footer">
+ Discover more. Travel beautifully.<br><br>
+ <span>Orlon Sky Holiday</span>
+</div>
+</div>
+
+<script>
+const chapters = [
+{
+ title:"Welcome to North East",
+ label:"Chapter 01 · The destination",
+ heading:"A journey into India's beautiful north east",
+ image:"photo-1500530855697-b586d89ba3ee",
+ caption:"Discover the green landscapes of North East India",
+ text:"North East India is a beautiful mix of Himalayan scenery, lush forests, tea gardens, rivers, waterfalls and vibrant cultures. This tour brings together three fascinating states: Assam, Meghalaya and Sikkim.",
+ items:[
+  "Assam — tea gardens, river islands and wildlife",
+  "Meghalaya — waterfalls, caves and living root bridges",
+  "Sikkim — Himalayan views, monasteries and mountain lakes",
+  "Experience regional food, traditions and local hospitality"
+ ],
+ note:"The three states are geographically spread out. Confirm the route, travel days and transport arrangements before booking."
+},
+{
+ title:"Explore Assam",
+ label:"Chapter 02 · Assam",
+ heading:"Tea gardens, mighty rivers and wildlife",
+ image:"photo-1511497584788-876760111969",
+ caption:"The lush green landscapes of Assam",
+ text:"Assam is known for its rolling tea estates, the mighty Brahmaputra River, rich cultural traditions and extraordinary wildlife. It offers a memorable introduction to the north eastern region.",
+ items:[
+  "Visit scenic tea gardens around Jorhat or Dibrugarh",
+  "Explore Guwahati and the famous Kamakhya Temple",
+  "Discover the river island of Majuli",
+  "Experience Assamese culture, crafts and local cuisine"
+ ],
+ note:"Travel time between Assam's destinations can be considerable. Choose sightseeing stops according to your available days."
+},
+{
+ title:"Kaziranga National Park",
+ label:"Chapter 03 · Assam wildlife",
+ heading:"Discover the home of the one-horned rhino",
+ image:"photo-1472396961693-142e6e269027",
+ caption:"Wildlife and natural beauty in Assam",
+ text:"Kaziranga National Park is famous for its greater one-horned rhinoceros and diverse wildlife. Its grasslands, wetlands and forests make it one of Assam's best-known nature destinations.",
+ items:[
+  "Enjoy a permitted wildlife safari",
+  "Look out for the one-horned rhinoceros",
+  "Discover the park's rich birdlife",
+  "Learn about wildlife conservation"
+ ],
+ note:"Safari zones, timings and availability depend on park rules and seasonal conditions. Follow all guide instructions."
+},
+{
+ title:"Discover Meghalaya",
+ label:"Chapter 04 · Meghalaya",
+ heading:"Where clouds meet green hills",
+ image:"photo-1501785888041-af3ef285b470",
+ caption:"Meghalaya's beautiful hills and natural scenery",
+ text:"Meghalaya, the abode of clouds, is loved for its misty hills, dramatic waterfalls, clear rivers and fascinating caves. It is a paradise for nature lovers and photographers.",
+ items:[
+  "Explore Shillong, the state's lively hill capital",
+  "Visit the beautiful landscapes of Cherrapunji",
+  "Discover the clear waters of Dawki",
+  "Experience Meghalaya's unique Khasi culture"
+ ],
+ note:"Waterfall flows and river conditions change with the season. Check local conditions before planning outdoor activities."
+},
+{
+ title:"Living Root Bridges",
+ label:"Chapter 05 · Meghalaya heritage",
+ heading:"Walk across nature's living architecture",
+ image:"photo-1511497584788-876760111969",
+ caption:"Explore the green forests and living root bridge region",
+ text:"Meghalaya's living root bridges are remarkable examples of traditional Khasi and Jaintia knowledge. Carefully guided tree roots form natural bridges that have been shaped over generations.",
+ items:[
+  "Visit the famous living root bridge areas",
+  "Explore forest paths with a local guide",
+  "Discover traditional village life",
+  "Enjoy the region's beautiful green surroundings"
+ ],
+ note:"Some bridge routes involve steep steps and long walks. Wear suitable shoes and check trail conditions."
+},
+{
+ title:"Waterfalls & Dawki",
+ label:"Chapter 06 · Meghalaya nature",
+ heading:"Experience waterfalls and crystal-clear rivers",
+ image:"photo-1470770841072-f978cf4d019e",
+ caption:"Meghalaya's scenic rivers and mountain landscapes",
+ text:"Meghalaya offers dramatic waterfalls, deep valleys and beautiful river scenery. The Dawki and Shnongpdeng region is especially popular for its clear waters and peaceful surroundings.",
+ items:[
+  "Admire the famous Nohkalikai Falls",
+  "Explore the scenic Dawki river area",
+  "Enjoy boating when conditions permit",
+  "Capture the landscapes of Cherrapunji"
+ ],
+ note:"Boating and water activities depend on weather, river levels and local operator safety instructions."
+},
+{
+ title:"Welcome to Sikkim",
+ label:"Chapter 07 · Sikkim",
+ heading:"Discover the magic of the Himalayas",
+ image:"photo-1464822759023-fed622ff2c3b",
+ caption:"The majestic Himalayan mountain landscape",
+ text:"Sikkim is a Himalayan destination known for mountain views, peaceful monasteries, colourful prayer flags, alpine lakes and welcoming mountain communities.",
+ items:[
+  "Explore Gangtok and its lively surroundings",
+  "Enjoy views of the Kanchenjunga range",
+  "Visit peaceful Buddhist monasteries",
+  "Discover local markets and Sikkimese cuisine"
+ ],
+ note:"Mountain roads and high-altitude areas may be affected by weather. Keep flexible travel time in your itinerary."
+},
+{
+ title:"Gangtok & Tsomgo Lake",
+ label:"Chapter 08 · Sikkim highlights",
+ heading:"Mountain views and a beautiful alpine lake",
+ image:"photo-1501785888041-af3ef285b470",
+ caption:"A scenic Himalayan lake surrounded by mountains",
+ text:"Gangtok is a wonderful base for exploring Sikkim. Tsomgo Lake, also known as Changu Lake, is a spectacular high-altitude lake surrounded by mountain scenery.",
+ items:[
+  "Explore Gangtok's local markets and viewpoints",
+  "Visit Tsomgo Lake subject to permits and conditions",
+  "Discover the spiritual atmosphere of local monasteries",
+  "Enjoy panoramic Himalayan scenery"
+ ],
+ note:"Tsomgo Lake is at high altitude. Permits, road access and weather conditions must be checked before travel."
+},
+{
+ title:"Food & culture",
+ label:"Chapter 09 · Local flavours",
+ heading:"Taste the traditions of the north east",
+ image:"photo-1625220194771-7ebdea0b70b9",
+ caption:"Discover regional food and local flavours",
+ text:"The north east offers a wonderful variety of regional food and cultural experiences. Each state has its own ingredients, cooking traditions, festivals and local specialities.",
+ items:[
+  "Assam — Assamese thali, tenga and pitha",
+  "Meghalaya — jadoh and local Khasi dishes",
+  "Sikkim — momos, thukpa and traditional soups",
+  "Explore local markets, crafts and cultural performances"
+ ],
+ note:"Food options vary by location. Ask about ingredients, spice levels and dietary requirements."
+},
+{
+ title:"Best time to travel",
+ label:"Chapter 10 · Choose your season",
+ heading:"Plan your perfect north east escape",
+ image:"photo-1500530855697-b586d89ba3ee",
+ caption:"Green hills and beautiful landscapes",
+ text:"The best travel period depends on the experiences you want. Many travellers prefer the cooler months for sightseeing, while the monsoon brings lush greenery but can affect road journeys and outdoor activities.",
+ items:[
+  "October to April — popular for many sightseeing routes",
+  "Spring — pleasant conditions in several destinations",
+  "Monsoon — lush scenery, but heavy rain may disrupt travel",
+  "Winter — cold weather in Sikkim's higher-altitude areas"
+ ],
+ note:"Weather varies between Assam's plains, Meghalaya's hills and Sikkim's high-altitude destinations. Check forecasts for your travel dates."
+},
+{
+ title:"Package & budget",
+ label:"Chapter 11 · Plan your holiday",
+ heading:"Your North East India holiday",
+ image:"photo-1500534623283-312aade485b7",
+ caption:"Make memories across three beautiful states",
+ text:"Explore Assam, Meghalaya and Sikkim with this advertised starting package price. Your final holiday cost will depend on travel dates, departure city, hotel category, transport and package inclusions.",
+ items:[
+  "Starting package price: ₹26,999 per person",
+  "Confirm accommodation and meal inclusions",
+  "Check inter-state transfers and sightseeing transport",
+  "Ask about permits, entry tickets and safari charges",
+  "Confirm flights or train tickets separately if applicable"
+ ],
+ note:"₹26,999 is the supplied advertised price. Confirm the final itinerary, availability and all inclusions with Orlon Sky Holiday."
+},
+{
+ title:"Packing checklist",
+ label:"Chapter 12 · Be prepared",
+ heading:"Pack for hills, rain and changing weather",
+ image:"photo-1551632811-561732d1e306",
+ caption:"Get ready for your north east adventure",
+ text:"The north east has varied weather and terrain. Pack comfortable clothing for sightseeing, warm layers for Sikkim and rain protection for the hill regions.",
+ checklist:[
+  "Comfortable walking shoes",
+  "Warm jacket and layered clothing",
+  "Raincoat or umbrella",
+  "Sunscreen and sunglasses",
+  "Personal medicines and first aid",
+  "Valid photo ID and travel documents",
+  "Power bank and charging accessories",
+  "Reusable water bottle"
+ ],
+ note:"Carry any required permits and identification documents. Pack extra warm clothing for high-altitude destinations."
+},
+{
+ title:"Your North East story",
+ label:"Final chapter · Begin your journey",
+ heading:"Ready to explore North East India?",
+ image:"photo-1464822759023-fed622ff2c3b",
+ caption:"Your unforgettable north east journey awaits",
+ text:"From Assam's tea gardens and wildlife to Meghalaya's waterfalls and Sikkim's Himalayan landscapes, this journey brings together three unique destinations in one memorable holiday.",
+ items:[
+  "Choose your travel dates and departure city",
+  "Confirm the route across all three states",
+  "Select your preferred hotels and sightseeing",
+  "Check permits, transport and package inclusions",
+  "Contact Orlon Sky Holiday to plan your trip"
+ ],
+ note:"Confirm the actual itinerary and availability before making your booking."
+}
+];
+
+let current=0;
+let opened=false;
+
+const book=document.getElementById("book");
+const left=document.getElementById("leftPage");
+const right=document.getElementById("rightPage");
+const prev=document.getElementById("prevBtn");
+const next=document.getElementById("nextBtn");
+const status=document.getElementById("status");
+const progress=document.getElementById("progressBar");
+const chapterMenu=document.getElementById("chapters");
+
+function safe(value){
+ return String(value).replace(/[&<>"']/g,c=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ })[c]);
+}
+
+function imageUrl(id){
+ if(id.startsWith("http"))return id;
+ return "https://images.unsplash.com/"+id+"?auto=format&fit=crop&w=1100&q=85";
+}
+
+function render(){
+ const c=chapters[current];
+
+ left.innerHTML=`
+  <div class="page-label">${safe(c.label)}</div>
+  <h2>${safe(c.heading)}</h2>
+  <p>${safe(c.text)}</p>
+  ${c.checklist?`
+   <div class="checklist">
+    ${c.checklist.map(item=>`
+     <label><input type="checkbox"> ${safe(item)}</label>
+    `).join("")}
+   </div>`:`
+   <ul>${c.items.map(item=>`<li>${safe(item)}</li>`).join("")}</ul>
+  `}
+  <p><small>${safe(c.note)}</small></p>
+  <div class="page-no">${current*2+1}</div>
+ `;
+
+ right.innerHTML=`
+  <div class="photo-wrap">
+   <img class="photo"
+    src="${safe(imageUrl(c.image))}"
+    alt="${safe(c.caption)}"
+    loading="lazy"
+    onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1100&q=85'">
+   <div class="caption">${safe(c.caption)}</div>
+  </div>
+  <div class="page-no">${current*2+2}</div>
+ `;
+
+ prev.disabled=current===0;
+ next.disabled=current===chapters.length-1;
+ next.textContent=current===chapters.length-1?"End of Book":"Next Chapter →";
+ status.textContent=c.title+" · "+(current+1)+" of "+chapters.length;
+ progress.style.width=((current+1)/chapters.length*100)+"%";
+
+ document.querySelectorAll(".chapters button").forEach((btn,i)=>{
+  btn.classList.toggle("active",i===current);
+ });
+}
+
+function goTo(index){
+ if(index<0||index>=chapters.length)return;
+ current=index;
+ render();
+}
+
+function openBook(){
+ opened=true;
+ book.classList.add("open");
+ setTimeout(render,300);
+}
+
+chapters.forEach((c,i)=>{
+ const btn=document.createElement("button");
+ btn.textContent=c.title;
+ btn.onclick=()=>{
+  if(!opened)openBook();
+  goTo(i);
+  book.scrollIntoView({behavior:"smooth",block:"center"});
+ };
+ chapterMenu.appendChild(btn);
+});
+
+document.getElementById("openBtn").addEventListener("click",openBook);
+prev.addEventListener("click",()=>goTo(current-1));
+next.addEventListener("click",()=>goTo(current+1));
+
+document.addEventListener("keydown",event=>{
+ if(!opened||event.target.matches("input,textarea"))return;
+ if(event.key==="ArrowRight")goTo(current+1);
+ if(event.key==="ArrowLeft")goTo(current-1);
+});
+
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,861 @@
+/* ========================================
+   ORION SKY HOLIDAY — Responsive Styles
+   ======================================== */
+
+/* --- Header: 768px and below (show hamburger) --- */
+@media (max-width: 768px) {
+  .nav-links,
+  .nav-actions .btn {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  /* Homepage header */
+  .header__nav {
+    display: none;
+  }
+
+  .mobile-toggle {
+    display: flex;
+  }
+
+  .header__cta-btn {
+    display: none;
+  }
+
+  .header__inner {
+    height: 64px;
+  }
+
+  .hero {
+    min-height: 100vh;
+  }
+
+  .hero__content {
+    padding-top: 100px;
+    padding-bottom: 40px;
+  }
+
+  .hero__text h1 {
+    font-size: 2rem;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero__form-wrap {
+    max-width: 100%;
+  }
+
+  .hero-form {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .trust-bar__grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .trust-bar__item {
+    justify-content: flex-start;
+    padding: 8px 0;
+  }
+
+  .dest-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .dest-card {
+    aspect-ratio: 3 / 4;
+  }
+
+  .steps__grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .steps__line {
+    display: none;
+  }
+
+  .step {
+    display: flex;
+    gap: 16px;
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .step__number {
+    width: 48px;
+    height: 48px;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin: 0;
+  }
+
+  .why-us__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .testi-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .insta-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .final-cta {
+    padding: 60px 0;
+  }
+
+  .final-cta__actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .final-cta__actions .btn {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .mega-menu {
+    display: none;
+  }
+}
+
+/* --- Header: switch to mobile nav on tablet to avoid crowding --- */
+@media (max-width: 1100px) {
+  .header__nav {
+    display: none;
+  }
+
+  .mobile-toggle {
+    display: flex;
+  }
+
+  .header__cta-btn {
+    display: none;
+  }
+}
+
+/* --- 480px and below --- */
+@media (max-width: 480px) {
+  :root {
+    --container-padding: 16px;
+    --header-height: 64px;
+  }
+
+  .section {
+    padding: var(--section-spacing-mobile) 0;
+  }
+
+  .section-header {
+    margin-bottom: 40px;
+  }
+
+  .dest-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: 80vh;
+    padding-top: var(--header-height);
+  }
+
+  .hero__content {
+    padding-top: 40px;
+    padding-bottom: 60px;
+  }
+
+  .hero__text h1 {
+    font-size: 2rem;
+  }
+
+  .hero__subtitle {
+    font-size: 0.95rem;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-form {
+    gap: 12px;
+  }
+
+  .hero-form__group {
+    border-right: none;
+  }
+
+  .hero-form__group select,
+  .hero-form__group input {
+    padding: 14px 16px;
+    font-size: 0.95rem;
+  }
+
+  .hero-form__submit {
+    width: 100%;
+    padding: 16px;
+  }
+
+  /* Trust Bar */
+  .trust-bar__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .trust-bar__item {
+    justify-content: flex-start;
+  }
+
+  /* Steps */
+  .steps__line {
+    display: none;
+  }
+
+  .steps__grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .step {
+    display: flex;
+    gap: 16px;
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .step__number {
+    margin-bottom: 0;
+  }
+
+  .step__icon {
+    width: 56px;
+    height: 56px;
+    margin: 0;
+    flex-shrink: 0;
+  }
+
+  /* Destinations */
+  .dest-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .dest-card {
+    aspect-ratio: 3 / 4;
+  }
+
+  /* Travel Styles */
+  .styles-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .style-card {
+    aspect-ratio: 16 / 11;
+  }
+
+  /* Itineraries */
+  .itin-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* Why Us */
+  .why-us__grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .why-us__image img {
+    aspect-ratio: 16 / 10;
+  }
+
+  /* Testimonials */
+  .testi-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .testi-card {
+    padding: 24px;
+  }
+
+  /* Instagram */
+  .insta-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Final CTA */
+  .final-cta {
+    padding: 80px 0;
+  }
+
+  .final-cta__content h2 {
+    font-size: 1.7rem;
+  }
+
+  .final-cta__actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .final-cta__actions .btn {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  /* Destinations Hub */
+  .dest-hero {
+    min-height: 60vh;
+  }
+
+  .dest-hero__content {
+    padding: 40px 0 50px;
+  }
+
+  .dest-hero__text h1 {
+    font-size: 2rem;
+  }
+
+  .dest-hero__subtitle {
+    font-size: 0.95rem;
+  }
+
+  .dest-hero__actions {
+    flex-direction: column;
+  }
+
+  .dest-hero__actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .region-nav__link {
+    padding: 14px 16px;
+    font-size: 0.78rem;
+  }
+
+  .dest-controls__row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dest-controls__filters {
+    padding-bottom: 4px;
+  }
+
+  .dest-controls__right {
+    justify-content: space-between;
+  }
+
+  .dest-search__input {
+    width: 180px;
+  }
+
+  .hub-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .hub-card__body {
+    padding: 20px;
+  }
+
+  .inspiration-cta__inner {
+    padding: 40px 24px;
+  }
+
+  .inspiration-cta__actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .inspiration-cta__actions .btn {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  /* Footer */
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .footer__brand {
+    max-width: none;
+  }
+
+  .footer__bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer__bottom-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+}
+
+/* --- 768px and below (tablet) --- */
+@media (max-width: 768px) {
+  :root {
+    --header-height: 64px;
+  }
+
+  .section {
+    padding: 70px 0;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: 85vh;
+  }
+
+  /* Steps */
+  .steps__line {
+    display: none;
+  }
+
+  .steps__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  /* Destinations */
+  .dest-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .dest-card {
+    aspect-ratio: 3 / 4;
+  }
+
+  /* Destinations Hub */
+  .hub-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  /* Travel Styles */
+  .styles-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Itineraries */
+  .itin-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Instagram */
+  .insta-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* --- 1024px and below (small desktop) --- */
+@media (max-width: 1024px) {
+  :root {
+    --container-padding: 20px;
+  }
+
+  .hero {
+    min-height: 85vh;
+  }
+
+  .hero__form-wrap {
+    max-width: 430px;
+  }
+
+  .why-us__grid {
+    gap: 40px;
+  }
+
+  .itin-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* --- 769px to 900px (tablet portrait): trust bar & steps go 2x2 --- */
+@media (min-width: 769px) and (max-width: 900px) {
+  .steps__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 32px;
+  }
+
+  .steps__line {
+    display: none;
+  }
+
+  .trust-bar__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 32px;
+  }
+
+  .trust-bar__item {
+    justify-content: flex-start;
+  }
+}
+
+/* --- 1280px container max --- */
+@media (min-width: 1280px) {
+  .container {
+    padding: 0 40px;
+  }
+}
+
+
+/* ========================================
+   COUNTRY PAGE — RESPONSIVE
+   ======================================== */
+
+/* --- 480px and below --- */
+@media (max-width: 480px) {
+  .cp-hero {
+    height: 55vh;
+    min-height: 380px;
+  }
+
+  .cp-hero-content {
+    padding: 40px 0;
+  }
+
+  .cp-hero-tagline {
+    font-size: 0.95rem;
+  }
+
+  .cp-hero-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .cp-hero-actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .cp-facts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cp-fact:nth-child(2) {
+    border-right: none;
+  }
+
+  .cp-fact {
+    padding: 18px 12px;
+  }
+
+  .cp-intro-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .cp-intro-image img {
+    height: 260px;
+  }
+
+  .cp-places-grid,
+  .cp-exp-grid,
+  .cp-itin-grid,
+  .cp-cost-grid,
+  .cp-test-grid,
+  .cp-related-grid,
+  .cp-guides-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cp-exp-card {
+    height: 220px;
+  }
+
+  .cp-visa-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .cp-visa-image img {
+    height: 240px;
+  }
+
+  .cp-form-wrap {
+    padding: 28px 20px;
+  }
+
+  .cp-form .form-actions-row {
+    flex-direction: column;
+  }
+
+  .cp-section {
+    padding: 50px 0;
+  }
+
+  .cp-final-cta {
+    padding: 50px 0;
+  }
+
+  .cp-final-cta-actions {
+    flex-direction: column;
+  }
+
+  .cp-final-cta-actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .cp-weather-table {
+    font-size: 0.82rem;
+  }
+
+  .cp-weather-table th,
+  .cp-weather-table td {
+    padding: 10px 12px;
+  }
+}
+
+/* --- 768px and below --- */
+@media (max-width: 768px) {
+  .cp-hero {
+    height: 60vh;
+    min-height: 400px;
+  }
+
+  .cp-facts-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .cp-fact:nth-child(3) {
+    border-right: none;
+  }
+
+  .cp-intro-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .cp-intro-image img {
+    height: 300px;
+  }
+
+  .cp-places-grid,
+  .cp-itin-grid,
+  .cp-test-grid,
+  .cp-related-grid,
+  .cp-guides-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cp-exp-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cp-exp-card {
+    height: 240px;
+  }
+
+  .cp-cost-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cp-cost-featured {
+    transform: none;
+  }
+
+  .cp-cost-featured:hover {
+    transform: translateY(-4px);
+  }
+
+  .cp-visa-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .cp-section {
+    padding: 60px 0;
+  }
+
+  .cp-nav-link {
+    padding: 12px 14px;
+    font-size: 0.82rem;
+  }
+
+  .cp-final-cta {
+    padding: 60px 0;
+  }
+
+  .form-progress::before {
+    left: 30px;
+    right: 30px;
+  }
+}
+
+/* --- 1024px and below --- */
+@media (max-width: 1024px) {
+  .cp-places-grid,
+  .cp-itin-grid,
+  .cp-cost-grid,
+  .cp-test-grid,
+  .cp-related-grid,
+  .cp-guides-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cp-exp-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cp-intro {
+    padding: 60px 0;
+  }
+
+  .cp-section {
+    padding: 70px 0;
+  }
+}
+
+/* --- 1280px and above --- */
+@media (min-width: 1280px) {
+  .cp-places-grid,
+  .cp-exp-grid,
+  .cp-itin-grid,
+  .cp-cost-grid,
+  .cp-test-grid,
+  .cp-related-grid,
+  .cp-guides-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+
+/* ========================================
+   ROOT PAGES — RESPONSIVE
+   ======================================== */
+
+/* --- Footer Mobile --- */
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footer-col ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    padding-top: 24px;
+    border-top: 1px solid rgba(15, 76, 92, 0.1);
+  }
+}
+
+/* --- Contact Page --- */
+@media (max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-map {
+    height: 250px;
+  }
+}
+
+/* --- Why Us / About Pages --- */
+@media (max-width: 768px) {
+  .values-grid,
+  .reasons-grid,
+  .team-grid,
+  .itinerary-featured-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-table {
+    display: none;
+  }
+
+  .comparison-mobile {
+    display: block;
+  }
+}
+
+/* --- Plan Your Trip Form --- */
+@media (max-width: 768px) {
+  .plan-form-wrap {
+    padding: 24px 16px;
+  }
+
+  .form-progress {
+    gap: 8px;
+  }
+
+  .form-progress-label {
+    font-size: 0.7rem;
+  }
+}
+
+/* --- WhatsApp Float Mobile --- */
+@media (max-width: 768px) {
+  .whatsapp-float {
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    font-size: 1.5rem;
+  }
+}
+
+/* --- Itineraries Page --- */
+@media (max-width: 768px) {
+  .itin-filter-bar {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .itin-filter-btn {
+    flex: 1 1 auto;
+    min-height: 44px;
+  }
+
+  .itinerary-featured-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+  }
+
+  .newsletter-form .btn {
+    width: 100%;
+  }
+}
+}

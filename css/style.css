@@ -1,0 +1,743 @@
+/* ========================================
+   ORION SKY HOLIDAY — Core Styles
+   ======================================== */
+
+/* --- CSS Custom Properties --- */
+:root {
+  --primary: #0F4C5C;
+  --primary-dark: #0a3842;
+  --primary-light: #1a6b7d;
+  --sand: #E8D5B7;
+  --sand-light: #f0e4d0;
+  --coral: #E85D3D;
+  --coral-dark: #c94a2d;
+  --coral-light: #ff7a5c;
+  --off-white: #FAF7F2;
+
+  --white: #ffffff;
+  --black: #1a1a1a;
+  --text-dark: #1a1a1a;
+  --text-body: #3a3a3a;
+  --text-muted: #7a7a7a;
+  --text-light: #ffffff;
+  --border-color: #e0ddd8;
+  --overlay-dark: rgba(15, 76, 92, 0.85);
+  --overlay-black: rgba(0, 0, 0, 0.55);
+
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --header-height: 80px;
+  --container-max: 1280px;
+  --container-padding: 24px;
+  --section-spacing: 100px;
+  --section-spacing-mobile: 60px;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  --z-header: 1000;
+  --z-mega: 999;
+  --z-mobile-menu: 1100;
+  --z-whatsapp: 900;
+  --z-overlay: 1050;
+}
+
+/* --- Reset & Base --- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: clamp(16px, 1.05vw, 18px);
+  line-height: 1.65;
+  color: var(--text-body);
+  background-color: var(--off-white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color var(--transition-fast);
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--text-dark);
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+}
+
+h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+}
+
+h3 {
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+}
+
+h4 {
+  font-size: clamp(1.15rem, 1.8vw, 1.5rem);
+}
+
+h5 {
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Utility --- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.section {
+  padding: var(--section-spacing) 0;
+}
+
+.section--alt {
+  background-color: var(--white);
+}
+
+.section--dark {
+  background-color: var(--primary);
+  color: var(--text-light);
+}
+
+.section--dark h2,
+.section--dark h3,
+.section--dark h4 {
+  color: var(--text-light);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* --- Section Headers --- */
+.section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 60px;
+}
+
+.section-header .label {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--coral);
+  margin-bottom: 12px;
+}
+
+.section-header h2 {
+  margin-bottom: 16px;
+}
+
+.section-header p {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+/* --- Focus Visible --- */
+:focus-visible {
+  outline: 2px solid var(--coral);
+  outline-offset: 3px;
+}
+
+/* --- Prefers Reduced Motion --- */
+/* --- Keyframes --- */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --- Selection --- */
+::selection {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+/* --- Mobile-First Base (70% mobile users) --- */
+a, button, input, select, textarea {
+  min-height: 44px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 14px 28px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: 2px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.btn-primary {
+  background: var(--coral);
+  color: var(--white);
+  border-color: var(--coral);
+}
+
+.btn-primary:hover {
+  background: var(--coral-dark);
+  border-color: var(--coral-dark);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-outline:hover {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.btn-outline-light {
+  background: transparent;
+  color: var(--white);
+  border-color: rgba(255,255,255,0.4);
+}
+
+.btn-outline-light:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: var(--white);
+}
+
+/* Touch-friendly form elements */
+input, select, textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--text-dark);
+  background: var(--white);
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color var(--transition-fast);
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--coral);
+  box-shadow: 0 0 0 3px rgba(232, 93, 61, 0.15);
+}
+
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%230F4C5C' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Prevent horizontal overflow */
+html, body {
+  overflow-x: hidden;
+}
+
+/* Smooth scroll offset for fixed header */
+html {
+  scroll-padding-top: 90px;
+}
+
+/* ========================================
+   NEW — INTERNATIONAL & INDIA DESTINATIONS
+   ======================================== */
+
+/* --- International Destinations Grid --- */
+.intl-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.intl-card {
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  display: block;
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+  aspect-ratio: 4 / 5;
+  min-height: 440px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.intl-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--coral);
+}
+
+.intl-card__media {
+  position: relative;
+  height: 62%;
+  overflow: hidden;
+  background: var(--off-white);
+}
+
+.intl-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+  filter: brightness(1);
+}
+
+.intl-card:hover .intl-card__media img {
+  transform: scale(1.1);
+}
+
+.intl-card__fallback {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.intl-card__fallback::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15) 0%, transparent 40%),
+                    radial-gradient(circle at 70% 70%, rgba(255,255,255,0.1) 0%, transparent 40%);
+  opacity: 0.6;
+}
+
+.intl-card__badge {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 3;
+  font-size: 1.5rem;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 6px 14px;
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: var(--shadow-sm);
+}
+
+.intl-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.18) 55%, rgba(0, 0, 0, 0.05) 100%);
+  transition: background var(--transition-base);
+}
+
+.intl-card:hover .intl-card__overlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.25) 55%, rgba(0, 0, 0, 0.1) 100%);
+}
+
+.intl-card__body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 26px 30px;
+  color: var(--white);
+}
+
+.intl-card__region {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sand);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.intl-card__title {
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+  color: var(--white);
+  line-height: 1.25;
+}
+
+.intl-card__desc {
+  font-size: 0.86rem;
+  color: rgba(255, 255, 255, 0.88);
+  margin-bottom: 18px;
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.intl-card__price {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--sand);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.intl-card__arrow {
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white);
+  position: relative;
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.intl-card:hover .intl-card__arrow {
+  transform: translateX(7px);
+  color: var(--coral-light);
+}
+
+/* --- Indian Destinations --- */
+.india-destinations {
+  padding-bottom: 140px;
+}
+
+.india-region {
+  margin-bottom: 74px;
+}
+
+.india-region:last-child {
+  margin-bottom: 0;
+}
+
+.india-region__title {
+  font-family: var(--font-heading);
+  font-size: 1.7rem;
+  color: var(--text-dark);
+  margin-bottom: 26px;
+  padding-bottom: 14px;
+  border-bottom: 3px solid var(--border-color);
+  display: inline-block;
+  position: relative;
+}
+
+.india-region__title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--region, var(--primary)), var(--coral));
+  border-radius: 2px;
+}
+
+.india-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.india-card {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  display: block;
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+  aspect-ratio: 3 / 4;
+  min-height: 320px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.india-card:hover {
+  transform: translateY(-7px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary);
+}
+
+.india-card__media {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--off-white);
+}
+
+.india-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.india-card:hover .india-card__media img {
+  transform: scale(1.08);
+}
+
+.india-card__fallback {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.india-card__fallback::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15) 0%, transparent 40%);
+  opacity: 0.55;
+}
+
+.india-card__badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 3;
+  font-size: 1.15rem;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 4px 10px;
+  border-radius: 40px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: var(--shadow-sm);
+}
+
+.india-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.86) 0%, rgba(0, 0, 0, 0.55) 30%, rgba(0, 0, 0, 0.12) 62%, transparent 100%);
+  transition: background var(--transition-base);
+}
+
+.india-card:hover .india-card__overlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.18) 55%, rgba(0, 0, 0, 0.05) 100%);
+}
+
+.india-card__body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px 18px 20px;
+  color: var(--white);
+}
+
+.india-card__places {
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sand);
+  margin-bottom: 5px;
+  display: block;
+}
+
+.india-card__title {
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+  color: var(--white);
+  line-height: 1.3;
+}
+
+.india-card__price {
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--sand);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.india-card__arrow {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white);
+  position: relative;
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.india-card:hover .india-card__arrow {
+  transform: translateX(5px);
+  color: var(--coral-light);
+}
+
+/* ========================================
+   RESPONSIVE — NEW DESTINATIONS
+   ======================================== */
+
+@media (max-width: 1024px) {
+  .intl-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .intl-card {
+    aspect-ratio: 3 / 4;
+    min-height: 380px;
+  }
+  .india-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .india-card {
+    aspect-ratio: 3 / 4;
+    min-height: 290px;
+  }
+}
+
+@media (max-width: 768px) {
+  .intl-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .intl-card {
+    aspect-ratio: 3 / 4;
+    min-height: 360px;
+  }
+  .intl-card__title {
+    font-size: 1.45rem;
+  }
+  .india-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .india-card {
+    aspect-ratio: 3 / 4;
+    min-height: 270px;
+  }
+  .india-card__title {
+    font-size: 0.98rem;
+  }
+  .india-region__title {
+    font-size: 1.45rem;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .intl-card {
+    aspect-ratio: 3 / 4;
+    min-height: 340px;
+  }
+  .india-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .india-card {
+    aspect-ratio: 3 / 4;
+    min-height: 250px;
+  }
+  .india-card__title {
+    font-size: 0.95rem;
+  }
+}

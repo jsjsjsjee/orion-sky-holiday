@@ -1,0 +1,731 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shimla & Manali Holiday | Orlon Sky Holiday</title>
+
+<style>
+:root{
+  --orange:#F97316;
+  --coral:#FB7185;
+  --purple:#6D28D9;
+  --deep:#241044;
+  --cream:#FFF8EF;
+  --paper:#FFFCF7;
+  --ink:#39284C;
+  --muted:#806E89;
+  --gold:#E9B85D;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:Georgia,'Times New Roman',serif;
+  background:#180D2C;
+  color:var(--ink);
+  min-height:100vh;
+}
+
+button{font:inherit;cursor:pointer}
+
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 6%;
+  color:#fff;
+  font-family:Arial,sans-serif;
+}
+
+.brand{
+  font-size:21px;
+  font-weight:800;
+  letter-spacing:1px;
+}
+
+.brand span{color:#FDBA74}
+
+.back{
+  color:white;
+  text-decoration:none;
+  border:1px solid #ffffff55;
+  padding:9px 17px;
+  border-radius:30px;
+  font-size:13px;
+}
+
+.scene{
+  min-height:calc(100vh - 65px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:35px 18px 55px;
+  background:
+    linear-gradient(135deg,rgba(36,16,68,.94),rgba(109,40,217,.70),rgba(249,115,22,.65)),
+    url('https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=2000&q=85') center/cover fixed;
+}
+
+.intro{
+  text-align:center;
+  color:white;
+  max-width:720px;
+  margin-bottom:30px;
+}
+
+.eyebrow{
+  text-transform:uppercase;
+  letter-spacing:4px;
+  color:#FED7AA;
+  font:700 11px Arial,sans-serif;
+  margin-bottom:13px;
+}
+
+.intro h1{
+  font-size:clamp(34px,6vw,60px);
+  line-height:1.08;
+  margin-bottom:14px;
+}
+
+.intro p{
+  color:#F5EAFE;
+  font:15px/1.7 Arial,sans-serif;
+}
+
+.book-wrap{
+  width:min(920px,96vw);
+  perspective:1800px;
+}
+
+.book{
+  position:relative;
+  min-height:560px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  border-radius:12px;
+  box-shadow:0 30px 90px #09031599;
+  transform-style:preserve-3d;
+  transition:transform .8s;
+}
+
+.book.opened{
+  transform:rotateX(0deg);
+}
+
+.book:before{
+  content:"";
+  position:absolute;
+  top:0;bottom:0;
+  left:50%;
+  width:12px;
+  transform:translateX(-50%);
+  background:linear-gradient(90deg,#b78c52,#fff1c8,#9b6a36);
+  z-index:5;
+  box-shadow:0 0 12px #39284c55;
+}
+
+.page{
+  background:var(--paper);
+  padding:35px 36px;
+  min-height:560px;
+  position:relative;
+  overflow:hidden;
+}
+
+.left-page{
+  border-radius:12px 0 0 12px;
+  background:linear-gradient(145deg,#fffaf1,#f8e9d9);
+}
+
+.right-page{
+  border-radius:0 12px 12px 0;
+}
+
+.page-number{
+  position:absolute;
+  bottom:17px;
+  color:#A58C9F;
+  font:11px Arial,sans-serif;
+}
+
+.left-page .page-number{left:30px}
+.right-page .page-number{right:30px}
+
+.chapter-tag{
+  color:var(--orange);
+  font:700 11px Arial,sans-serif;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin-bottom:14px;
+}
+
+.page h2{
+  color:var(--deep);
+  font-size:clamp(25px,3vw,35px);
+  line-height:1.15;
+  margin-bottom:17px;
+}
+
+.page p{
+  color:#695773;
+  font:14px/1.8 Arial,sans-serif;
+  margin-bottom:13px;
+}
+
+.page-image{
+  width:100%;
+  height:205px;
+  object-fit:cover;
+  border-radius:9px;
+  margin:8px 0 13px;
+  box-shadow:0 8px 20px #41265b20;
+}
+
+.image-caption{
+  font:italic 11px Arial,sans-serif;
+  color:#A18A9F;
+  margin-top:-5px;
+  margin-bottom:13px;
+}
+
+.feature-list{
+  list-style:none;
+  margin:15px 0;
+}
+
+.feature-list li{
+  font:13px/1.6 Arial,sans-serif;
+  color:#5C4A69;
+  padding:9px 0 9px 24px;
+  border-bottom:1px solid #EEE4E9;
+  position:relative;
+}
+
+.feature-list li:before{
+  content:"✦";
+  position:absolute;
+  left:2px;
+  color:var(--orange);
+}
+
+.note{
+  background:#FFF0E6;
+  border-left:3px solid var(--orange);
+  padding:12px 14px;
+  border-radius:5px;
+  font:12px/1.6 Arial,sans-serif;
+  color:#79513C;
+  margin-top:15px;
+}
+
+.price{
+  color:var(--purple);
+  font-size:34px;
+  font-weight:bold;
+  margin:14px 0;
+}
+
+.price small{
+  font:12px Arial,sans-serif;
+  color:var(--muted);
+}
+
+.cover{
+  grid-column:1/-1;
+  position:absolute;
+  inset:0;
+  z-index:10;
+  border-radius:12px;
+  background:
+    linear-gradient(135deg,rgba(36,16,68,.45),rgba(109,40,217,.42),rgba(249,115,22,.65)),
+    url('https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1400&q=85') center/cover;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:35px;
+  transition:transform 1s,opacity .8s;
+  transform-origin:left center;
+  backface-visibility:hidden;
+}
+
+.cover-content{max-width:520px}
+
+.cover-kicker{
+  letter-spacing:5px;
+  font:700 11px Arial,sans-serif;
+  color:#FFE0B8;
+  margin-bottom:22px;
+}
+
+.cover h2{
+  color:white;
+  font-size:clamp(42px,7vw,72px);
+  line-height:1.02;
+  margin-bottom:18px;
+}
+
+.cover p{
+  color:#FFF3E9;
+  font:14px/1.7 Arial,sans-serif;
+}
+
+.cover-price{
+  display:inline-block;
+  margin:25px 0;
+  padding:12px 22px;
+  border:1px solid #ffffff99;
+  border-radius:40px;
+  font:700 17px Arial,sans-serif;
+  background:#ffffff20;
+}
+
+.open-btn{
+  display:block;
+  margin:10px auto 0;
+  border:0;
+  border-radius:30px;
+  background:linear-gradient(90deg,#FB923C,#F472B6);
+  color:#35164F;
+  padding:14px 29px;
+  font:700 13px Arial,sans-serif;
+  box-shadow:0 8px 24px #170b2d66;
+}
+
+.book.opened .cover{
+  transform:rotateY(-180deg);
+  opacity:0;
+  pointer-events:none;
+}
+
+.controls{
+  width:min(920px,96vw);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:20px;
+  color:white;
+  font-family:Arial,sans-serif;
+}
+
+.control-btn{
+  border:1px solid #ffffff55;
+  background:#ffffff16;
+  color:white;
+  border-radius:30px;
+  padding:11px 20px;
+  font-size:12px;
+}
+
+.control-btn:hover{background:#ffffff30}
+
+.control-btn:disabled{opacity:.35;cursor:not-allowed}
+
+.progress-area{
+  flex:1;
+  max-width:350px;
+}
+
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  font-size:11px;
+  color:#F5DDFB;
+  margin-bottom:7px;
+}
+
+.progress{
+  height:5px;
+  background:#ffffff35;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#FDBA74,#F9A8D4);
+  transition:width .3s;
+}
+
+.chapter-menu{
+  width:min(920px,96vw);
+  margin-top:22px;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.chapter-menu button{
+  background:#ffffff14;
+  color:#fff;
+  border:1px solid #ffffff35;
+  border-radius:25px;
+  padding:8px 13px;
+  font:11px Arial,sans-serif;
+}
+
+.chapter-menu button.active{
+  background:#FDBA74;
+  color:#35164F;
+  border-color:#FDBA74;
+  font-weight:bold;
+}
+
+.checklist{
+  list-style:none;
+  margin-top:12px;
+}
+
+.checklist li{
+  padding:8px 0;
+  border-bottom:1px solid #EEE4E9;
+  font:13px Arial,sans-serif;
+  color:#5C4A69;
+}
+
+.checklist input{
+  accent-color:var(--orange);
+  margin-right:8px;
+}
+
+.footer{
+  color:#DCC9ED;
+  text-align:center;
+  font:11px Arial,sans-serif;
+  margin-top:30px;
+  letter-spacing:1px;
+}
+
+@media(max-width:650px){
+  .scene{padding:25px 10px 40px}
+  .book{grid-template-columns:1fr;min-height:0}
+  .book:before{display:none}
+  .page{min-height:450px;padding:27px 23px}
+  .left-page{display:none}
+  .right-page{border-radius:12px}
+  .cover{min-height:450px}
+  .controls{flex-wrap:wrap}
+  .progress-area{order:-1;flex-basis:100%;max-width:none}
+  .control-btn{padding:10px 14px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="brand">ORLON <span>SKY HOLIDAY</span></div>
+  <a class="back" href="javascript:history.back()">← Back</a>
+</header>
+
+<main class="scene">
+
+  <section class="intro">
+    <div class="eyebrow">A Himalayan Escape · India</div>
+    <h1>Shimla & Manali</h1>
+    <p>Discover mountain charm, beautiful valleys, snow-covered landscapes and unforgettable moments in Himachal Pradesh.</p>
+  </section>
+
+  <div class="book-wrap">
+    <div class="book" id="book">
+
+      <div class="cover" id="cover">
+        <div class="cover-content">
+          <div class="cover-kicker">ORLON SKY HOLIDAY PRESENTS</div>
+          <h2>Discover<br>Shimla & Manali</h2>
+          <p>Two beautiful mountain destinations. One unforgettable Himalayan holiday.</p>
+          <div class="cover-price">Starting ₹15,999 / Person*</div>
+          <button class="open-btn" onclick="openBook()">OPEN YOUR TRAVEL BOOK →</button>
+        </div>
+      </div>
+
+      <section class="page left-page" id="leftPage">
+        <div class="chapter-tag">Your Journey</div>
+        <h2 id="leftHeading">Welcome to Himachal</h2>
+        <img class="page-image" id="leftImage" src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=900&q=80" alt="Himalayan mountains">
+        <p id="leftText">Your Himalayan journey begins here.</p>
+        <div class="note">Explore the pages to discover your next mountain adventure.</div>
+        <span class="page-number">ORLON SKY HOLIDAY</span>
+      </section>
+
+      <section class="page right-page" id="rightPage">
+        <div class="chapter-tag" id="chapterTag">CHAPTER 01</div>
+        <h2 id="heading">Welcome to Shimla & Manali</h2>
+        <img class="page-image" id="pageImage" src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=900&q=80" alt="Shimla and Manali">
+        <div class="image-caption" id="imageCaption">The beauty of the Himalayas</div>
+        <div id="pageContent"></div>
+        <span class="page-number" id="pageNumber">01 / 11</span>
+      </section>
+
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="control-btn" id="prevBtn" onclick="previousChapter()" disabled>← Previous</button>
+
+    <div class="progress-area">
+      <div class="progress-text">
+        <span id="progressLabel">Chapter 1 of 11</span>
+        <span id="progressPercent">9%</span>
+      </div>
+      <div class="progress">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <button class="control-btn" id="nextBtn" onclick="nextChapter()">Next →</button>
+  </div>
+
+  <nav class="chapter-menu" id="chapterMenu"></nav>
+
+  <div class="footer">DISCOVER MORE · TRAVEL BEAUTIFULLY · ORLON SKY HOLIDAY</div>
+
+</main>
+
+<script>
+const chapters = [
+{
+ title:"Welcome",
+ label:"CHAPTER 01",
+ heading:"Welcome to Shimla & Manali",
+ image:"photo-1626621341517-bbf3d9990a23",
+ caption:"A beautiful escape into the Himalayas",
+ text:"Welcome to Himachal Pradesh, where majestic mountains, peaceful valleys and refreshing mountain air create the perfect holiday. Explore the colonial charm of Shimla and the natural beauty of Manali in one memorable trip.",
+ items:["Explore the scenic beauty of Shimla","Enjoy the mountain atmosphere of Manali","Discover beautiful valleys and local culture","Create unforgettable holiday memories"],
+ note:"Your Himalayan holiday begins with Orlon Sky Holiday."
+},
+{
+ title:"Why Visit",
+ label:"CHAPTER 02",
+ heading:"Two Destinations, Endless Memories",
+ image:"photo-1500530855697-b586d89ba3ee",
+ caption:"Beautiful mountain views and peaceful escapes",
+ text:"Shimla and Manali offer two different experiences in one trip. Shimla is known for its heritage streets and relaxed mountain atmosphere, while Manali offers adventure, river valleys and spectacular Himalayan scenery.",
+ items:["Scenic mountain landscapes","Pleasant weather and peaceful surroundings","Adventure activities and sightseeing","Local markets, cafés and Himachali culture"],
+ note:"A wonderful combination for couples, families and friends."
+},
+{
+ title:"Shimla",
+ label:"CHAPTER 03",
+ heading:"Explore the Queen of Hills",
+ image:"photo-1597074866923-dc0589150358",
+ caption:"Shimla – colonial charm in the mountains",
+ text:"Shimla welcomes visitors with beautiful hills, heritage architecture, lively markets and charming walking streets. Enjoy the relaxed atmosphere and panoramic views of the surrounding mountains.",
+ items:["Mall Road – shopping, cafés and local experiences","The Ridge – famous open space and mountain views","Christ Church – historic landmark","Jakhoo Temple – hilltop spiritual destination","Kufri – popular mountain excursion"],
+ note:"Sightseeing and access may depend on weather, traffic and local conditions."
+},
+{
+ title:"Manali",
+ label:"CHAPTER 04",
+ heading:"Discover the Magic of Manali",
+ image:"photo-1626621341517-bbf3d9990a23",
+ caption:"Manali – mountains, rivers and adventure",
+ text:"Manali is a favourite Himalayan getaway surrounded by snow-covered peaks, pine forests and the beautiful Beas River. It offers a mix of relaxation, sightseeing and outdoor adventure.",
+ items:["Hadimba Devi Temple – peaceful forest surroundings","Old Manali – cafés and charming streets","Solang Valley – adventure and mountain views","Atal Tunnel – spectacular engineering and scenery","Beas River – beautiful riverside moments"],
+ note:"Rohtang Pass and high-altitude routes are seasonal and subject to permits and road conditions."
+},
+{
+ title:"Best Time",
+ label:"CHAPTER 05",
+ heading:"Choose Your Perfect Season",
+ image:"photo-1519681393784-d120267933ba",
+ caption:"Every season brings a different Himalayan experience",
+ text:"Shimla and Manali can be visited throughout the year, depending on the experience you prefer. Summer is popular for pleasant weather, winter attracts snow lovers, and the monsoon brings lush landscapes with possible travel disruptions.",
+ items:["March to June – pleasant weather and sightseeing","July to September – greenery; possible heavy rain and landslides","October to November – clear skies and autumn views","December to February – winter atmosphere and possible snowfall"],
+ note:"Snowfall is not guaranteed. Check weather and road advisories before travel."
+},
+{
+ title:"Travel Budget",
+ label:"CHAPTER 06",
+ heading:"Your Himalayan Holiday Price",
+ image:"photo-1464822759023-fed622ff2c3b",
+ caption:"A memorable mountain holiday",
+ text:"Explore Shimla and Manali with a package price starting from:",
+ price:"₹15,999",
+ priceNote:"per person*",
+ items:["Two popular Himachal destinations","A planned mountain holiday experience","Sightseeing opportunities","Time to enjoy local food and shopping"],
+ note:"*Starting price only. Final price, inclusions, hotel category, transport, travel dates and availability must be confirmed with Orlon Sky Holiday."
+},
+{
+ title:"Culture",
+ label:"CHAPTER 07",
+ heading:"Experience Himachali Culture",
+ image:"photo-1470770841072-f978cf4d019e",
+ caption:"Traditions, hospitality and mountain life",
+ text:"Himachal Pradesh is known for its warm hospitality, colourful traditions, local handicrafts and beautiful mountain villages. Take time to experience the local lifestyle during your journey.",
+ items:["Explore traditional markets","Discover local handicrafts and woollen products","Enjoy the mountain village atmosphere","Respect local customs and traditions"],
+ note:"Support local shops, artisans and community businesses during your visit."
+},
+{
+ title:"Food",
+ label:"CHAPTER 08",
+ heading:"Taste the Flavours of Himachal",
+ image:"photo-1547592180-85f173990554",
+ caption:"Local flavours make every journey special",
+ text:"A Himachal trip is also a chance to explore comforting regional food and delicious café experiences. Shimla and Manali offer a mix of traditional dishes and familiar favourites.",
+ items:["Dham – traditional Himachali festive meal","Siddu – local steamed bread","Madra – popular Himachali dish","Babru – local stuffed bread","Cafés and mountain-side dining in Manali"],
+ note:"Food availability and menu options vary by restaurant and season."
+},
+{
+ title:"Packing",
+ label:"CHAPTER 09",
+ heading:"Your Mountain Travel Checklist",
+ image:"photo-1478131143081-80f7f84ca84d",
+ caption:"Pack smart and enjoy your journey",
+ text:"Mountain weather can change quickly. Carry comfortable clothing and essential travel items so you can enjoy your trip comfortably.",
+ checklist:["Warm jackets and sweaters","Comfortable walking shoes","Sunglasses and sunscreen","Personal medicines and basic first aid","Valid identity proof","Power bank and phone charger","Water bottle and small backpack","Rain protection during monsoon"],
+ note:"Pack extra warm clothing during winter and check the forecast before departure."
+},
+{
+ title:"Itinerary",
+ label:"CHAPTER 10",
+ heading:"Suggested 5 Nights / 6 Days",
+ image:"photo-1501785888041-af3ef285b470",
+ caption:"A sample journey through Shimla and Manali",
+ text:"Here is a sample itinerary to help you imagine your Himachal holiday. The final schedule should be adjusted to match your arrival point, departure point and confirmed package.",
+ items:["Day 1 – Arrive in Shimla and relax","Day 2 – Shimla sightseeing: Mall Road, The Ridge and nearby attractions","Day 3 – Kufri excursion, then travel towards Manali as scheduled","Day 4 – Manali local sightseeing and Hadimba Temple","Day 5 – Solang Valley and nearby attractions, subject to conditions","Day 6 – Breakfast and departure"],
+ note:"This is an indicative itinerary, not a confirmed package schedule. Travel times and sightseeing depend on road, weather and traffic conditions."
+},
+{
+ title:"Enquiry",
+ label:"CHAPTER 11",
+ heading:"Let's Plan Your Himalayan Escape",
+ image:"photo-1472396961693-142e6e269027",
+ caption:"Your Shimla & Manali memories start here",
+ text:"Ready to explore Shimla and Manali? Contact Orlon Sky Holiday to check available travel dates, hotel options, transport arrangements and final package details.",
+ price:"₹15,999",
+ priceNote:"starting per person*",
+ items:["Destination: Shimla & Manali, Himachal Pradesh","Suggested duration: 5 Nights / 6 Days","Package price: Starting ₹15,999 per person*","Contact our holiday team for final details"],
+ note:"Replace the sample email address in the code with your official booking email before publishing."
+}
+];
+
+let current = 0;
+let opened = false;
+
+const $ = id => document.getElementById(id);
+
+function safe(value){
+ return String(value).replace(/[&<>"']/g, c => ({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[c]));
+}
+
+function imageUrl(id){
+ return `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1000&q=85`;
+}
+
+function render(){
+ const c = chapters[current];
+ const previous = chapters[Math.max(0,current-1)];
+
+ $("chapterTag").textContent = c.label;
+ $("heading").textContent = c.heading;
+ $("pageImage").src = imageUrl(c.image);
+ $("pageImage").alt = c.heading;
+ $("imageCaption").textContent = c.caption;
+ $("pageNumber").textContent = `${String(current+1).padStart(2,"0")} / ${chapters.length}`;
+
+ $("leftHeading").textContent = previous.heading;
+ $("leftImage").src = imageUrl(previous.image);
+ $("leftImage").alt = previous.heading;
+ $("leftText").textContent = previous.text;
+
+ let html = `<p>${safe(c.text)}</p>`;
+
+ if(c.price){
+  html += `<div class="price">${safe(c.price)} <small>${safe(c.priceNote || "")}</small></div>`;
+ }
+
+ if(c.items){
+  html += `<ul class="feature-list">${c.items.map(item=>`<li>${safe(item)}</li>`).join("")}</ul>`;
+ }
+
+ if(c.checklist){
+  html += `<ul class="checklist">${c.checklist.map((item,i)=>`
+   <li><label><input type="checkbox" id="pack${i}"> ${safe(item)}</label></li>
+  `).join("")}</ul>`;
+ }
+
+ if(c.note){
+  html += `<div class="note">${safe(c.note)}</div>`;
+ }
+
+ if(current === chapters.length-1){
+  html += `<button class="open-btn" style="margin:20px 0 0;color:#35164F" onclick="sendEnquiry()">ENQUIRE NOW →</button>`;
+  html += `<button class="control-btn" style="background:#6D28D9;margin:12px 0 0" onclick="restartBook()">↻ Read Again</button>`;
+ }
+
+ $("pageContent").innerHTML = html;
+
+ $("progressLabel").textContent = `Chapter ${current+1} of ${chapters.length}`;
+ const percent = Math.round(((current+1)/chapters.length)*100);
+ $("progressPercent").textContent = percent+"%";
+ $("progressFill").style.width = percent+"%";
+
+ $("prevBtn").disabled = current===0;
+ $("nextBtn").disabled = current===chapters.length-1;
+
+ document.querySelectorAll(".chapter-menu button").forEach((btn,i)=>{
+  btn.classList.toggle("active",i===current);
+ });
+}
+
+function createMenu(){
+ $("chapterMenu").innerHTML = chapters.map((c,i)=>
+  `<button type="button" onclick="goTo(${i})">${String(i+1).padStart(2,"0")} · ${safe(c.title)}</button>`
+ ).join("");
+}
+
+function openBook(){
+ opened = true;
+ $("book").classList.add("opened");
+ render();
+}
+
+function goTo(index){
+ if(!opened) openBook();
+ current = Math.max(0,Math.min(chapters.length-1,index));
+ render();
+}
+
+function nextChapter(){
+ if(current < chapters.length-1) goTo(current+1);
+}
+
+function previousChapter(){
+ if(current > 0) goTo(current-1);
+}
+
+function restartBook(){
+ current=0;
+ render();
+ document.querySelector(".book-wrap").scrollIntoView({behavior:"smooth"});
+}
+
+function sendEnquiry(){
+ const subject = encodeURIComponent("Shimla & Manali Holiday Enquiry");
+ const body = encodeURIComponent(
+  "Hello Orlon Sky Holiday,\n\nI am interested in the Shimla & Manali holiday package.\n\nStarting price shown: ₹15,999 per person.\nSuggested duration: 5 Nights / 6 Days.\n\nPlease share the available dates, package inclusions, hotel details and final price.\n\nThank you."
+ );
+ window.location.href = `mailto:mailto:traveldesk@orionskyholiday.com?subject=${subject}&body=${body}`;
+}
+
+document.addEventListener("keydown",e=>{
+ if(!opened) return;
+ if(e.key==="ArrowRight") nextChapter();
+ if(e.key==="ArrowLeft") previousChapter();
+});
+
+createMenu();
+render();
+</script>
+
+</body>
+</html>

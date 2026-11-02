@@ -1,0 +1,498 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discover Spiti Valley | Orlon Sky Holiday</title>
+<style>
+:root {
+  --mountain:#352333;
+  --blue:#754A46;
+  --sky:#D9B995;
+  --red:#B85C42;
+  --gold:#E8BD78;
+  --cream:#FFF8ED;
+  --ink:#493A38;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;color:white;background:var(--mountain)}
+button{font:inherit;cursor:pointer}
+.scene{
+  min-height:100vh;padding-bottom:35px;
+  background:
+  linear-gradient(125deg,#241725E8,#70443DB8,#30202FE8),
+  url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2000&q=85")
+  center/cover fixed;
+}
+header{
+  max-width:1200px;margin:auto;padding:22px;
+  display:flex;justify-content:space-between;align-items:center;
+  border-bottom:1px solid #ffffff35
+}
+.brand{font:bold 19px Georgia,serif}
+.brand span{color:var(--gold)}
+.back{
+  color:white;text-decoration:none;border:1px solid #ffffff65;
+  padding:10px 15px;border-radius:30px;font-size:12px
+}
+.intro{text-align:center;padding:35px 15px 20px}
+.eyebrow{
+  text-transform:uppercase;letter-spacing:4px;font-size:11px;
+  font-weight:bold;color:var(--gold)
+}
+.intro h1{font:clamp(38px,6vw,65px) Georgia,serif;margin:13px 0}
+.intro p{max-width:680px;margin:auto;color:#F3E5D8;line-height:1.7}
+.book-area{width:min(1000px,calc(100% - 30px));margin:25px auto 0}
+.book{
+  position:relative;display:grid;grid-template-columns:1fr 1fr;
+  aspect-ratio:1.6;min-height:450px;
+  filter:drop-shadow(0 25px 35px #0007)
+}
+.page{
+  min-width:0;overflow:hidden;position:relative;color:var(--ink);
+  padding:clamp(20px,3.5vw,38px);
+  background:radial-gradient(circle at top left,#D9B99545,transparent 55%),var(--cream);
+  border:1px solid #E2CDB5
+}
+.left{border-radius:8px 0 0 8px;border-right:1px solid #D4BDA6}
+.right{border-radius:0 8px 8px 0}
+.book::after{
+  content:"";position:absolute;z-index:3;top:0;bottom:0;left:50%;
+  width:18px;transform:translateX(-50%);pointer-events:none;
+  background:linear-gradient(90deg,#4A302F33,#D6BDA4AA,#fff8ed,#49312F33)
+}
+.page-label{
+  font-size:10px;font-weight:bold;letter-spacing:2px;
+  text-transform:uppercase;color:var(--red);margin-bottom:15px
+}
+.page h2{
+  font:clamp(25px,3.3vw,36px) Georgia,serif;
+  line-height:1.1;color:var(--mountain);margin:0 0 15px
+}
+.page p{color:#6B5A52;font-size:13px;line-height:1.8}
+.page ul{list-style:none;padding:0;margin-top:15px}
+.page li{
+  border-bottom:1px solid #493A3816;padding:9px 0 9px 19px;
+  position:relative;color:#594943;font-size:12px;line-height:1.5
+}
+.page li::before{content:"✦";color:var(--red);position:absolute;left:0}
+.photo-wrap{height:100%;min-height:300px;position:relative}
+.photo{
+  width:100%;height:100%;min-height:300px;max-height:480px;
+  object-fit:cover;border-radius:4px
+}
+.caption{
+  position:absolute;bottom:10px;left:10px;right:10px;
+  padding:25px 12px 12px;background:linear-gradient(transparent,#241725ED);
+  color:white;font:15px Georgia,serif
+}
+.page-no{position:absolute;bottom:12px;color:#9B8273;font-size:10px}
+.left .page-no{left:25px}.right .page-no{right:25px}
+.cover{
+  position:absolute;z-index:5;inset:0 50% 0 0;transform-origin:left center;
+  transition:transform 1.3s cubic-bezier(.2,.7,.2,1);
+  backface-visibility:hidden;border-radius:8px 0 0 8px;
+  background:
+  linear-gradient(140deg,#352333E8,#8A5143D9),
+  url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1000&q=85") center/cover;
+  border:2px solid #E8BD7899;box-shadow:inset -10px 0 20px #0004;
+  display:grid;place-items:center;text-align:center;padding:25px
+}
+.cover::after{
+  content:"";position:absolute;inset:13px;
+  border:1px solid var(--gold);pointer-events:none
+}
+.cover-content{position:relative;z-index:1}
+.cover h2{
+  color:var(--cream);font:clamp(30px,4vw,48px) Georgia,serif;
+  margin:18px 0 12px
+}
+.cover p{font-size:12px;color:#F3E5D8;line-height:1.7}
+.price{font-weight:bold;font-size:15px!important;color:var(--gold)!important}
+.primary{
+  background:var(--gold);color:var(--mountain);border:none;
+  padding:13px 17px;margin-top:12px;border-radius:4px;
+  font-size:11px;font-weight:bold;text-transform:uppercase;letter-spacing:1px
+}
+.primary:hover{background:#F5D9A8}
+.book.open .cover{transform:rotateY(-170deg);pointer-events:none}
+.controls{
+  display:flex;justify-content:center;align-items:center;
+  flex-wrap:wrap;gap:15px;margin-top:22px
+}
+.nav-btn{
+  background:#ffffff12;color:white;border:1px solid #ffffff65;
+  border-radius:30px;padding:11px 17px;font-size:12px
+}
+.nav-btn:hover:not(:disabled){background:#ffffff30}
+.nav-btn:disabled{opacity:.35;cursor:not-allowed}
+.status{min-width:150px;text-align:center;font-size:11px;color:#F3E5D8}
+.progress{
+  width:min(260px,70%);height:3px;background:#ffffff30;margin:15px auto
+}
+.progress div{
+  height:100%;width:0;background:var(--gold);transition:width .3s
+}
+.chapters{
+  max-width:950px;margin:25px auto;padding:0 15px;
+  display:flex;justify-content:center;flex-wrap:wrap;gap:8px
+}
+.chapters button{
+  background:#ffffff10;border:1px solid #ffffff45;color:white;
+  padding:9px 12px;border-radius:25px;font-size:10px
+}
+.chapters button.active{
+  border-color:var(--gold);color:var(--gold);background:#E8BD781C
+}
+.checklist{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.checklist label{color:#594943;font-size:12px}
+.checklist input{accent-color:var(--red)}
+.footer{text-align:center;color:#ffffff9c;font-size:11px;padding:10px}
+.footer span{color:var(--gold)}
+@media(max-width:700px){
+  header{padding:17px}.brand{font-size:15px}.intro{padding-top:25px}
+  .book{display:flex;flex-direction:column;aspect-ratio:auto;min-height:0}
+  .book::after{display:none}
+  .left,.right{border-radius:5px}.right{margin-top:8px}
+  .page{padding:23px}.photo-wrap{min-height:240px}
+  .photo{min-height:240px;max-height:330px}
+  .cover{inset:0;transform-origin:center bottom;border-radius:5px}
+  .book.open .cover{transform:rotateX(90deg)}
+  .cover h2{font-size:38px}.controls{gap:8px}
+  .nav-btn{padding:10px 12px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="scene">
+<header>
+  <div class="brand"><span>✧</span> Orlon Sky Holiday</div>
+  <a class="back" href="javascript:history.back()">← Back to Destinations</a>
+</header>
+
+<section class="intro">
+  <div class="eyebrow">Himachal Pradesh · Himalayas · Adventure</div>
+  <h1>Discover Spiti Valley</h1>
+  <p>Journey into the dramatic cold desert of the Himalayas. Discover ancient monasteries, timeless villages, winding mountain roads, high-altitude lakes and unforgettable landscapes through your personal travel book.</p>
+</section>
+
+<main class="book-area">
+  <div class="book" id="book">
+    <section class="page left" id="leftPage"></section>
+    <section class="page right" id="rightPage"></section>
+    <div class="cover">
+      <div class="cover-content">
+        <div class="eyebrow">Orlon Sky Holiday presents</div>
+        <h2>Discover<br>Spiti Valley</h2>
+        <p>Key Monastery · Kaza<br>Chandratal · Langza</p>
+        <p class="price">From ₹24,999 / person*</p>
+        <button class="primary" id="openBtn">Open Your Travel Book ↗</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="nav-btn" id="prevBtn" disabled>← Previous</button>
+    <div class="status" id="status">Your journey awaits</div>
+    <button class="nav-btn" id="nextBtn">Next Chapter →</button>
+  </div>
+  <div class="progress"><div id="progressBar"></div></div>
+</main>
+
+<nav class="chapters" id="chapters"></nav>
+<div class="footer">Discover more. Travel beautifully. <br><br><span>Orlon Sky Holiday</span></div>
+</div>
+
+<script>
+const chapters = [
+{
+  title:"Welcome to Spiti",label:"Chapter 01 · The destination",
+  heading:"A magical world beyond the mountains",
+  image:"photo-1464822759023-fed622ff2c3b",
+  caption:"The dramatic Himalayan mountain landscape",
+  text:"Spiti Valley, in Himachal Pradesh, is a spectacular high-altitude cold desert surrounded by rugged mountains, deep valleys and ancient Buddhist heritage. Its peaceful villages, dramatic landscapes and star-filled skies make it a remarkable Himalayan escape.",
+  items:[
+    "Kaza — the main town and base for exploring Spiti",
+    "Key Monastery — an iconic hilltop Buddhist monastery",
+    "Chandratal — a beautiful high-altitude lake",
+    "Langza — a village known for mountain views and fossils"
+  ],
+  note:"Spiti is a high-altitude destination. Allow time for acclimatisation and plan journeys according to road and weather conditions."
+},
+{
+  title:"Why visit Spiti?",label:"Chapter 02 · Find your experience",
+  heading:"Where adventure meets ancient traditions",
+  image:"photo-1500530855697-b586d89ba3ee",
+  caption:"Wide-open landscapes of the Himalayan cold desert",
+  text:"Spiti offers a different side of the Himalayas: peaceful monasteries, remote settlements, dramatic roads and unique mountain culture. It is ideal for travellers seeking nature, photography, road trips and meaningful cultural experiences.",
+  items:[
+    "Adventure — scenic drives and mountain exploration",
+    "Culture — monasteries, prayer flags and local traditions",
+    "Photography — rugged peaks, villages and open skies",
+    "Stargazing — clear nights away from busy city lights"
+  ],
+  note:"Some routes and outdoor activities may be affected by altitude, weather and seasonal road closures."
+},
+{
+  title:"Places to visit",label:"Chapter 03 · The highlights",
+  heading:"Explore Spiti's unforgettable places",
+  image:"photo-1519681393784-d120267933ba",
+  caption:"Mountain scenery beneath a clear Himalayan sky",
+  text:"Spiti's highlights are spread across a remote mountain region. Take time to explore its villages, monasteries, viewpoints and high-altitude landscapes rather than rushing between locations.",
+  items:[
+    "Kaza — explore the valley's main town and local market",
+    "Key Monastery — discover a historic Buddhist learning centre",
+    "Kibber — experience a beautiful high-altitude village",
+    "Langza — admire the giant Buddha statue and mountain scenery",
+    "Hikkim — visit one of the world's highest post offices",
+    "Chandratal — enjoy the spectacular lake and surrounding peaks"
+  ],
+  note:"Chandratal access is seasonal and depends on road conditions. Check local access information before planning."
+},
+{
+  title:"Best time to travel",label:"Chapter 04 · Choose your season",
+  heading:"Choose the right Himalayan season",
+  image:"photo-1472396961693-142e6e269027",
+  caption:"A mountain journey through changing seasons",
+  text:"The best time to visit Spiti depends on the experience you want. Summer is generally the most accessible period for many road journeys, while winter brings extreme cold and challenging travel conditions.",
+  items:[
+    "May–June — early summer scenery; some routes may still be affected by snow",
+    "July–September — popular travel period, with changing road conditions",
+    "October — colder weather and beautiful autumn landscapes",
+    "November–April — severe winter conditions and possible road closures"
+  ],
+  note:"Weather and road access vary each year. Confirm current local conditions before departure."
+},
+{
+  title:"Budget & prices",label:"Chapter 05 · Plan your spend",
+  heading:"Your Spiti Valley holiday budget",
+  image:"photo-1500534623283-312aade485b7",
+  caption:"Plan your journey through the mountain desert",
+  text:"The advertised starting price for this Spiti Valley holiday is ₹24,999 per person. The final cost depends on travel dates, departure city, transport, accommodation, meals and selected activities.",
+  items:[
+    "Starting package price: ₹24,999 per person",
+    "Confirm transport and road-trip arrangements",
+    "Check hotel or homestay category and meal inclusions",
+    "Ask about sightseeing, local transfers and guide services",
+    "Confirm any permits, entry charges and optional activities"
+  ],
+  note:"₹24,999 is the supplied starting price, not a guaranteed live quote. Confirm package inclusions, dates and availability before booking."
+},
+{
+  title:"History & culture",label:"Chapter 06 · Stories of Spiti",
+  heading:"Discover a living Himalayan heritage",
+  image:"photo-1544735716-392fe2489ffa",
+  caption:"Buddhist heritage and traditional Himalayan architecture",
+  text:"Spiti has a rich cultural identity shaped by Tibetan Buddhist traditions, mountain communities and centuries-old settlements. Its monasteries preserve religious art, learning and traditions that remain part of everyday life.",
+  items:[
+    "Visit Key Monastery and learn about Buddhist traditions",
+    "Explore the historic village of Tabo and its monastery",
+    "Observe traditional homes and local architecture",
+    "Discover prayer flags, murals and community customs",
+    "Respect monastery rules and local religious practices"
+  ],
+  note:"Dress respectfully at religious sites and ask permission before photographing people or ceremonies."
+},
+{
+  title:"Taste of Spiti",label:"Chapter 07 · At the table",
+  heading:"Enjoy the flavours of the mountains",
+  image:"photo-1547592180-85f173990554",
+  caption:"Warm local food and Himalayan hospitality",
+  text:"Food in Spiti is shaped by its cold desert climate and local traditions. Enjoy warming meals, simple home-style cooking and regional specialities, often served with genuine mountain hospitality.",
+  items:[
+    "Thukpa — a comforting noodle soup",
+    "Momos — steamed dumplings with different fillings",
+    "Thenthuk — a traditional hand-pulled noodle soup",
+    "Butter tea — a traditional Himalayan drink",
+    "Local breads and barley-based dishes"
+  ],
+  note:"Food options can be limited in remote villages. Inform your accommodation about dietary needs in advance."
+},
+{
+  title:"Packing checklist",label:"Chapter 08 · Be prepared",
+  heading:"Pack smart for high-altitude travel",
+  image:"photo-1551632811-561732d1e306",
+  caption:"Prepare for cold weather and changing mountain conditions",
+  text:"Spiti's altitude, strong sunshine and changing temperatures make suitable preparation essential. Pack in layers and carry the essentials needed for a remote mountain journey.",
+  checklist:[
+    "Warm thermal layers",
+    "Heavy jacket and fleece",
+    "Comfortable trekking shoes",
+    "Sunglasses and sun hat",
+    "High-SPF sunscreen and lip balm",
+    "Reusable water bottle",
+    "Personal medicines and first aid",
+    "Valid photo ID and travel documents",
+    "Power bank and charging cables",
+    "Gloves, woollen cap and socks"
+  ],
+  note:"Speak with a healthcare professional about high-altitude travel if you have concerns. Never ignore symptoms of altitude sickness."
+},
+{
+  title:"Suggested itinerary",label:"Chapter 09 · Make it yours",
+  heading:"A memorable Spiti road journey",
+  image:"photo-1464822759023-fed622ff2c3b",
+  caption:"Follow the winding roads into the Himalayan valley",
+  text:"A Spiti journey needs enough time for long mountain drives, acclimatisation and possible weather delays. This sample route is an outline and should be adjusted to current road access and traveller needs.",
+  items:[
+    "Day 1: Reach Shimla or the selected starting point",
+    "Day 2: Travel towards the Kinnaur region",
+    "Day 3: Continue towards Kaza with suitable acclimatisation",
+    "Day 4: Explore Kaza and nearby villages",
+    "Day 5: Visit Key Monastery, Kibber and nearby viewpoints",
+    "Day 6: Explore Langza, Hikkim and Komic",
+    "Day 7: Return journey, subject to road conditions"
+  ],
+  note:"This is a sample route, not a confirmed package itinerary. Add extra days where needed and confirm the route, overnight stops and road access before booking."
+},
+{
+  title:"Travel thoughtfully",label:"Chapter 10 · Travel with care",
+  heading:"Protect the fragile Himalayan environment",
+  image:"photo-1500530855697-b586d89ba3ee",
+  caption:"Keep Spiti's landscapes beautiful for future travellers",
+  text:"Spiti's mountain ecosystem is fragile, and remote communities depend on limited natural resources. Responsible travel helps protect the valley's landscapes, heritage and local way of life.",
+  items:[
+    "Carry your waste back and avoid single-use plastic",
+    "Respect village customs and monastery traditions",
+    "Save water and electricity wherever possible",
+    "Stay on designated roads and walking routes",
+    "Support local homestays, guides and businesses",
+    "Avoid disturbing wildlife and natural habitats"
+  ],
+  note:"Follow local advice, road safety instructions and environmental rules throughout your journey."
+},
+{
+  title:"Your Spiti story",label:"Final chapter · Begin your journey",
+  heading:"Ready to discover Spiti Valley?",
+  image:"photo-1519681393784-d120267933ba",
+  caption:"Your Himalayan adventure starts here",
+  text:"From ancient monasteries and peaceful villages to dramatic mountain roads and unforgettable high-altitude scenery, Spiti Valley offers an experience unlike any other. Let Orlon Sky Holiday help you plan your next Himalayan journey.",
+  items:[
+    "Choose your preferred travel dates",
+    "Confirm your departure city and group size",
+    "Select your accommodation and transport preferences",
+    "Check the package inclusions and final price",
+    "Confirm road conditions and travel arrangements"
+  ],
+  note:"Contact Orlon Sky Holiday to enquire about the Spiti Valley package starting from ₹24,999 per person."
+}
+];
+
+let current=0;
+let opened=false;
+
+const book=document.getElementById("book");
+const left=document.getElementById("leftPage");
+const right=document.getElementById("rightPage");
+const prev=document.getElementById("prevBtn");
+const next=document.getElementById("nextBtn");
+const status=document.getElementById("status");
+const progress=document.getElementById("progressBar");
+const chapterMenu=document.getElementById("chapters");
+
+function safe(value){
+  return String(value).replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  })[c]);
+}
+
+function imageUrl(id){
+  return "https://images.unsplash.com/"+id+"?auto=format&fit=crop&w=1100&q=85";
+}
+
+function render(){
+  const c=chapters[current];
+
+  left.innerHTML=`
+    <div class="page-label">${safe(c.label)}</div>
+    <h2>${safe(c.heading)}</h2>
+    <p>${safe(c.text)}</p>
+    ${c.checklist?`
+      <div class="checklist">
+        ${c.checklist.map(item=>`<label><input type="checkbox"> ${safe(item)}</label>`).join("")}
+      </div>`:`
+      <ul>${c.items.map(item=>`<li>${safe(item)}</li>`).join("")}</ul>`}
+    <p><small>${safe(c.note)}</small></p>
+    <div class="page-no">${current*2+1}</div>
+  `;
+
+  right.innerHTML=`
+    <div class="photo-wrap">
+      <img class="photo" src="${imageUrl(c.image)}" alt="${safe(c.caption)}"
+        onerror="this.onerror=null;this.style.background='#754A46';this.removeAttribute('src')">
+      <div class="caption">${safe(c.caption)}</div>
+    </div>
+    ${current===chapters.length-1?`
+      `:""}
+    <div class="page-no">${current*2+2}</div>
+  `;
+
+  prev.disabled=current===0;
+  next.disabled=current===chapters.length-1;
+  next.textContent=current===chapters.length-1?"End of Book":"Next Chapter →";
+  status.textContent=c.title+" · "+(current+1)+" of "+chapters.length;
+  progress.style.width=((current+1)/chapters.length*100)+"%";
+
+  document.querySelectorAll(".chapters button").forEach((btn,i)=>{
+    btn.classList.toggle("active",i===current);
+  });
+
+  const plan=document.getElementById("planBtn");
+  if(plan){
+    plan.onclick=()=>{
+      const subject=encodeURIComponent("Spiti Valley holiday enquiry");
+      const body=encodeURIComponent(
+        "Hello Orlon Sky Holiday,\n"+
+        "I am interested in the Spiti Valley tour starting from ₹24,999 per person.\n"+
+        "Please share the itinerary, package inclusions, travel dates and availability."
+      );
+      // Replace with your real business email.
+      window.location.href="mailto:YOUR-EMAIL@example.com?subject="+subject+"&body="+body;
+    };
+  }
+
+  const restart=document.getElementById("restartBtn");
+  if(restart)restart.onclick=()=>{current=0;render()};
+}
+
+function goTo(index){
+  if(index<0||index>=chapters.length)return;
+  current=index;
+  render();
+}
+
+function openBook(){
+  opened=true;
+  book.classList.add("open");
+  setTimeout(render,300);
+}
+
+chapters.forEach((c,i)=>{
+  const btn=document.createElement("button");
+  btn.textContent=c.title;
+  btn.onclick=()=>{
+    if(!opened)openBook();
+    goTo(i);
+    book.scrollIntoView({behavior:"smooth",block:"center"});
+  };
+  chapterMenu.appendChild(btn);
+});
+
+document.getElementById("openBtn").addEventListener("click",openBook);
+prev.addEventListener("click",()=>goTo(current-1));
+next.addEventListener("click",()=>goTo(current+1));
+
+document.addEventListener("keydown",event=>{
+  if(!opened||event.target.matches("input,textarea"))return;
+  if(event.key==="ArrowRight")goTo(current+1);
+  if(event.key==="ArrowLeft")goTo(current-1);
+});
+
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,400 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maharashtra – Mumbai & Beyond | Orlon Sky Holiday</title>
+<style>
+:root{
+  --primary:#56316d;
+  --secondary:#9b4770;
+  --accent:#f39a48;
+  --gold:#ffdc9b;
+  --paper:#fffaf1;
+  --ink:#382b3d;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,serif;color:var(--ink)}
+.scene{
+  min-height:100vh;padding:24px;
+  background:
+    radial-gradient(circle at 10% 10%,#ffd79b 0,transparent 25%),
+    radial-gradient(circle at 90% 85%,#ef9863 0,transparent 25%),
+    linear-gradient(135deg,#29143f,#633c78 52%,#bd654e);
+}
+header{
+  max-width:1150px;margin:auto;display:flex;
+  justify-content:space-between;align-items:center;
+  color:white;gap:12px
+}
+.brand{font-size:21px;font-weight:bold;letter-spacing:1px}
+.back{color:white;text-decoration:none;font:14px Arial}
+.intro{text-align:center;color:white;max-width:760px;margin:32px auto 25px}
+.eyebrow{font:12px Arial;letter-spacing:4px;text-transform:uppercase;color:var(--gold)}
+.intro h1{font-size:clamp(32px,5vw,54px);margin:12px 0}
+.intro p{font:15px/1.7 Arial;color:#fff1eb}
+.book-area{max-width:1100px;margin:auto}
+.book{
+  position:relative;display:grid;grid-template-columns:1fr 1fr;
+  min-height:540px;perspective:1800px;
+  box-shadow:0 20px 55px #160b2877;
+}
+.page{
+  position:relative;min-width:0;min-height:540px;
+  padding:38px;background:var(--paper);
+  display:flex;flex-direction:column;
+}
+.left-page{border-right:1px solid #e0d0b9}
+.right-page{padding:20px;background:#f1e5d7}
+.spine{
+  position:absolute;z-index:3;top:0;bottom:0;left:50%;
+  width:10px;transform:translateX(-50%);
+  background:linear-gradient(90deg,#79512f,#f0d49f,#79512f);
+}
+.cover{
+  position:absolute;z-index:5;inset:0 50% 0 0;
+  transform-origin:right center;
+  transition:transform .9s ease;
+  backface-visibility:hidden;
+  border:5px solid var(--gold);
+  padding:35px 28px;color:white;
+  display:flex;flex-direction:column;justify-content:space-between;
+  text-align:center;
+  background:
+    linear-gradient(145deg,#29143feF,#633c78e8,#d16c4ee8),
+    url("https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=85") center/cover;
+}
+.book.open .cover{transform:rotateY(-170deg);pointer-events:none}
+.cover-mark{font-size:30px;color:var(--gold)}
+.cover h2{font-size:clamp(29px,4vw,44px);line-height:1.12;margin:17px 0}
+.cover p{font:13px/1.6 Arial;color:#fff1eb}
+.cover-dest{font:11px/1.8 Arial;letter-spacing:1px}
+.price{font-size:26px;color:var(--gold);font-weight:bold;margin:12px}
+.cover button{
+  padding:12px 20px;border:0;border-radius:25px;
+  background:var(--gold);color:#321e3e;font-weight:bold;cursor:pointer
+}
+.chapter-kicker{
+  font:11px Arial;letter-spacing:2px;text-transform:uppercase;
+  color:#a14c67;margin-bottom:13px
+}
+.page h2{font-size:29px;line-height:1.2;color:var(--primary);margin:0 0 15px}
+.chapter-text{font:14px/1.75 Arial,sans-serif}
+.chapter-text p{margin:0 0 12px}
+.chapter-text ul{padding-left:20px;margin:8px 0 15px}
+.chapter-text li{margin-bottom:7px}
+.note{
+  margin-top:auto;padding:13px 15px;
+  background:#f4e5d1;border-left:3px solid var(--accent);
+  font:13px/1.6 Arial,sans-serif
+}
+.page-no{margin-top:16px;text-align:right;font:11px Arial;color:#987e5e}
+.photo-wrap{display:flex;flex-direction:column;flex:1;min-height:0}
+.photo{
+  display:block;width:100%;height:100%;min-height:300px;
+  max-height:450px;object-fit:cover;border-radius:4px
+}
+.caption{font:12px/1.5 Arial;color:#685c49;margin-top:10px}
+.controls{
+  display:flex;justify-content:center;align-items:center;
+  gap:12px;flex-wrap:wrap;margin:20px 0 10px
+}
+.controls button{
+  border:0;border-radius:25px;padding:11px 20px;
+  background:#fff0d9;color:var(--primary);cursor:pointer;
+  font-weight:bold
+}
+.controls button:disabled{opacity:.4;cursor:not-allowed}
+.status{font:13px Arial;color:white;min-width:110px;text-align:center}
+.progress{height:5px;background:#ffffff55;border-radius:8px;max-width:500px;margin:12px auto;overflow:hidden}
+.progress-fill{height:100%;background:var(--gold);width:0;transition:width .3s}
+.chapter-nav{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin:20px auto}
+.chapter-nav button{
+  padding:8px 12px;border-radius:20px;
+  border:1px solid #ffffff75;background:#ffffff18;color:white;
+  font:11px Arial;cursor:pointer
+}
+.chapter-nav button.active{background:var(--gold);color:#29143f}
+.checklist{list-style:none;padding:0!important}
+.checklist li:before{content:"✓";color:#a14c67;font-weight:bold;margin-right:8px}
+
+/* Simple requested footer */
+.site-footer{
+  text-align:center;
+  padding:28px 15px 10px;
+  margin-top:35px;
+  color:white;
+  font-family:Georgia,serif;
+}
+.site-footer .footer-brand{
+  font-size:21px;font-weight:bold;letter-spacing:1px;
+  color:var(--gold);margin-bottom:8px;
+}
+.site-footer p{font-size:14px;margin:0;color:#fff1eb;line-height:1.6}
+
+@media(max-width:700px){
+  .scene{padding:15px}
+  .intro{margin:24px auto 20px}
+  .book{grid-template-columns:1fr;min-height:0}
+  .page{min-height:390px;padding:26px 23px}
+  .right-page{min-height:320px}
+  .spine{display:none}
+  .cover{
+    inset:0 0 auto 0;height:390px;
+    transform-origin:top center;
+  }
+  .book.open .cover{transform:rotateX(90deg)}
+  .photo{min-height:240px;max-height:330px}
+  .page h2{font-size:25px}
+  .cover h2{font-size:34px}
+  .site-footer{margin-top:25px;padding-bottom:5px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="scene">
+
+<header>
+  <div class="brand">✧ Orlon Sky Holiday</div>
+  <a class="back" href="index.html">← Back to Tours</a>
+</header>
+
+<section class="intro">
+  <div class="eyebrow">City Lights • Coastal Beauty • Heritage</div>
+  <h1>Discover Maharashtra</h1>
+  <p>Explore Mumbai's iconic landmarks, historic forts, beautiful beaches, hill stations and the cultural treasures of Maharashtra.</p>
+</section>
+
+<main class="book-area">
+<div class="book" id="book">
+
+  <section class="page left-page">
+    <div class="chapter-kicker" id="kicker"></div>
+    <h2 id="chapterTitle"></h2>
+    <div class="chapter-text" id="chapterText"></div>
+    <div class="note" id="chapterNote"></div>
+    <div class="page-no" id="leftNo"></div>
+  </section>
+
+  <section class="page right-page">
+    <div class="photo-wrap">
+      <img class="photo" id="chapterImage" alt="Maharashtra travel destination">
+      <div class="caption" id="chapterCaption"></div>
+    </div>
+    <div class="page-no" id="rightNo"></div>
+  </section>
+
+  <div class="spine"></div>
+
+  <section class="cover">
+    <div>
+      <div class="cover-mark">✧</div>
+      <div class="eyebrow">Orlon Sky Holiday Presents</div>
+      <h2>MAHARASHTRA<br>MUMBAI &<br>BEYOND</h2>
+      <p>Where city energy meets coastal beauty and timeless heritage.</p>
+    </div>
+    <div>
+      <div class="cover-dest">MUMBAI • PUNE • LONAVALA • ALIBAG</div>
+      <div class="price">₹13,999 <small style="font-size:13px">/ person</small></div>
+      <button onclick="openBook()">Open Your Travel Book →</button>
+    </div>
+  </section>
+
+</div>
+
+<div class="controls">
+  <button id="prevBtn" onclick="goTo(current-1)">← Previous</button>
+  <div class="status" id="status"></div>
+  <button id="nextBtn" onclick="goTo(current+1)">Next →</button>
+</div>
+
+<div class="progress"><div class="progress-fill" id="progress"></div></div>
+<nav class="chapter-nav" id="chapterNav"></nav>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-brand">✧ Orlon Sky Holiday</div>
+  <p>Discover more. Travel farther. Make memories forever.</p>
+</footer>
+
+</div>
+
+<script>
+const chapters=[
+{
+title:"Welcome to Maharashtra",
+kicker:"Chapter 01 • The grand introduction",
+text:`<p>Welcome to Maharashtra, a land of vibrant cities, historic forts, scenic hill stations and beautiful coastlines. From Mumbai's iconic skyline to the peaceful landscapes beyond, every destination has something special to offer.</p><p>Discover its culture, history, architecture and unforgettable flavours.</p>`,
+note:"Get ready to experience the best of Mumbai and destinations beyond the city.",
+image:"https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1100&q=85",
+caption:"Mumbai's iconic skyline and urban landscape."
+},
+{
+title:"Mumbai – City of Dreams",
+kicker:"Chapter 02 • India's vibrant metropolis",
+text:`<p>Mumbai is a city full of energy, culture and iconic landmarks. Explore its historic architecture, lively waterfront and bustling streets.</p><ul><li>Gateway of India</li><li>Marine Drive</li><li>Chhatrapati Shivaji Maharaj Terminus</li><li>Colaba Causeway</li></ul>`,
+note:"Explore the city at a relaxed pace and allow extra time for Mumbai traffic.",
+image:"https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=1100&q=85",
+caption:"Mumbai's famous waterfront and city attractions."
+},
+{
+title:"Gateway of India",
+kicker:"Chapter 03 • A historic landmark",
+text:`<p>The Gateway of India is one of Mumbai's most recognisable monuments. Built during the British period, it stands proudly beside the Arabian Sea.</p><ul><li>Admire its Indo-Saracenic architecture</li><li>Explore the waterfront promenade</li><li>Enjoy views of the harbour</li><li>Discover nearby Colaba streets</li></ul>`,
+note:"Check boat service availability and safety instructions before boarding.",
+image:"https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1100&q=85",
+caption:"The Gateway of India, Mumbai."
+},
+{
+title:"Marine Drive",
+kicker:"Chapter 04 • The Queen's Necklace",
+text:`<p>Marine Drive is one of Mumbai's most loved waterfront promenades. Enjoy a walk beside the Arabian Sea and admire the sweeping curve of the coastline.</p><ul><li>Enjoy the sea breeze</li><li>Watch the sunset</li><li>Admire the city skyline</li><li>Experience the evening lights</li></ul>`,
+note:"Evenings are especially popular, so expect crowds at peak times.",
+image:"https://images.unsplash.com/photo-1595658658481-d53d3f999875?auto=format&fit=crop&w=1100&q=85",
+caption:"Mumbai's scenic Marine Drive waterfront."
+},
+{
+title:"Elephanta Caves",
+kicker:"Chapter 05 • Ancient rock-cut art",
+text:`<p>Located on Elephanta Island, these remarkable rock-cut caves are known for their historic sculptures and temple architecture.</p><ul><li>Explore ancient cave sculptures</li><li>Discover the famous Trimurti sculpture</li><li>Enjoy the island ferry journey</li></ul>`,
+note:"Ferry services depend on weather and operating schedules. Check timings in advance.",
+image:"https://plus.unsplash.com/premium_photo-1697729588485-6c238cf3ab2f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+caption:"Ancient Indian rock-cut architecture."
+},
+{
+title:"Pune – Culture & Heritage",
+kicker:"Chapter 06 • The cultural city",
+text:`<p>Pune combines rich Maratha history with a lively modern atmosphere. Discover historic landmarks, gardens, museums and local food.</p><ul><li>Shaniwar Wada</li><li>Aga Khan Palace</li><li>Dagadusheth Halwai Ganpati Temple</li><li>Local markets and cafés</li></ul>`,
+note:"Check monument timings and entry requirements before your visit.",
+image:"https://images.unsplash.com/photo-1595658658481-d53d3f999875?auto=format&fit=crop&w=1100&q=85",
+caption:"Historic architecture and heritage experiences."
+},
+{
+title:"Lonavala – Hill Station",
+kicker:"Chapter 07 • Green landscapes",
+text:`<p>Lonavala is a popular hill station known for misty valleys, viewpoints, waterfalls and lush monsoon scenery.</p><ul><li>Tiger's Leap viewpoint</li><li>Karla and Bhaja Caves</li><li>Bhushi Dam when accessible</li><li>Famous local chikki</li></ul>`,
+note:"During monsoon, check road conditions and avoid unsafe waterfall edges.",
+image:"https://images.unsplash.com/photo-1618805714320-f8825019c1be?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+caption:"Green mountain scenery and hill-station landscapes."
+},
+{
+title:"Alibag – Coastal Retreat",
+kicker:"Chapter 08 • Beaches and sea views",
+text:`<p>Alibag is a relaxing coastal destination near Mumbai, known for beaches, historic sea forts and a laid-back atmosphere.</p><ul><li>Alibag Beach</li><li>Kolaba Fort</li><li>Nearby coastal villages</li><li>Local coastal cuisine</li></ul>`,
+note:"Access to Kolaba Fort is affected by tides. Check local tide information.",
+image:"https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1100&q=85",
+caption:"A peaceful coastal setting along the Konkan region."
+},
+{
+title:"Maharashtra's Fort Heritage",
+kicker:"Chapter 09 • Stories in stone",
+text:`<p>Maharashtra is home to remarkable forts that tell stories of the Maratha Empire and the region's rich history.</p><ul><li>Raigad Fort</li><li>Pratapgad Fort</li><li>Sinhagad Fort</li><li>Historic coastal forts</li></ul>`,
+note:"Some forts involve steep climbs. Carry water and wear suitable footwear.",
+image:"https://images.unsplash.com/photo-1606293926075-69a00dbfde81?auto=format&fit=crop&w=1100&q=85",
+caption:"Historic fort architecture and heritage."
+},
+{
+title:"Ajanta & Ellora Caves",
+kicker:"Chapter 10 • UNESCO heritage",
+text:`<p>The Ajanta and Ellora Caves are among India's most extraordinary heritage attractions. Their rock-cut monuments, paintings and sculptures reflect centuries of artistic traditions.</p><ul><li>Explore Ajanta's ancient Buddhist caves</li><li>Discover Ellora's Buddhist, Hindu and Jain monuments</li><li>Admire the Kailasa Temple</li></ul>`,
+note:"Ajanta and Ellora are separate attractions and require dedicated travel time.",
+image:"https://plus.unsplash.com/premium_photo-1697729588019-20a1f5a325d1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+caption:"Ancient cave architecture and intricate stonework."
+},
+{
+title:"Taste of Maharashtra",
+kicker:"Chapter 11 • Local flavours",
+text:`<p>Maharashtrian cuisine offers a wonderful mix of bold flavours, traditional snacks and regional specialities.</p><ul><li>Vada Pav and Misal Pav</li><li>Puran Poli</li><li>Poha and Sabudana Khichdi</li><li>Malvani and Konkani dishes</li><li>Shrikhand and local sweets</li></ul>`,
+note:"Ask about spice levels and ingredients when ordering local dishes.",
+image:"https://images.unsplash.com/photo-1769030905851-c0e0a4fe5c51?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+caption:"A delicious spread inspired by Indian regional cuisine."
+},
+{
+title:"Best Time to Visit",
+kicker:"Chapter 12 • Plan your journey",
+text:`<p>October to March is generally comfortable for exploring Mumbai, heritage attractions and coastal destinations.</p><ul><li>October–February: pleasant sightseeing weather</li><li>March–May: warmer days</li><li>June–September: monsoon greenery and heavy rainfall in many areas</li></ul>`,
+note:"Hill stations and coastal routes may be affected by monsoon weather.",
+image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1100&q=85",
+caption:"A scenic coastal holiday atmosphere."
+},
+{
+title:"Your Maharashtra Package",
+kicker:"Chapter 13 • Your holiday details",
+text:`<p>Discover Mumbai and selected highlights beyond the city with Orlon Sky Holiday.</p><ul><li>Destination: Maharashtra, India</li><li>Tour theme: Mumbai & Beyond</li><li>City attractions and heritage experiences</li><li>Coastal and scenic destination highlights</li><li>Local culture and food experiences</li></ul>`,
+note:"<strong>Package price: ₹13,999 per person.</strong><br>Confirm travel dates, hotel category, transport, inclusions and availability before booking.",
+image:"https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=1100&q=85",
+caption:"Discover the vibrant spirit of Maharashtra."
+},
+{
+title:"Your Travel Checklist",
+kicker:"Chapter 14 • Pack and prepare",
+text:`<p>Prepare for a comfortable journey through cities, hills and coastal destinations.</p><ul class="checklist"><li>Comfortable walking shoes</li><li>Light cotton clothing</li><li>Sunscreen, sunglasses and a hat</li><li>Rain jacket or umbrella during monsoon</li><li>Personal medicines and ID documents</li><li>Phone charger and power bank</li><li>Reusable water bottle</li></ul>`,
+note:"Keep your travel documents and valuables safe throughout the journey.",
+image:"https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1100&q=85",
+caption:"Pack your essentials and get ready to explore."
+},
+{
+title:"Thank You & Happy Travelling!",
+kicker:"Chapter 15 • Until the next journey",
+text:`<p>From Mumbai's sparkling skyline to the hills of Lonavala and the shores of the Konkan, Maharashtra offers memories that stay with you.</p><p>Thank you for exploring with Orlon Sky Holiday. We look forward to welcoming you on your next adventure!</p><h2>Happy Travelling!</h2>`,
+note:"Orlon Sky Holiday – Discover more. Travel farther. Make memories forever.",
+image:"https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1100&q=85",
+caption:"Every journey leaves behind beautiful memories."
+}
+];
+
+let current=0;
+const $=id=>document.getElementById(id);
+
+function render(){
+  const c=chapters[current];
+  $("kicker").textContent=c.kicker;
+  $("chapterTitle").textContent=c.title;
+  $("chapterText").innerHTML=c.text;
+  $("chapterNote").innerHTML=c.note;
+  $("chapterImage").src=c.image;
+  $("chapterImage").alt=c.title+" - Maharashtra";
+  $("chapterCaption").textContent=c.caption;
+  $("leftNo").textContent=String(current*2+1).padStart(2,"0");
+  $("rightNo").textContent=String(current*2+2).padStart(2,"0");
+  $("status").textContent=`Chapter ${current+1} of ${chapters.length}`;
+  $("progress").style.width=((current+1)/chapters.length*100)+"%";
+  $("prevBtn").disabled=current===0;
+  $("nextBtn").disabled=current===chapters.length-1;
+  document.querySelectorAll(".chapter-nav button").forEach((b,i)=>{
+    b.classList.toggle("active",i===current);
+  });
+}
+
+function openBook(){
+  $("book").classList.add("open");
+}
+
+function goTo(index){
+  if(index<0||index>=chapters.length)return;
+  openBook();
+  current=index;
+  render();
+}
+
+chapters.forEach((chapter,index)=>{
+  const button=document.createElement("button");
+  button.type="button";
+  button.textContent=chapter.title;
+  button.addEventListener("click",()=>goTo(index));
+  $("chapterNav").appendChild(button);
+});
+
+document.addEventListener("keydown",event=>{
+  if(event.key==="ArrowRight")goTo(current+1);
+  if(event.key==="ArrowLeft")goTo(current-1);
+});
+
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,689 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discover Thailand | Orlon Sky Holiday</title>
+
+<style>
+:root {
+  --purple: #35113F;
+  --orchid: #713B78;
+  --coral: #E88A78;
+  --gold: #F1C98B;
+  --cream: #FFF7EF;
+  --ink: #392D43;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+  background: var(--purple);
+}
+
+button { font: inherit; cursor: pointer; }
+
+.scene {
+  min-height: 100vh;
+  padding-bottom: 35px;
+  background:
+    linear-gradient(125deg, #270A31E8, #692C69B3, #2D0F38D9),
+    url("https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=2000&q=85")
+    center/cover fixed;
+}
+
+header {
+  max-width: 1200px;
+  margin: auto;
+  padding: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ffffff35;
+}
+
+.brand {
+  font-family: Georgia, serif;
+  font-weight: bold;
+  font-size: 19px;
+}
+
+.brand span { color: var(--coral); }
+
+.back {
+  color: white;
+  text-decoration: none;
+  border: 1px solid #ffffff65;
+  padding: 10px 15px;
+  border-radius: 30px;
+  font-size: 12px;
+}
+
+.intro {
+  text-align: center;
+  padding: 35px 15px 20px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--gold);
+}
+
+.intro h1 {
+  font: clamp(38px, 6vw, 65px) Georgia, serif;
+  margin: 13px 0;
+}
+
+.intro p {
+  max-width: 680px;
+  margin: auto;
+  color: #f8edf6;
+  line-height: 1.7;
+}
+
+.book-area {
+  width: min(1000px, calc(100% - 30px));
+  margin: 25px auto 0;
+  perspective: 1800px;
+}
+
+.book {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  aspect-ratio: 1.6;
+  min-height: 450px;
+  filter: drop-shadow(0 25px 35px #0007);
+}
+
+.page {
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
+  color: var(--ink);
+  padding: clamp(20px, 3.5vw, 38px);
+  background:
+    radial-gradient(circle at top left, #efc9a744, transparent 50%),
+    var(--cream);
+  border: 1px solid #d9c3b3;
+}
+
+.left {
+  border-radius: 8px 0 0 8px;
+  border-right: 1px solid #c9b1a2;
+}
+
+.right { border-radius: 0 8px 8px 0; }
+
+.book::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 18px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  background: linear-gradient(90deg, #6b593322, #9b8b6c70, #fff9e7, #74614330);
+}
+
+.page-label {
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #a65e5b;
+  margin-bottom: 15px;
+}
+
+.page h2 {
+  font: clamp(25px, 3.3vw, 36px) Georgia, serif;
+  line-height: 1.1;
+  color: var(--purple);
+  margin: 0 0 15px;
+}
+
+.page p {
+  color: #65596a;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.page ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+}
+
+.page li {
+  border-bottom: 1px solid #35113f16;
+  padding: 9px 0 9px 19px;
+  position: relative;
+  color: #514658;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.page li::before {
+  content: "✦";
+  color: #c46f67;
+  position: absolute;
+  left: 0;
+}
+
+.photo-wrap {
+  height: 100%;
+  min-height: 300px;
+  position: relative;
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  max-height: 480px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.caption {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  padding: 25px 12px 12px;
+  background: linear-gradient(transparent, #260b31e8);
+  color: white;
+  font: 15px Georgia, serif;
+}
+
+.page-no {
+  position: absolute;
+  bottom: 12px;
+  color: #a18b64;
+  font-size: 10px;
+}
+
+.left .page-no { left: 25px; }
+.right .page-no { right: 25px; }
+
+.cover {
+  position: absolute;
+  z-index: 5;
+  inset: 0 50% 0 0;
+  transform-origin: left center;
+  transition: transform 1.3s cubic-bezier(.2,.7,.2,1);
+  backface-visibility: hidden;
+  border-radius: 8px 0 0 8px;
+  background:
+    linear-gradient(140deg, #35113FBB, #5B245FE8),
+    url("https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1000&q=85")
+    center/cover;
+  border: 2px solid #e88a7899;
+  box-shadow: inset -10px 0 20px #0004;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 25px;
+}
+
+.cover::after {
+  content: "";
+  position: absolute;
+  inset: 13px;
+  border: 1px solid var(--gold);
+  pointer-events: none;
+}
+
+.cover-content { position: relative; z-index: 1; }
+
+.cover h2 {
+  color: var(--cream);
+  font: clamp(30px, 4vw, 48px) Georgia, serif;
+  margin: 18px 0 12px;
+}
+
+.cover p {
+  font-size: 12px;
+  color: #f8e8e0;
+  line-height: 1.7;
+}
+
+.price {
+  font-weight: bold;
+  font-size: 15px !important;
+  color: var(--gold) !important;
+}
+
+.primary {
+  background: var(--coral);
+  color: #35113F;
+  border: none;
+  padding: 13px 17px;
+  margin-top: 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.primary:hover { background: #f5b3a2; }
+
+.book.open .cover {
+  transform: rotateY(-170deg);
+  pointer-events: none;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 22px;
+}
+
+.nav-btn {
+  background: #ffffff12;
+  color: white;
+  border: 1px solid #ffffff65;
+  border-radius: 30px;
+  padding: 11px 17px;
+  font-size: 12px;
+}
+
+.nav-btn:hover:not(:disabled) { background: #ffffff30; }
+.nav-btn:disabled { opacity: .35; cursor: not-allowed; }
+
+.status {
+  min-width: 150px;
+  text-align: center;
+  font-size: 11px;
+  color: #f4d9c4;
+}
+
+.progress {
+  width: min(260px, 70%);
+  height: 3px;
+  background: #ffffff30;
+  margin: 15px auto;
+}
+
+.progress div {
+  height: 100%;
+  width: 0;
+  background: var(--coral);
+  transition: width .3s;
+}
+
+.chapters {
+  max-width: 950px;
+  margin: 25px auto;
+  padding: 0 15px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chapters button {
+  background: #ffffff10;
+  border: 1px solid #ffffff45;
+  color: white;
+  padding: 9px 12px;
+  border-radius: 25px;
+  font-size: 10px;
+}
+
+.chapters button.active {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: #f1c98b1c;
+}
+
+.checklist {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.checklist label {
+  color: #514658;
+  font-size: 12px;
+}
+
+.checklist input { accent-color: var(--orchid); }
+
+.footer {
+  text-align: center;
+  color: #ffffff9c;
+  font-size: 11px;
+  padding: 10px;
+}
+
+.footer span { color: var(--gold); }
+
+@media(max-width:700px) {
+  header { padding: 17px; }
+  .brand { font-size: 15px; }
+  .intro { padding-top: 25px; }
+
+  .book {
+    display: flex;
+    flex-direction: column;
+    aspect-ratio: auto;
+    min-height: 0;
+  }
+
+  .book::after { display: none; }
+  .left, .right { border-radius: 5px; }
+  .left { border-right: 1px solid #c9b1a2; }
+  .right { margin-top: 8px; }
+  .page { padding: 23px; }
+  .photo-wrap { min-height: 240px; }
+  .photo { min-height: 240px; max-height: 330px; }
+
+  .cover {
+    inset: 0;
+    transform-origin: center bottom;
+    border-radius: 5px;
+  }
+
+  .book.open .cover { transform: rotateX(90deg); }
+  .cover h2 { font-size: 38px; }
+  .controls { gap: 8px; }
+  .nav-btn { padding: 10px 12px; }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *, *::before, *::after { transition: none !important; }
+}
+</style>
+</head>
+
+<body>
+<div class="scene">
+
+<header>
+  <div class="brand"><span>✧</span> Orlon Sky Holiday</div>
+  <a class="back" href="javascript:history.back()">← Back to Destinations</a>
+</header>
+
+<section class="intro">
+  <div class="eyebrow">Southeast Asia · Your next adventure</div>
+  <h1>Discover Thailand</h1>
+  <p>Golden temples, lively city streets, northern mountain culture and turquoise island waters — explore Thailand through your personal travel book.</p>
+</section>
+
+<main class="book-area">
+  <div class="book" id="book">
+    <section class="page left" id="leftPage"></section>
+    <section class="page right" id="rightPage"></section>
+
+    <div class="cover">
+      <div class="cover-content">
+        <div class="eyebrow">Orlon Sky Holiday presents</div>
+        <h2>Discover<br>Thailand</h2>
+        <p>Bangkok · Chiang Mai<br>Phuket · Phi Phi Islands</p>
+        <p class="price">From ₹38,999 / person*</p>
+        <button class="primary" id="openBtn">Open Your Travel Book ↗</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="nav-btn" id="prevBtn" disabled>← Previous</button>
+    <div class="status" id="status">Your journey awaits</div>
+    <button class="nav-btn" id="nextBtn">Next Chapter →</button>
+  </div>
+
+  <div class="progress"><div id="progressBar"></div></div>
+</main>
+
+<nav class="chapters" id="chapters"></nav>
+
+<div class="footer">Discover more. Travel beautifully.<br><br> <span>Orlon Sky Holiday</span></div>
+</div>
+
+<script>
+const chapters = [
+{
+ title:"Welcome to Thailand", label:"Chapter 01 · The destination",
+ heading:"A land of vibrant contrasts",
+ image:"photo-1508009603885-50cf7c579365",
+ caption:"Bangkok's vibrant cityscape",
+ text:"Thailand blends lively cities, ornate temples, northern traditions, tropical beaches and welcoming local culture. From Bangkok's energy to island sunsets, every stop offers a different side of the country.",
+ items:["Bangkok's temples, markets and skyline","Chiang Mai's culture and mountain scenery","Phuket's beaches and island excursions","Phi Phi Islands' dramatic limestone cliffs"],
+ note:"Plan transfers carefully because travel times between regions can be significant."
+},
+{
+ title:"Why visit Thailand?", label:"Chapter 02 · Find your experience",
+ heading:"Something for every traveller",
+ image:"photo-1528181304800-259b08848526",
+ caption:"Culture, nature and unforgettable views",
+ text:"Thailand is popular with first-time travellers, couples, families, food lovers and adventure seekers. Pair cultural sights with relaxed beach time or nature experiences.",
+ items:["Culture: temples, historic districts and markets","Couples: sunsets, island stays and scenic dining","Families: beaches and family attractions","Food lovers: street food and regional Thai dishes"],
+ note:"Choose activities that suit your interests and check local guidance."
+},
+{
+ title:"Places to visit", label:"Chapter 03 · The highlights",
+ heading:"Four unforgettable stops",
+ image:"photo-1533929736458-ca588d08c8be",
+ caption:"Discover Thailand's famous destinations",
+ text:"Build your trip around these four destinations, or choose fewer stops if you prefer a slower holiday.",
+ items:["Bangkok — Grand Palace area, Wat Arun and markets","Chiang Mai — old city, temples and mountain excursions","Phuket — beaches, viewpoints and boat trips","Phi Phi Islands — turquoise bays and limestone cliffs"],
+ note:"Boat trips and access to specific bays depend on weather and local conservation rules."
+},
+{
+ title:"Best time to travel", label:"Chapter 04 · Choose your season",
+ heading:"Plan around the weather",
+ image:"photo-1501785888041-af3ef285b470",
+ caption:"Sunshine, beaches and tropical scenery",
+ text:"Thailand has a tropical climate, but weather patterns vary by region and coast. November to February is often comfortable for many popular destinations, while island conditions differ by season.",
+ items:["Bangkok: hot and humid much of the year","Chiang Mai: cooler months are popular for visits","Phuket: check Andaman Sea monsoon conditions","Phi Phi: boat schedules may change with weather"],
+ note:"Check current forecasts and local marine advisories before travel."
+},
+{
+ title:"Budget & prices", label:"Chapter 05 · Plan your spend",
+ heading:"Your Thailand holiday budget",
+ image:"photo-1556742049-0cfed4f6a45d",
+ caption:"A trip tailored to your budget",
+ text:"The advertised starting price is ₹38,999 per person. Final cost depends on travel dates, departure city, hotel category, flights, transfers, meals and included activities.",
+ items:["Starting package price: ₹38,999 per person","Confirm flights, baggage and airport transfers","Check hotel category and meal inclusions","Budget extra for island boats, activities and shopping"],
+ note:"₹38,999 is the supplied starting price, not a guaranteed live quote. Confirm inclusions and availability."
+},
+{
+ title:"History & culture", label:"Chapter 06 · Stories of Thailand",
+ heading:"Traditions and living heritage",
+ image:"photo-1528181304800-259b08848526",
+ caption:"Temples, traditions and local heritage",
+ text:"Thailand's cultural identity is shaped by Buddhist traditions, royal history, regional communities and centuries of trade. Discover ornate temples, traditional crafts, festivals and historic neighbourhoods.",
+ items:["Visit Bangkok's landmark temples respectfully","Explore Chiang Mai's old city and craft traditions","Remove shoes where signs or customs require","Dress modestly when visiting religious sites"],
+ note:"Temple rules differ. Follow signs and ask permission before photographing people."
+},
+{
+ title:"Taste of Thailand", label:"Chapter 07 · At the table",
+ heading:"Fresh, fragrant and full of flavour",
+ image:"photo-1559314809-0d155014e29e",
+ caption:"A colourful world of Thai flavours",
+ text:"Thai cuisine balances sweet, sour, salty, spicy and savoury flavours. Try regional specialities and street-food favourites, and let vendors know if you prefer mild spice.",
+ items:["Pad Thai — stir-fried noodles","Tom yum — fragrant hot-and-sour soup","Green curry — aromatic coconut curry","Mango sticky rice — a much-loved dessert"],
+ note:"If you have food allergies, confirm ingredients and cross-contamination risks."
+},
+{
+ title:"Packing checklist", label:"Chapter 08 · Be prepared",
+ heading:"Pack for a tropical trip",
+ image:"photo-1553062407-98eeb64c6a62",
+ caption:"Travel light and stay comfortable",
+ text:"Thailand is generally warm and humid. Pack breathable clothes, sun protection and rain cover, with suitable clothing for temples and outdoor activities.",
+ checklist:["Lightweight clothing","Comfortable walking shoes","Swimwear and quick-dry towel","Sunscreen and sunglasses","Insect repellent","Compact umbrella or rain jacket","Passport and booking details","Personal medicines"],
+ note:"Carry modest clothing for temple visits and check airline baggage rules."
+},
+{
+ title:"Suggested itinerary", label:"Chapter 09 · Make it yours",
+ heading:"A memorable route",
+ image:"photo-1508009603885-50cf7c579365",
+ caption:"City discovery followed by island time",
+ text:"A multi-region Thailand trip requires travel time. These sample routes can help you begin planning a balanced holiday.",
+ items:["6–7 days: Bangkok + Phuket","8–10 days: Bangkok + Chiang Mai + Phuket","10–12 days: add Phi Phi Islands and beach time","Keep buffer time for flights, ferries and weather"],
+ note:"Confirm flights, ferries and transfer arrangements for your dates."
+},
+{
+ title:"Travel thoughtfully", label:"Chapter 10 · Travel with care",
+ heading:"Respect places and people",
+ image:"photo-1501785888041-af3ef285b470",
+ caption:"Protect the natural beauty you came to see",
+ text:"Thoughtful travel helps protect Thailand's temples, beaches, marine environments and local communities. Follow guidance at nature sites and choose responsible tour operators.",
+ items:["Follow marine park and wildlife rules","Never touch or feed wild marine animals","Avoid littering and protect coral reefs","Respect local customs and religious places","Support local guides and businesses"],
+ note:"Follow current local rules, safety advice and conservation guidance."
+},
+{
+ title:"Your Thailand story", label:"Final chapter · Begin your journey",
+ heading:"Ready to discover Thailand?",
+ image:"photo-1508009603885-50cf7c579365",
+ caption:"Your Thailand adventure starts here",
+ text:"From Bangkok's energetic streets to Chiang Mai's cultural charm and the clear waters around Phuket and Phi Phi, Thailand offers a memorable blend of discovery and relaxation.",
+ items:["Choose your travel dates and departure city","Select the places you want to explore","Confirm package price and inclusions","Arrange hotels, transfers and island activities"],
+ note:"Use your actual website booking or enquiry process to confirm availability."
+}
+];
+
+let current = 0;
+let opened = false;
+
+const book = document.getElementById("book");
+const left = document.getElementById("leftPage");
+const right = document.getElementById("rightPage");
+const prev = document.getElementById("prevBtn");
+const next = document.getElementById("nextBtn");
+const status = document.getElementById("status");
+const progress = document.getElementById("progressBar");
+const chapterMenu = document.getElementById("chapters");
+
+function safe(value) {
+  return String(value).replace(/[&<>"']/g, c => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;",
+    '"':"&quot;", "'":"&#39;"
+  })[c]);
+}
+
+function imageUrl(id) {
+  return "https://images.unsplash.com/" + id +
+    "?auto=format&fit=crop&w=1100&q=85";
+}
+
+function render() {
+  const c = chapters[current];
+
+  left.innerHTML = `
+    <div class="page-label">${safe(c.label)}</div>
+    <h2>${safe(c.heading)}</h2>
+    <p>${safe(c.text)}</p>
+    ${c.checklist ? `
+      <div class="checklist">
+        ${c.checklist.map(item => `
+          <label><input type="checkbox"> ${safe(item)}</label>
+        `).join("")}
+      </div>
+    ` : `
+      <ul>${c.items.map(item => `<li>${safe(item)}</li>`).join("")}</ul>
+    `}
+    <p><small>${safe(c.note)}</small></p>
+    <div class="page-no">${current * 2 + 1}</div>
+  `;
+
+  right.innerHTML = `
+    <div class="photo-wrap">
+      <img class="photo"
+        src="${imageUrl(c.image)}"
+        alt="${safe(c.caption)}"
+        onerror="this.onerror=null;this.style.background='#713B78';this.removeAttribute('src')">
+      <div class="caption">${safe(c.caption)}</div>
+    </div>
+    ${current === chapters.length - 1 ? `
+ 
+    ` : ""}
+    <div class="page-no">${current * 2 + 2}</div>
+  `;
+
+  prev.disabled = current === 0;
+  next.disabled = current === chapters.length - 1;
+  next.textContent = current === chapters.length - 1
+    ? "End of Book" : "Next Chapter →";
+
+  status.textContent = c.title + " · " +
+    (current + 1) + " of " + chapters.length;
+
+  progress.style.width =
+    ((current + 1) / chapters.length * 100) + "%";
+
+  document.querySelectorAll(".chapters button").forEach((btn, i) => {
+    btn.classList.toggle("active", i === current);
+  });
+
+  const plan = document.getElementById("planBtn");
+  if (plan) {
+    plan.onclick = () => {
+      const subject = encodeURIComponent("Thailand holiday enquiry");
+      const body = encodeURIComponent(
+        "Hello Orlon Sky Holiday,\n" +
+        "I am interested in the Thailand tour starting from ₹38,999 per person.\n" +
+        "Please share the itinerary, package inclusions, dates and availability."
+      );
+      // Replace this with your real business email.
+      window.location.href =
+        "mailto:YOUR-EMAIL@example.com?subject=" + subject + "&body=" + body;
+    };
+  }
+
+  const restart = document.getElementById("restartBtn");
+  if (restart) restart.onclick = () => { current = 0; render(); };
+}
+
+function goTo(index) {
+  if (index < 0 || index >= chapters.length) return;
+  current = index;
+  render();
+}
+
+function openBook() {
+  opened = true;
+  book.classList.add("open");
+  setTimeout(render, 300);
+}
+
+chapters.forEach((c, i) => {
+  const btn = document.createElement("button");
+  btn.textContent = c.title;
+  btn.onclick = () => {
+    if (!opened) openBook();
+    goTo(i);
+    book.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
+  chapterMenu.appendChild(btn);
+});
+
+document.getElementById("openBtn").addEventListener("click", openBook);
+prev.addEventListener("click", () => goTo(current - 1));
+next.addEventListener("click", () => goTo(current + 1));
+
+document.addEventListener("keydown", event => {
+  if (!opened || event.target.matches("input, textarea")) return;
+  if (event.key === "ArrowRight") goTo(current + 1);
+  if (event.key === "ArrowLeft") goTo(current - 1);
+});
+
+render();
+</script>
+</body>
+</html>

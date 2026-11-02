@@ -1,0 +1,777 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discover Uttarakhand | Orlon Sky Holiday</title>
+
+<style>
+:root {
+  --deep:#073D3A;
+  --green:#167A65;
+  --aqua:#75D6C0;
+  --mint:#C9F1E3;
+  --gold:#D8B875;
+  --cream:#FAFFF9;
+  --ink:#244C43;
+}
+
+*{box-sizing:border-box}
+
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ color:white;
+ background:var(--deep);
+}
+
+button{font:inherit;cursor:pointer}
+
+.scene{
+ min-height:100vh;
+ padding-bottom:35px;
+ background:
+ linear-gradient(130deg,#063D39F2,#138B78D9,#83DCC2C9),
+ url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2000&q=85")
+ center/cover fixed;
+}
+
+header{
+ max-width:1200px;
+ margin:auto;
+ padding:22px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ border-bottom:1px solid #ffffff45;
+}
+
+.brand{font:bold 19px Georgia,serif}
+.brand span{color:var(--gold)}
+
+.back{
+ color:white;
+ text-decoration:none;
+ border:1px solid #ffffff75;
+ padding:10px 15px;
+ border-radius:30px;
+ font-size:12px;
+}
+
+.intro{text-align:center;padding:35px 15px 20px}
+
+.eyebrow{
+ text-transform:uppercase;
+ letter-spacing:4px;
+ font-size:11px;
+ font-weight:bold;
+ color:var(--mint);
+}
+
+.intro h1{
+ font:clamp(38px,6vw,65px) Georgia,serif;
+ margin:13px 0;
+}
+
+.intro p{
+ max-width:680px;
+ margin:auto;
+ color:#E5FFF5;
+ line-height:1.7;
+}
+
+.book-area{
+ width:min(1000px,calc(100% - 30px));
+ margin:25px auto 0;
+}
+
+.book{
+ position:relative;
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ aspect-ratio:1.6;
+ min-height:450px;
+ filter:drop-shadow(0 25px 35px #002B2470);
+}
+
+.page{
+ min-width:0;
+ overflow:hidden;
+ position:relative;
+ color:var(--ink);
+ padding:clamp(20px,3.5vw,38px);
+ background:
+ radial-gradient(circle at top left,#A7EBD530,transparent 55%),
+ var(--cream);
+ border:1px solid #B8DCCF;
+}
+
+.left{
+ border-radius:8px 0 0 8px;
+ border-right:1px solid #B7D6C9;
+}
+
+.right{border-radius:0 8px 8px 0}
+
+.book::after{
+ content:"";
+ position:absolute;
+ z-index:3;
+ top:0;
+ bottom:0;
+ left:50%;
+ width:18px;
+ transform:translateX(-50%);
+ pointer-events:none;
+ background:linear-gradient(90deg,#174D4033,#B7DCCCAA,#FAFFF9,#174D4033);
+}
+
+.page-label{
+ font-size:10px;
+ font-weight:bold;
+ letter-spacing:2px;
+ text-transform:uppercase;
+ color:var(--green);
+ margin-bottom:15px;
+}
+
+.page h2{
+ font:clamp(25px,3.3vw,36px) Georgia,serif;
+ line-height:1.1;
+ color:var(--deep);
+ margin:0 0 15px;
+}
+
+.page p{
+ color:#536F65;
+ font-size:13px;
+ line-height:1.8;
+}
+
+.page ul{list-style:none;padding:0;margin-top:15px}
+
+.page li{
+ border-bottom:1px solid #073D3A16;
+ padding:9px 0 9px 19px;
+ position:relative;
+ color:#365D50;
+ font-size:12px;
+ line-height:1.5;
+}
+
+.page li::before{
+ content:"✦";
+ color:var(--green);
+ position:absolute;
+ left:0;
+}
+
+.photo-wrap{
+ height:100%;
+ min-height:300px;
+ position:relative;
+ background:linear-gradient(145deg,#BCEBDD,#E6F8EE);
+ border:1px dashed #8CBBA8;
+ border-radius:4px;
+ overflow:hidden;
+}
+
+.photo{
+ display:block;
+ width:100%;
+ height:100%;
+ min-height:300px;
+ max-height:480px;
+ object-fit:cover;
+ border-radius:4px;
+}
+
+.caption{
+ position:absolute;
+ bottom:0;
+ left:0;
+ right:0;
+ padding:35px 14px 14px;
+ background:linear-gradient(transparent,#073D3AEF);
+ color:white;
+ font:15px Georgia,serif;
+}
+
+.page-no{
+ position:absolute;
+ bottom:12px;
+ color:#718F82;
+ font-size:10px;
+}
+
+.left .page-no{left:25px}
+.right .page-no{right:25px}
+
+.cover{
+ position:absolute;
+ z-index:5;
+ inset:0 50% 0 0;
+ transform-origin:left center;
+ transition:transform 1.3s cubic-bezier(.2,.7,.2,1);
+ backface-visibility:hidden;
+ border-radius:8px 0 0 8px;
+ background:
+ linear-gradient(140deg,#06443DEB,#15977EDB,#75D6C0C9),
+ url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=85")
+ center/cover;
+ border:2px solid #D8B875AA;
+ box-shadow:inset -10px 0 20px #0004;
+ display:grid;
+ place-items:center;
+ text-align:center;
+ padding:25px;
+}
+
+.cover::after{
+ content:"";
+ position:absolute;
+ inset:13px;
+ border:1px solid var(--gold);
+ pointer-events:none;
+}
+
+.cover-content{position:relative;z-index:1}
+
+.om{
+ font-size:42px;
+ color:#F2D99F;
+ margin-bottom:5px;
+}
+
+.cover h2{
+ color:var(--cream);
+ font:clamp(30px,4vw,48px) Georgia,serif;
+ margin:12px 0;
+}
+
+.cover p{
+ font-size:12px;
+ color:#E8FFF5;
+ line-height:1.7;
+}
+
+.price{
+ font-weight:bold;
+ font-size:15px!important;
+ color:#FFE3A6!important;
+}
+
+.primary{
+ background:var(--gold);
+ color:var(--deep);
+ border:none;
+ padding:13px 17px;
+ margin-top:12px;
+ border-radius:4px;
+ font-size:11px;
+ font-weight:bold;
+ text-transform:uppercase;
+ letter-spacing:1px;
+}
+
+.primary:hover{background:#F4DDAA}
+
+.book.open .cover{
+ transform:rotateY(-170deg);
+ pointer-events:none;
+}
+
+.controls{
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ flex-wrap:wrap;
+ gap:15px;
+ margin-top:22px;
+}
+
+.nav-btn{
+ background:#ffffff12;
+ color:white;
+ border:1px solid #ffffff65;
+ border-radius:30px;
+ padding:11px 17px;
+ font-size:12px;
+}
+
+.nav-btn:hover:not(:disabled){background:#ffffff30}
+.nav-btn:disabled{opacity:.35;cursor:not-allowed}
+
+.status{
+ min-width:150px;
+ text-align:center;
+ font-size:11px;
+ color:#E5FFF5;
+}
+
+.progress{
+ width:min(260px,70%);
+ height:3px;
+ background:#ffffff30;
+ margin:15px auto;
+}
+
+.progress div{
+ height:100%;
+ width:0;
+ background:var(--gold);
+ transition:width .3s;
+}
+
+.chapters{
+ max-width:950px;
+ margin:25px auto;
+ padding:0 15px;
+ display:flex;
+ justify-content:center;
+ flex-wrap:wrap;
+ gap:8px;
+}
+
+.chapters button{
+ background:#ffffff10;
+ border:1px solid #ffffff45;
+ color:white;
+ padding:9px 12px;
+ border-radius:25px;
+ font-size:10px;
+}
+
+.chapters button.active{
+ border-color:var(--gold);
+ color:#FFE3A6;
+ background:#D8B87525;
+}
+
+.checklist{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:12px;
+ margin-top:20px;
+}
+
+.checklist label{
+ color:#365D50;
+ font-size:12px;
+}
+
+.checklist input{accent-color:var(--green)}
+
+.footer{
+ text-align:center;
+ color:#ffffffa8;
+ font-size:11px;
+ padding:10px;
+}
+
+.footer span{color:#FFE3A6}
+
+@media(max-width:700px){
+ header{padding:17px}
+ .brand{font-size:15px}
+ .intro{padding-top:25px}
+
+ .book{
+  display:flex;
+  flex-direction:column;
+  aspect-ratio:auto;
+  min-height:0;
+ }
+
+ .book::after{display:none}
+ .left,.right{border-radius:5px}
+ .right{margin-top:8px}
+ .page{padding:23px}
+ .photo-wrap{min-height:240px}
+ .photo{min-height:240px;max-height:330px}
+
+ .cover{
+  inset:0;
+  transform-origin:center bottom;
+  border-radius:5px;
+ }
+
+ .book.open .cover{transform:rotateX(90deg)}
+ .cover h2{font-size:38px}
+ .controls{gap:8px}
+ .nav-btn{padding:10px 12px}
+}
+
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{transition:none!important}
+}
+</style>
+</head>
+
+<body>
+<div class="scene">
+
+<header>
+ <div class="brand"><span>✧</span> Orlon Sky Holiday</div>
+ <a class="back" href="javascript:history.back()">← Back to Destinations</a>
+</header>
+
+<section class="intro">
+ <div class="eyebrow">Devbhoomi · Spirituality · Himalayas</div>
+ <h1>Discover Uttarakhand</h1>
+ <p>
+  Explore the sacred Char Dham temples, beautiful Himalayan valleys,
+  holy rivers and peaceful mountain landscapes in the Land of the Gods.
+ </p>
+</section>
+
+<main class="book-area">
+ <div class="book" id="book">
+
+  <section class="page left" id="leftPage"></section>
+  <section class="page right" id="rightPage"></section>
+
+  <div class="cover">
+   <div class="cover-content">
+    <div class="eyebrow">Orlon Sky Holiday presents</div>
+<br>
+    <div class="om">ॐ</div>
+    <h2>Discover<br>Uttarakhand</h2>
+    <p>Yamunotri · Gangotri<br>Kedarnath · Badrinath</p>
+    <p class="price">₹28,999 / person*</p>
+    <button class="primary" id="openBtn">Open Your Travel Book ↗</button>
+   </div>
+  </div>
+
+ </div>
+
+ <div class="controls">
+  <button class="nav-btn" id="prevBtn" disabled>← Previous</button>
+  <div class="status" id="status">Your journey awaits</div>
+  <button class="nav-btn" id="nextBtn">Next Chapter →</button>
+ </div>
+
+ <div class="progress"><div id="progressBar"></div></div>
+</main>
+
+<nav class="chapters" id="chapters"></nav>
+
+<div class="footer">
+ Discover more. Travel beautifully.<br><br>
+ <span>Orlon Sky Holiday</span>
+</div>
+
+</div>
+
+<script>
+const chapters = [
+
+{
+ title:"Welcome to Uttarakhand",
+ label:"Chapter 01 · The divine journey",
+ heading:"A sacred journey in the Himalayas",
+ image:"https://images.unsplash.com/photo-1604027179698-5fc67dfe55b8?w=1100&auto=format&fit=crop&q=85",
+ caption:"A sacred journey through the Himalayas",
+ text:"Uttarakhand, known as Devbhoomi or the Land of the Gods, is home to the revered Char Dham pilgrimage. This spiritual journey takes visitors through beautiful Himalayan valleys, holy rivers and four important temples.",
+ items:[
+  "Yamunotri — the sacred source of River Yamuna",
+  "Gangotri — the origin of the holy River Ganga",
+  "Kedarnath — a revered temple dedicated to Lord Shiva",
+  "Badrinath — a sacred shrine dedicated to Lord Vishnu"
+ ],
+ note:"The pilgrimage involves mountain travel, changing weather and physical activity. Plan carefully before departure."
+},
+
+{
+ title:"Yamunotri",
+ label:"Chapter 02 · First Dham",
+ heading:"Begin your spiritual journey",
+ image:"https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1100&auto=format&fit=crop&q=85",
+ caption:"Discover the peaceful beauty of the Himalayan region",
+ text:"Yamunotri is the westernmost shrine of the Char Dham pilgrimage. Dedicated to Goddess Yamuna, the temple is surrounded by dramatic mountain scenery and is reached by a trekking route from Janki Chatti.",
+ items:[
+  "Visit the sacred Yamunotri Temple",
+  "Experience the peaceful mountain surroundings",
+  "Explore the nearby Surya Kund hot spring",
+  "Enjoy the scenic trek from Janki Chatti"
+ ],
+ note:"The trek can be demanding. Check local conditions and follow official travel and safety guidance."
+},
+
+{
+ title:"Gangotri",
+ label:"Chapter 03 · Second Dham",
+ heading:"The sacred origin of the Ganga",
+ image:"https://plus.unsplash.com/premium_photo-1697730398251-40cd8dc57e0b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+ caption:"Experience the serene Himalayan landscape",
+ text:"Gangotri is one of the most important pilgrimage destinations in Uttarakhand. Dedicated to Goddess Ganga, the temple stands beside the Bhagirathi River amid beautiful Himalayan surroundings.",
+ items:[
+  "Visit the sacred Gangotri Temple",
+  "Spend peaceful time beside the Bhagirathi River",
+  "Explore the beautiful mountain town",
+  "Learn about the spiritual significance of the Ganga"
+ ],
+ note:"Access to higher-altitude areas may depend on weather, road conditions and local permissions."
+},
+
+{
+ title:"Kedarnath",
+ label:"Chapter 04 · Third Dham",
+ heading:"In the abode of Lord Shiva",
+ image:"https://images.unsplash.com/photo-1712733900711-d0b929d0d7cc?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+ caption:"The majestic Himalayan mountains",
+ text:"Kedarnath is a highly revered shrine dedicated to Lord Shiva. Located in the Garhwal Himalayas, the temple is surrounded by magnificent mountain peaks and is an important destination for pilgrims.",
+ items:[
+  "Seek blessings at Kedarnath Temple",
+  "Experience the spectacular Himalayan setting",
+  "Explore the spiritual atmosphere of the region",
+  "Prepare for the trek from Gaurikund"
+ ],
+ note:"The Kedarnath trek requires preparation and physical fitness. Check current route conditions before travelling."
+},
+
+{
+ title:"Badrinath",
+ label:"Chapter 05 · Fourth Dham",
+ heading:"The sacred home of Lord Vishnu",
+ image:"https://plus.unsplash.com/premium_photo-1661963629241-52c812d5c7f8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+ caption:"Beautiful mountain scenery in Uttarakhand",
+ text:"Badrinath is dedicated to Lord Vishnu and is the final shrine in the traditional Char Dham circuit. Located along the Alaknanda River, it is surrounded by striking Himalayan scenery.",
+ items:[
+  "Visit the Badrinath Temple",
+  "Explore the surroundings of Tapt Kund",
+  "Enjoy views of the Neelkanth peak",
+  "Experience the peaceful atmosphere of the town"
+ ],
+ note:"Temple opening dates and access conditions vary by season. Confirm details before departure."
+},
+
+{
+ title:"Places to explore",
+ label:"Chapter 06 · Beyond the temples",
+ heading:"Discover more of Uttarakhand",
+ image:"https://images.unsplash.com/photo-1657215756064-a1cec8616e80?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+ caption:"Explore the natural beauty of Uttarakhand",
+ text:"Beyond the Char Dham temples, Uttarakhand offers beautiful hill towns, forests, rivers and scenic viewpoints. Add extra destinations to make your journey more memorable.",
+ items:[
+  "Rishikesh — river views and spiritual experiences",
+  "Haridwar — temples and the Ganga Aarti",
+  "Joshimath — mountain views and a gateway to Badrinath",
+  "Uttarkashi — a peaceful Himalayan town",
+  "Devprayag — the sacred river confluence"
+ ],
+ note:"Additional destinations may require extra travel days and transport arrangements."
+},
+
+{
+ title:"Food & culture",
+ label:"Chapter 07 · Local experiences",
+ heading:"Enjoy the flavours of Devbhoomi",
+ image:"https://plus.unsplash.com/premium_photo-1695297516692-82b537c62733?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+ caption:"Enjoy local food and warm hospitality",
+ text:"Uttarakhand's culture is deeply connected with its mountains, temples, festivals and traditional cuisine. Taste regional dishes and experience the warmth of local hospitality.",
+ items:[
+  "Kafuli — a traditional leafy green preparation",
+  "Phaanu — a popular lentil-based dish",
+  "Chainsoo — a traditional Garhwali speciality",
+  "Aloo ke Gutke — a local potato preparation",
+  "Bal Mithai — a well-known regional sweet"
+ ],
+ note:"Food availability may vary in remote mountain areas. Inform your accommodation about dietary needs."
+},
+
+{
+ title:"Best time to visit",
+ label:"Chapter 08 · Choose your season",
+ heading:"Plan around the mountain weather",
+ image:"https://images.unsplash.com/photo-1773398348702-500c3d26a6c1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+ caption:"Beautiful natural landscapes of the Himalayas",
+ text:"The Char Dham pilgrimage generally takes place during the warmer months, subject to official temple opening dates. Mountain weather can change quickly, so choose your dates carefully.",
+ items:[
+  "May–June — popular pilgrimage season",
+  "July–August — monsoon rain can affect travel",
+  "September–October — often preferred for clearer conditions",
+  "Winter — many high-altitude routes and temples close"
+ ],
+ note:"Always confirm official temple opening dates, weather forecasts and road conditions before departure."
+},
+
+{
+ title:"Packing checklist",
+ label:"Chapter 09 · Travel prepared",
+ heading:"Pack smart for the mountains",
+ image:"https://images.unsplash.com/photo-1522199710521-72d69614c702?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+ caption:"Get ready for your Himalayan pilgrimage",
+ text:"Mountain journeys involve changing temperatures, walking and sometimes long road transfers. Pack practical essentials to make your pilgrimage more comfortable.",
+ checklist:[
+  "Comfortable trekking shoes",
+  "Warm clothes and jacket",
+  "Raincoat or waterproof layer",
+  "Personal medicines",
+  "Sunscreen and sunglasses",
+  "Water bottle",
+  "Valid photo identification",
+  "Small backpack and toiletries"
+ ],
+ note:"Pack according to your travel dates and the physical demands of your chosen itinerary."
+},
+
+{
+ title:"Your Char Dham journey",
+ label:"Final chapter · Begin your pilgrimage",
+ heading:"Ready for your divine journey?",
+ image:"https://images.unsplash.com/photo-1786897162869-b0ccd067affd?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+ caption:"Let your spiritual journey begin",
+ text:"Experience the sacred temples of Yamunotri, Gangotri, Kedarnath and Badrinath with Orlon Sky Holiday. Discover the spiritual beauty of Uttarakhand and create memories along the way.",
+ items:[
+  "Package starting price: ₹28,999 per person",
+  "Confirm your preferred travel dates",
+  "Check transport and accommodation inclusions",
+  "Complete any required pilgrimage registration",
+  "Confirm the itinerary before departure"
+ ],
+ note:"Package price and availability must be confirmed with Orlon Sky Holiday. Ask for a complete list of inclusions and exclusions."
+}
+
+];
+
+let current=0;
+let opened=false;
+
+const book=document.getElementById("book");
+const left=document.getElementById("leftPage");
+const right=document.getElementById("rightPage");
+const prev=document.getElementById("prevBtn");
+const next=document.getElementById("nextBtn");
+const status=document.getElementById("status");
+const progress=document.getElementById("progressBar");
+const chapterMenu=document.getElementById("chapters");
+
+function safe(value){
+ return String(value).replace(/[&<>"']/g,c=>({
+  "&":"&amp;",
+  "<":"&lt;",
+  ">":"&gt;",
+  '"':"&quot;",
+  "'":"&#39;"
+ })[c]);
+}
+
+function render(){
+ const c=chapters[current];
+
+ left.innerHTML=`
+  <div class="page-label">${safe(c.label)}</div>
+  <h2>${safe(c.heading)}</h2>
+  <p>${safe(c.text)}</p>
+
+  ${c.checklist?`
+   <div class="checklist">
+    ${c.checklist.map(item=>`
+     <label>
+      <input type="checkbox"> ${safe(item)}
+     </label>
+    `).join("")}
+   </div>
+  `:`
+   <ul>
+    ${c.items.map(item=>`<li>${safe(item)}</li>`).join("")}
+   </ul>
+  `}
+
+  <p><small>${safe(c.note)}</small></p>
+  <div class="page-no">${current*2+1}</div>
+ `;
+
+ right.innerHTML=`
+  <div class="photo-wrap">
+   <img
+    class="photo"
+    src="${safe(c.image)}"
+    alt="${safe(c.caption)}"
+    onerror="this.onerror=null;this.style.display='none';this.parentElement.style.background='linear-gradient(145deg,#BCEBDD,#E6F8EE)'"
+   >
+   <div class="caption">${safe(c.caption)}</div>
+  </div>
+
+  ${current===chapters.length-1?`
+   
+  `:""}
+
+  <div class="page-no">${current*2+2}</div>
+ `;
+
+ prev.disabled=current===0;
+ next.disabled=current===chapters.length-1;
+
+ next.textContent=
+  current===chapters.length-1
+  ?"End of Book"
+  :"Next Chapter →";
+
+ status.textContent=
+  c.title+" · "+(current+1)+" of "+chapters.length;
+
+ progress.style.width=
+  ((current+1)/chapters.length*100)+"%";
+
+ document.querySelectorAll(".chapters button")
+  .forEach((btn,i)=>{
+   btn.classList.toggle("active",i===current);
+  });
+
+ const restart=document.getElementById("restartBtn");
+
+ if(restart){
+  restart.onclick=()=>{
+   current=0;
+   render();
+   book.scrollIntoView({behavior:"smooth",block:"center"});
+  };
+ }
+}
+
+function goTo(index){
+ if(index<0||index>=chapters.length)return;
+ current=index;
+ render();
+}
+
+function openBook(){
+ if(opened)return;
+ opened=true;
+ book.classList.add("open");
+ setTimeout(render,300);
+}
+
+chapters.forEach((c,i)=>{
+ const btn=document.createElement("button");
+ btn.textContent=c.title;
+
+ btn.onclick=()=>{
+  if(!opened)openBook();
+  goTo(i);
+  book.scrollIntoView({behavior:"smooth",block:"center"});
+ };
+
+ chapterMenu.appendChild(btn);
+});
+
+document.getElementById("openBtn")
+ .addEventListener("click",openBook);
+
+prev.addEventListener("click",()=>goTo(current-1));
+next.addEventListener("click",()=>goTo(current+1));
+
+document.addEventListener("keydown",event=>{
+ if(!opened||event.target.matches("input,textarea"))return;
+
+ if(event.key==="ArrowRight")goTo(current+1);
+ if(event.key==="ArrowLeft")goTo(current-1);
+});
+
+render();
+</script>
+</body>
+</html>

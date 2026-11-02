@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="bgKinjal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fdfbf7"/>
+      <stop offset="100%" stop-color="#e8ede9"/>
+    </linearGradient>
+    <linearGradient id="suitKinjal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f4c5c"/>
+      <stop offset="100%" stop-color="#072b35"/>
+    </linearGradient>
+    <linearGradient id="shirtKinjal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1b7a82"/>
+      <stop offset="100%" stop-color="#145960"/>
+    </linearGradient>
+  </defs>
+  <!-- Background Circle -->
+  <circle cx="200" cy="200" r="190" fill="url(#bgKinjal)" stroke="#e36414" stroke-width="3"/>
+  
+  <!-- Torso & Suit -->
+  <path d="M 80 400 C 90 310 130 270 200 270 C 270 270 310 310 320 400 Z" fill="url(#suitKinjal)"/>
+  <!-- Blouse / Inner shirt -->
+  <path d="M 160 270 L 200 340 L 240 270 Z" fill="url(#shirtKinjal)"/>
+  <!-- Neck -->
+  <rect x="178" y="210" width="44" height="65" rx="6" fill="#e0a97a"/>
+  <!-- Shadow under chin -->
+  <ellipse cx="200" cy="235" rx="22" ry="8" fill="#c78c5c" opacity="0.4"/>
+  <!-- Head / Face -->
+  <ellipse cx="200" cy="180" rx="60" ry="70" fill="#e8b88d"/>
+  
+  <!-- Hair Back -->
+  <path d="M 125 180 C 120 280 150 320 160 330 C 150 280 140 220 145 170 Z" fill="#231916"/>
+  <path d="M 275 180 C 280 280 250 320 240 330 C 250 280 260 220 255 170 Z" fill="#231916"/>
+  
+  <!-- Hair Front -->
+  <path d="M 135 175 C 130 110 170 85 205 85 C 245 85 270 115 265 175 C 250 120 225 110 200 115 C 165 120 145 145 135 175 Z" fill="#1f1614"/>
+  
+  <!-- Eyes -->
+  <ellipse cx="178" cy="172" rx="7" ry="4.5" fill="#2c1a0e"/>
+  <ellipse cx="222" cy="172" rx="7" ry="4.5" fill="#2c1a0e"/>
+  <circle cx="176" cy="170" r="2" fill="#fff"/>
+  <circle cx="220" cy="170" r="2" fill="#fff"/>
+  
+  <!-- Eyebrows -->
+  <path d="M 166 160 Q 178 155 190 160" stroke="#1f1614" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M 210 160 Q 222 155 234 160" stroke="#1f1614" stroke-width="3" stroke-linecap="round" fill="none"/>
+  
+  <!-- Nose -->
+  <path d="M 200 170 L 197 192 L 204 193" stroke="#c98a58" stroke-width="2" stroke-linecap="round" fill="none"/>
+  
+  <!-- Warm Smiling Lips -->
+  <path d="M 184 212 Q 200 226 216 212" fill="#c44d47"/>
+  <path d="M 186 212 Q 200 219 214 212" fill="#ffffff"/>
+  
+  <!-- Subtle blush -->
+  <circle cx="162" cy="190" r="10" fill="#e87a6c" opacity="0.25"/>
+  <circle cx="238" cy="190" r="10" fill="#e87a6c" opacity="0.25"/>
+  
+  <!-- Small Pearl Earrings -->
+  <circle cx="138" cy="188" r="4.5" fill="#fdfbf7" stroke="#d5c7b8" stroke-width="1"/>
+  <circle cx="262" cy="188" r="4.5" fill="#fdfbf7" stroke="#d5c7b8" stroke-width="1"/>
+</svg>

@@ -1,0 +1,787 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discover Madhya Pradesh | Orlon Sky Holiday</title>
+
+<style>
+:root{
+ --deep:#38204D;
+ --purple:#694078;
+ --saffron:#E99B45;
+ --gold:#F1CC83;
+ --cream:#FFFBF3;
+ --ink:#49374F;
+}
+
+*{box-sizing:border-box}
+
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ color:white;
+ background:var(--deep);
+}
+
+button{font:inherit;cursor:pointer}
+
+.scene{
+ min-height:100vh;
+ padding-bottom:35px;
+ background:
+ linear-gradient(130deg,#291439F2,#684477D9,#D18A48C9),
+ url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=2000&q=85")
+ center/cover fixed;
+}
+
+header{
+ max-width:1200px;
+ margin:auto;
+ padding:22px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ border-bottom:1px solid #ffffff45;
+}
+
+.brand{font:bold 19px Georgia,serif}
+.brand span{color:var(--gold)}
+
+.back{
+ color:white;
+ text-decoration:none;
+ border:1px solid #ffffff75;
+ padding:10px 15px;
+ border-radius:30px;
+ font-size:12px;
+}
+
+.intro{text-align:center;padding:35px 15px 20px}
+
+.eyebrow{
+ text-transform:uppercase;
+ letter-spacing:4px;
+ font-size:11px;
+ font-weight:bold;
+ color:var(--gold);
+}
+
+.intro h1{
+ font:clamp(38px,6vw,65px) Georgia,serif;
+ margin:13px 0;
+}
+
+.intro p{
+ max-width:680px;
+ margin:auto;
+ color:#FFF0DC;
+ line-height:1.7;
+}
+
+.book-area{
+ width:min(1000px,calc(100% - 30px));
+ margin:25px auto 0;
+}
+
+.book{
+ position:relative;
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ aspect-ratio:1.6;
+ min-height:450px;
+ filter:drop-shadow(0 25px 35px #0007);
+}
+
+.page{
+ min-width:0;
+ overflow:hidden;
+ position:relative;
+ color:var(--ink);
+ padding:clamp(20px,3.5vw,38px);
+ background:
+ radial-gradient(circle at top left,#E9B76B30,transparent 55%),
+ var(--cream);
+ border:1px solid #E6D4BB;
+}
+
+.left{
+ border-radius:8px 0 0 8px;
+ border-right:1px solid #D9C5AA;
+}
+
+.right{border-radius:0 8px 8px 0}
+
+.book::after{
+ content:"";
+ position:absolute;
+ z-index:3;
+ top:0;
+ bottom:0;
+ left:50%;
+ width:18px;
+ transform:translateX(-50%);
+ pointer-events:none;
+ background:linear-gradient(90deg,#49305233,#DCC9B0AA,#FFFBF3,#49305233);
+}
+
+.page-label{
+ font-size:10px;
+ font-weight:bold;
+ letter-spacing:2px;
+ text-transform:uppercase;
+ color:var(--purple);
+ margin-bottom:15px;
+}
+
+.page h2{
+ font:clamp(25px,3.3vw,36px) Georgia,serif;
+ line-height:1.1;
+ color:var(--deep);
+ margin:0 0 15px;
+}
+
+.page p{
+ color:#6C5A6E;
+ font-size:13px;
+ line-height:1.8;
+}
+
+.page ul{list-style:none;padding:0;margin-top:15px}
+
+.page li{
+ border-bottom:1px solid #38204D16;
+ padding:9px 0 9px 19px;
+ position:relative;
+ color:#59445F;
+ font-size:12px;
+ line-height:1.5;
+}
+
+.page li::before{
+ content:"✦";
+ color:var(--saffron);
+ position:absolute;
+ left:0;
+}
+
+.photo-wrap{
+ height:100%;
+ min-height:300px;
+ position:relative;
+ background:linear-gradient(145deg,#F3D9B6,#F9EBDD);
+ border:1px dashed #C49A70;
+ border-radius:4px;
+ overflow:hidden;
+}
+
+.photo{
+ display:block;
+ width:100%;
+ height:100%;
+ min-height:300px;
+ max-height:480px;
+ object-fit:cover;
+ border-radius:4px;
+}
+
+.caption{
+ position:absolute;
+ bottom:0;
+ left:0;
+ right:0;
+ padding:35px 14px 14px;
+ background:linear-gradient(transparent,#291439EF);
+ color:white;
+ font:15px Georgia,serif;
+}
+
+.page-no{
+ position:absolute;
+ bottom:12px;
+ color:#99869B;
+ font-size:10px;
+}
+
+.left .page-no{left:25px}
+.right .page-no{right:25px}
+
+.cover{
+ position:absolute;
+ z-index:5;
+ inset:0 50% 0 0;
+ transform-origin:left center;
+ transition:transform 1.3s cubic-bezier(.2,.7,.2,1);
+ backface-visibility:hidden;
+ border-radius:8px 0 0 8px;
+ background:
+ linear-gradient(140deg,#321743EB,#70427EDB,#D28B4BD9),
+ url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=85")
+ center/cover;
+ border:2px solid #F1CC83AA;
+ box-shadow:inset -10px 0 20px #0004;
+ display:grid;
+ place-items:center;
+ text-align:center;
+ padding:25px;
+}
+
+.cover::after{
+ content:"";
+ position:absolute;
+ inset:13px;
+ border:1px solid var(--gold);
+ pointer-events:none;
+}
+
+.cover-content{position:relative;z-index:1}
+
+.cover h2{
+ color:var(--cream);
+ font:clamp(30px,4vw,48px) Georgia,serif;
+ margin:18px 0 12px;
+}
+
+.cover p{
+ font-size:12px;
+ color:#FFF0DC;
+ line-height:1.7;
+}
+
+.price{
+ font-weight:bold;
+ font-size:15px!important;
+ color:#FFE0A1!important;
+}
+
+.primary{
+ background:var(--gold);
+ color:var(--deep);
+ border:none;
+ padding:13px 17px;
+ margin-top:12px;
+ border-radius:4px;
+ font-size:11px;
+ font-weight:bold;
+ text-transform:uppercase;
+ letter-spacing:1px;
+}
+
+.primary:hover{background:#FFE3AF}
+
+.book.open .cover{
+ transform:rotateY(-170deg);
+ pointer-events:none;
+}
+
+.controls{
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ flex-wrap:wrap;
+ gap:15px;
+ margin-top:22px;
+}
+
+.nav-btn{
+ background:#ffffff12;
+ color:white;
+ border:1px solid #ffffff65;
+ border-radius:30px;
+ padding:11px 17px;
+ font-size:12px;
+}
+
+.nav-btn:hover:not(:disabled){background:#ffffff30}
+.nav-btn:disabled{opacity:.35;cursor:not-allowed}
+
+.status{
+ min-width:150px;
+ text-align:center;
+ font-size:11px;
+ color:#FFF0DC;
+}
+
+.progress{
+ width:min(260px,70%);
+ height:3px;
+ background:#ffffff30;
+ margin:15px auto;
+}
+
+.progress div{
+ height:100%;
+ width:0;
+ background:var(--gold);
+ transition:width .3s;
+}
+
+.chapters{
+ max-width:950px;
+ margin:25px auto;
+ padding:0 15px;
+ display:flex;
+ justify-content:center;
+ flex-wrap:wrap;
+ gap:8px;
+}
+
+.chapters button{
+ background:#ffffff10;
+ border:1px solid #ffffff45;
+ color:white;
+ padding:9px 12px;
+ border-radius:25px;
+ font-size:10px;
+}
+
+.chapters button.active{
+ border-color:var(--gold);
+ color:var(--gold);
+ background:#F1CC831C;
+}
+
+.checklist{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:12px;
+ margin-top:20px;
+}
+
+.checklist label{
+ color:#59445F;
+ font-size:12px;
+}
+
+.checklist input{accent-color:var(--purple)}
+
+.footer{
+ text-align:center;
+ color:#ffffffa8;
+ font-size:11px;
+ padding:10px;
+}
+
+.footer span{color:var(--gold)}
+
+@media(max-width:700px){
+ header{padding:17px}
+ .brand{font-size:15px}
+ .intro{padding-top:25px}
+
+ .book{
+  display:flex;
+  flex-direction:column;
+  aspect-ratio:auto;
+  min-height:0;
+ }
+
+ .book::after{display:none}
+ .left,.right{border-radius:5px}
+ .right{margin-top:8px}
+ .page{padding:23px}
+ .photo-wrap{min-height:240px}
+ .photo{min-height:240px;max-height:330px}
+
+ .cover{
+  inset:0;
+  transform-origin:center bottom;
+  border-radius:5px;
+ }
+
+ .book.open .cover{transform:rotateX(90deg)}
+ .cover h2{font-size:38px}
+ .controls{gap:8px}
+ .nav-btn{padding:10px 12px}
+}
+
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{transition:none!important}
+}
+</style>
+</head>
+
+<body>
+<div class="scene">
+
+<header>
+ <div class="brand"><span>✧</span> Orlon Sky Holiday</div>
+ <a class="back" href="javascript:history.back()">← Back to Destinations</a>
+</header>
+
+<section class="intro">
+ <div class="eyebrow">Heritage · Nature · Culture · Wildlife</div>
+ <h1>Discover Madhya Pradesh</h1>
+ <p>
+  Explore the magnificent temples of Khajuraho, royal forts of Gwalior,
+  historic Orchha, sacred Ujjain and the incredible wildlife of Madhya Pradesh.
+ </p>
+</section>
+
+<main class="book-area">
+ <div class="book" id="book">
+
+  <section class="page left" id="leftPage"></section>
+  <section class="page right" id="rightPage"></section>
+
+  <div class="cover">
+   <div class="cover-content">
+    <div class="eyebrow">Orlon Sky Holiday presents</div>
+    <h2>Discover<br>Madhya Pradesh</h2>
+    <p>Khajuraho · Orchha<br>Gwalior · Bhopal · Ujjain</p>
+    <p class="price">₹21,999 / person*</p>
+    <button class="primary" id="openBtn">Open Your Travel Book ↗</button>
+   </div>
+  </div>
+
+ </div>
+
+ <div class="controls">
+  <button class="nav-btn" id="prevBtn" disabled>← Previous</button>
+  <div class="status" id="status">Your journey awaits</div>
+  <button class="nav-btn" id="nextBtn">Next Chapter →</button>
+ </div>
+
+ <div class="progress"><div id="progressBar"></div></div>
+</main>
+
+<nav class="chapters" id="chapters"></nav>
+
+<div class="footer">
+ Discover more. Travel beautifully.<br><br>
+ <span>Orlon Sky Holiday</span>
+</div>
+
+</div>
+
+<script>
+const chapters = [
+
+{
+ title:"Welcome to Madhya Pradesh",
+ label:"Chapter 01 · The heart of India",
+ heading:"Discover the incredible heart of India",
+ image:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1100&auto=format&fit=crop&q=85",
+ caption:"Discover the cultural and natural beauty of India",
+ text:"Madhya Pradesh, popularly known as the Heart of India, is a wonderful destination filled with ancient temples, magnificent forts, historic cities, forests and rich traditions. Explore its fascinating heritage and natural beauty on one memorable holiday.",
+ items:[
+  "Khajuraho — world-famous historic temples",
+  "Orchha — royal palaces and heritage",
+  "Gwalior — magnificent forts and monuments",
+  "Bhopal — lakes, museums and culture",
+  "Ujjain — one of India's important pilgrimage cities"
+ ],
+ note:"Travel distances between destinations can be significant. Plan enough time for road journeys."
+},
+
+{
+ title:"Khajuraho",
+ label:"Chapter 02 · Ancient architecture",
+ heading:"Marvel at the temples of Khajuraho",
+ image:"https://images.unsplash.com/photo-1606293926075-69a00dbfde81?w=1100&auto=format&fit=crop&q=85",
+ caption:"Explore the magnificent architecture of Khajuraho",
+ text:"Khajuraho is internationally famous for its remarkable group of medieval Hindu and Jain temples. Their intricate sculptures and architectural beauty make this UNESCO World Heritage Site one of India's most celebrated heritage destinations.",
+ items:[
+  "Explore the Western Group of Temples",
+  "Discover the Eastern Group of Temples",
+  "Admire detailed stone carvings",
+  "Learn about the Chandela dynasty",
+  "Enjoy the cultural atmosphere of the town"
+ ],
+ note:"Follow monument rules and check current visiting hours before your visit."
+},
+
+{
+ title:"Orchha",
+ label:"Chapter 03 · Royal heritage",
+ heading:"Step into the royal world of Orchha",
+ image:"https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?w=1100&auto=format&fit=crop&q=85",
+ caption:"Discover the timeless charm of historic India",
+ text:"Orchha is a beautiful historic town on the banks of the Betwa River. Its palaces, temples, cenotaphs and peaceful surroundings make it a wonderful destination for history lovers and photographers.",
+ items:[
+  "Explore the grand Orchha Fort complex",
+  "Visit Jahangir Mahal",
+  "Discover Raja Mahal",
+  "Visit the beautiful Ram Raja Temple",
+  "Enjoy views of the Betwa River"
+ ],
+ note:"Allow time to explore the heritage complex and nearby monuments."
+},
+
+{
+ title:"Gwalior",
+ label:"Chapter 04 · Forts and palaces",
+ heading:"Experience the grandeur of Gwalior",
+ image:"https://images.unsplash.com/photo-1643269877099-ea5393b80320?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+ caption:"Explore India's remarkable royal heritage",
+ text:"Gwalior is known for its impressive hilltop fort, historic palaces and musical heritage. Its monuments reflect the region's fascinating history and royal architecture.",
+ items:[
+  "Explore the magnificent Gwalior Fort",
+  "Visit Man Singh Palace",
+  "Discover the beautiful Sas Bahu Temples",
+  "See the historic Jai Vilas Palace",
+  "Explore the city's cultural attractions"
+ ],
+ note:"Wear comfortable walking shoes while exploring the fort and its historic surroundings."
+},
+
+{
+ title:"Bhopal",
+ label:"Chapter 05 · The city of lakes",
+ heading:"Enjoy the beauty of Bhopal",
+ image:"https://plus.unsplash.com/premium_photo-1661963839850-b4be117aff11?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+ caption:"Experience peaceful lakes and city life",
+ text:"Bhopal, the capital of Madhya Pradesh, is known for its beautiful lakes, museums, green spaces and historic architecture. The city offers a pleasant mix of culture, heritage and modern attractions.",
+ items:[
+  "Spend time at Upper Lake",
+  "Visit Bharat Bhavan",
+  "Explore the Tribal Museum",
+  "Discover the historic Taj-ul-Masajid",
+  "Enjoy local food and shopping"
+ ],
+ note:"Check museum schedules and local attraction timings before visiting."
+},
+
+{
+ title:"Sanchi",
+ label:"Chapter 06 · Buddhist heritage",
+ heading:"Discover the peaceful legacy of Sanchi",
+ image:"https://images.unsplash.com/photo-1699988194923-50f944f92d9a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+ caption:"Explore the historic Buddhist monuments",
+ text:"Sanchi is one of India's most important Buddhist heritage sites. Its Great Stupa and ancient monasteries offer an insight into Buddhist history, art and architecture.",
+ items:[
+  "Visit the Great Stupa",
+  "Explore the beautifully carved gateways",
+  "Discover ancient monasteries",
+  "Learn about Emperor Ashoka",
+  "Enjoy the peaceful historic surroundings"
+ ],
+ note:"Sanchi is generally visited as an excursion from Bhopal. Allow time for the journey."
+},
+
+{
+ title:"Ujjain",
+ label:"Chapter 07 · Spiritual experiences",
+ heading:"Seek blessings in sacred Ujjain",
+ image:"https://images.unsplash.com/photo-1695185577116-3513f730f722?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+ caption:"Experience India's spiritual traditions",
+ text:"Ujjain is an ancient pilgrimage city on the banks of the Shipra River. It is home to the revered Mahakaleshwar Jyotirlinga Temple and is an important centre of Hindu spiritual traditions.",
+ items:[
+  "Visit Mahakaleshwar Jyotirlinga Temple",
+  "Explore the sacred Ram Ghat",
+  "Discover Kal Bhairav Temple",
+  "Visit Harsiddhi Temple",
+  "Experience the spiritual atmosphere of Ujjain"
+ ],
+ note:"Temple entry, darshan and special rituals may require advance arrangements. Check official information."
+},
+
+{
+ title:"Wildlife and nature",
+ label:"Chapter 08 · Into the wilderness",
+ heading:"Explore the forests of Madhya Pradesh",
+ image:"https://images.unsplash.com/photo-1653588981980-51db2cbef04e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+ caption:"Discover the natural beauty of India's forests",
+ text:"Madhya Pradesh is famous for its national parks and tiger reserves. Nature lovers can explore beautiful forests and enjoy guided wildlife experiences in designated protected areas.",
+ items:[
+  "Kanha National Park — forests and wildlife",
+  "Bandhavgarh National Park — famous tiger reserve",
+  "Pench National Park — rich biodiversity",
+  "Panna National Park — wildlife and landscapes",
+  "Satpura Tiger Reserve — nature experiences"
+ ],
+ note:"Safaris require advance booking and are subject to park regulations, permits and availability. Wildlife sightings are never guaranteed."
+},
+
+{
+ title:"Food and culture",
+ label:"Chapter 09 · Taste of Madhya Pradesh",
+ heading:"Enjoy local flavours and traditions",
+ image:"https://images.unsplash.com/photo-1593252719532-53f183016149?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+ caption:"Taste the delicious flavours of central India",
+ text:"Madhya Pradesh offers a rich food culture with delicious street food, traditional snacks and regional specialities. Each city brings its own unique flavours and local traditions.",
+ items:[
+  "Poha and Jalebi — a popular breakfast combination",
+  "Dal Bafla — a traditional regional dish",
+  "Bhutte ka Kees — a famous corn preparation",
+  "Bhopali cuisine — rich local flavours",
+  "Malpua — a traditional sweet treat"
+ ],
+ note:"Try local specialities from hygienic and trusted food establishments."
+},
+
+{
+ title:"Best time to visit",
+ label:"Chapter 10 · Choose your season",
+ heading:"Plan your perfect Madhya Pradesh holiday",
+ image:"https://images.unsplash.com/photo-1472396961693-142e6e269027?w=1100&auto=format&fit=crop&q=85",
+ caption:"Enjoy the changing beauty of Madhya Pradesh",
+ text:"The best travel season depends on your interests. Cooler months are popular for sightseeing, while wildlife safaris have their own seasonal schedules and park opening rules.",
+ items:[
+  "October–February — pleasant for sightseeing",
+  "March–June — warmer weather and some wildlife trips",
+  "July–September — monsoon season and lush scenery",
+  "Wildlife parks — check individual park opening dates"
+ ],
+ note:"Check local weather, park schedules and attraction timings before confirming your trip."
+},
+
+{
+ title:"Your Madhya Pradesh journey",
+ label:"Final chapter · Begin your adventure",
+ heading:"Ready to explore the heart of India?",
+ image:"https://images.unsplash.com/photo-1786658054271-e6885f2cab30?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+ caption:"Your Madhya Pradesh adventure starts here",
+ text:"From the temples of Khajuraho to the royal heritage of Orchha and Gwalior, from the spiritual city of Ujjain to the forests of central India, Madhya Pradesh promises a wonderful journey.",
+ items:[
+  "Package starting price: ₹21,999 per person",
+  "Choose your preferred travel dates",
+  "Confirm your departure city",
+  "Select your sightseeing destinations",
+  "Check hotels, meals and transport inclusions"
+ ],
+ note:"The advertised price is a starting price. Confirm the final itinerary, availability, inclusions and exclusions with Orlon Sky Holiday."
+}
+
+];
+
+let current=0;
+let opened=false;
+
+const book=document.getElementById("book");
+const left=document.getElementById("leftPage");
+const right=document.getElementById("rightPage");
+const prev=document.getElementById("prevBtn");
+const next=document.getElementById("nextBtn");
+const status=document.getElementById("status");
+const progress=document.getElementById("progressBar");
+const chapterMenu=document.getElementById("chapters");
+
+function safe(value){
+ return String(value).replace(/[&<>"']/g,c=>({
+  "&":"&amp;",
+  "<":"&lt;",
+  ">":"&gt;",
+  '"':"&quot;",
+  "'":"&#39;"
+ })[c]);
+}
+
+function render(){
+ const c=chapters[current];
+
+ left.innerHTML=`
+  <div class="page-label">${safe(c.label)}</div>
+  <h2>${safe(c.heading)}</h2>
+  <p>${safe(c.text)}</p>
+
+  ${c.checklist?`
+   <div class="checklist">
+    ${c.checklist.map(item=>`
+     <label>
+      <input type="checkbox"> ${safe(item)}
+     </label>
+    `).join("")}
+   </div>
+  `:`
+   <ul>
+    ${c.items.map(item=>`<li>${safe(item)}</li>`).join("")}
+   </ul>
+  `}
+
+  <p><small>${safe(c.note)}</small></p>
+  <div class="page-no">${current*2+1}</div>
+ `;
+
+ right.innerHTML=`
+  <div class="photo-wrap">
+   <img
+    class="photo"
+    src="${safe(c.image)}"
+    alt="${safe(c.caption)}"
+    onerror="this.onerror=null;this.style.display='none';this.parentElement.style.background='linear-gradient(145deg,#F3D9B6,#F9EBDD)'"
+   >
+   <div class="caption">${safe(c.caption)}</div>
+  </div>
+
+  ${current===chapters.length-1?`
+   
+  `:""}
+
+  <div class="page-no">${current*2+2}</div>
+ `;
+
+ prev.disabled=current===0;
+ next.disabled=current===chapters.length-1;
+
+ next.textContent=
+  current===chapters.length-1
+  ?"End of Book"
+  :"Next Chapter →";
+
+ status.textContent=
+  c.title+" · "+(current+1)+" of "+chapters.length;
+
+ progress.style.width=
+  ((current+1)/chapters.length*100)+"%";
+
+ document.querySelectorAll(".chapters button")
+  .forEach((btn,i)=>{
+   btn.classList.toggle("active",i===current);
+  });
+
+ const restart=document.getElementById("restartBtn");
+
+ if(restart){
+  restart.onclick=()=>{
+   current=0;
+   render();
+   book.scrollIntoView({behavior:"smooth",block:"center"});
+  };
+ }
+}
+
+function goTo(index){
+ if(index<0||index>=chapters.length)return;
+ current=index;
+ render();
+}
+
+function openBook(){
+ if(opened)return;
+ opened=true;
+ book.classList.add("open");
+ setTimeout(render,300);
+}
+
+chapters.forEach((c,i)=>{
+ const btn=document.createElement("button");
+ btn.textContent=c.title;
+
+ btn.onclick=()=>{
+  if(!opened)openBook();
+  goTo(i);
+  book.scrollIntoView({behavior:"smooth",block:"center"});
+ };
+
+ chapterMenu.appendChild(btn);
+});
+
+document.getElementById("openBtn")
+ .addEventListener("click",openBook);
+
+prev.addEventListener("click",()=>goTo(current-1));
+next.addEventListener("click",()=>goTo(current+1));
+
+document.addEventListener("keydown",event=>{
+ if(!opened||event.target.matches("input,textarea"))return;
+
+ if(event.key==="ArrowRight")goTo(current+1);
+ if(event.key==="ArrowLeft")goTo(current-1);
+});
+
+render();
+</script>
+</body>
+</html>

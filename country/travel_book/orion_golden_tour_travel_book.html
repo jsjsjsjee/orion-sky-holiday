@@ -1,0 +1,527 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Golden Triangle Tour | Orlon Sky Holiday</title>
+
+<style>
+:root{
+ --deep:#172D52;
+ --blue:#315F91;
+ --pink:#C66F78;
+ --gold:#E8BD70;
+ --cream:#FFFCF5;
+ --ink:#39475B;
+}
+
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;color:white;background:var(--deep)}
+button{font:inherit;cursor:pointer}
+
+.scene{
+ min-height:100vh;
+ padding-bottom:35px;
+ background:
+ linear-gradient(130deg,#14294CF2,#375F91D9,#C66F78C9),
+ url("https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=2000&q=85")
+ center/cover fixed;
+}
+
+header{
+ max-width:1200px;margin:auto;padding:22px;
+ display:flex;justify-content:space-between;align-items:center;
+ border-bottom:1px solid #ffffff45;
+}
+.brand{font:bold 19px Georgia,serif}
+.brand span{color:var(--gold)}
+.back{
+ color:white;text-decoration:none;border:1px solid #ffffff75;
+ padding:10px 15px;border-radius:30px;font-size:12px;
+}
+
+.intro{text-align:center;padding:35px 15px 20px}
+.eyebrow{
+ text-transform:uppercase;letter-spacing:4px;
+ font-size:11px;font-weight:bold;color:var(--gold);
+}
+.intro h1{font:clamp(38px,6vw,65px) Georgia,serif;margin:13px 0}
+.intro p{max-width:680px;margin:auto;color:#FFF0E8;line-height:1.7}
+
+.book-area{width:min(1000px,calc(100% - 30px));margin:25px auto 0}
+.book{
+ position:relative;display:grid;grid-template-columns:1fr 1fr;
+ aspect-ratio:1.6;min-height:450px;
+ filter:drop-shadow(0 25px 35px #0007);
+}
+.page{
+ min-width:0;overflow:hidden;position:relative;color:var(--ink);
+ padding:clamp(20px,3.5vw,38px);
+ background:radial-gradient(circle at top left,#E8BD7030,transparent 55%),var(--cream);
+ border:1px solid #E6D9C8;
+}
+.left{border-radius:8px 0 0 8px;border-right:1px solid #D9C8B7}
+.right{border-radius:0 8px 8px 0}
+
+.book::after{
+ content:"";position:absolute;z-index:3;top:0;bottom:0;left:50%;
+ width:18px;transform:translateX(-50%);pointer-events:none;
+ background:linear-gradient(90deg,#49305233,#DCC9B0AA,#FFFCF5,#49305233);
+}
+.page-label{
+ font-size:10px;font-weight:bold;letter-spacing:2px;
+ text-transform:uppercase;color:var(--pink);margin-bottom:15px;
+}
+.page h2{
+ font:clamp(25px,3.3vw,36px) Georgia,serif;
+ line-height:1.1;color:var(--deep);margin:0 0 15px;
+}
+.page p{color:#657083;font-size:13px;line-height:1.8}
+.page ul{list-style:none;padding:0;margin-top:15px}
+.page li{
+ border-bottom:1px solid #172D5216;padding:9px 0 9px 19px;
+ position:relative;color:#526078;font-size:12px;line-height:1.5;
+}
+.page li::before{content:"✦";color:var(--pink);position:absolute;left:0}
+
+.photo-wrap{
+ height:100%;min-height:300px;position:relative;
+ background:linear-gradient(145deg,#F3D9B6,#F9EBDD);
+ border:1px dashed #C49A70;border-radius:4px;overflow:hidden;
+}
+.photo{
+ display:block;width:100%;height:100%;min-height:300px;
+ max-height:480px;object-fit:cover;border-radius:4px;
+}
+.caption{
+ position:absolute;bottom:0;left:0;right:0;
+ padding:35px 14px 14px;
+ background:linear-gradient(transparent,#14294CEF);
+ color:white;font:15px Georgia,serif;
+}
+.page-no{position:absolute;bottom:12px;color:#99869B;font-size:10px}
+.left .page-no{left:25px}
+.right .page-no{right:25px}
+
+.cover{
+ position:absolute;z-index:5;inset:0 50% 0 0;
+ transform-origin:left center;
+ transition:transform 1.3s cubic-bezier(.2,.7,.2,1);
+ backface-visibility:hidden;border-radius:8px 0 0 8px;
+ background:
+ linear-gradient(140deg,#14294CF0,#375F91E8,#C66F78D9),
+ url("https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=1000&q=85")
+ center/cover;
+ border:2px solid #E8BD70AA;
+ box-shadow:inset -10px 0 20px #0004;
+ display:grid;place-items:center;text-align:center;padding:25px;
+}
+.cover::after{
+ content:"";position:absolute;inset:13px;border:1px solid var(--gold);
+ pointer-events:none;
+}
+.cover-content{position:relative;z-index:1}
+.cover-symbol{font-size:37px;color:var(--gold)}
+.cover h2{color:var(--cream);font:clamp(30px,4vw,48px) Georgia,serif;margin:12px 0}
+.cover p{font-size:12px;color:#FFF0E8;line-height:1.7}
+.price{font-weight:bold;font-size:15px!important;color:#FFE0A1!important}
+
+.primary{
+ background:var(--gold);color:var(--deep);border:none;
+ padding:13px 17px;margin-top:12px;border-radius:4px;
+ font-size:11px;font-weight:bold;text-transform:uppercase;letter-spacing:1px;
+}
+.primary:hover{background:#FFE3AF}
+.book.open .cover{transform:rotateY(-170deg);pointer-events:none}
+
+.controls{
+ display:flex;justify-content:center;align-items:center;
+ flex-wrap:wrap;gap:15px;margin-top:22px;
+}
+.nav-btn{
+ background:#ffffff12;color:white;border:1px solid #ffffff65;
+ border-radius:30px;padding:11px 17px;font-size:12px;
+}
+.nav-btn:hover:not(:disabled){background:#ffffff30}
+.nav-btn:disabled{opacity:.35;cursor:not-allowed}
+.status{min-width:150px;text-align:center;font-size:11px;color:#FFF0E8}
+.progress{width:min(260px,70%);height:3px;background:#ffffff30;margin:15px auto}
+.progress div{height:100%;width:0;background:var(--gold);transition:width .3s}
+
+.chapters{
+ max-width:950px;margin:25px auto;padding:0 15px;
+ display:flex;justify-content:center;flex-wrap:wrap;gap:8px;
+}
+.chapters button{
+ background:#ffffff10;border:1px solid #ffffff45;color:white;
+ padding:9px 12px;border-radius:25px;font-size:10px;
+}
+.chapters button.active{
+ border-color:var(--gold);color:var(--gold);background:#E8BD701C;
+}
+.checklist{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.checklist label{color:#526078;font-size:12px}
+.checklist input{accent-color:var(--blue)}
+.footer{text-align:center;color:#ffffffa8;font-size:11px;padding:10px}
+.footer span{color:var(--gold)}
+
+@media(max-width:700px){
+ header{padding:17px}
+ .brand{font-size:15px}
+ .intro{padding-top:25px}
+ .book{display:flex;flex-direction:column;aspect-ratio:auto;min-height:0}
+ .book::after{display:none}
+ .left,.right{border-radius:5px}
+ .right{margin-top:8px}
+ .page{padding:23px}
+ .photo-wrap{min-height:240px}
+ .photo{min-height:240px;max-height:330px}
+ .cover{inset:0;transform-origin:center bottom;border-radius:5px}
+ .book.open .cover{transform:rotateX(90deg)}
+ .cover h2{font-size:38px}
+ .controls{gap:8px}
+ .nav-btn{padding:10px 12px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}}
+</style>
+</head>
+
+<body>
+<div class="scene">
+
+<header>
+ <div class="brand"><span>✧</span> Orlon Sky Holiday</div>
+ <a class="back" href="javascript:history.back()">← Back to Destinations</a>
+</header>
+
+<section class="intro">
+ <div class="eyebrow">Royal Heritage · Culture · Architecture</div>
+ <h1>Golden Triangle Tour</h1>
+ <p>
+  Discover India's iconic Golden Triangle through the historic streets of Delhi,
+  the timeless beauty of Agra and the royal charm of Jaipur.
+ </p>
+</section>
+
+<main class="book-area">
+ <div class="book" id="book">
+  <section class="page left" id="leftPage"></section>
+  <section class="page right" id="rightPage"></section>
+
+  <div class="cover">
+   <div class="cover-content">
+    <div class="eyebrow">Orlon Sky Holiday presents</div>
+    <div class="cover-symbol">✧</div>
+    <h2>Golden<br>Triangle Tour</h2>
+    <p>Delhi · Agra · Jaipur<br>Three Cities. One Incredible Journey.</p>
+    <p class="price">₹19,999 / person*</p>
+    <button class="primary" id="openBtn">Open Your Travel Book ↗</button>
+   </div>
+  </div>
+ </div>
+
+ <div class="controls">
+  <button class="nav-btn" id="prevBtn" disabled>← Previous</button>
+  <div class="status" id="status">Your journey awaits</div>
+  <button class="nav-btn" id="nextBtn">Next Chapter →</button>
+ </div>
+ <div class="progress"><div id="progressBar"></div></div>
+</main>
+
+<nav class="chapters" id="chapters"></nav>
+
+<div class="footer">
+ Discover more. Travel beautifully.<br><br>
+ <span>Orlon Sky Holiday</span>
+</div>
+</div>
+
+<script>
+const chapters=[
+
+{
+ title:"Welcome to Golden Triangle",
+ label:"Chapter 01 · India's iconic journey",
+ heading:"Three cities, countless memories",
+ image:"https://images.unsplash.com/photo-1477587458883-47145ed94245?w=1100&auto=format&fit=crop&q=85",
+ caption:"Discover the incredible heritage of North India",
+ text:"The Golden Triangle is one of India's most popular travel circuits, connecting Delhi, Agra and Jaipur. This journey combines historic monuments, Mughal architecture, colourful markets, royal palaces and unforgettable cultural experiences.",
+ items:[
+  "Delhi — India's historic and vibrant capital",
+  "Agra — home of the magnificent Taj Mahal",
+  "Jaipur — the beautiful Pink City of Rajasthan",
+  "Discover heritage, food and local traditions",
+  "Enjoy a memorable journey through three cities"
+ ],
+ note:"Travel times and sightseeing schedules depend on traffic, entry timings and your selected itinerary."
+},
+
+{
+ title:"Delhi",
+ label:"Chapter 02 · The capital city",
+ heading:"Explore the historic charm of Delhi",
+ image:"https://images.unsplash.com/photo-1587474260584-136574528ed5?w=1100&auto=format&fit=crop&q=85",
+ caption:"India Gate and the grand avenues of New Delhi",
+ text:"Delhi brings together centuries of history and modern city life. Explore grand monuments, bustling markets, impressive architecture and delicious street food in India's capital.",
+ items:[
+  "Visit the iconic India Gate",
+  "Explore the historic Red Fort",
+  "Discover Qutub Minar",
+  "Visit Humayun's Tomb",
+  "Experience the lively streets of Chandni Chowk",
+  "Explore Jama Masjid and local markets"
+ ],
+ note:"Plan monument visits according to opening hours and allow extra time for city traffic."
+},
+
+{
+ title:"Agra",
+ label:"Chapter 03 · City of the Taj",
+ heading:"Fall in love with the timeless Taj Mahal",
+ image:"https://images.unsplash.com/photo-1564507592333-c60657eea523?w=1100&auto=format&fit=crop&q=85",
+ caption:"The magnificent Taj Mahal in Agra",
+ text:"Agra is world-famous for the Taj Mahal, one of the most celebrated monuments on Earth. Its Mughal heritage, elegant architecture and historic surroundings make it a highlight of the Golden Triangle.",
+ items:[
+  "Witness the beautiful Taj Mahal",
+  "Explore the impressive Agra Fort",
+  "Visit the historic gardens of Mehtab Bagh",
+  "Discover the marble craftsmanship of Agra",
+  "Shop for local handicrafts and souvenirs"
+ ],
+ note:"The Taj Mahal is generally closed on Fridays. Confirm current entry rules before your visit."
+},
+
+{
+ title:"Jaipur",
+ label:"Chapter 04 · The Pink City",
+ heading:"Discover the royal beauty of Jaipur",
+ image:"https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?w=1100&auto=format&fit=crop&q=85",
+ caption:"The royal architecture and colourful streets of Jaipur",
+ text:"Jaipur is Rajasthan's vibrant capital, famous for its pink-coloured old city, magnificent forts, royal palaces and traditional markets. It offers a wonderful glimpse into Rajasthan's royal history.",
+ items:[
+  "Explore the majestic Amber Fort",
+  "Photograph the beautiful Hawa Mahal",
+  "Visit the City Palace",
+  "Discover the astronomical instruments at Jantar Mantar",
+  "Shop for jewellery, textiles and handicrafts",
+  "Explore the colourful bazaars"
+ ],
+ note:"Wear comfortable shoes for fort visits and check monument opening times."
+},
+
+{
+ title:"Famous experiences",
+ label:"Chapter 05 · Unforgettable moments",
+ heading:"Make every moment memorable",
+ image:"https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=1100&auto=format&fit=crop&q=85",
+ caption:"Experience the colours and traditions of India",
+ text:"The Golden Triangle offers much more than sightseeing. Enjoy local food, cultural performances, heritage walks, photography and shopping across three unique cities.",
+ items:[
+  "Enjoy a heritage walk in Old Delhi",
+  "Watch the sunrise at the Taj Mahal",
+  "Explore Jaipur's traditional bazaars",
+  "Taste authentic North Indian cuisine",
+  "Discover local art and handicrafts"
+ ],
+ note:"Some experiences and guided activities may require separate reservations or additional charges."
+},
+
+{
+ title:"Food and culture",
+ label:"Chapter 06 · Taste of North India",
+ heading:"Enjoy the flavours of three cities",
+ image:"https://images.unsplash.com/photo-1547592180-85f173990554?w=1100&auto=format&fit=crop&q=85",
+ caption:"Discover the delicious flavours of Indian cuisine",
+ text:"Delhi, Agra and Jaipur each offer their own culinary traditions. From street-food favourites to royal Rajasthani dishes, enjoy a delicious part of your journey.",
+ items:[
+  "Delhi — Chole Bhature and Parathas",
+  "Agra — famous Petha and Mughlai cuisine",
+  "Jaipur — Dal Baati Churma",
+  "Try local sweets and traditional snacks",
+  "Explore authentic regional restaurants"
+ ],
+ note:"Choose hygienic food outlets and mention any dietary requirements in advance."
+},
+
+{
+ title:"Shopping",
+ label:"Chapter 07 · Markets and souvenirs",
+ heading:"Bring home a piece of India",
+ image:"https://images.unsplash.com/photo-1606293926075-69a00dbfde81?w=1100&auto=format&fit=crop&q=85",
+ caption:"Discover traditional crafts and colourful markets",
+ text:"The Golden Triangle is a wonderful shopping destination. Each city offers traditional textiles, jewellery, handicrafts, marble work and souvenirs.",
+ items:[
+  "Delhi — Chandni Chowk and Janpath",
+  "Agra — marble inlay crafts and leather goods",
+  "Jaipur — colourful textiles and gemstones",
+  "Explore traditional handicraft stores",
+  "Shop for memorable travel souvenirs"
+ ],
+ note:"Compare prices and purchase gemstones or expensive handicrafts from reputable sellers."
+},
+
+{
+ title:"Best time to visit",
+ label:"Chapter 08 · Choose your season",
+ heading:"Plan your perfect Golden Triangle holiday",
+ image:"https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1100&auto=format&fit=crop&q=85",
+ caption:"Enjoy the changing beauty of India's heritage cities",
+ text:"The cooler months are generally comfortable for sightseeing across Delhi, Agra and Jaipur. Each season offers a different travel experience, so choose dates based on your preferences.",
+ items:[
+  "October–March — pleasant sightseeing weather",
+  "April–June — hot summer conditions",
+  "July–September — monsoon season",
+  "Early mornings — ideal for popular monuments",
+  "Weekdays — may be less crowded at some attractions"
+ ],
+ note:"Check weather forecasts, monument schedules and festival dates before confirming your journey."
+},
+
+{
+ title:"Packing checklist",
+ label:"Chapter 09 · Travel prepared",
+ heading:"Everything you need for your trip",
+ image:"https://images.unsplash.com/photo-1551632811-561732d1e306?w=1100&auto=format&fit=crop&q=85",
+ caption:"Pack your essentials and get ready to explore",
+ text:"A little preparation makes your Golden Triangle journey more comfortable. Pack for city sightseeing, monument visits, shopping and changing weather.",
+ checklist:[
+  "Comfortable walking shoes",
+  "Lightweight clothes",
+  "Sunglasses and sunscreen",
+  "Personal medicines",
+  "Valid photo identification",
+  "Phone charger and power bank",
+  "Small day backpack",
+  "Camera"
+ ],
+ note:"Pack according to your travel dates and planned activities."
+},
+
+{
+ title:"Your Golden Triangle journey",
+ label:"Final chapter · Begin your adventure",
+ heading:"Ready to explore India's Golden Triangle?",
+ image:"https://plus.unsplash.com/premium_photo-1661919589683-f11880119fb7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+ caption:"Three iconic cities, one unforgettable holiday",
+ text:"Experience the history of Delhi, the timeless beauty of the Taj Mahal in Agra and the royal heritage of Jaipur with Orlon Sky Holiday. Your journey through India's Golden Triangle awaits.",
+ items:[
+  "Package starting price: ₹19,999 per person",
+  "Choose your preferred travel dates",
+  "Confirm your departure city",
+  "Check hotel and transport arrangements",
+  "Confirm sightseeing and package inclusions"
+ ],
+ note:"The advertised price is a starting price. Confirm the final itinerary, availability, hotel category, inclusions and exclusions with Orlon Sky Holiday."
+}
+
+];
+
+let current=0;
+let opened=false;
+
+const book=document.getElementById("book");
+const left=document.getElementById("leftPage");
+const right=document.getElementById("rightPage");
+const prev=document.getElementById("prevBtn");
+const next=document.getElementById("nextBtn");
+const status=document.getElementById("status");
+const progress=document.getElementById("progressBar");
+const chapterMenu=document.getElementById("chapters");
+
+function safe(value){
+ return String(value).replace(/[&<>"']/g,c=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ })[c]);
+}
+
+function render(){
+ const c=chapters[current];
+
+ left.innerHTML=`
+  <div class="page-label">${safe(c.label)}</div>
+  <h2>${safe(c.heading)}</h2>
+  <p>${safe(c.text)}</p>
+  ${c.checklist?`
+   <div class="checklist">
+    ${c.checklist.map(item=>`
+     <label><input type="checkbox"> ${safe(item)}</label>
+    `).join("")}
+   </div>
+  `:`
+   <ul>${c.items.map(item=>`<li>${safe(item)}</li>`).join("")}</ul>
+  `}
+  <p><small>${safe(c.note)}</small></p>
+  <div class="page-no">${current*2+1}</div>
+ `;
+
+ right.innerHTML=`
+  <div class="photo-wrap">
+   <img class="photo" src="${safe(c.image)}" alt="${safe(c.caption)}"
+    onerror="this.onerror=null;this.style.display='none';this.parentElement.style.background='linear-gradient(145deg,#F3D9B6,#F9EBDD)'">
+   <div class="caption">${safe(c.caption)}</div>
+  </div>
+  ${current===chapters.length-1?`
+   
+  `:""}
+  <div class="page-no">${current*2+2}</div>
+ `;
+
+ prev.disabled=current===0;
+ next.disabled=current===chapters.length-1;
+ next.textContent=current===chapters.length-1?"End of Book":"Next Chapter →";
+ status.textContent=c.title+" · "+(current+1)+" of "+chapters.length;
+ progress.style.width=((current+1)/chapters.length*100)+"%";
+
+ document.querySelectorAll(".chapters button").forEach((btn,i)=>{
+  btn.classList.toggle("active",i===current);
+ });
+
+ const restart=document.getElementById("restartBtn");
+ if(restart){
+  restart.onclick=()=>{
+   current=0;
+   render();
+   book.scrollIntoView({behavior:"smooth",block:"center"});
+  };
+ }
+}
+
+function goTo(index){
+ if(index<0||index>=chapters.length)return;
+ current=index;
+ render();
+}
+
+function openBook(){
+ if(opened)return;
+ opened=true;
+ book.classList.add("open");
+ setTimeout(render,300);
+}
+
+chapters.forEach((c,i)=>{
+ const btn=document.createElement("button");
+ btn.textContent=c.title;
+ btn.onclick=()=>{
+  if(!opened)openBook();
+  goTo(i);
+  book.scrollIntoView({behavior:"smooth",block:"center"});
+ };
+ chapterMenu.appendChild(btn);
+});
+
+document.getElementById("openBtn").addEventListener("click",openBook);
+prev.addEventListener("click",()=>goTo(current-1));
+next.addEventListener("click",()=>goTo(current+1));
+
+document.addEventListener("keydown",event=>{
+ if(!opened||event.target.matches("input,textarea"))return;
+ if(event.key==="ArrowRight")goTo(current+1);
+ if(event.key==="ArrowLeft")goTo(current-1);
+});
+
+render();
+</script>
+</body>
+</html>

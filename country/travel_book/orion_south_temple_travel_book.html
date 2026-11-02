@@ -1,0 +1,524 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>South Temple Tour | Orlon Sky Holiday</title>
+
+<style>
+:root{
+ --deep:#481D29;
+ --maroon:#772D3D;
+ --orange:#D87536;
+ --gold:#E9BE70;
+ --cream:#FFFAF1;
+ --ink:#563C3E;
+}
+
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;color:white;background:var(--deep)}
+button{font:inherit;cursor:pointer}
+
+.scene{
+ min-height:100vh;
+ padding-bottom:35px;
+ background:
+ linear-gradient(130deg,#391520F2,#853B3DD9,#E18A45C9),
+ url("https://images.unsplash.com/photo-1606293926075-69a00dbfde81?auto=format&fit=crop&w=2000&q=85")
+ center/cover fixed;
+}
+
+header{
+ max-width:1200px;margin:auto;padding:22px;
+ display:flex;justify-content:space-between;align-items:center;
+ border-bottom:1px solid #ffffff45;
+}
+.brand{font:bold 19px Georgia,serif}
+.brand span{color:var(--gold)}
+.back{
+ color:white;text-decoration:none;border:1px solid #ffffff75;
+ padding:10px 15px;border-radius:30px;font-size:12px;
+}
+
+.intro{text-align:center;padding:35px 15px 20px}
+.eyebrow{
+ text-transform:uppercase;letter-spacing:4px;
+ font-size:11px;font-weight:bold;color:var(--gold);
+}
+.intro h1{font:clamp(38px,6vw,65px) Georgia,serif;margin:13px 0}
+.intro p{max-width:680px;margin:auto;color:#FFF0E4;line-height:1.7}
+
+.book-area{width:min(1000px,calc(100% - 30px));margin:25px auto 0}
+.book{
+ position:relative;display:grid;grid-template-columns:1fr 1fr;
+ aspect-ratio:1.6;min-height:450px;
+ filter:drop-shadow(0 25px 35px #0007);
+}
+.page{
+ min-width:0;overflow:hidden;position:relative;color:var(--ink);
+ padding:clamp(20px,3.5vw,38px);
+ background:radial-gradient(circle at top left,#E9BE7030,transparent 55%),var(--cream);
+ border:1px solid #E6D9C8;
+}
+.left{border-radius:8px 0 0 8px;border-right:1px solid #D9C8B7}
+.right{border-radius:0 8px 8px 0}
+
+.book::after{
+ content:"";position:absolute;z-index:3;top:0;bottom:0;left:50%;
+ width:18px;transform:translateX(-50%);pointer-events:none;
+ background:linear-gradient(90deg,#49305233,#DCC9B0AA,#FFFAF1,#49305233);
+}
+.page-label{
+ font-size:10px;font-weight:bold;letter-spacing:2px;
+ text-transform:uppercase;color:var(--orange);margin-bottom:15px;
+}
+.page h2{
+ font:clamp(25px,3.3vw,36px) Georgia,serif;
+ line-height:1.1;color:var(--deep);margin:0 0 15px;
+}
+.page p{color:#746064;font-size:13px;line-height:1.8}
+.page ul{list-style:none;padding:0;margin-top:15px}
+.page li{
+ border-bottom:1px solid #481D2916;padding:9px 0 9px 19px;
+ position:relative;color:#654D51;font-size:12px;line-height:1.5;
+}
+.page li::before{content:"✦";color:var(--orange);position:absolute;left:0}
+
+.photo-wrap{
+ height:100%;min-height:300px;position:relative;
+ background:linear-gradient(145deg,#F4D9B6,#FAEBDD);
+ border:1px dashed #C49A70;border-radius:4px;overflow:hidden;
+}
+.photo{
+ display:block;width:100%;height:100%;min-height:300px;
+ max-height:480px;object-fit:cover;border-radius:4px;
+}
+.caption{
+ position:absolute;bottom:0;left:0;right:0;
+ padding:35px 14px 14px;
+ background:linear-gradient(transparent,#391520EF);
+ color:white;font:15px Georgia,serif;
+}
+.page-no{position:absolute;bottom:12px;color:#99869B;font-size:10px}
+.left .page-no{left:25px}
+.right .page-no{right:25px}
+
+.cover{
+ position:absolute;z-index:5;inset:0 50% 0 0;
+ transform-origin:left center;
+ transition:transform 1.3s cubic-bezier(.2,.7,.2,1);
+ backface-visibility:hidden;border-radius:8px 0 0 8px;
+ background:
+ linear-gradient(140deg,#391520F2,#853B3DE8,#E18A45D9),
+ url("https://images.unsplash.com/photo-1606293926075-69a00dbfde81?auto=format&fit=crop&w=1000&q=85")
+ center/cover;
+ border:2px solid #E9BE70AA;
+ box-shadow:inset -10px 0 20px #0004;
+ display:grid;place-items:center;text-align:center;padding:25px;
+}
+.cover::after{
+ content:"";position:absolute;inset:13px;border:1px solid var(--gold);
+ pointer-events:none;
+}
+.cover-content{position:relative;z-index:1}
+.cover-symbol{font-size:39px;color:var(--gold)}
+.cover h2{color:var(--cream);font:clamp(30px,4vw,48px) Georgia,serif;margin:12px 0}
+.cover p{font-size:12px;color:#FFF0E4;line-height:1.7}
+.price{font-weight:bold;font-size:15px!important;color:#FFE0A1!important}
+
+.primary{
+ background:var(--gold);color:var(--deep);border:none;
+ padding:13px 17px;margin-top:12px;border-radius:4px;
+ font-size:11px;font-weight:bold;text-transform:uppercase;letter-spacing:1px;
+}
+.primary:hover{background:#FFE3AF}
+.book.open .cover{transform:rotateY(-170deg);pointer-events:none}
+
+.controls{
+ display:flex;justify-content:center;align-items:center;
+ flex-wrap:wrap;gap:15px;margin-top:22px;
+}
+.nav-btn{
+ background:#ffffff12;color:white;border:1px solid #ffffff65;
+ border-radius:30px;padding:11px 17px;font-size:12px;
+}
+.nav-btn:hover:not(:disabled){background:#ffffff30}
+.nav-btn:disabled{opacity:.35;cursor:not-allowed}
+.status{min-width:150px;text-align:center;font-size:11px;color:#FFF0E4}
+.progress{width:min(260px,70%);height:3px;background:#ffffff30;margin:15px auto}
+.progress div{height:100%;width:0;background:var(--gold);transition:width .3s}
+
+.chapters{
+ max-width:950px;margin:25px auto;padding:0 15px;
+ display:flex;justify-content:center;flex-wrap:wrap;gap:8px;
+}
+.chapters button{
+ background:#ffffff10;border:1px solid #ffffff45;color:white;
+ padding:9px 12px;border-radius:25px;font-size:10px;
+}
+.chapters button.active{
+ border-color:var(--gold);color:var(--gold);background:#E9BE701C;
+}
+.checklist{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.checklist label{color:#654D51;font-size:12px}
+.checklist input{accent-color:var(--maroon)}
+.footer{text-align:center;color:#ffffffa8;font-size:11px;padding:10px}
+.footer span{color:var(--gold)}
+
+@media(max-width:700px){
+ header{padding:17px}
+ .brand{font-size:15px}
+ .intro{padding-top:25px}
+ .book{display:flex;flex-direction:column;aspect-ratio:auto;min-height:0}
+ .book::after{display:none}
+ .left,.right{border-radius:5px}
+ .right{margin-top:8px}
+ .page{padding:23px}
+ .photo-wrap{min-height:240px}
+ .photo{min-height:240px;max-height:330px}
+ .cover{inset:0;transform-origin:center bottom;border-radius:5px}
+ .book.open .cover{transform:rotateX(90deg)}
+ .cover h2{font-size:38px}
+ .controls{gap:8px}
+ .nav-btn{padding:10px 12px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}}
+</style>
+</head>
+
+<body>
+<div class="scene">
+
+<header>
+ <div class="brand"><span>✧</span> Orlon Sky Holiday</div>
+ <a class="back" href="javascript:history.back()">← Back to Destinations</a>
+</header>
+
+<section class="intro">
+ <div class="eyebrow">Sacred Temples · Heritage · Spirituality</div>
+ <h1>South Temple Tour</h1>
+ <p>
+  Explore the magnificent Meenakshi Temple in Madurai, the sacred island
+  of Rameshwaram and the extraordinary Chola temples of Thanjavur.
+ </p>
+</section>
+
+<main class="book-area">
+ <div class="book" id="book">
+  <section class="page left" id="leftPage"></section>
+  <section class="page right" id="rightPage"></section>
+
+  <div class="cover">
+   <div class="cover-content">
+    <div class="eyebrow">Orlon Sky Holiday presents</div>
+
+    <h2>South<br>Temple Tour</h2>
+    <p>Madurai · Rameshwaram<br>Thanjavur</p>
+    <p class="price">₹21,999 / person*</p>
+    <button class="primary" id="openBtn">Open Your Travel Book ↗</button>
+   </div>
+  </div>
+ </div>
+
+ <div class="controls">
+  <button class="nav-btn" id="prevBtn" disabled>← Previous</button>
+  <div class="status" id="status">Your journey awaits</div>
+  <button class="nav-btn" id="nextBtn">Next Chapter →</button>
+ </div>
+ <div class="progress"><div id="progressBar"></div></div>
+</main>
+
+<nav class="chapters" id="chapters"></nav>
+
+<div class="footer">
+ Discover more. Travel beautifully.<br><br>
+ <span>Orlon Sky Holiday</span>
+</div>
+</div>
+
+<script>
+const chapters=[
+
+{
+ title:"Welcome to South Temple Tour",
+ label:"Chapter 01 · A spiritual journey",
+ heading:"Discover the sacred heritage of Tamil Nadu",
+ image:"https://images.unsplash.com/photo-1606293926075-69a00dbfde81?w=1100&auto=format&fit=crop&q=85",
+ caption:"Discover the magnificent temple heritage of South India",
+ text:"Experience a beautiful journey through three remarkable destinations in Tamil Nadu. From the colourful towers of Madurai to the sacred island of Rameshwaram and the grand Chola architecture of Thanjavur, this tour celebrates India's spiritual and cultural heritage.",
+ items:[
+  "Madurai — home of the Meenakshi Amman Temple",
+  "Rameshwaram — sacred pilgrimage island",
+  "Thanjavur — the land of magnificent Chola architecture",
+  "Explore ancient temples and local traditions",
+  "Experience the culture and cuisine of Tamil Nadu"
+ ],
+ note:"Temple schedules, travel times and local conditions may affect your itinerary."
+},
+
+{
+ title:"Madurai",
+ label:"Chapter 02 · The temple city",
+ heading:"Experience the divine beauty of Madurai",
+ image:"https://plus.unsplash.com/premium_photo-1697729444936-8c6a6f643312?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+ caption:"The magnificent temple architecture of South India",
+ text:"Madurai is one of India's oldest continuously inhabited cities and is famous for the spectacular Meenakshi Amman Temple. Its colourful gopurams, sacred halls and lively streets offer a memorable cultural experience.",
+ items:[
+  "Visit the famous Meenakshi Amman Temple",
+  "Explore the historic Thirumalai Nayakkar Mahal",
+  "Discover the sacred atmosphere of the city",
+  "Visit the Gandhi Memorial Museum",
+  "Explore traditional markets and local shops"
+ ],
+ note:"Follow temple dress codes and check darshan timings before your visit."
+},
+
+{
+ title:"Rameshwaram",
+ label:"Chapter 03 · The sacred island",
+ heading:"Discover the spiritual charm of Rameshwaram",
+ image:"https://plus.unsplash.com/premium_photo-1692102550620-35f8716814b4?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+ caption:"Experience the sacred coastal beauty of Rameshwaram",
+ text:"Rameshwaram is one of the most revered pilgrimage destinations in India. Located on Pamban Island, it is famous for Ramanathaswamy Temple, its long corridors, sacred water tanks and beautiful coastal scenery.",
+ items:[
+  "Visit the Ramanathaswamy Temple",
+  "Explore the famous temple corridors",
+  "See the iconic Pamban Bridge",
+  "Visit the beautiful Dhanushkodi region",
+  "Enjoy views of the surrounding coastline"
+ ],
+ note:"Sea conditions and local restrictions may affect access to some coastal locations."
+},
+
+{
+ title:"Ramanathaswamy Temple",
+ label:"Chapter 04 · Sacred architecture",
+ heading:"Explore one of India's sacred Jyotirlingas",
+ image:"https://plus.unsplash.com/premium_photo-1675597056623-74d1e05dc3f0?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+ caption:"Explore the sacred temple traditions of Rameshwaram",
+ text:"The Ramanathaswamy Temple is renowned for its magnificent corridors, sculpted pillars and spiritual importance. It is one of the twelve traditional Jyotirlinga shrines dedicated to Lord Shiva.",
+ items:[
+  "Explore the temple's magnificent corridors",
+  "Learn about its spiritual significance",
+  "Experience the traditional pilgrimage rituals",
+  "Discover the temple's beautiful architecture",
+  "Respect temple customs and visitor guidelines"
+ ],
+ note:"Rituals, special entry and bathing facilities may have separate rules and charges."
+},
+
+{
+ title:"Thanjavur",
+ label:"Chapter 05 · The Chola heritage",
+ heading:"Discover the architectural wonder of Thanjavur",
+ image:"https://plus.unsplash.com/premium_photo-1697729536647-4e23a32dd324?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+ caption:"Discover the timeless temple architecture of Tamil Nadu",
+ text:"Thanjavur is celebrated for its artistic traditions and remarkable Chola heritage. The city is home to the iconic Brihadeeswarar Temple, a UNESCO World Heritage Site and one of India's finest examples of Dravidian architecture.",
+ items:[
+  "Visit the magnificent Brihadeeswarar Temple",
+  "Explore the historic Thanjavur Palace",
+  "Discover traditional bronze sculptures",
+  "Learn about the Chola dynasty",
+  "Explore local art and handicraft shops"
+ ],
+ note:"Allow sufficient time to explore the temple complex and nearby heritage attractions."
+},
+
+{
+ title:"Brihadeeswarar Temple",
+ label:"Chapter 06 · The Great Living Chola Temple",
+ heading:"Witness the grandeur of the Big Temple",
+ image:"https://images.unsplash.com/photo-1721532865054-5da685de394c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+ caption:"A celebration of Chola architecture and craftsmanship",
+ text:"The Brihadeeswarar Temple, also known as the Big Temple, is an extraordinary monument built during the reign of Chola emperor Rajaraja I. Its towering vimana and intricate stone craftsmanship reflect the brilliance of Chola architecture.",
+ items:[
+  "Admire the towering temple vimana",
+  "Explore the magnificent Nandi statue",
+  "Discover ancient inscriptions and sculptures",
+  "Learn about Chola engineering",
+  "Experience the UNESCO-listed heritage complex"
+ ],
+ note:"Observe monument rules and check current visiting hours."
+},
+
+{
+ title:"Food and culture",
+ label:"Chapter 07 · Taste of Tamil Nadu",
+ heading:"Enjoy authentic South Indian flavours",
+ image:"https://images.unsplash.com/photo-1787024231387-edccb8c44700?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+ caption:"Enjoy traditional South Indian cuisine",
+ text:"Tamil Nadu is famous for its delicious vegetarian and non-vegetarian cuisine, traditional filter coffee and wonderful regional specialities. Enjoy local flavours during your temple journey.",
+ items:[
+  "Traditional idli and dosa",
+  "South Indian meals served on banana leaves",
+  "Crispy medu vada and sambar",
+  "Traditional Tamil sweets",
+  "Freshly brewed South Indian filter coffee"
+ ],
+ note:"Choose hygienic food outlets and mention any dietary requirements in advance."
+},
+
+{
+ title:"Best time to visit",
+ label:"Chapter 08 · Choose your season",
+ heading:"Plan your perfect temple holiday",
+ image:"https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1100&auto=format&fit=crop&q=85",
+ caption:"Enjoy the spiritual and cultural beauty of Tamil Nadu",
+ text:"Tamil Nadu can be visited throughout much of the year, but cooler months are generally more comfortable for temple sightseeing. Plan around local festivals and temple events if you want a special cultural experience.",
+ items:[
+  "October–March — generally comfortable for sightseeing",
+  "April–June — hot summer conditions",
+  "July–September — monsoon season",
+  "Festival dates — busy periods requiring advance planning"
+ ],
+ note:"Check weather forecasts, temple schedules and festival dates before confirming travel."
+},
+
+{
+ title:"Packing checklist",
+ label:"Chapter 09 · Travel prepared",
+ heading:"Prepare for your spiritual journey",
+ image:"https://images.unsplash.com/photo-1551632811-561732d1e306?w=1100&auto=format&fit=crop&q=85",
+ caption:"Pack your essentials for a comfortable temple tour",
+ text:"A little preparation makes temple visits and long journeys more comfortable. Pack modest clothing, comfortable footwear and your travel essentials.",
+ checklist:[
+  "Comfortable traditional clothing",
+  "Modest temple-appropriate outfits",
+  "Easy-to-remove footwear",
+  "Personal medicines",
+  "Sunscreen and sunglasses",
+  "Valid photo identification",
+  "Water bottle",
+  "Small travel backpack"
+ ],
+ note:"Some temples have specific clothing and footwear rules. Confirm requirements before visiting."
+},
+
+{
+ title:"Your South Temple journey",
+ label:"Final chapter · Begin your pilgrimage",
+ heading:"Ready for your divine South India journey?",
+ image:"https://images.unsplash.com/photo-1606293926075-69a00dbfde81?w=1100&auto=format&fit=crop&q=85",
+ caption:"Three sacred destinations, one unforgettable journey",
+ text:"Explore Madurai's magnificent Meenakshi Temple, experience the spiritual atmosphere of Rameshwaram and admire the Chola heritage of Thanjavur with Orlon Sky Holiday.",
+ items:[
+  "Package starting price: ₹21,999 per person",
+  "Choose your preferred travel dates",
+  "Confirm your departure city",
+  "Check hotel and transport arrangements",
+  "Confirm temple visits and package inclusions"
+ ],
+ note:"The advertised price is a starting price. Confirm the final itinerary, availability, hotel category, inclusions and exclusions with Orlon Sky Holiday."
+}
+
+];
+
+let current=0;
+let opened=false;
+
+const book=document.getElementById("book");
+const left=document.getElementById("leftPage");
+const right=document.getElementById("rightPage");
+const prev=document.getElementById("prevBtn");
+const next=document.getElementById("nextBtn");
+const status=document.getElementById("status");
+const progress=document.getElementById("progressBar");
+const chapterMenu=document.getElementById("chapters");
+
+function safe(value){
+ return String(value).replace(/[&<>"']/g,c=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ })[c]);
+}
+
+function render(){
+ const c=chapters[current];
+
+ left.innerHTML=`
+  <div class="page-label">${safe(c.label)}</div>
+  <h2>${safe(c.heading)}</h2>
+  <p>${safe(c.text)}</p>
+  ${c.checklist?`
+   <div class="checklist">
+    ${c.checklist.map(item=>`
+     <label><input type="checkbox"> ${safe(item)}</label>
+    `).join("")}
+   </div>
+  `:`
+   <ul>${c.items.map(item=>`<li>${safe(item)}</li>`).join("")}</ul>
+  `}
+  <p><small>${safe(c.note)}</small></p>
+  <div class="page-no">${current*2+1}</div>
+ `;
+
+ right.innerHTML=`
+  <div class="photo-wrap">
+   <img class="photo" src="${safe(c.image)}" alt="${safe(c.caption)}"
+    onerror="this.onerror=null;this.style.display='none';this.parentElement.style.background='linear-gradient(145deg,#F4D9B6,#FAEBDD)'">
+   <div class="caption">${safe(c.caption)}</div>
+  </div>
+  ${current===chapters.length-1?`
+   
+  `:""}
+  <div class="page-no">${current*2+2}</div>
+ `;
+
+ prev.disabled=current===0;
+ next.disabled=current===chapters.length-1;
+ next.textContent=current===chapters.length-1?"End of Book":"Next Chapter →";
+ status.textContent=c.title+" · "+(current+1)+" of "+chapters.length;
+ progress.style.width=((current+1)/chapters.length*100)+"%";
+
+ document.querySelectorAll(".chapters button").forEach((btn,i)=>{
+  btn.classList.toggle("active",i===current);
+ });
+
+ const restart=document.getElementById("restartBtn");
+ if(restart){
+  restart.onclick=()=>{
+   current=0;
+   render();
+   book.scrollIntoView({behavior:"smooth",block:"center"});
+  };
+ }
+}
+
+function goTo(index){
+ if(index<0||index>=chapters.length)return;
+ current=index;
+ render();
+}
+
+function openBook(){
+ if(opened)return;
+ opened=true;
+ book.classList.add("open");
+ setTimeout(render,300);
+}
+
+chapters.forEach((c,i)=>{
+ const btn=document.createElement("button");
+ btn.textContent=c.title;
+ btn.onclick=()=>{
+  if(!opened)openBook();
+  goTo(i);
+  book.scrollIntoView({behavior:"smooth",block:"center"});
+ };
+ chapterMenu.appendChild(btn);
+});
+
+document.getElementById("openBtn").addEventListener("click",openBook);
+prev.addEventListener("click",()=>goTo(current-1));
+next.addEventListener("click",()=>goTo(current+1));
+
+document.addEventListener("keydown",event=>{
+ if(!opened||event.target.matches("input,textarea"))return;
+ if(event.key==="ArrowRight")goTo(current+1);
+ if(event.key==="ArrowLeft")goTo(current-1);
+});
+
+render();
+</script>
+</body>
+</html>

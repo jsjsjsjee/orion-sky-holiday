@@ -1,0 +1,481 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discover Uttarakhand | Orlon Sky Holiday</title>
+
+<style>
+:root {
+  --mountain:#123C3B;
+  --blue:#287C83;
+  --sky:#B9DED7;
+  --red:#C77B48;
+  --gold:#E9C783;
+  --cream:#FFFCF5;
+  --ink:#263F54;
+}
+
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;color:white;background:var(--mountain)}
+button{font:inherit;cursor:pointer}
+
+.scene{
+ min-height:100vh;padding-bottom:35px;
+ background:
+ linear-gradient(125deg,#092B2BE8,#287C83B8,#123C3BE0),
+ url("https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2000&q=85")
+ center/cover fixed;
+}
+
+header{
+ max-width:1200px;margin:auto;padding:22px;
+ display:flex;justify-content:space-between;align-items:center;
+ border-bottom:1px solid #ffffff35
+}
+
+.brand{font:bold 19px Georgia,serif}
+.brand span{color:var(--gold)}
+.back{
+ color:white;text-decoration:none;border:1px solid #ffffff65;
+ padding:10px 15px;border-radius:30px;font-size:12px
+}
+
+.intro{text-align:center;padding:35px 15px 20px}
+.eyebrow{
+ text-transform:uppercase;letter-spacing:4px;font-size:11px;
+ font-weight:bold;color:var(--gold)
+}
+.intro h1{font:clamp(38px,6vw,65px) Georgia,serif;margin:13px 0}
+.intro p{max-width:680px;margin:auto;color:#e3effa;line-height:1.7}
+
+.book-area{width:min(1000px,calc(100% - 30px));margin:25px auto 0}
+.book{
+ position:relative;display:grid;grid-template-columns:1fr 1fr;
+ aspect-ratio:1.6;min-height:450px;
+ filter:drop-shadow(0 25px 35px #0007)
+}
+
+.page{
+ min-width:0;overflow:hidden;position:relative;color:var(--ink);
+ padding:clamp(20px,3.5vw,38px);
+ background:radial-gradient(circle at top left,#B9DED730,transparent 55%),var(--cream);
+ border:1px solid #c8d9e6
+}
+.left{border-radius:8px 0 0 8px;border-right:1px solid #b7cadb}
+.right{border-radius:0 8px 8px 0}
+
+.book::after{
+ content:"";position:absolute;z-index:3;top:0;bottom:0;left:50%;
+ width:18px;transform:translateX(-50%);pointer-events:none;
+ background:linear-gradient(90deg,#23445b33,#b7cadbaa,#fffdf5,#526b8033)
+}
+
+.page-label{
+ font-size:10px;font-weight:bold;letter-spacing:2px;
+ text-transform:uppercase;color:var(--red);margin-bottom:15px
+}
+.page h2{font:clamp(25px,3.3vw,36px) Georgia,serif;line-height:1.1;color:var(--mountain);margin:0 0 15px}
+.page p{color:#536879;font-size:13px;line-height:1.8}
+.page ul{list-style:none;padding:0;margin-top:15px}
+.page li{
+ border-bottom:1px solid #102B4616;padding:9px 0 9px 19px;
+ position:relative;color:#365269;font-size:12px;line-height:1.5
+}
+.page li::before{content:"✦";color:var(--red);position:absolute;left:0}
+
+.photo-wrap{height:100%;min-height:300px;position:relative}
+.photo{width:100%;height:100%;min-height:300px;max-height:480px;object-fit:cover;border-radius:4px}
+.caption{
+ position:absolute;bottom:10px;left:10px;right:10px;
+ padding:25px 12px 12px;background:linear-gradient(transparent,#091D35ED);
+ color:white;font:15px Georgia,serif
+}
+.page-no{position:absolute;bottom:12px;color:#718ba0;font-size:10px}
+.left .page-no{left:25px}.right .page-no{right:25px}
+
+.cover{
+ position:absolute;z-index:5;inset:0 50% 0 0;transform-origin:left center;
+ transition:transform 1.3s cubic-bezier(.2,.7,.2,1);backface-visibility:hidden;
+ border-radius:8px 0 0 8px;
+ background:linear-gradient(140deg,#123C3BE8,#287C83D9),
+ url("https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1000&q=85") center/cover;
+ border:2px solid #E9C78399;box-shadow:inset -10px 0 20px #0004;
+ display:grid;place-items:center;text-align:center;padding:25px
+}
+.cover::after{content:"";position:absolute;inset:13px;border:1px solid var(--gold);pointer-events:none}
+.cover-content{position:relative;z-index:1}
+.cover h2{color:var(--cream);font:clamp(30px,4vw,48px) Georgia,serif;margin:18px 0 12px}
+.cover p{font-size:12px;color:#e3effa;line-height:1.7}
+.price{font-weight:bold;font-size:15px!important;color:var(--gold)!important}
+.primary{
+ background:var(--gold);color:var(--mountain);border:none;
+ padding:13px 17px;margin-top:12px;border-radius:4px;
+ font-size:11px;font-weight:bold;text-transform:uppercase;letter-spacing:1px
+}
+.primary:hover{background:#f8e4b6}
+.book.open .cover{transform:rotateY(-170deg);pointer-events:none}
+
+.controls{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:15px;margin-top:22px}
+.nav-btn{background:#ffffff12;color:white;border:1px solid #ffffff65;border-radius:30px;padding:11px 17px;font-size:12px}
+.nav-btn:hover:not(:disabled){background:#ffffff30}
+.nav-btn:disabled{opacity:.35;cursor:not-allowed}
+.status{min-width:150px;text-align:center;font-size:11px;color:#e3effa}
+.progress{width:min(260px,70%);height:3px;background:#ffffff30;margin:15px auto}
+.progress div{height:100%;width:0;background:var(--gold);transition:width .3s}
+.chapters{max-width:950px;margin:25px auto;padding:0 15px;display:flex;justify-content:center;flex-wrap:wrap;gap:8px}
+.chapters button{background:#ffffff10;border:1px solid #ffffff45;color:white;padding:9px 12px;border-radius:25px;font-size:10px}
+.chapters button.active{border-color:var(--gold);color:var(--gold);background:#E9C7831C}
+.checklist{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.checklist label{color:#365269;font-size:12px}
+.checklist input{accent-color:var(--blue)}
+.footer{text-align:center;color:#ffffff9c;font-size:11px;padding:10px}
+.footer span{color:var(--gold)}
+
+@media(max-width:700px){
+ header{padding:17px}.brand{font-size:15px}.intro{padding-top:25px}
+ .book{display:flex;flex-direction:column;aspect-ratio:auto;min-height:0}
+ .book::after{display:none}
+ .left,.right{border-radius:5px}.right{margin-top:8px}
+ .page{padding:23px}.photo-wrap{min-height:240px}
+ .photo{min-height:240px;max-height:330px}
+ .cover{inset:0;transform-origin:center bottom;border-radius:5px}
+ .book.open .cover{transform:rotateX(90deg)}
+ .cover h2{font-size:38px}.controls{gap:8px}.nav-btn{padding:10px 12px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}}
+</style>
+</head>
+
+<body>
+<div class="scene">
+
+<header>
+ <div class="brand"><span>✧</span> Orlon Sky Holiday</div>
+ <a class="back" href="javascript:history.back()">← Back to Destinations</a>
+</header>
+
+<section class="intro">
+ <div class="eyebrow">Himalayas · Nature · Adventure · Spirituality</div>
+ <h1>Discover Uttarakhand</h1>
+ <p>Explore beautiful hill stations, peaceful lakes, sacred river towns, lush forests and magnificent Himalayan landscapes with an unforgettable Uttarakhand holiday.</p>
+</section>
+
+<main class="book-area">
+ <div class="book" id="book">
+  <section class="page left" id="leftPage"></section>
+  <section class="page right" id="rightPage"></section>
+
+  <div class="cover">
+   <div class="cover-content">
+    <div class="eyebrow">Orlon Sky Holiday presents</div>
+    <h2>Discover<br>Uttarakhand</h2>
+    <p>Nainital · Mussoorie<br>Rishikesh · Auli</p>
+    <p class="price">From ₹19,999 / person*</p>
+    <button class="primary" id="openBtn">Open Your Travel Book ↗</button>
+   </div>
+  </div>
+ </div>
+
+ <div class="controls">
+  <button class="nav-btn" id="prevBtn" disabled>← Previous</button>
+  <div class="status" id="status">Your journey awaits</div>
+  <button class="nav-btn" id="nextBtn">Next Chapter →</button>
+ </div>
+
+ <div class="progress"><div id="progressBar"></div></div>
+</main>
+
+<nav class="chapters" id="chapters"></nav>
+<div class="footer">Discover more. Travel beautifully. <br><br><span>Orlon Sky Holiday</span></div>
+</div>
+
+<script>
+const chapters = [
+{
+ title:"Welcome to Uttarakhand",
+ label:"Chapter 01 · The destination",
+ heading:"Welcome to the Land of Gods",
+ image:"photo-1448375240586-882707db888b",
+ caption:"The beautiful Himalayan landscapes",
+ text:"Uttarakhand is a beautiful northern Indian state known for its Himalayan mountains, peaceful hill stations, sacred temples, rivers and lush green valleys. From Nainital's lakes to Mussoorie's mountain views, every destination offers a memorable experience.",
+ items:[
+  "Nainital — beautiful lakes and mountain views",
+  "Mussoorie — the Queen of Hills",
+  "Rishikesh — yoga, river experiences and adventure",
+  "Haridwar — sacred ghats and spiritual traditions",
+  "Auli — Himalayan scenery and winter activities"
+ ],
+ note:"Travel conditions and sightseeing access may vary according to weather and season."
+},
+{
+ title:"Why visit Uttarakhand?",label:"Chapter 02 · Find your experience",
+ heading:"Nature, Adventure & Spirituality",
+ image:"photo-1470770841072-f978cf4d019e",
+ caption:"A refreshing escape into the mountains",
+ text:"Uttarakhand offers something for every kind of traveller. Enjoy peaceful hill stations, scenic mountain drives, river adventures, forest experiences and spiritual destinations.",
+ items:[
+  "Nature — forests, lakes, waterfalls and mountain views",
+  "Adventure — rafting, trekking and outdoor experiences",
+  "Spirituality — temples, yoga and sacred river ghats",
+  "Relaxation — peaceful resorts and beautiful hill towns"
+ ],
+ note:"Choose adventure activities through authorised operators and follow local safety instructions."
+},
+{
+ title:"Places to visit",label:"Chapter 03 · The highlights",
+ heading:"Discover Uttarakhand's Famous Places",
+ image:"photo-1501785888041-af3ef285b470",
+ caption:"Beautiful destinations across Uttarakhand",
+ text:"Uttarakhand is home to many famous travel destinations. Explore lakeside beauty, colonial hill-town charm, sacred riverfronts and spectacular mountain landscapes.",
+ items:[
+  "Nainital — Naini Lake, Naina Devi Temple and Snow View Point",
+  "Mussoorie — Mall Road, Gun Hill and Kempty Falls",
+  "Rishikesh — Ram Jhula, Lakshman Jhula area and Ganga ghats",
+  "Haridwar — Har Ki Pauri and Ganga Aarti",
+  "Auli — mountain views and skiing in suitable winter conditions",
+  "Jim Corbett — wildlife experiences and authorised safaris"
+ ],
+ note:"Safari permits, attraction access and seasonal activities should be confirmed before travel."
+},
+{
+ title:"Best time to travel",label:"Chapter 04 · Choose your season",
+ heading:"Find Your Perfect Mountain Season",
+ image:"photo-1472396961693-142e6e269027",
+ caption:"Uttarakhand looks beautiful throughout the year",
+ text:"Each season offers a different experience in Uttarakhand. Summer is popular for hill-station holidays, monsoon brings greenery with possible travel disruption, and winter offers colder mountain weather and possible snowfall at higher elevations.",
+ items:[
+  "March to June — pleasant weather and sightseeing",
+  "July to September — greenery, with possible heavy rain",
+  "October to November — clear views and comfortable travel",
+  "December to February — winter weather and possible snowfall"
+ ],
+ note:"Check weather forecasts, road conditions and local travel advisories before departure."
+},
+{
+ title:"Budget & prices",label:"Chapter 05 · Plan your spend",
+ heading:"Your Uttarakhand Holiday Budget",
+ image:"photo-1517849845537-4d257902454a",
+ caption:"Make memories in the Himalayas",
+ text:"Explore the beauty of Uttarakhand with an advertised starting package price of ₹19,999 per person. The final cost depends on your travel dates, departure city, hotel category, transport and selected sightseeing experiences.",
+ items:[
+  "Starting package price: ₹19,999 per person",
+  "Confirm hotel category and room arrangements",
+  "Check flights or train and ground transfers",
+  "Ask about meals and sightseeing inclusions",
+  "Confirm adventure activities and optional excursions"
+ ],
+ note:"₹19,999 is the supplied starting price, not a guaranteed live quote. Confirm final pricing, availability and package inclusions before booking."
+},
+{
+ title:"History & culture",label:"Chapter 06 · Stories of Uttarakhand",
+ heading:"Discover the Culture of Devbhoomi",
+ image:"photo-1544735716-392fe2489ffa",
+ caption:"Traditions and heritage of Uttarakhand",
+ text:"Uttarakhand has a rich cultural identity shaped by Himalayan communities, religious traditions, local festivals, folk music and traditional architecture. Its villages and sacred towns offer a glimpse into local life.",
+ items:[
+  "Explore traditional Garhwali and Kumaoni culture",
+  "Discover local fairs and folk traditions",
+  "Visit historic temples and sacred places",
+  "Experience traditional mountain hospitality",
+  "Respect local customs and religious sites"
+ ],
+ note:"Dress respectfully at religious places and follow local visitor guidelines."
+},
+{
+ title:"Taste of Uttarakhand",label:"Chapter 07 · At the table",
+ heading:"Enjoy the Flavours of the Hills",
+ image:"photo-1547592180-85f173990554",
+ caption:"Discover traditional Uttarakhand cuisine",
+ text:"Uttarakhand's food is known for its simple ingredients, regional recipes and comforting mountain flavours. Enjoy local specialities during your journey.",
+ items:[
+  "Kafuli — traditional leafy green dish",
+  "Phaanu — a regional lentil preparation",
+  "Aloo ke Gutke — spiced potato speciality",
+  "Chainsoo — traditional roasted lentil dish",
+  "Bal Mithai — popular Kumaoni sweet"
+ ],
+ note:"Food availability varies by destination and restaurant. Ask about ingredients if you have food allergies."
+},
+{
+ title:"Packing checklist",label:"Chapter 08 · Be prepared",
+ heading:"Pack for Your Mountain Holiday",
+ image:"photo-1551632811-561732d1e306",
+ caption:"Prepare for changing mountain conditions",
+ text:"Uttarakhand's weather can vary between hill stations, river towns and higher mountain regions. Pack comfortable clothing and essential travel items according to your itinerary.",
+ checklist:[
+  "Comfortable walking shoes",
+  "Warm jackets and sweaters",
+  "Raincoat or umbrella",
+  "Sunglasses and sunscreen",
+  "Personal medicines and first aid",
+  "Valid identity documents",
+  "Power bank and phone charger",
+  "Reusable water bottle"
+ ],
+ note:"Carry extra warm clothing during winter and check the weather forecast before travelling."
+},
+{
+ title:"Suggested itinerary",label:"Chapter 09 · Make it yours",
+ heading:"A Journey Through Uttarakhand",
+ image:"photo-1472396961693-142e6e269027",
+ caption:"Explore the beauty of Uttarakhand",
+ text:"Here is an indicative route covering some popular Uttarakhand destinations. Actual travel time and route order should be planned according to your arrival city, departure city and available holiday duration.",
+ items:[
+  "Day 1 — Arrive in Nainital and enjoy the lake area",
+  "Day 2 — Nainital sightseeing and nearby attractions",
+  "Day 3 — Travel towards Mussoorie and explore Mall Road",
+  "Day 4 — Mussoorie sightseeing and nearby viewpoints",
+  "Day 5 — Travel towards Rishikesh and explore the Ganga ghats",
+  "Day 6 — Rishikesh sightseeing and departure"
+ ],
+ note:"This is a sample itinerary, not a confirmed package schedule. Nainital, Mussoorie and Rishikesh involve significant road travel between regions. Confirm the route and duration before booking."
+},
+{
+ title:"Travel thoughtfully",label:"Chapter 10 · Travel with care",
+ heading:"Keep Uttarakhand Beautiful",
+ image:"photo-1472396961693-142e6e269027",
+ caption:"Protect the mountains and natural surroundings",
+ text:"Uttarakhand's mountain ecosystems, rivers and forests deserve care. Responsible travel helps protect nature and supports local communities.",
+ items:[
+  "Avoid littering in mountains and river areas",
+  "Respect wildlife and forest regulations",
+  "Use authorised adventure activity operators",
+  "Support local businesses and artisans",
+  "Save water and avoid unnecessary plastic",
+  "Follow local road and weather advisories"
+ ],
+ note:"Follow local safety instructions and protected-area rules throughout your journey."
+},
+{
+ title:"Your Uttarakhand story",label:"Final chapter · Begin your journey",
+ heading:"Ready to Discover Uttarakhand?",
+ image:"photo-1448375240586-882707db888b",
+ caption:"Your Himalayan holiday starts here",
+ text:"From Nainital's peaceful lakes and Mussoorie's beautiful hills to Rishikesh's spiritual atmosphere and Auli's mountain scenery, Uttarakhand is waiting to welcome you.",
+ items:[
+  "Destination: Uttarakhand, India",
+  "Starting package price: ₹19,999 per person",
+  "Choose your preferred travel dates",
+  "Confirm hotels, transport and sightseeing",
+  "Contact Orlon Sky Holiday for package details"
+ ],
+ note:"Use your website's actual enquiry or booking process to confirm dates, final prices and availability."
+}
+];
+
+let current=0;
+let opened=false;
+
+const book=document.getElementById("book");
+const left=document.getElementById("leftPage");
+const right=document.getElementById("rightPage");
+const prev=document.getElementById("prevBtn");
+const next=document.getElementById("nextBtn");
+const status=document.getElementById("status");
+const progress=document.getElementById("progressBar");
+const chapterMenu=document.getElementById("chapters");
+
+function safe(value){
+ return String(value).replace(/[&<>"']/g,c=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ })[c]);
+}
+
+function imageUrl(id){
+ return "https://images.unsplash.com/"+id+"?auto=format&fit=crop&w=1100&q=85";
+}
+
+function render(){
+ const c=chapters[current];
+
+ left.innerHTML=`
+  <div class="page-label">${safe(c.label)}</div>
+  <h2>${safe(c.heading)}</h2>
+  <p>${safe(c.text)}</p>
+  ${c.checklist?`
+   <div class="checklist">
+    ${c.checklist.map(item=>`<label><input type="checkbox"> ${safe(item)}</label>`).join("")}
+   </div>`:`
+   <ul>${c.items.map(item=>`<li>${safe(item)}</li>`).join("")}</ul>`}
+  <p><small>${safe(c.note)}</small></p>
+  <div class="page-no">${current*2+1}</div>
+ `;
+
+ right.innerHTML=`
+  <div class="photo-wrap">
+   <img class="photo" src="${imageUrl(c.image)}" alt="${safe(c.caption)}"
+    onerror="this.onerror=null;this.style.background='#287C83';this.removeAttribute('src')">
+   <div class="caption">${safe(c.caption)}</div>
+  </div>
+  ${current===chapters.length-1?`
+   `:""}
+  <div class="page-no">${current*2+2}</div>
+ `;
+
+ prev.disabled=current===0;
+ next.disabled=current===chapters.length-1;
+ next.textContent=current===chapters.length-1?"End of Book":"Next Chapter →";
+ status.textContent=c.title+" · "+(current+1)+" of "+chapters.length;
+ progress.style.width=((current+1)/chapters.length*100)+"%";
+
+ document.querySelectorAll(".chapters button").forEach((btn,i)=>{
+  btn.classList.toggle("active",i===current);
+ });
+
+ const plan=document.getElementById("planBtn");
+ if(plan){
+  plan.onclick=()=>{
+   const subject=encodeURIComponent("Uttarakhand holiday enquiry");
+   const body=encodeURIComponent(
+    "Hello Orlon Sky Holiday,\n"+
+    "I am interested in the Uttarakhand tour starting from ₹19,999 per person.\n"+
+    "Please share the itinerary, package inclusions, travel dates and availability."
+   );
+   // Replace with your real business email.
+   window.location.href="mailto:YOUR-EMAIL@example.com?subject="+subject+"&body="+body;
+  };
+ }
+
+ const restart=document.getElementById("restartBtn");
+ if(restart)restart.onclick=()=>{current=0;render()};
+}
+
+function goTo(index){
+ if(index<0||index>=chapters.length)return;
+ current=index;
+ render();
+}
+
+function openBook(){
+ opened=true;
+ book.classList.add("open");
+ setTimeout(render,300);
+}
+
+chapters.forEach((c,i)=>{
+ const btn=document.createElement("button");
+ btn.textContent=c.title;
+ btn.onclick=()=>{
+  if(!opened)openBook();
+  goTo(i);
+  book.scrollIntoView({behavior:"smooth",block:"center"});
+ };
+ chapterMenu.appendChild(btn);
+});
+
+document.getElementById("openBtn").addEventListener("click",openBook);
+prev.addEventListener("click",()=>goTo(current-1));
+next.addEventListener("click",()=>goTo(current+1));
+
+document.addEventListener("keydown",event=>{
+ if(!opened||event.target.matches("input,textarea"))return;
+ if(event.key==="ArrowRight")goTo(current+1);
+ if(event.key==="ArrowLeft")goTo(current-1);
+});
+
+render();
+</script>
+</body>
+</html>

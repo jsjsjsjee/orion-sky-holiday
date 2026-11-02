@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="bgAarti" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff8f2"/>
+      <stop offset="100%" stop-color="#faebd7"/>
+    </linearGradient>
+    <linearGradient id="suitAarti" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#144552"/>
+      <stop offset="100%" stop-color="#0b2b34"/>
+    </linearGradient>
+    <linearGradient id="topAarti" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e36414"/>
+      <stop offset="100%" stop-color="#b84605"/>
+    </linearGradient>
+  </defs>
+  <!-- Background Circle -->
+  <circle cx="200" cy="200" r="190" fill="url(#bgAarti)" stroke="#0f4c5c" stroke-width="3"/>
+  
+  <!-- Torso & Suit -->
+  <path d="M 80 400 C 90 310 130 270 200 270 C 270 270 310 310 320 400 Z" fill="url(#suitAarti)"/>
+  <!-- Elegant Coral Top -->
+  <path d="M 165 270 L 200 335 L 235 270 Z" fill="url(#topAarti)"/>
+  <!-- Gold chain necklace -->
+  <path d="M 180 275 Q 200 295 220 275" stroke="#d4af37" stroke-width="2.5" fill="none"/>
+  
+  <!-- Neck -->
+  <rect x="178" y="210" width="44" height="65" rx="6" fill="#dfa575"/>
+  <!-- Shadow under chin -->
+  <ellipse cx="200" cy="235" rx="22" ry="8" fill="#c48858" opacity="0.4"/>
+  <!-- Head / Face -->
+  <ellipse cx="200" cy="180" rx="58" ry="68" fill="#e8b488"/>
+  
+  <!-- Hair: Shoulder length stylish waves -->
+  <path d="M 120 180 C 115 260 145 340 165 350 C 150 290 138 230 142 170 Z" fill="#1b120c"/>
+  <path d="M 280 180 C 285 260 255 340 235 350 C 250 290 262 230 258 170 Z" fill="#1b120c"/>
+  
+  <!-- Hair Top & Side Swept -->
+  <path d="M 132 170 C 130 100 170 78 205 78 C 245 78 272 105 268 170 C 255 110 215 95 185 105 C 155 115 140 140 132 170 Z" fill="#180f0a"/>
+  
+  <!-- Eyes -->
+  <ellipse cx="178" cy="172" rx="7" ry="4.5" fill="#241408"/>
+  <ellipse cx="222" cy="172" rx="7" ry="4.5" fill="#241408"/>
+  <circle cx="176" cy="170" r="2" fill="#fff"/>
+  <circle cx="220" cy="170" r="2" fill="#fff"/>
+  
+  <!-- Eyebrows -->
+  <path d="M 166 160 Q 178 154 190 159" stroke="#180f0a" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M 210 159 Q 222 154 234 160" stroke="#180f0a" stroke-width="3" stroke-linecap="round" fill="none"/>
+  
+  <!-- Nose -->
+  <path d="M 200 170 L 198 192 L 204 193" stroke="#c48858" stroke-width="2" stroke-linecap="round" fill="none"/>
+  
+  <!-- Bright smile -->
+  <path d="M 183 213 Q 200 227 217 213" fill="#cf4338"/>
+  <path d="M 185 213 Q 200 220 215 213" fill="#ffffff"/>
+  
+  <!-- Small Gold Studs -->
+  <circle cx="138" cy="188" r="4" fill="#d4af37"/>
+  <circle cx="262" cy="188" r="4" fill="#d4af37"/>
+</svg>

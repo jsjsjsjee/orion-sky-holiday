@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Discover Singapore | Orion Sky Holiday</title>
+<style>
+  :root {
+    --forest: #123f35;
+    --deep: #082d28;
+    --leaf: #47785b;
+    --gold: #c49a55;
+    --paper: #fff9ec;
+    --ink: #263b32;
+    --muted: #68756c;
+    --coral: #f06445;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    color: white;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #0c3932;
+  }
+  button, a { font: inherit; }
+  button { cursor: pointer; }
+  .scene {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+      linear-gradient(120deg, rgba(5, 39, 32, .84), rgba(8, 50, 41, .54) 48%, rgba(10, 43, 37, .8)),
+      url("https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=2200&q=85") center/cover fixed;
+  }
+  .scene::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(180, 205, 144, .18), transparent 32%),
+      radial-gradient(circle at 88% 80%, rgba(224, 176, 93, .14), transparent 28%);
+    pointer-events: none;
+  }
+  .topbar {
+    width: min(1240px, calc(100% - 44px));
+    margin: auto;
+    min-height: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    border-bottom: 1px solid rgba(255,255,255,.18);
+  }
+  .brand { display:flex; align-items:center; gap:10px; font-family: Georgia, serif; font-weight:700; }
+  .brand-mark {
+    width: 34px; height: 34px; border: 1px solid #ff7250; color: #ff7250;
+    border-radius: 50%; display:grid; place-items:center; font-size:20px;
+  }
+  .top-actions { display:flex; align-items:center; gap:18px; }
+  .top-actions a { color:rgba(255,255,255,.9); text-decoration:none; font-size:13px; }
+  .top-actions a:hover { color:#ffd9a0; }
+  .back-link {
+    border: 1px solid rgba(255,255,255,.4); color:white; background:rgba(255,255,255,.08);
+    border-radius:999px; padding:10px 15px; text-decoration:none; font-size:12px;
+  }
+  .intro { text-align:center; padding: 34px 18px 8px; }
+  .eyebrow { color:#e8c78c; text-transform:uppercase; letter-spacing:.22em; font-size:10px; font-weight:800; }
+  h1 { margin:10px 0 7px; font: clamp(35px, 5vw, 58px)/1.02 Georgia, "Times New Roman", serif; letter-spacing:-.035em; }
+  .intro p { color:rgba(255,255,255,.82); max-width:610px; margin:0 auto; line-height:1.6; font-size:14px; }
+  .book-area { padding: 24px 18px 48px; display:flex; justify-content:center; perspective:1800px; }
+  .book-shell { width:min(1000px, 100%); }
+  .book {
+    position:relative; width:100%; min-height:480px; aspect-ratio: 1.62 / 1;
+    display:grid; grid-template-columns:1fr 1fr;
+    filter:drop-shadow(0 28px 38px rgba(0,0,0,.34));
+    transform-style:preserve-3d;
+  }
+  .book::after {
+    content:""; position:absolute; z-index:4; top:1.3%; bottom:1.3%; left:50%; width:24px;
+    transform:translateX(-50%);
+    background:linear-gradient(90deg, rgba(65,45,25,.08), rgba(73,49,25,.22), rgba(255,255,255,.4), rgba(63,44,25,.14));
+    pointer-events:none;
+  }
+  .page {
+    position:relative; min-width:0; overflow:hidden; color:var(--ink);
+    background:
+      radial-gradient(ellipse at 0 0, rgba(199,168,107,.13), transparent 55%),
+      linear-gradient(135deg, #fffdf5, var(--paper));
+    border:1px solid rgba(110,82,45,.22);
+    padding: clamp(18px, 3.2vw, 36px);
+    box-shadow: inset 0 0 25px rgba(111,77,35,.055);
+  }
+  .page.left { border-radius:9px 2px 2px 9px; }
+  .page.right { border-radius:2px 9px 9px 2px; }
+  .page.left::before, .page.right::before {
+    content:""; position:absolute; top:0; bottom:0; width:14px; pointer-events:none;
+  }
+  .page.left::before { right:0; background:linear-gradient(90deg, transparent, rgba(76,54,30,.08)); }
+  .page.right::before { left:0; background:linear-gradient(90deg, rgba(76,54,30,.08), transparent); }
+  .page-kicker { text-transform:uppercase; color:#9a6e34; letter-spacing:.17em; font-size:9px; font-weight:800; margin-bottom:11px; }
+  .page h2 { font: clamp(23px, 3vw, 34px)/1.05 Georgia, serif; margin:0 0 12px; color:#214b3c; }
+  .page h3 { font: 19px/1.15 Georgia,serif; margin:0 0 8px; color:#214b3c; }
+  .page p { color:#5c695f; font-size:clamp(11px, 1.3vw, 13px); line-height:1.65; margin:0 0 12px; }
+  .page-photo {
+    width:100%; height:100%; min-height:250px; object-fit:cover; display:block;
+    border-radius:4px; filter:saturate(.9);
+  }
+  .photo-wrap { position:relative; height:100%; min-height:300px; }
+  .photo-caption {
+    position:absolute; bottom:12px; left:12px; right:12px; color:white; font-size:10px;
+    letter-spacing:.04em; padding:10px 12px; border-radius:4px;
+    background:linear-gradient(transparent, rgba(0,0,0,.72));
+  }
+  .small-note { font-size:10px!important; color:#8b8c7e!important; font-style:italic; }
+  .chapter-number { position:absolute; bottom:17px; color:#9d8a68; font:12px Georgia,serif; }
+  .left .chapter-number { left:clamp(18px, 3.2vw, 36px); }
+  .right .chapter-number { right:clamp(18px, 3.2vw, 36px); }
+  .cover {
+    position:absolute; z-index:8; inset:0 50% 0 0; transform-origin:left center;
+    transform-style:preserve-3d; transition:transform 1.25s cubic-bezier(.2,.72,.15,1);
+    border-radius:9px 3px 3px 9px;
+    background:
+      linear-gradient(120deg, rgba(7,46,37,.35), rgba(5,40,33,.91)),
+      url("https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1100&q=85") center/cover;
+    box-shadow:inset -10px 0 18px rgba(0,0,0,.22), inset 5px 0 0 rgba(226,196,133,.24);
+    display:flex; align-items:center; justify-content:center; text-align:center; padding:30px;
+    backface-visibility:hidden;
+  }
+  .cover::after { content:""; position:absolute; inset:13px; border:1px solid rgba(233,204,145,.58); border-radius:5px; pointer-events:none; }
+  .cover-content { position:relative; z-index:1; max-width:310px; }
+  .cover .eyebrow { color:#e5c98e; }
+  .cover h2 { color:#fff9e9; font:clamp(30px,4vw,48px)/1 Georgia,serif; margin:14px 0 12px; }
+  .cover p { color:rgba(255,255,255,.83); font:italic 14px/1.6 Georgia,serif; }
+  .open-btn, .primary-btn {
+    border:0; background:var(--coral); color:white; font-weight:800; font-size:11px;
+    letter-spacing:.06em; text-transform:uppercase; border-radius:4px; padding:14px 19px;
+    box-shadow:0 8px 18px rgba(140,52,28,.22); transition:transform .2s, background .2s;
+  }
+  .open-btn { margin-top:12px; }
+  .open-btn:hover, .primary-btn:hover { background:#dc5034; transform:translateY(-2px); }
+  .book.is-open .cover { transform:rotateY(-168deg); pointer-events:none; }
+  .book.is-open .cover-content { opacity:0; transition:opacity .25s; }
+  .controls {
+    display:flex; justify-content:center; align-items:center; gap:13px; margin:19px auto 0;
+    flex-wrap:wrap;
+  }
+  .nav-btn {
+    border:1px solid rgba(255,255,255,.38); color:white; background:rgba(255,255,255,.1);
+    border-radius:999px; padding:11px 17px; font-size:12px; transition:background .2s, opacity .2s;
+  }
+  .nav-btn:hover:not(:disabled) { background:rgba(255,255,255,.2); }
+  .nav-btn:disabled { opacity:.35; cursor:not-allowed; }
+  .page-status { min-width:120px; text-align:center; color:rgba(255,255,255,.8); font-size:11px; }
+  .progress { width:min(260px,65vw); height:3px; background:rgba(255,255,255,.2); border-radius:9px; overflow:hidden; margin:12px auto 0; }
+  .progress span { display:block; height:100%; width:0; background:#e5c98e; transition:width .35s; }
+  .chapter-nav { display:flex; justify-content:center; gap:7px; flex-wrap:wrap; max-width:900px; margin:22px auto 0; padding:0 18px; }
+  .chapter-chip {
+    border:1px solid rgba(255,255,255,.25); background:rgba(6,37,31,.25); color:rgba(255,255,255,.82);
+    border-radius:999px; padding:8px 11px; font-size:10px; transition:all .2s;
+  }
+  .chapter-chip:hover, .chapter-chip.active { background:rgba(232,199,140,.17); border-color:#e5c98e; color:#ffe3ae; }
+  .list { list-style:none; padding:0; margin:13px 0 0; }
+  .list li { position:relative; padding:8px 0 8px 19px; border-bottom:1px solid rgba(80,100,78,.13); color:#4d6255; font-size:12px; line-height:1.45; }
+  .list li::before { content:"✦"; position:absolute; left:0; top:8px; color:#bb8a45; font-size:11px; }
+  .mini-grid { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-top:14px; }
+  .mini-card { padding:10px; background:rgba(81,121,80,.08); border:1px solid rgba(81,121,80,.13); border-radius:5px; }
+  .mini-card strong { display:block; color:#315844; font:15px Georgia,serif; margin-bottom:4px; }
+  .mini-card span { color:#6d796d; font-size:10px; line-height:1.4; }
+  .checklist { display:grid; grid-template-columns:1fr 1fr; gap:7px 12px; margin-top:12px; }
+  .checklist label { display:flex; align-items:flex-start; gap:7px; color:#52675a; font-size:11px; line-height:1.4; cursor:pointer; }
+  .checklist input { accent-color:#427452; margin-top:2px; }
+  .cta-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:17px; }
+  .secondary-btn { border:1px solid #9aa58e; background:transparent; color:#315844; border-radius:4px; padding:12px 14px; font-size:10px; font-weight:800; text-transform:uppercase; }
+  .footer { text-align:center; padding:0 18px 35px; color:rgba(255,255,255,.58); font-size:10px; }
+  .footer span { color:#e5c98e; }
+  .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  @media (max-width:700px) {
+    .topbar { width:calc(100% - 28px); min-height:65px; }
+    .brand { font-size:13px; }
+    .top-actions a:not(.back-link) { display:none; }
+    .intro { padding-top:28px; }
+    .intro p { font-size:12px; }
+    .book-area { padding:18px 12px 35px; }
+    .book { aspect-ratio:auto; min-height:0; display:flex; flex-direction:column; gap:0; filter:drop-shadow(0 18px 25px rgba(0,0,0,.28)); }
+    .book::after { display:none; }
+    .page { min-height:315px; padding:22px; border-radius:6px!important; }
+    .page.left { display:block; }
+    .page.right { border-radius:6px; }
+    .page-photo { min-height:245px; max-height:310px; }
+    .photo-wrap { min-height:245px; }
+    .cover { inset:0; border-radius:6px; transform-origin:center bottom; }
+    .book.is-open .cover { transform:rotateX(85deg); }
+    .book.is-open .cover-content { opacity:0; }
+    .cover::after { inset:10px; }
+    .cover h2 { font-size:37px; }
+    .chapter-nav { margin-top:15px; }
+    .chapter-chip { font-size:9px; padding:7px 9px; }
+    .controls { gap:8px; }
+    .nav-btn { padding:10px 13px; }
+  }
+/* CSS */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background-color: #f4f4f5;
+  color: #18181b;
+  text-decoration: none;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+/* Smooth hover effect */
+.back-btn:hover {
+  background-color: #e4e4e7;
+  transform: translateX(-4px); /* Moves slightly left to emphasize "back" */
+}
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { scroll-behavior:auto!important; transition:none!important; animation:none!important; }
+  }
+</style>
+</head>
+<body>
+<div class="scene">
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">⌃</span><span>Orion Sky Holiday</span></div>
+
+<a class="back-btn" href="javascript:history.back()">← Back to Destination</a>
+
+  </header>
+
+  <section class="intro">
+    <div class="eyebrow">Your next chapter begins here</div>
+    <h1>Discover Singapore</h1>
+    <p>Open your travel journal and wander through misty hills, emerald tea gardens, quiet backwaters and timeless traditions.</p>
+  </section>
+
+  <main class="book-area" id="book">
+    <div class="book-shell">
+      <div class="book" id="bookElement" aria-label="Interactive Singapore travel book">
+        <section class="page left" id="leftPage" aria-live="polite"></section>
+        <section class="page right" id="rightPage" aria-live="polite"></section>
+        <div class="cover" id="cover">
+          <div class="cover-content">
+            <div class="eyebrow">Orion Sky Holiday presents</div>
+            <h2>Discover<br>Singapore</h2>
+            <p>The City in a Garden<br>Skyline · Gardens · Culture</p>
+            <button class="open-btn" id="openBook">Open Your Travel Book ↗</button>
+          </div>
+        </div>
+      </div>
+      <div class="controls">
+        <button class="nav-btn" id="prevBtn" disabled>← Previous</button>
+        <div class="page-status" id="pageStatus">Your journey awaits</div>
+        <button class="nav-btn" id="nextBtn">Next Chapter →</button>
+      </div>
+      <div class="progress"><span id="progressBar"></span></div>
+    </div>
+  </main>
+
+  <nav class="chapter-nav" id="chapters" aria-label="Travel book chapters"></nav>
+<br>
+  <div class="footer">A little inspiration for your next journey · <br><span><br>Orion Sky Holiday</span></div>
+</div>
+
+<script>
+const chapters = [
+  {
+    title: "Welcome to Singapore", kicker: "Chapter 01 · The destination",
+    image: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1100&q=85",
+    caption: "A vibrant city framed by gardens and water",
+    heading: "Small island, big experiences",
+    text: "Singapore is a dynamic city-state known for its striking skyline, multicultural neighbourhoods, green urban spaces, food culture and efficient public transport. It is easy to combine iconic sights with quieter gardens and local districts.",
+    bullets: ["Marina Bay skyline and waterfront walks", "Gardens, nature parks and island escapes", "Multicultural heritage and neighbourhoods", "Hawker centres and world-class attractions"],
+    note: "Travel note: Singapore is compact, but popular attractions can still take several hours to explore."
+  },
+  {
+    title: "Why visit Singapore?", kicker: "Chapter 02 · Find your feeling",
+    image: "https://images.unsplash.com/photo-1508964942454-1a56651d54ac?auto=format&fit=crop&w=1100&q=85",
+    caption: "A city that blends culture, nature and innovation",
+    heading: "Something for every traveller",
+    text: "Singapore works well for first-time international travellers, families, food lovers and short city breaks. Attractions are varied, transport is convenient, and many neighbourhoods can be explored on foot.",
+    bullets: ["Families: Sentosa, the zoo and interactive attractions", "Couples: waterfront dining and skyline views", "Food lovers: hawker centres and local specialities", "Culture seekers: Chinatown, Little India and Kampong Glam"],
+    note: "Check attraction hours and ticket availability before visiting."
+  },
+  {
+    title: "Places to visit", kicker: "Chapter 03 · The highlights",
+    image: "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1100&q=85",
+    caption: "Iconic sights and colourful neighbourhoods",
+    heading: "Singapore highlights",
+    text: "Mix famous landmarks with local districts to see different sides of the city. Allow time to enjoy each stop rather than rushing through the whole list.",
+    bullets: ["Marina Bay Sands — landmark skyline views", "Gardens by the Bay — Supertrees and conservatories", "Sentosa Island — beaches and major attractions", "Merlion Park — classic waterfront photo spot", "Chinatown — heritage, shops and temples", "Little India — colour, food and cultural landmarks", "Jewel Changi — indoor waterfall and shopping"],
+    note: "Some attractions require tickets; verify current access, timings and booking rules."
+  },
+  {
+    title: "When to travel", kicker: "Chapter 04 · Choose your season",
+    image: "https://images.unsplash.com/photo-1496939376851-89342e90adcd?auto=format&fit=crop&w=1100&q=85",
+    caption: "Tropical warmth throughout the year",
+    heading: "Plan for tropical weather",
+    text: "Singapore is warm and humid year-round, with rainfall possible in every season. Rather than relying on a sharply defined tourist season, plan indoor and outdoor activities together and keep a light rain layer handy.",
+    bullets: ["Expect warm, humid conditions year-round", "Rain showers can arrive quickly", "Carry water and take breaks in the heat", "Check forecasts for outdoor plans and events"],
+    note: "Weather varies day to day. Check a current forecast close to your travel dates."
+  },
+  {
+    title: "Budget & prices", kicker: "Chapter 05 · Plan your spend",
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1100&q=85",
+    caption: "Choose the trip style that suits you",
+    heading: "A practical budget",
+    text: "Your Singapore budget depends on hotel location, attraction tickets, dining choices and travel dates. Use these broad estimates for early planning, not as live package quotes.",
+    bullets: ["Budget: S$90–S$160 per person/day", "Mid-range: S$160–S$320 per person/day", "Premium: S$320+ per person/day", "International flights and shopping may be extra"],
+    note: "Illustrative estimates only. Prices change with season and availability; confirm current costs before booking."
+  },
+  {
+    title: "History & culture", kicker: "Chapter 06 · Stories of the city",
+    image: "https://images.unsplash.com/photo-1565967511849-76a60a516170?auto=format&fit=crop&w=1100&q=85",
+    caption: "Many cultures, one city",
+    heading: "A meeting of traditions",
+    text: "Singapore grew from a regional trading port into a global city. Chinese, Malay, Indian and other communities have shaped its neighbourhoods, languages, festivals, architecture and everyday food culture.",
+    bullets: ["Explore heritage streets in Chinatown", "Discover temples and shops in Little India", "Visit Kampong Glam and the Sultan Mosque area", "Learn about the city's trading-port history"],
+    note: "Dress respectfully at religious sites and follow posted visitor guidance."
+  },
+  {
+    title: "Taste of Singapore", kicker: "Chapter 07 · At the table",
+    image: "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1100&q=85",
+    caption: "A food destination in its own right",
+    heading: "Follow the flavours",
+    text: "Singapore's food scene brings together Chinese, Malay, Indian and Peranakan influences. Hawker centres are a great way to sample local favourites at a range of prices.",
+    bullets: ["Hainanese chicken rice", "Chilli crab and pepper crab", "Laksa and kaya toast", "Satay, roti prata and nasi lemak"],
+    note: "Ask about ingredients and allergens; recipes and spice levels vary."
+  },
+  {
+    title: "Packing checklist", kicker: "Chapter 08 · Be ready",
+    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=1100&q=85",
+    caption: "Pack light for a tropical city break",
+    heading: "Your travel checklist",
+    text: "Singapore is warm and often humid, with air-conditioned indoor spaces and occasional heavy showers. Adapt this checklist to your activities and travel dates.",
+    checklist: ["Lightweight breathable clothing", "Comfortable walking shoes", "Compact umbrella", "Sunscreen and sunglasses", "Reusable water bottle", "Travel adapter", "Passport and booking details", "Any personal medicines"],
+    note: "Carry a light layer for strong air-conditioning and check entry requirements before departure."
+  },
+  {
+    title: "Suggested itinerary", kicker: "Chapter 09 · Make it yours",
+    image: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1100&q=85",
+    caption: "A city break with room to explore",
+    heading: "Three ways to explore",
+    text: "Singapore's public transport makes it possible to see a lot in a few days, but keep your route practical and allow time for meals and rest.",
+    bullets: ["2 days: Marina Bay + Gardens by the Bay + hawker food", "3 days: add Chinatown, Little India and Kampong Glam", "4–5 days: add Sentosa and a nature or wildlife attraction", "Group nearby attractions to reduce travel time"],
+    note: "Check travel times, ticket requirements and attraction opening hours for your dates."
+  },
+  {
+    title: "Travel thoughtfully", kicker: "Chapter 10 · Good journeys",
+    image: "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1100&q=85",
+    caption: "Enjoy the city with care and curiosity",
+    heading: "Travel with care",
+    text: "A little awareness makes city travel smoother. Follow local rules, respect shared spaces and take care of the parks, waterfronts and public areas that make Singapore special.",
+    bullets: ["Follow signs and local laws", "Use bins and keep public spaces tidy", "Respect people and places of worship", "Use public transport where convenient", "Follow park and wildlife guidance"],
+    note: "Check official travel guidance and current entry requirements before your trip."
+  },
+  {
+    title: "Your Singapore story", kicker: "The final chapter · Begin your journey",
+    image: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1100&q=85",
+    caption: "Your Singapore story begins here",
+    heading: "Ready to discover?",
+    text: "From the glowing skyline at Marina Bay to colourful heritage districts and lush garden escapes, Singapore makes it easy to build a memorable city break. Choose the experiences that matter most to you and make the trip your own.",
+    bullets: ["Choose your dates and hotel area", "Select your must-see attractions", "Set a comfortable daily budget", "Confirm tickets, transport and entry requirements"],
+    note: "This demo button opens an enquiry email. Replace it with your website's actual booking or trip-planner route."
+  }
+];
+
+let current = 0;
+let isOpen = false;
+const book = document.getElementById("bookElement");
+const leftPage = document.getElementById("leftPage");
+const rightPage = document.getElementById("rightPage");
+const openBookBtn = document.getElementById("openBook");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const pageStatus = document.getElementById("pageStatus");
+const progressBar = document.getElementById("progressBar");
+const chapterNav = document.getElementById("chapters");
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, ch => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+  }[ch]));
+}
+function renderLeft(chapter, index) {
+  return `
+    <div class="page-kicker">${escapeHtml(chapter.kicker)}</div>
+    <h2>${escapeHtml(chapter.heading)}</h2>
+    <p>${escapeHtml(chapter.text)}</p>
+    ${chapter.checklist ? `
+      <div class="checklist">
+        ${chapter.checklist.map((item, i) => `<label><input type="checkbox" data-check="${i}"> <span>${escapeHtml(item)}</span></label>`).join("")}
+      </div>` : `
+      <ul class="list">${chapter.bullets.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+    `}
+    <p class="small-note" style="margin-top:14px">${escapeHtml(chapter.note)}</p>
+    <div class="chapter-number">${String(index + 1).padStart(2, "0")} / ${String(chapters.length).padStart(2, "0")}</div>
+  `;
+}
+function renderRight(chapter, index) {
+  return `
+    <div class="photo-wrap">
+      <img class="page-photo" src="${escapeHtml(chapter.image)}" alt="${escapeHtml(chapter.caption)}" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1000&q=80'">
+      <div class="photo-caption">${escapeHtml(chapter.caption)}</div>
+    </div>
+    ${index === chapters.length - 1 ? `
+      
+    ` : ""}
+    <div class="chapter-number">${index * 2 + 2}</div>
+  `;
+}
+function render() {
+  const chapter = chapters[current];
+  leftPage.innerHTML = renderLeft(chapter, current);
+  rightPage.innerHTML = renderRight(chapter, current);
+  leftPage.style.display = "";
+  document.querySelectorAll(".chapter-chip").forEach((button, i) => {
+    button.classList.toggle("active", i === current);
+    button.setAttribute("aria-current", i === current ? "step" : "false");
+  });
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === chapters.length - 1;
+  nextBtn.textContent = current === chapters.length - 1 ? "Last Chapter" : "Next Chapter →";
+  pageStatus.textContent = `${chapter.title} · ${current + 1} of ${chapters.length}`;
+  progressBar.style.width = `${((current + 1) / chapters.length) * 100}%`;
+  const planBtn = document.getElementById("planBtn");
+  const restartBtn = document.getElementById("restartBtn");
+  if (planBtn) planBtn.addEventListener("click", () => {
+    window.location.href = "mailto:hello@orionskyholiday.com?subject=" + encodeURIComponent("Plan my Singapore trip") +
+      "&body=" + encodeURIComponent("Hello Orion Sky Holiday,\\nI would like to plan a trip to Singapore. Please share itinerary and package details.");
+  });
+  if (restartBtn) restartBtn.addEventListener("click", () => {
+    current = 0; render(); book.scrollIntoView({behavior:"smooth", block:"center"});
+  });
+}
+function goTo(index) {
+  if (index < 0 || index >= chapters.length) return;
+  current = index;
+  book.classList.remove("turning");
+  void book.offsetWidth;
+  book.classList.add("turning");
+  render();
+}
+chapters.forEach((chapter, index) => {
+  const button = document.createElement("button");
+  button.className = "chapter-chip";
+  button.textContent = chapter.title;
+  button.type = "button";
+  button.addEventListener("click", () => {
+    if (!isOpen) openBook();
+    goTo(index);
+    book.scrollIntoView({behavior:"smooth", block:"center"});
+  });
+  chapterNav.appendChild(button);
+});
+function openBook() {
+  isOpen = true;
+  book.classList.add("is-open");
+  pageStatus.textContent = "Chapter 1 · Your journey begins";
+  prevBtn.disabled = true;
+  openBookBtn.blur();
+  setTimeout(() => { render(); }, 250);
+}
+openBookBtn.addEventListener("click", openBook);
+prevBtn.addEventListener("click", () => goTo(current - 1));
+nextBtn.addEventListener("click", () => goTo(current + 1));
+document.addEventListener("keydown", event => {
+  if (!isOpen || event.target.matches("input, textarea, select")) return;
+  if (event.key === "ArrowRight") goTo(current + 1);
+  if (event.key === "ArrowLeft") goTo(current - 1);
+});
+render();
+</script>
+</body>
+</html>

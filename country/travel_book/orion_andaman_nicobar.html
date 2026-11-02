@@ -1,0 +1,405 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andaman & Nicobar Islands | Orlon Sky Holiday</title>
+<style>
+:root{
+  --ocean:#087e91;
+  --deep:#06465b;
+  --aqua:#42c9c0;
+  --coral:#ff946b;
+  --gold:#ffe0a3;
+  --paper:#fffaf1;
+  --ink:#263d46;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,"Times New Roman",serif;color:var(--ink)}
+.scene{
+  min-height:100vh;padding:24px;
+  background:
+    radial-gradient(circle at 8% 12%,#ffe0a3 0,transparent 24%),
+    radial-gradient(circle at 92% 82%,#ff946b 0,transparent 25%),
+    linear-gradient(135deg,#043d55,#087e91 52%,#39b9ae);
+}
+header{
+  max-width:1150px;margin:auto;display:flex;
+  justify-content:space-between;align-items:center;
+  color:white;gap:12px
+}
+.brand{font-size:21px;font-weight:bold;letter-spacing:1px}
+.back{color:white;text-decoration:none;font:14px Arial,sans-serif}
+.intro{text-align:center;color:white;max-width:780px;margin:32px auto 25px}
+.eyebrow{font:12px Arial,sans-serif;letter-spacing:4px;text-transform:uppercase;color:var(--gold)}
+.intro h1{font-size:clamp(32px,5vw,54px);margin:12px 0}
+.intro p{font:15px/1.7 Arial,sans-serif;color:#efffff}
+.book-area{max-width:1100px;margin:auto}
+.book{
+  position:relative;display:grid;grid-template-columns:1fr 1fr;
+  min-height:540px;perspective:1800px;
+  box-shadow:0 20px 55px #002b3977;
+}
+.page{
+  position:relative;min-width:0;min-height:540px;
+  padding:38px;background:var(--paper);
+  display:flex;flex-direction:column;
+}
+.left-page{border-right:1px solid #e0d0b9}
+.right-page{padding:20px;background:#f0e8d9}
+.spine{
+  position:absolute;z-index:3;top:0;bottom:0;left:50%;
+  width:10px;transform:translateX(-50%);
+  background:linear-gradient(90deg,#705039,#f0d49f,#705039);
+}
+.cover{
+  position:absolute;z-index:5;inset:0 50% 0 0;
+  transform-origin:right center;
+  transition:transform .9s ease;
+  backface-visibility:hidden;
+  border:5px solid var(--gold);
+  padding:35px 28px;color:white;
+  display:flex;flex-direction:column;justify-content:space-between;
+  text-align:center;
+  background:
+    linear-gradient(145deg,#043c54ed,#087e91e8,#e8795be8),
+    url("https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85") center/cover;
+}
+.book.open .cover{transform:rotateY(-170deg);pointer-events:none}
+.cover-mark{font-size:30px;color:var(--gold)}
+.cover h2{font-size:clamp(28px,4vw,43px);line-height:1.12;margin:17px 0}
+.cover p{font:13px/1.6 Arial,sans-serif;color:#efffff}
+.cover-dest{font:11px/1.8 Arial,sans-serif;letter-spacing:1px}
+.price{font-size:26px;color:var(--gold);font-weight:bold;margin:12px}
+.cover button{
+  padding:12px 20px;border:0;border-radius:25px;
+  background:var(--gold);color:#073e50;font-weight:bold;cursor:pointer
+}
+.chapter-kicker{
+  font:11px Arial,sans-serif;letter-spacing:2px;
+  text-transform:uppercase;color:var(--ocean);margin-bottom:13px
+}
+.page h2{font-size:29px;line-height:1.2;color:var(--deep);margin:0 0 15px}
+.chapter-text{font:14px/1.75 Arial,sans-serif}
+.chapter-text p{margin:0 0 12px}
+.chapter-text ul{padding-left:20px;margin:8px 0 15px}
+.chapter-text li{margin-bottom:7px}
+.note{
+  margin-top:auto;padding:13px 15px;
+  background:#e5f2ec;border-left:3px solid var(--coral);
+  font:13px/1.6 Arial,sans-serif
+}
+.page-no{margin-top:16px;text-align:right;font:11px Arial,sans-serif;color:#987e5e}
+.photo-wrap{display:flex;flex-direction:column;flex:1;min-height:0}
+.photo{
+  display:block;width:100%;height:100%;min-height:300px;
+  max-height:450px;object-fit:cover;border-radius:4px
+}
+.caption{font:12px/1.5 Arial,sans-serif;color:#685c49;margin-top:10px}
+.controls{
+  display:flex;justify-content:center;align-items:center;
+  gap:12px;flex-wrap:wrap;margin:20px 0 10px
+}
+.controls button{
+  border:0;border-radius:25px;padding:11px 20px;
+  background:#fff0d9;color:var(--deep);cursor:pointer;font-weight:bold
+}
+.controls button:disabled{opacity:.4;cursor:not-allowed}
+.status{font:13px Arial,sans-serif;color:white;min-width:110px;text-align:center}
+.progress{height:5px;background:#ffffff55;border-radius:8px;max-width:500px;margin:12px auto;overflow:hidden}
+.progress-fill{height:100%;background:var(--gold);width:0;transition:width .3s}
+.chapter-nav{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin:20px auto}
+.chapter-nav button{
+  padding:8px 12px;border-radius:20px;
+  border:1px solid #ffffff75;background:#ffffff18;color:white;
+  font:11px Arial,sans-serif;cursor:pointer
+}
+.chapter-nav button.active{background:var(--gold);color:#043c54}
+.checklist{list-style:none;padding:0!important}
+.checklist li:before{content:"✓";color:var(--ocean);font-weight:bold;margin-right:8px}
+
+/* Exact requested Orlon Sky Holiday footer */
+.site-footer{
+  text-align:center;padding:28px 15px 10px;
+  margin-top:35px;color:white;font-family:Georgia,serif
+}
+.site-footer .footer-brand{
+  font-size:21px;font-weight:bold;letter-spacing:1px;
+  color:var(--gold);margin-bottom:8px
+}
+.site-footer p{font-size:14px;margin:0;color:#fff;line-height:1.6}
+
+@media(max-width:700px){
+  .scene{padding:15px}
+  .intro{margin:24px auto 20px}
+  .book{grid-template-columns:1fr;min-height:0}
+  .page{min-height:390px;padding:26px 23px}
+  .right-page{min-height:320px}
+  .spine{display:none}
+  .cover{
+    inset:0 0 auto 0;height:390px;
+    transform-origin:top center;
+  }
+  .book.open .cover{transform:rotateX(90deg)}
+  .photo{min-height:240px;max-height:330px}
+  .page h2{font-size:25px}
+  .cover h2{font-size:34px}
+  .site-footer{margin-top:25px;padding-bottom:5px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="scene">
+
+<header>
+  <div class="brand">✧ Orlon Sky Holiday</div>
+  <a class="back" href="index.html">← Back to Tours</a>
+</header>
+
+<section class="intro">
+  <div class="eyebrow">Island Escape • Blue Waters • Tropical Paradise</div>
+  <h1>Discover Andaman & Nicobar</h1>
+  <p>Explore the turquoise waters of Havelock, the peaceful beauty of Neil Island and the historic charm of Port Blair. Your island adventure begins here.</p>
+</section>
+
+<main class="book-area">
+<div class="book" id="book">
+
+  <section class="page left-page">
+    <div class="chapter-kicker" id="kicker"></div>
+    <h2 id="chapterTitle"></h2>
+    <div class="chapter-text" id="chapterText"></div>
+    <div class="note" id="chapterNote"></div>
+    <div class="page-no" id="leftNo"></div>
+  </section>
+
+  <section class="page right-page">
+    <div class="photo-wrap">
+      <img class="photo" id="chapterImage" src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1100&q=85" alt="Andaman Islands">
+      <div class="caption" id="chapterCaption"></div>
+    </div>
+    <div class="page-no" id="rightNo"></div>
+  </section>
+
+  <div class="spine"></div>
+
+  <section class="cover">
+    <div>
+      <div class="cover-mark">✧</div>
+      <div class="eyebrow">Orlon Sky Holiday Presents</div>
+      <h2>ANDAMAN<br>& NICOBAR<br>ISLANDS</h2>
+      <p>Discover tropical beaches, crystal-clear waters and unforgettable island experiences.</p>
+    </div>
+    <div>
+      <div class="cover-dest">PORT BLAIR • HAVELOCK • NEIL ISLAND</div>
+      <div class="price">₹29,999 <small style="font-size:13px">/ person</small></div>
+      <button onclick="openBook()">Open Your Travel Book →</button>
+    </div>
+  </section>
+
+</div>
+
+<div class="controls">
+  <button id="prevBtn" onclick="goTo(current-1)">← Previous</button>
+  <div class="status" id="status"></div>
+  <button id="nextBtn" onclick="goTo(current+1)">Next →</button>
+</div>
+
+<div class="progress"><div class="progress-fill" id="progress"></div></div>
+<nav class="chapter-nav" id="chapterNav"></nav>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-brand">✧ Orlon Sky Holiday</div>
+  <p>Discover more. Travel farther. Make memories forever.</p>
+</footer>
+
+</div>
+
+<script>
+const chapters=[
+{
+title:"Welcome to Andaman & Nicobar",
+kicker:"Chapter 01 • The island paradise",
+text:`<p>Welcome to the Andaman and Nicobar Islands, a tropical paradise in the Bay of Bengal. Famous for white-sand beaches, clear blue waters, coral reefs and lush green forests, these islands offer a memorable escape.</p><p>Explore Port Blair, relax in Havelock and discover the peaceful charm of Neil Island.</p>`,
+note:"Get ready for beautiful beaches, island adventures and unforgettable sunsets.",
+image:"https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1100&q=85",
+caption:"A tropical island beach with beautiful blue waters."
+},
+{
+title:"Port Blair – Island Gateway",
+kicker:"Chapter 02 • Your island arrival",
+text:`<p>Port Blair, now officially known as Sri Vijaya Puram, is the main gateway to the Andaman Islands. It is a wonderful introduction to the region's history, culture and coastal beauty.</p><ul><li>Explore the waterfront</li><li>Visit local markets</li><li>Discover island culture</li><li>Enjoy scenic sea views</li></ul>`,
+note:"Keep your ferry tickets and identification documents ready for island transfers.",
+image:"https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1100&q=85",
+caption:"The beautiful coastline of the Andaman Islands."
+},
+{
+title:"Cellular Jail",
+kicker:"Chapter 03 • History and remembrance",
+text:`<p>Cellular Jail is one of the most significant historical landmarks in the Andaman Islands. It stands as a memorial to the freedom fighters who were imprisoned during India's struggle for independence.</p><ul><li>Explore the historic prison complex</li><li>Learn about India's freedom movement</li><li>Visit the memorial galleries</li><li>Attend the light and sound show when available</li></ul>`,
+note:"Check visiting hours and show timings before your visit.",
+image:"https://plus.unsplash.com/premium_photo-1705363013491-0ed4a7a4fe99?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+caption:"Historic architecture and heritage landmarks."
+},
+{
+title:"Corbyn's Cove Beach",
+kicker:"Chapter 04 • Coastal relaxation",
+text:`<p>Corbyn's Cove is a picturesque beach near Port Blair. With coconut palms, gentle sea views and a relaxing atmosphere, it is a lovely place to unwind.</p><ul><li>Enjoy a peaceful seaside walk</li><li>Relax beneath the palm trees</li><li>Capture beautiful coastal photographs</li><li>Enjoy the sea breeze</li></ul>`,
+note:"Follow local swimming advisories and beach safety instructions.",
+image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1100&q=85",
+caption:"A sunny beach with turquoise tropical water."
+},
+{
+title:"Ross Island – Heritage Escape",
+kicker:"Chapter 05 • Ruins and nature",
+text:`<p>Ross Island, now known as Netaji Subhas Chandra Bose Island, is known for its historic colonial-era remains, old buildings and beautiful natural surroundings.</p><ul><li>Explore the historic ruins</li><li>Walk along scenic pathways</li><li>Discover the island's colonial past</li><li>Enjoy coastal viewpoints</li></ul>`,
+note:"Boat transfers depend on weather and local operating schedules.",
+image:"https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=1100&q=85",
+caption:"Lush island scenery and tropical coastal views."
+},
+{
+title:"Havelock Island – Swaraj Dweep",
+kicker:"Chapter 06 • Tropical paradise",
+text:`<p>Havelock Island, officially known as Swaraj Dweep, is one of the most popular destinations in the Andaman Islands. It is famous for beautiful beaches, coral reefs and clear waters.</p><ul><li>Explore Radhanagar Beach</li><li>Visit Elephant Beach</li><li>Enjoy island scenery</li><li>Try permitted water activities</li></ul>`,
+note:"Plan ferry transfers in advance, especially during busy travel seasons.",
+image:"https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1100&q=85",
+caption:"A tropical beach framed by palms and blue water."
+},
+{
+title:"Radhanagar Beach",
+kicker:"Chapter 07 • A world-famous shore",
+text:`<p>Radhanagar Beach is celebrated for its soft white sand, clear water and beautiful natural surroundings. It is one of the most memorable places to experience the beauty of Havelock.</p><ul><li>Walk along the white sandy beach</li><li>Enjoy the scenic coastline</li><li>Relax beneath the tropical trees</li><li>Watch a spectacular sunset</li></ul>`,
+note:"Observe swimming flags and local beach safety guidance.",
+image:"https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1100&q=85",
+caption:"White sand and clear tropical sea at a beautiful island beach."
+},
+{
+title:"Elephant Beach",
+kicker:"Chapter 08 • Underwater adventure",
+text:`<p>Elephant Beach is known for its colourful marine life and water-based activities. It is a favourite spot for visitors interested in exploring the underwater world.</p><ul><li>Try snorkelling with authorised operators</li><li>Discover colourful coral reef areas</li><li>Enjoy the beautiful beach surroundings</li><li>Explore permitted water activities</li></ul>`,
+note:"Never touch or stand on coral. Use reef-safe practices and follow your guide's instructions.",
+image:"https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1100&q=85",
+caption:"Snorkelling and underwater experiences in tropical waters."
+},
+{
+title:"Neil Island – Shaheed Dweep",
+kicker:"Chapter 09 • Peaceful island life",
+text:`<p>Neil Island, officially known as Shaheed Dweep, is loved for its relaxed atmosphere, beautiful coastline and scenic natural landscapes.</p><ul><li>Explore Bharatpur Beach</li><li>Visit Laxmanpur Beach</li><li>Discover Sitapur Beach</li><li>Enjoy quiet island surroundings</li></ul>`,
+note:"Allow enough time for ferry transfers between Havelock and Neil Island.",
+image:"https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=1100&q=85",
+caption:"A peaceful island coastline surrounded by tropical greenery."
+},
+{
+title:"Bharatpur Beach",
+kicker:"Chapter 10 • Clear water and coral",
+text:`<p>Bharatpur Beach is one of the best-known beaches on Neil Island. Its shallow coastal waters and marine surroundings make it a popular stop for beach lovers.</p><ul><li>Enjoy the beach scenery</li><li>Try permitted glass-bottom boat rides</li><li>Explore marine life responsibly</li><li>Relax beside the sea</li></ul>`,
+note:"Marine activities depend on weather, sea conditions and local permissions.",
+image:"https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1100&q=85",
+caption:"Clear tropical water and beautiful coastal scenery."
+},
+{
+title:"Natural Bridge – Neil Island",
+kicker:"Chapter 11 • Nature's creation",
+text:`<p>The Natural Bridge, also called the Howrah Bridge, is a fascinating natural rock formation on Neil Island. It is a popular place for photography and nature exploration.</p><ul><li>See the natural rock formation</li><li>Explore the coastal landscape</li><li>Observe marine life in suitable conditions</li><li>Capture memorable photographs</li></ul>`,
+note:"Visit at suitable low tide and follow local guide advice. Watch your footing on rocky surfaces.",
+image:"https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1100&q=85",
+caption:"A dramatic natural landscape shaped by the sea."
+},
+{
+title:"Island Food & Local Flavours",
+kicker:"Chapter 12 • Taste the islands",
+text:`<p>The Andaman Islands offer a mix of coastal Indian cuisine and fresh seafood, with influences from different communities.</p><ul><li>Fresh fish curry and rice</li><li>Grilled seafood</li><li>Coconut-based preparations</li><li>Local tropical fruits</li><li>Vegetarian island-style meals</li></ul>`,
+note:"Inform restaurants about allergies and dietary preferences before ordering.",
+image:"https://images.unsplash.com/photo-1779333863055-9aaeb540cc4a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+caption:"A delicious spread inspired by coastal cuisine."
+},
+{
+title:"Best Time to Visit",
+kicker:"Chapter 13 • Plan your island holiday",
+text:`<p>October to May is generally a popular period for visiting the Andaman Islands. Weather and sea conditions can affect boat services and outdoor activities.</p><ul><li>October–February: popular for sightseeing</li><li>March–May: warm weather and beach experiences</li><li>June–September: monsoon season with rougher seas and possible travel disruption</li></ul>`,
+note:"Always check ferry schedules, weather updates and sea conditions before travel.",
+image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1100&q=85",
+caption:"Sunny tropical weather and a beautiful island coastline."
+},
+{
+title:"Your Andaman Holiday Package",
+kicker:"Chapter 14 • Your travel details",
+text:`<p>Explore the highlights of Port Blair, Havelock Island and Neil Island with Orlon Sky Holiday.</p><ul><li>Destination: Andaman & Nicobar Islands</li><li>Port Blair sightseeing</li><li>Havelock Island experiences</li><li>Neil Island exploration</li><li>Beaches, heritage and island scenery</li></ul>`,
+note:"<strong>Package price: ₹29,999 per person.</strong><br>Confirm travel dates, hotel category, ferry transfers, flights, meals, sightseeing inclusions and availability before booking.",
+image:"https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1100&q=85",
+caption:"Your unforgettable Andaman island holiday."
+},
+{
+title:"Your Island Travel Checklist",
+kicker:"Chapter 15 • Pack and prepare",
+text:`<p>Prepare for a comfortable and memorable island holiday.</p><ul class="checklist"><li>Light cotton clothes and beachwear</li><li>Swimwear and quick-dry towel</li><li>Sunscreen, sunglasses and a hat</li><li>Comfortable sandals and walking shoes</li><li>Personal medicines and ID documents</li><li>Waterproof phone pouch</li><li>Reusable water bottle</li><li>Power bank and charger</li></ul>`,
+note:"Carry valid photo identification for ferry and hotel check-ins. Pack light for island transfers.",
+image:"https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1100&q=85",
+caption:"Pack your essentials for a tropical island adventure."
+},
+{
+title:"Thank You & Happy Travelling!",
+kicker:"Chapter 16 • Until the next island escape",
+text:`<p>From the history of Port Blair to the stunning beaches of Havelock and the peaceful beauty of Neil Island, the Andaman Islands promise memories that last a lifetime.</p><p>Thank you for exploring with Orlon Sky Holiday. We look forward to welcoming you on your next adventure!</p><h2>Happy Travelling!</h2>`,
+note:"Orlon Sky Holiday – Discover more. Travel farther. Make memories forever.",
+image:"https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1100&q=85",
+caption:"Beautiful memories from your island escape."
+}
+];
+
+let current=0;
+const $=id=>document.getElementById(id);
+
+function render(){
+  const c=chapters[current];
+  $("kicker").textContent=c.kicker;
+  $("chapterTitle").textContent=c.title;
+  $("chapterText").innerHTML=c.text;
+  $("chapterNote").innerHTML=c.note;
+  $("chapterImage").src=c.image;
+  $("chapterImage").alt=c.title+" - Andaman and Nicobar Islands";
+  $("chapterCaption").textContent=c.caption;
+  $("leftNo").textContent=String(current*2+1).padStart(2,"0");
+  $("rightNo").textContent=String(current*2+2).padStart(2,"0");
+  $("status").textContent=`Chapter ${current+1} of ${chapters.length}`;
+  $("progress").style.width=((current+1)/chapters.length*100)+"%";
+  $("prevBtn").disabled=current===0;
+  $("nextBtn").disabled=current===chapters.length-1;
+  document.querySelectorAll(".chapter-nav button").forEach((b,i)=>{
+    b.classList.toggle("active",i===current);
+  });
+}
+
+function openBook(){
+  $("book").classList.add("open");
+}
+
+function goTo(index){
+  if(index<0||index>=chapters.length)return;
+  openBook();
+  current=index;
+  render();
+}
+
+chapters.forEach((chapter,index)=>{
+  const button=document.createElement("button");
+  button.type="button";
+  button.textContent=chapter.title;
+  button.addEventListener("click",()=>goTo(index));
+  $("chapterNav").appendChild(button);
+});
+
+document.addEventListener("keydown",event=>{
+  if(event.key==="ArrowRight")goTo(current+1);
+  if(event.key==="ArrowLeft")goTo(current-1);
+});
+
+render();
+</script>
+</body>
+</html>

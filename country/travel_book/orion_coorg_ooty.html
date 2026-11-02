@@ -1,0 +1,490 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discover Coorg, Ooty & Mysore | Orlon Sky Holiday</title>
+<style>
+:root{
+ --mountain:#123D35;
+ --blue:#287C70;
+ --sky:#B5DCCB;
+ --red:#C17B48;
+ --gold:#E8C77A;
+ --cream:#FFFCF3;
+ --ink:#294B43;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;color:white;background:var(--mountain)}
+button{font:inherit;cursor:pointer}
+.scene{
+ min-height:100vh;padding-bottom:35px;
+ background:
+ linear-gradient(125deg,#092C28ED,#17675CBF,#103B35E8),
+ url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2000&q=85")
+ center/cover fixed;
+}
+header{
+ max-width:1200px;margin:auto;padding:22px;
+ display:flex;justify-content:space-between;align-items:center;
+ border-bottom:1px solid #ffffff35
+}
+.brand{font:bold 19px Georgia,serif}
+.brand span{color:var(--gold)}
+.back{
+ color:white;text-decoration:none;border:1px solid #ffffff65;
+ padding:10px 15px;border-radius:30px;font-size:12px
+}
+.intro{text-align:center;padding:35px 15px 20px}
+.eyebrow{
+ text-transform:uppercase;letter-spacing:4px;font-size:11px;
+ font-weight:bold;color:var(--gold)
+}
+.intro h1{font:clamp(38px,6vw,65px) Georgia,serif;margin:13px 0}
+.intro p{max-width:680px;margin:auto;color:#e0f1e9;line-height:1.7}
+.book-area{width:min(1000px,calc(100% - 30px));margin:25px auto 0}
+.book{
+ position:relative;display:grid;grid-template-columns:1fr 1fr;
+ aspect-ratio:1.6;min-height:450px;
+ filter:drop-shadow(0 25px 35px #0007)
+}
+.page{
+ min-width:0;overflow:hidden;position:relative;color:var(--ink);
+ padding:clamp(20px,3.5vw,38px);
+ background:radial-gradient(circle at top left,#B5DCCB45,transparent 55%),var(--cream);
+ border:1px solid #c8d9ce
+}
+.left{border-radius:8px 0 0 8px;border-right:1px solid #b7cdbf}
+.right{border-radius:0 8px 8px 0}
+.book::after{
+ content:"";position:absolute;z-index:3;top:0;bottom:0;left:50%;
+ width:18px;transform:translateX(-50%);pointer-events:none;
+ background:linear-gradient(90deg,#234b3d33,#b7cdbbaa,#fffdf5,#526b8033)
+}
+.page-label{
+ font-size:10px;font-weight:bold;letter-spacing:2px;
+ text-transform:uppercase;color:var(--red);margin-bottom:15px
+}
+.page h2{
+ font:clamp(25px,3.3vw,36px) Georgia,serif;
+ line-height:1.1;color:var(--mountain);margin:0 0 15px
+}
+.page p{color:#536b61;font-size:13px;line-height:1.8}
+.page ul{list-style:none;padding:0;margin-top:15px}
+.page li{
+ border-bottom:1px solid #123D3516;padding:9px 0 9px 19px;
+ position:relative;color:#36594d;font-size:12px;line-height:1.5
+}
+.page li::before{content:"✦";color:var(--red);position:absolute;left:0}
+.photo-wrap{height:100%;min-height:300px;position:relative}
+.photo{
+ display:block;width:100%;height:100%;min-height:300px;
+ max-height:480px;object-fit:cover;border-radius:4px
+}
+.caption{
+ position:absolute;bottom:10px;left:10px;right:10px;
+ padding:25px 12px 12px;background:linear-gradient(transparent,#092C28ED);
+ color:white;font:15px Georgia,serif
+}
+.page-no{position:absolute;bottom:12px;color:#718b80;font-size:10px}
+.left .page-no{left:25px}
+.right .page-no{right:25px}
+.cover{
+ position:absolute;z-index:5;inset:0 50% 0 0;
+ transform-origin:left center;
+ transition:transform 1.3s cubic-bezier(.2,.7,.2,1);
+ backface-visibility:hidden;border-radius:8px 0 0 8px;
+ background:
+ linear-gradient(140deg,#0B342DEB,#287C70D9),
+ url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=85") center/cover;
+ border:2px solid #E8C77A99;box-shadow:inset -10px 0 20px #0004;
+ display:grid;place-items:center;text-align:center;padding:25px
+}
+.cover::after{
+ content:"";position:absolute;inset:13px;
+ border:1px solid var(--gold);pointer-events:none
+}
+.cover-content{position:relative;z-index:1}
+.cover h2{
+ color:var(--cream);font:clamp(30px,4vw,48px) Georgia,serif;
+ margin:18px 0 12px
+}
+.cover p{font-size:12px;color:#e0f1e9;line-height:1.7}
+.price{font-weight:bold;font-size:15px!important;color:var(--gold)!important}
+.primary{
+ background:var(--gold);color:var(--mountain);border:none;
+ padding:13px 17px;margin-top:12px;border-radius:4px;
+ font-size:11px;font-weight:bold;text-transform:uppercase;letter-spacing:1px
+}
+.primary:hover{background:#f8e4b6}
+.book.open .cover{transform:rotateY(-170deg);pointer-events:none}
+.controls{
+ display:flex;justify-content:center;align-items:center;
+ flex-wrap:wrap;gap:15px;margin-top:22px
+}
+.nav-btn{
+ background:#ffffff12;color:white;border:1px solid #ffffff65;
+ border-radius:30px;padding:11px 17px;font-size:12px
+}
+.nav-btn:hover:not(:disabled){background:#ffffff30}
+.nav-btn:disabled{opacity:.35;cursor:not-allowed}
+.status{min-width:150px;text-align:center;font-size:11px;color:#e0f1e9}
+.progress{
+ width:min(260px,70%);height:3px;
+ background:#ffffff30;margin:15px auto
+}
+.progress div{height:100%;width:0;background:var(--gold);transition:width .3s}
+.chapters{
+ max-width:950px;margin:25px auto;padding:0 15px;
+ display:flex;justify-content:center;flex-wrap:wrap;gap:8px
+}
+.chapters button{
+ background:#ffffff10;border:1px solid #ffffff45;color:white;
+ padding:9px 12px;border-radius:25px;font-size:10px
+}
+.chapters button.active{
+ border-color:var(--gold);color:var(--gold);background:#E8C77A1C
+}
+.checklist{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.checklist label{color:#36594d;font-size:12px}
+.checklist input{accent-color:var(--blue)}
+.footer{text-align:center;color:#ffffff9c;font-size:11px;padding:10px}
+.footer span{color:var(--gold)}
+@media(max-width:700px){
+ header{padding:17px}
+ .brand{font-size:15px}
+ .intro{padding-top:25px}
+ .book{display:flex;flex-direction:column;aspect-ratio:auto;min-height:0}
+ .book::after{display:none}
+ .left,.right{border-radius:5px}
+ .right{margin-top:8px}
+ .page{padding:23px}
+ .photo-wrap{min-height:240px}
+ .photo{min-height:240px;max-height:330px}
+ .cover{inset:0;transform-origin:center bottom;border-radius:5px}
+ .book.open .cover{transform:rotateX(90deg)}
+ .cover h2{font-size:38px}
+ .controls{gap:8px}
+ .nav-btn{padding:10px 12px}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="scene">
+<header>
+ <div class="brand"><span>✧</span> Orlon Sky Holiday</div>
+ <a class="back" href="javascript:history.back()">← Back to Destinations</a>
+</header>
+
+<section class="intro">
+ <div class="eyebrow">Nature · Hills · Heritage · Adventure</div>
+ <h1>Discover Coorg, Ooty & Mysore</h1>
+ <p>Explore Coorg's lush coffee plantations, Ooty's misty Nilgiri hills and Mysore's magnificent royal heritage through your personal travel book.</p>
+</section>
+
+<main class="book-area">
+ <div class="book" id="book">
+  <section class="page left" id="leftPage"></section>
+  <section class="page right" id="rightPage"></section>
+  <div class="cover">
+   <div class="cover-content">
+    <div class="eyebrow">Orlon Sky Holiday presents</div>
+    <h2>Discover<br>South India</h2>
+    <p>Coorg · Ooty<br>Mysore · Nilgiris</p>
+    <p class="price">From ₹19,999 / person*</p>
+    <button class="primary" id="openBtn">Open Your Travel Book ↗</button>
+   </div>
+  </div>
+ </div>
+ <div class="controls">
+  <button class="nav-btn" id="prevBtn" disabled>← Previous</button>
+  <div class="status" id="status">Your journey awaits</div>
+  <button class="nav-btn" id="nextBtn">Next Chapter →</button>
+ </div>
+ <div class="progress"><div id="progressBar"></div></div>
+</main>
+<nav class="chapters" id="chapters"></nav>
+<div class="footer">Discover more. Travel beautifully.<br><br><span>Orlon Sky Holiday</span></div>
+</div>
+
+<script>
+const chapters = [
+{
+ title:"Welcome to South India",
+ label:"Chapter 01 · The destination",
+ heading:"Three destinations, one beautiful journey",
+ image:"photo-1441974231531-c6227db76b6e",
+ caption:"Discover the green landscapes of South India",
+ text:"Experience a refreshing holiday through Karnataka and Tamil Nadu. This journey brings together Coorg's coffee estates, Ooty's cool mountain atmosphere and Mysore's royal architecture.",
+ items:[
+  "Coorg — coffee plantations, waterfalls and green hills",
+  "Ooty — tea gardens, lakes and mountain viewpoints",
+  "Mysore — royal palaces and cultural heritage",
+  "Nilgiris — scenic roads and peaceful hill landscapes"
+ ],
+ note:"Travel times between destinations depend on the selected route and road conditions."
+},
+{
+ title:"Explore Coorg",
+ label:"Chapter 02 · Karnataka",
+ heading:"Welcome to the Scotland of India",
+ image:"photo-1511497584788-876760111969",
+ caption:"Coorg's lush green forests and plantation landscapes",
+ text:"Coorg, also known as Kodagu, is famous for its coffee estates, mist-covered hills, waterfalls and peaceful natural surroundings. It is an ideal destination for relaxation and scenic experiences.",
+ items:[
+  "Abbey Falls — enjoy a beautiful waterfall surrounded by greenery",
+  "Raja's Seat — admire panoramic valley views",
+  "Coffee plantations — discover the region's famous coffee",
+  "Dubare — explore the riverside forest area",
+  "Madikeri — enjoy the hill town's local attractions"
+ ],
+ note:"Waterfall access and outdoor activities may vary with seasonal weather."
+},
+{
+ title:"Coorg Coffee Trails",
+ label:"Chapter 03 · Plantation experiences",
+ heading:"A refreshing escape among coffee estates",
+ image:"photo-1445116572660-236099ec97a0",
+ caption:"Coffee plantations and the relaxed atmosphere of Coorg",
+ text:"Coorg is one of India's well-known coffee-growing regions. Enjoy scenic plantation drives, learn about coffee cultivation and experience the peaceful atmosphere of the countryside.",
+ items:[
+  "Walk through scenic coffee estates",
+  "Learn about coffee growing and processing",
+  "Enjoy local coffee and regional delicacies",
+  "Explore spice gardens and plantation surroundings"
+ ],
+ note:"Visit private estates only with permission or through an authorised tour."
+},
+{
+ title:"Discover Ooty",
+ label:"Chapter 04 · Tamil Nadu",
+ heading:"The queen of the Nilgiri hills",
+ image:"photo-1500530855697-b586d89ba3ee",
+ caption:"Scenic mountain landscapes around the Nilgiris",
+ text:"Ooty, officially called Udhagamandalam, is a beautiful hill station in Tamil Nadu. Its cool climate, tea gardens, winding roads and scenic viewpoints make it a favourite holiday destination.",
+ items:[
+  "Ooty Lake — enjoy boating and lakeside views",
+  "Botanical Garden — explore beautiful plant collections",
+  "Doddabetta Peak — admire views from the Nilgiris",
+  "Tea gardens — discover the region's tea-growing landscape",
+  "Rose Garden — enjoy colourful seasonal flowers"
+ ],
+ note:"Hill-station weather can change quickly, so carry a light jacket."
+},
+{
+ title:"Ooty Toy Train",
+ label:"Chapter 05 · A memorable experience",
+ heading:"Ride through the beautiful Nilgiris",
+ image:"photo-1473448912268-2022ce9509d8",
+ caption:"The green mountain scenery of the Nilgiri region",
+ text:"The Nilgiri Mountain Railway is a memorable heritage experience. Its mountain route passes through tunnels, bridges, forests and beautiful hill scenery.",
+ items:[
+  "Experience the heritage mountain railway",
+  "Enjoy scenic views along the route",
+  "Explore Coonoor and nearby hill landscapes",
+  "Capture beautiful photographs of the Nilgiris"
+ ],
+ note:"Train services and seat availability depend on the railway timetable. Reserve tickets in advance."
+},
+{
+ title:"Discover Mysore",
+ label:"Chapter 06 · Royal Karnataka",
+ heading:"The city of palaces and traditions",
+ image:"photo-1441974231531-c6227db76b6e",
+ caption:"Mysore's magnificent royal heritage",
+ text:"Mysore, also known as Mysuru, is celebrated for its royal history, grand architecture, traditional markets and cultural festivals. It offers a wonderful blend of heritage and modern city life.",
+ items:[
+  "Mysore Palace — explore the famous royal residence",
+  "Chamundi Hill — visit the hilltop temple and viewpoint",
+  "Brindavan Gardens — enjoy landscaped gardens and fountains",
+  "Devaraja Market — discover flowers, spices and local products",
+  "St. Philomena's Church — admire its impressive architecture"
+ ],
+ note:"Palace timings, photography rules and fountain schedules should be checked before visiting."
+},
+{
+ title:"Mysore Palace",
+ label:"Chapter 07 · Royal heritage",
+ heading:"Step into a world of royal grandeur",
+ image:"photo-1500534623283-312aade485b7",
+ caption:"The historic architecture of Mysore Palace",
+ text:"Mysore Palace is one of India's most recognised royal landmarks. Its grand halls, decorative interiors, arches and illuminated exterior make it a major highlight of the city.",
+ items:[
+  "Explore the palace's historic architecture",
+  "Admire decorative interiors and royal collections",
+  "Learn about the Wadiyar dynasty",
+  "Enjoy the palace illumination when scheduled"
+ ],
+ note:"Check official visitor information for current entry timings, ticket prices and illumination schedules."
+},
+{
+ title:"Food & Local Culture",
+ label:"Chapter 08 · Taste the region",
+ heading:"A delicious journey through local flavours",
+ image:"photo-1657196118354-f25f29fe636d",
+ caption:"Discover the flavours of South Indian cuisine",
+ text:"Karnataka and Tamil Nadu offer distinctive regional food traditions. From Coorg's local specialities to Ooty's tea and homemade chocolates and Mysore's famous sweets, every stop brings new flavours.",
+ items:[
+  "Coorg — Pandi curry and traditional Kodava dishes",
+  "Mysore — Mysore Pak and local South Indian meals",
+  "Ooty — fresh tea, homemade chocolates and bakery treats",
+  "Tamil Nadu — idli, dosa, sambar and filter coffee"
+ ],
+ note:"Ask about ingredients and spice levels if you have food allergies or dietary requirements."
+},
+{
+ title:"Best Time to Visit",
+ label:"Chapter 09 · Choose your season",
+ heading:"Find the perfect time for your holiday",
+ image:"photo-1500534623283-312aade485b7",
+ caption:"Enjoy scenic green landscapes and pleasant weather",
+ text:"Coorg, Ooty and Mysore can be visited throughout much of the year, but each season offers a different experience. Your ideal travel period depends on whether you prefer cooler weather, greenery or sightseeing.",
+ items:[
+  "October to March — generally pleasant for sightseeing",
+  "April to May — popular for summer hill-station escapes",
+  "June to September — monsoon greenery and seasonal waterfalls",
+  "Mornings and evenings — often cooler in the hill regions"
+ ],
+ note:"Monsoon rain can affect road journeys, viewpoints and outdoor activities."
+},
+{
+ title:"Packing Checklist",
+ label:"Chapter 10 · Be prepared",
+ heading:"Pack smart for hills and city sightseeing",
+ image:"photo-1551632811-561732d1e306",
+ caption:"Prepare for a comfortable South India holiday",
+ text:"Your journey includes hill stations, plantation areas and city sightseeing. Pack comfortable clothing and essentials for changing temperatures and occasional rain.",
+ checklist:[
+  "Comfortable walking shoes",
+  "Light jacket or sweater",
+  "Raincoat or umbrella",
+  "Sunscreen and sunglasses",
+  "Personal medicines",
+  "Reusable water bottle",
+  "Camera and phone charger",
+  "Identity and travel documents"
+ ],
+ note:"Carry warm clothing for early mornings and evenings in Ooty and Coorg."
+},
+{
+ title:"Your South India Story",
+ label:"Final chapter · Begin your journey",
+ heading:"Ready to explore Coorg, Ooty & Mysore?",
+ image:"photo-1441974231531-c6227db76b6e",
+ caption:"Your South India holiday starts here",
+ text:"From Coorg's coffee plantations to Ooty's misty mountains and Mysore's royal palaces, this holiday offers a wonderful combination of nature, culture and relaxation.",
+ items:[
+  "Choose your preferred travel dates",
+  "Confirm hotels and transportation",
+  "Select your sightseeing experiences",
+  "Ask for the complete package itinerary",
+  "Get ready for a memorable South India holiday"
+ ],
+ note:"Starting package price: ₹19,999 per person. Final price and inclusions should be confirmed with Orlon Sky Holiday."
+}
+];
+
+let current=0;
+let opened=false;
+
+const book=document.getElementById("book");
+const left=document.getElementById("leftPage");
+const right=document.getElementById("rightPage");
+const prev=document.getElementById("prevBtn");
+const next=document.getElementById("nextBtn");
+const status=document.getElementById("status");
+const progress=document.getElementById("progressBar");
+const chapterMenu=document.getElementById("chapters");
+
+function safe(value){
+ return String(value).replace(/[&<>"']/g,c=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ })[c]);
+}
+
+function imageUrl(id){
+ return "https://images.unsplash.com/"+id+"?auto=format&fit=crop&w=1100&q=85";
+}
+
+function render(){
+ const c=chapters[current];
+
+ left.innerHTML=`
+  <div class="page-label">${safe(c.label)}</div>
+  <h2>${safe(c.heading)}</h2>
+  <p>${safe(c.text)}</p>
+  ${c.checklist?`
+   <div class="checklist">
+    ${c.checklist.map(item=>`<label><input type="checkbox"> ${safe(item)}</label>`).join("")}
+   </div>`:`
+   <ul>${c.items.map(item=>`<li>${safe(item)}</li>`).join("")}</ul>`}
+  <p><small>${safe(c.note)}</small></p>
+  <div class="page-no">${current*2+1}</div>
+ `;
+
+ right.innerHTML=`
+  <div class="photo-wrap">
+   <img class="photo" src="${imageUrl(c.image)}" alt="${safe(c.caption)}"
+    onerror="this.onerror=null;this.style.display='none';this.parentElement.style.background='#287C70'">
+   <div class="caption">${safe(c.caption)}</div>
+  </div>
+  ${current===chapters.length-1?`
+   `:""}
+  <div class="page-no">${current*2+2}</div>
+ `;
+
+ prev.disabled=current===0;
+ next.disabled=current===chapters.length-1;
+ next.textContent=current===chapters.length-1?"End of Book":"Next Chapter →";
+ status.textContent=c.title+" · "+(current+1)+" of "+chapters.length;
+ progress.style.width=((current+1)/chapters.length*100)+"%";
+
+ document.querySelectorAll(".chapters button").forEach((btn,i)=>{
+  btn.classList.toggle("active",i===current);
+ });
+
+ const restart=document.getElementById("restartBtn");
+ if(restart)restart.onclick=()=>{current=0;render()};
+}
+
+function goTo(index){
+ if(index<0||index>=chapters.length)return;
+ current=index;
+ render();
+}
+
+function openBook(){
+ opened=true;
+ book.classList.add("open");
+ setTimeout(render,300);
+}
+
+chapters.forEach((c,i)=>{
+ const btn=document.createElement("button");
+ btn.textContent=c.title;
+ btn.onclick=()=>{
+  if(!opened)openBook();
+  goTo(i);
+  book.scrollIntoView({behavior:"smooth",block:"center"});
+ };
+ chapterMenu.appendChild(btn);
+});
+
+document.getElementById("openBtn").addEventListener("click",openBook);
+prev.addEventListener("click",()=>goTo(current-1));
+next.addEventListener("click",()=>goTo(current+1));
+
+document.addEventListener("keydown",event=>{
+ if(!opened||event.target.matches("input,textarea"))return;
+ if(event.key==="ArrowRight")goTo(current+1);
+ if(event.key==="ArrowLeft")goTo(current-1);
+});
+
+render();
+</script>
+</body>
+</html>

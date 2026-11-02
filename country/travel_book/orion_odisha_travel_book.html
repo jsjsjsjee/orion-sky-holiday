@@ -1,0 +1,505 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discover Puri, Gangasagar & Kolkata | Orlon Sky Holiday</title>
+<style>
+:root{
+ --mountain:#10364B;
+ --blue:#087E8B;
+ --sky:#B9E5E8;
+ --red:#E27A4B;
+ --gold:#F1C875;
+ --cream:#FFFCF4;
+ --ink:#294C5A;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;color:white;background:var(--mountain)}
+button{font:inherit;cursor:pointer}
+.scene{
+ min-height:100vh;padding-bottom:35px;
+ background:
+ linear-gradient(125deg,#092C43ED,#087E8BBF,#173B55E8),
+ url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=85")
+ center/cover fixed;
+}
+header{
+ max-width:1200px;margin:auto;padding:22px;
+ display:flex;justify-content:space-between;align-items:center;
+ border-bottom:1px solid #ffffff35
+}
+.brand{font:bold 19px Georgia,serif}
+.brand span{color:var(--gold)}
+.back{
+ color:white;text-decoration:none;border:1px solid #ffffff65;
+ padding:10px 15px;border-radius:30px;font-size:12px
+}
+.intro{text-align:center;padding:35px 15px 20px}
+.eyebrow{
+ text-transform:uppercase;letter-spacing:4px;font-size:11px;
+ font-weight:bold;color:var(--gold)
+}
+.intro h1{font:clamp(38px,6vw,65px) Georgia,serif;margin:13px 0}
+.intro p{max-width:680px;margin:auto;color:#e0f1f5;line-height:1.7}
+.book-area{width:min(1000px,calc(100% - 30px));margin:25px auto 0}
+.book{
+ position:relative;display:grid;grid-template-columns:1fr 1fr;
+ aspect-ratio:1.6;min-height:450px;
+ filter:drop-shadow(0 25px 35px #0007)
+}
+.page{
+ min-width:0;overflow:hidden;position:relative;color:var(--ink);
+ padding:clamp(20px,3.5vw,38px);
+ background:radial-gradient(circle at top left,#B9E5E845,transparent 55%),var(--cream);
+ border:1px solid #c8d9e6
+}
+.left{border-radius:8px 0 0 8px;border-right:1px solid #b7cadb}
+.right{border-radius:0 8px 8px 0}
+.book::after{
+ content:"";position:absolute;z-index:3;top:0;bottom:0;left:50%;
+ width:18px;transform:translateX(-50%);pointer-events:none;
+ background:linear-gradient(90deg,#23445b33,#b7cadbaa,#fffdf5,#526b8033)
+}
+.page-label{
+ font-size:10px;font-weight:bold;letter-spacing:2px;
+ text-transform:uppercase;color:var(--red);margin-bottom:15px
+}
+.page h2{
+ font:clamp(25px,3.3vw,36px) Georgia,serif;
+ line-height:1.1;color:var(--mountain);margin:0 0 15px
+}
+.page p{color:#536879;font-size:13px;line-height:1.8}
+.page ul{list-style:none;padding:0;margin-top:15px}
+.page li{
+ border-bottom:1px solid #10364B16;padding:9px 0 9px 19px;
+ position:relative;color:#365269;font-size:12px;line-height:1.5
+}
+.page li::before{content:"✦";color:var(--red);position:absolute;left:0}
+.photo-wrap{height:100%;min-height:300px;position:relative}
+.photo{
+ display:block;width:100%;height:100%;min-height:300px;
+ max-height:480px;object-fit:cover;border-radius:4px
+}
+.caption{
+ position:absolute;bottom:10px;left:10px;right:10px;
+ padding:25px 12px 12px;background:linear-gradient(transparent,#092C43ED);
+ color:white;font:15px Georgia,serif
+}
+.page-no{position:absolute;bottom:12px;color:#718ba0;font-size:10px}
+.left .page-no{left:25px}
+.right .page-no{right:25px}
+.cover{
+ position:absolute;z-index:5;inset:0 50% 0 0;
+ transform-origin:left center;
+ transition:transform 1.3s cubic-bezier(.2,.7,.2,1);
+ backface-visibility:hidden;border-radius:8px 0 0 8px;
+ background:
+ linear-gradient(140deg,#10364BEB,#087E8BD9),
+ url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=85") center/cover;
+ border:2px solid #F1C87599;box-shadow:inset -10px 0 20px #0004;
+ display:grid;place-items:center;text-align:center;padding:25px
+}
+.cover::after{
+ content:"";position:absolute;inset:13px;
+ border:1px solid var(--gold);pointer-events:none
+}
+.cover-content{position:relative;z-index:1}
+.cover h2{
+ color:var(--cream);font:clamp(30px,4vw,48px) Georgia,serif;
+ margin:18px 0 12px
+}
+.cover p{font-size:12px;color:#e0f1f5;line-height:1.7}
+.price{font-weight:bold;font-size:15px!important;color:var(--gold)!important}
+.primary{
+ background:var(--gold);color:var(--mountain);border:none;
+ padding:13px 17px;margin-top:12px;border-radius:4px;
+ font-size:11px;font-weight:bold;text-transform:uppercase;letter-spacing:1px
+}
+.primary:hover{background:#f8e4b6}
+.book.open .cover{transform:rotateY(-170deg);pointer-events:none}
+.controls{
+ display:flex;justify-content:center;align-items:center;
+ flex-wrap:wrap;gap:15px;margin-top:22px
+}
+.nav-btn{
+ background:#ffffff12;color:white;border:1px solid #ffffff65;
+ border-radius:30px;padding:11px 17px;font-size:12px
+}
+.nav-btn:hover:not(:disabled){background:#ffffff30}
+.nav-btn:disabled{opacity:.35;cursor:not-allowed}
+.status{min-width:150px;text-align:center;font-size:11px;color:#e0f1f5}
+.progress{
+ width:min(260px,70%);height:3px;
+ background:#ffffff30;margin:15px auto
+}
+.progress div{height:100%;width:0;background:var(--gold);transition:width .3s}
+.chapters{
+ max-width:950px;margin:25px auto;padding:0 15px;
+ display:flex;justify-content:center;flex-wrap:wrap;gap:8px
+}
+.chapters button{
+ background:#ffffff10;border:1px solid #ffffff45;color:white;
+ padding:9px 12px;border-radius:25px;font-size:10px
+}
+.chapters button.active{
+ border-color:var(--gold);color:var(--gold);background:#F1C8751C
+}
+.checklist{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.checklist label{color:#365269;font-size:12px}
+.checklist input{accent-color:var(--blue)}
+.footer{text-align:center;color:#ffffff9c;font-size:11px;padding:10px}
+.footer span{color:var(--gold)}
+@media(max-width:700px){
+ header{padding:17px}
+ .brand{font-size:15px}
+ .intro{padding-top:25px}
+ .book{display:flex;flex-direction:column;aspect-ratio:auto;min-height:0}
+ .book::after{display:none}
+ .left,.right{border-radius:5px}
+ .right{margin-top:8px}
+ .page{padding:23px}
+ .photo-wrap{min-height:240px}
+ .photo{min-height:240px;max-height:330px}
+ .cover{inset:0;transform-origin:center bottom;border-radius:5px}
+ .book.open .cover{transform:rotateX(90deg)}
+ .cover h2{font-size:38px}
+ .controls{gap:8px}
+ .nav-btn{padding:10px 12px}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="scene">
+<header>
+ <div class="brand"><span>✧</span> Orlon Sky Holiday</div>
+ <a class="back" href="javascript:history.back()">← Back to Destinations</a>
+</header>
+
+<section class="intro">
+ <div class="eyebrow">Spirituality · Heritage · Beaches · Culture</div>
+ <h1>Discover Puri, Gangasagar & Kolkata</h1>
+ <p>Experience the spiritual beauty of Puri, the sacred shores of Gangasagar and the vibrant culture of Kolkata through one unforgettable Eastern India journey.</p>
+</section>
+
+<main class="book-area">
+ <div class="book" id="book">
+  <section class="page left" id="leftPage"></section>
+  <section class="page right" id="rightPage"></section>
+  <div class="cover">
+   <div class="cover-content">
+    <div class="eyebrow">Orlon Sky Holiday presents</div>
+    <h2>Discover<br>Eastern India</h2>
+    <p>Puri · Gangasagar<br>Kolkata · Bengal</p>
+    <p class="price">From ₹17,999 / person*</p>
+    <button class="primary" id="openBtn">Open Your Travel Book ↗</button>
+   </div>
+  </div>
+ </div>
+ <div class="controls">
+  <button class="nav-btn" id="prevBtn" disabled>← Previous</button>
+  <div class="status" id="status">Your journey awaits</div>
+  <button class="nav-btn" id="nextBtn">Next Chapter →</button>
+ </div>
+ <div class="progress"><div id="progressBar"></div></div>
+</main>
+<nav class="chapters" id="chapters"></nav>
+<div class="footer">Discover more. Travel beautifully.<br><br><span>Orlon Sky Holiday</span></div>
+</div>
+
+<script>
+const chapters = [
+{
+ title:"Welcome to Eastern India",
+ label:"Chapter 01 · The destination",
+ heading:"Three destinations, one memorable journey",
+ image:"photo-1507525428034-b723cf961d3e",
+ caption:"Discover the beautiful eastern coastline",
+ text:"Explore an exciting journey across Odisha and West Bengal. Visit Puri's sacred temples and beaches, experience the spiritual atmosphere of Gangasagar and discover Kolkata's historic landmarks and cultural life.",
+ items:[
+  "Puri — Jagannath Temple and golden beaches",
+  "Gangasagar — the sacred meeting of river and sea",
+  "Kolkata — heritage, architecture and city culture",
+  "Eastern India — spirituality, traditions and delicious food"
+ ],
+ note:"This multi-state journey requires advance planning for road transfers, ferry connections and temple visits."
+},
+{
+ title:"Discover Puri",
+ label:"Chapter 02 · Odisha",
+ heading:"The spiritual charm of Puri",
+ image:"photo-1706790574525-d218c4c52b5c",
+ caption:"Puri's sacred atmosphere and coastal beauty",
+ text:"Puri is one of India's most important pilgrimage destinations. Famous for the Jagannath Temple, beautiful coastline and traditional culture, the city welcomes visitors throughout the year.",
+ items:[
+  "Jagannath Temple — visit the famous sacred shrine",
+  "Puri Beach — enjoy the Bay of Bengal coastline",
+  "Golden Beach — relax beside the sea",
+  "Local markets — discover traditional handicrafts",
+  "Gundicha Temple — explore an important pilgrimage site"
+ ],
+ note:"Temple entry is subject to current rules. Non-Hindu visitors may not be permitted inside the Jagannath Temple."
+},
+{
+ title:"Jagannath Temple",
+ label:"Chapter 03 · Sacred Odisha",
+ heading:"Explore the spiritual heart of Puri",
+ image:"photo-1606293926075-69a00dbfde81",
+ caption:"Traditional temple architecture and spiritual heritage",
+ text:"The Jagannath Temple is a major centre of Hindu pilgrimage and a symbol of Odisha's religious and cultural identity. Its traditions, rituals and annual Rath Yatra attract devotees from across India.",
+ items:[
+  "Learn about Lord Jagannath and temple traditions",
+  "Discover the significance of Rath Yatra",
+  "Explore the temple's historic surroundings",
+  "Experience the spiritual atmosphere of Puri"
+ ],
+ note:"Follow temple dress codes, security instructions and photography restrictions."
+},
+{
+ title:"Puri Beach",
+ label:"Chapter 04 · Coastal Odisha",
+ heading:"Relax beside the Bay of Bengal",
+ image:"photo-1507525428034-b723cf961d3e",
+ caption:"Beautiful sea views along Puri Beach",
+ text:"Puri Beach is a popular coastal attraction known for its sandy shoreline, sunrise views and lively atmosphere. Enjoy a relaxing walk, local snacks and beautiful coastal scenery.",
+ items:[
+  "Enjoy an early morning beach walk",
+  "Watch the sunrise over the Bay of Bengal",
+  "Explore beachside food stalls and local markets",
+  "Visit Golden Beach for a relaxing coastal experience"
+ ],
+ note:"Follow lifeguard instructions and avoid swimming in restricted or unsafe areas."
+},
+{
+ title:"Discover Gangasagar",
+ label:"Chapter 05 · West Bengal",
+ heading:"Where the Ganga meets the ocean",
+ image:"photo-1500375592092-40eb2168fd21",
+ caption:"The coastal beauty and sacred atmosphere of Gangasagar",
+ text:"Gangasagar, located on Sagar Island in West Bengal, is an important pilgrimage destination. It is known for the sacred Kapil Muni Temple and the holy confluence of the Ganga and the Bay of Bengal.",
+ items:[
+  "Sagar Island — explore the island's peaceful surroundings",
+  "Kapil Muni Temple — visit the important pilgrimage site",
+  "Gangasagar Beach — enjoy the coastal landscape",
+  "Holy confluence — experience the sacred pilgrimage atmosphere"
+ ],
+ note:"The journey involves road travel and ferry or vessel connections. Check local services and tide conditions before departure."
+},
+{
+ title:"Gangasagar Pilgrimage",
+ label:"Chapter 06 · Spiritual experience",
+ heading:"A sacred journey of faith",
+ image:"photo-1572945015532-741f8c49a7b2",
+ caption:"The sacred coastal pilgrimage of Gangasagar",
+ text:"Gangasagar is especially famous for the annual Makar Sankranti pilgrimage, when devotees gather to take a holy dip and offer prayers. The destination has deep religious significance.",
+ items:[
+  "Visit Kapil Muni Temple",
+  "Learn about the Makar Sankranti pilgrimage",
+  "Experience local traditions and devotional activities",
+  "Enjoy the island's coastal scenery"
+ ],
+ note:"During major pilgrimage periods, expect large crowds and longer transport queues."
+},
+{
+ title:"Discover Kolkata",
+ label:"Chapter 07 · West Bengal",
+ heading:"The cultural capital of Eastern India",
+ image:"photo-1558431382-27e303142255",
+ caption:"Kolkata's iconic architecture and city heritage",
+ text:"Kolkata is a vibrant city known for colonial-era architecture, literature, art, food and festivals. It offers a fascinating mix of history, culture and modern city life.",
+ items:[
+  "Victoria Memorial — admire the grand white marble monument",
+  "Howrah Bridge — see the city's iconic bridge",
+  "Dakshineswar Temple — visit the famous riverside temple",
+  "Indian Museum — explore history and cultural collections",
+  "Park Street — enjoy food and city life"
+ ],
+ note:"Check monument opening days and visitor timings before planning sightseeing."
+},
+{
+ title:"Kolkata Heritage",
+ label:"Chapter 08 · History & architecture",
+ heading:"Explore the stories of the City of Joy",
+ image:"photo-1558431382-27e303142255",
+ caption:"Historic Kolkata and its architectural landmarks",
+ text:"Kolkata's history is reflected in its grand buildings, historic neighbourhoods, cultural institutions and riverfront. The city has played an important role in India's artistic and intellectual life.",
+ items:[
+  "Victoria Memorial — historic galleries and gardens",
+  "Howrah Bridge — a landmark across the Hooghly River",
+  "College Street — famous for books and academic heritage",
+  "Kumartuli — discover traditional idol-making workshops",
+  "Princep Ghat — enjoy riverside views"
+ ],
+ note:"Allow enough time for city traffic when planning multiple sightseeing stops."
+},
+{
+ title:"Food & Local Culture",
+ label:"Chapter 09 · Taste Eastern India",
+ heading:"A delicious journey through regional flavours",
+ image:"photo-1714799263412-2e0c1f875959",
+ caption:"Enjoy the traditional flavours of Odisha and Bengal",
+ text:"Odisha and West Bengal offer distinctive culinary traditions. From Puri's famous temple food to Bengali sweets and Kolkata street food, every destination has something delicious to discover.",
+ items:[
+  "Puri — traditional Mahaprasad and local seafood",
+  "Kolkata — kathi rolls and puchka",
+  "Bengal — rasgulla, sandesh and mishti doi",
+  "Odisha — dalma, pakhala bhata and regional sweets"
+ ],
+ note:"Food availability and temple offerings follow local customs and rules. Check ingredients if you have dietary restrictions."
+},
+{
+ title:"Best Time to Visit",
+ label:"Chapter 10 · Choose your season",
+ heading:"Plan your Eastern India holiday",
+ image:"photo-1507525428034-b723cf961d3e",
+ caption:"Enjoy coastal views and sightseeing across Eastern India",
+ text:"The best time for this journey depends on your preference for comfortable sightseeing, pilgrimage events and coastal weather. Winter is generally popular for exploring these destinations.",
+ items:[
+  "October to February — generally pleasant for sightseeing",
+  "March to May — warmer weather, especially in coastal areas",
+  "June to September — monsoon rain may affect travel",
+  "January — Gangasagar Mela brings large pilgrimage crowds"
+ ],
+ note:"Check weather alerts, ferry operations and local event schedules before travelling."
+},
+{
+ title:"Packing Checklist",
+ label:"Chapter 11 · Be prepared",
+ heading:"Pack smart for your Eastern India trip",
+ image:"photo-1476514525535-07fb3b4ae5f1",
+ caption:"Prepare for a comfortable pilgrimage and sightseeing holiday",
+ text:"This journey includes temples, beaches, ferry transfers and city sightseeing. Carry comfortable clothing and essential travel documents for a smooth experience.",
+ checklist:[
+  "Comfortable walking footwear",
+  "Light cotton clothing",
+  "Sun hat and sunglasses",
+  "Sunscreen and personal medicines",
+  "Water bottle",
+  "Umbrella or rain protection",
+  "Identity and travel documents",
+  "Small bag for ferry transfers"
+ ],
+ note:"Carry suitable modest clothing for religious places and keep valuables secure during ferry journeys."
+},
+{
+ title:"Your Eastern India Story",
+ label:"Final chapter · Begin your journey",
+ heading:"Ready to explore Puri, Gangasagar & Kolkata?",
+ image:"photo-1507525428034-b723cf961d3e",
+ caption:"Your Eastern India holiday starts here",
+ text:"From Puri's spiritual traditions to Gangasagar's sacred coastline and Kolkata's fascinating heritage, this journey offers a wonderful combination of pilgrimage, culture and sightseeing.",
+ items:[
+  "Choose your preferred travel dates",
+  "Confirm hotels and transportation",
+  "Plan ferry connections for Gangasagar",
+  "Check temple timings and sightseeing arrangements",
+  "Get ready for an unforgettable Eastern India holiday"
+ ],
+ note:"Starting package price: ₹17,999 per person. Confirm final price, itinerary and inclusions with Orlon Sky Holiday."
+}
+];
+
+let current=0;
+let opened=false;
+
+const book=document.getElementById("book");
+const left=document.getElementById("leftPage");
+const right=document.getElementById("rightPage");
+const prev=document.getElementById("prevBtn");
+const next=document.getElementById("nextBtn");
+const status=document.getElementById("status");
+const progress=document.getElementById("progressBar");
+const chapterMenu=document.getElementById("chapters");
+
+function safe(value){
+ return String(value).replace(/[&<>"']/g,c=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ })[c]);
+}
+
+function imageUrl(id){
+ return "https://images.unsplash.com/"+id+"?auto=format&fit=crop&w=1100&q=85";
+}
+
+function render(){
+ const c=chapters[current];
+
+ left.innerHTML=`
+  <div class="page-label">${safe(c.label)}</div>
+  <h2>${safe(c.heading)}</h2>
+  <p>${safe(c.text)}</p>
+  ${c.checklist?`
+   <div class="checklist">
+    ${c.checklist.map(item=>`<label><input type="checkbox"> ${safe(item)}</label>`).join("")}
+   </div>`:`
+   <ul>${c.items.map(item=>`<li>${safe(item)}</li>`).join("")}</ul>`}
+  <p><small>${safe(c.note)}</small></p>
+  <div class="page-no">${current*2+1}</div>
+ `;
+
+ right.innerHTML=`
+  <div class="photo-wrap">
+   <img class="photo" src="${imageUrl(c.image)}" alt="${safe(c.caption)}"
+    onerror="this.onerror=null;this.style.display='none';this.parentElement.style.background='#087E8B'">
+   <div class="caption">${safe(c.caption)}</div>
+  </div>
+  ${current===chapters.length-1?`
+ `:""}
+  <div class="page-no">${current*2+2}</div>
+ `;
+
+ prev.disabled=current===0;
+ next.disabled=current===chapters.length-1;
+ next.textContent=current===chapters.length-1?"End of Book":"Next Chapter →";
+ status.textContent=c.title+" · "+(current+1)+" of "+chapters.length;
+ progress.style.width=((current+1)/chapters.length*100)+"%";
+
+ document.querySelectorAll(".chapters button").forEach((btn,i)=>{
+  btn.classList.toggle("active",i===current);
+ });
+
+ const restart=document.getElementById("restartBtn");
+ if(restart)restart.onclick=()=>{current=0;render()};
+}
+
+function goTo(index){
+ if(index<0||index>=chapters.length)return;
+ current=index;
+ render();
+}
+
+function openBook(){
+ opened=true;
+ book.classList.add("open");
+ setTimeout(render,300);
+}
+
+chapters.forEach((c,i)=>{
+ const btn=document.createElement("button");
+ btn.textContent=c.title;
+ btn.onclick=()=>{
+  if(!opened)openBook();
+  goTo(i);
+  book.scrollIntoView({behavior:"smooth",block:"center"});
+ };
+ chapterMenu.appendChild(btn);
+});
+
+document.getElementById("openBtn").addEventListener("click",openBook);
+prev.addEventListener("click",()=>goTo(current-1));
+next.addEventListener("click",()=>goTo(current+1));
+
+document.addEventListener("keydown",event=>{
+ if(!opened||event.target.matches("input,textarea"))return;
+ if(event.key==="ArrowRight")goTo(current+1);
+ if(event.key==="ArrowLeft")goTo(current-1);
+});
+
+render();
+</script>
+</body>
+</html>

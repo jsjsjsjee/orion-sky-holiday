@@ -1,0 +1,452 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discover Vietnam | Orlon Sky Holiday</title>
+<style>
+:root {
+  --mountain:#123D38;
+  --blue:#237D78;
+  --sky:#B8DED5;
+  --red:#C94C45;
+  --gold:#E9C783;
+  --cream:#FFFCF5;
+  --ink:#263F42;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;color:white;background:var(--mountain)}
+button{font:inherit;cursor:pointer}
+.scene{
+ min-height:100vh;padding-bottom:35px;
+ background:
+ linear-gradient(125deg,#082D2BE8,#237D78B8,#123D38E0),
+ url("https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=2000&q=85")
+ center/cover fixed;
+}
+header{
+ max-width:1200px;margin:auto;padding:22px;
+ display:flex;justify-content:space-between;align-items:center;
+ border-bottom:1px solid #ffffff35
+}
+.brand{font:bold 19px Georgia,serif}
+.brand span{color:var(--gold)}
+.back{
+ color:white;text-decoration:none;border:1px solid #ffffff65;
+ padding:10px 15px;border-radius:30px;font-size:12px
+}
+.intro{text-align:center;padding:35px 15px 20px}
+.eyebrow{
+ text-transform:uppercase;letter-spacing:4px;font-size:11px;
+ font-weight:bold;color:var(--gold)
+}
+.intro h1{font:clamp(38px,6vw,65px) Georgia,serif;margin:13px 0}
+.intro p{max-width:680px;margin:auto;color:#e3effa;line-height:1.7}
+.book-area{width:min(1000px,calc(100% - 30px));margin:25px auto 0}
+.book{
+ position:relative;display:grid;grid-template-columns:1fr 1fr;
+ aspect-ratio:1.6;min-height:450px;
+ filter:drop-shadow(0 25px 35px #0007)
+}
+.page{
+ min-width:0;overflow:hidden;position:relative;color:var(--ink);
+ padding:clamp(20px,3.5vw,38px);
+ background:radial-gradient(circle at top left,#B8DED550,transparent 55%),var(--cream);
+ border:1px solid #c8d9d0
+}
+.left{border-radius:8px 0 0 8px;border-right:1px solid #b7cfc5}
+.right{border-radius:0 8px 8px 0}
+.book::after{
+ content:"";position:absolute;z-index:3;top:0;bottom:0;left:50%;
+ width:18px;transform:translateX(-50%);pointer-events:none;
+ background:linear-gradient(90deg,#23445b33,#b7cabbba,#fffdf5,#526b8033)
+}
+.page-label{
+ font-size:10px;font-weight:bold;letter-spacing:2px;
+ text-transform:uppercase;color:var(--red);margin-bottom:15px
+}
+.page h2{font:clamp(25px,3.3vw,36px) Georgia,serif;line-height:1.1;color:var(--mountain);margin:0 0 15px}
+.page p{color:#536879;font-size:13px;line-height:1.8}
+.page ul{list-style:none;padding:0;margin-top:15px}
+.page li{
+ border-bottom:1px solid #102B4616;padding:9px 0 9px 19px;
+ position:relative;color:#365269;font-size:12px;line-height:1.5
+}
+.page li::before{content:"✦";color:var(--red);position:absolute;left:0}
+.photo-wrap{height:100%;min-height:300px;position:relative}
+.photo{width:100%;height:100%;min-height:300px;max-height:480px;object-fit:cover;border-radius:4px}
+.caption{
+ position:absolute;bottom:10px;left:10px;right:10px;
+ padding:25px 12px 12px;background:linear-gradient(transparent,#092C2BED);
+ color:white;font:15px Georgia,serif
+}
+.page-no{position:absolute;bottom:12px;color:#718ba0;font-size:10px}
+.left .page-no{left:25px}.right .page-no{right:25px}
+.cover{
+ position:absolute;z-index:5;inset:0 50% 0 0;transform-origin:left center;
+ transition:transform 1.3s cubic-bezier(.2,.7,.2,1);backface-visibility:hidden;
+ border-radius:8px 0 0 8px;
+ background:linear-gradient(140deg,#123D38E8,#237D78D9),
+ url("https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1000&q=85") center/cover;
+ border:2px solid #E9C78399;box-shadow:inset -10px 0 20px #0004;
+ display:grid;place-items:center;text-align:center;padding:25px
+}
+.cover::after{content:"";position:absolute;inset:13px;border:1px solid var(--gold);pointer-events:none}
+.cover-content{position:relative;z-index:1}
+.cover h2{color:var(--cream);font:clamp(30px,4vw,48px) Georgia,serif;margin:18px 0 12px}
+.cover p{font-size:12px;color:#e3effa;line-height:1.7}
+.price{font-weight:bold;font-size:15px!important;color:var(--gold)!important}
+.primary{
+ background:var(--gold);color:var(--mountain);border:none;
+ padding:13px 17px;margin-top:12px;border-radius:4px;
+ font-size:11px;font-weight:bold;text-transform:uppercase;letter-spacing:1px
+}
+.primary:hover{background:#f8e4b6}
+.book.open .cover{transform:rotateY(-170deg);pointer-events:none}
+.controls{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:15px;margin-top:22px}
+.nav-btn{background:#ffffff12;color:white;border:1px solid #ffffff65;border-radius:30px;padding:11px 17px;font-size:12px}
+.nav-btn:hover:not(:disabled){background:#ffffff30}
+.nav-btn:disabled{opacity:.35;cursor:not-allowed}
+.status{min-width:150px;text-align:center;font-size:11px;color:#e3effa}
+.progress{width:min(260px,70%);height:3px;background:#ffffff30;margin:15px auto}
+.progress div{height:100%;width:0;background:var(--gold);transition:width .3s}
+.chapters{max-width:950px;margin:25px auto;padding:0 15px;display:flex;justify-content:center;flex-wrap:wrap;gap:8px}
+.chapters button{background:#ffffff10;border:1px solid #ffffff45;color:white;padding:9px 12px;border-radius:25px;font-size:10px}
+.chapters button.active{border-color:var(--gold);color:var(--gold);background:#E9C7831C}
+.checklist{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.checklist label{color:#365269;font-size:12px}
+.checklist input{accent-color:var(--blue)}
+.footer{text-align:center;color:#ffffff9c;font-size:11px;padding:10px}
+.footer span{color:var(--gold)}
+@media(max-width:700px){
+ header{padding:17px}.brand{font-size:15px}.intro{padding-top:25px}
+ .book{display:flex;flex-direction:column;aspect-ratio:auto;min-height:0}
+ .book::after{display:none}
+ .left,.right{border-radius:5px}.right{margin-top:8px}
+ .page{padding:23px}.photo-wrap{min-height:240px}
+ .photo{min-height:240px;max-height:330px}
+ .cover{inset:0;transform-origin:center bottom;border-radius:5px}
+ .book.open .cover{transform:rotateX(90deg)}
+ .cover h2{font-size:38px}.controls{gap:8px}.nav-btn{padding:10px 12px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="scene">
+<header>
+ <div class="brand"><span>✧</span> Orlon Sky Holiday</div>
+ <a class="back" href="javascript:history.back()">← Back to Destinations</a>
+</header>
+
+<section class="intro">
+ <div class="eyebrow">Heritage · Nature · Vietnamese Culture</div>
+ <h1>Discover Vietnam</h1>
+ <p>Explore Hanoi's timeless charm, sail through Ha Long Bay, wander Hoi An's lantern-lit streets and experience the vibrant energy of Ho Chi Minh City.</p>
+</section>
+
+<main class="book-area">
+ <div class="book" id="book">
+  <section class="page left" id="leftPage"></section>
+  <section class="page right" id="rightPage"></section>
+  <div class="cover">
+   <div class="cover-content">
+    <div class="eyebrow">Orlon Sky Holiday presents</div>
+    <h2>Discover<br>Vietnam</h2>
+    <p>Hanoi · Ha Long Bay<br>Hoi An · Ho Chi Minh City</p>
+    <p class="price">₹41,999 / person*</p>
+    <button class="primary" id="openBtn">Open Your Travel Book ↗</button>
+   </div>
+  </div>
+ </div>
+ <div class="controls">
+  <button class="nav-btn" id="prevBtn" disabled>← Previous</button>
+  <div class="status" id="status">Your journey awaits</div>
+  <button class="nav-btn" id="nextBtn">Next Chapter →</button>
+ </div>
+ <div class="progress"><div id="progressBar"></div></div>
+</main>
+<nav class="chapters" id="chapters"></nav>
+<div class="footer">Discover more. Travel beautifully. <br><br><span>Orlon Sky Holiday</span></div>
+</div>
+
+<script>
+const chapters = [
+{
+ title:"Welcome to Vietnam",label:"Chapter 01 · The destination",
+ heading:"A land of timeless beauty",
+ image:"photo-1528127269322-539801943592",
+ caption:"Vietnam's beautiful landscapes and culture",
+ text:"Vietnam brings together dramatic coastlines, historic towns, lively cities and extraordinary food. Discover the country's different personalities as you travel from Hanoi in the north to Ho Chi Minh City in the south.",
+ items:[
+  "Hanoi — historic streets, lakes and local culture",
+  "Ha Long Bay — limestone islands and emerald waters",
+  "Hoi An — heritage architecture and colourful lanterns",
+  "Ho Chi Minh City — energetic streets and modern life"
+ ],
+ note:"Travel times between regions can be significant. Confirm transport and overnight stays in your itinerary."
+},
+{
+ title:"Why visit Vietnam?",label:"Chapter 02 · Find your experience",
+ heading:"Culture, nature and discovery",
+ image:"photo-1501785888041-af3ef285b470",
+ caption:"Discover Vietnam's diverse scenery",
+ text:"Vietnam offers memorable experiences for culture lovers, photographers, food enthusiasts and nature travellers. Explore historic neighbourhoods, cruise scenic waters and discover regional traditions.",
+ items:[
+  "Culture — historic architecture and local traditions",
+  "Nature — bays, countryside and beautiful coastlines",
+  "Food — Vietnamese street food and regional dishes",
+  "Adventure — boat trips, cycling and guided excursions"
+ ],
+ note:"Choose experiences according to your interests, available time and the confirmed travel schedule."
+},
+{
+ title:"Hanoi highlights",label:"Chapter 03 · Northern Vietnam",
+ heading:"Discover the charm of Hanoi",
+ image:"photo-1509030450996-dd1a26dda07a",
+ caption:"Hanoi's historic streets and architecture",
+ text:"Vietnam's capital combines traditional neighbourhoods, lakeside scenery, street-food culture and historic landmarks. Take time to explore at a relaxed pace.",
+ items:[
+  "Hoan Kiem Lake — a peaceful city landmark",
+  "Old Quarter — lively streets and traditional shops",
+  "Temple of Literature — historic cultural architecture",
+  "Local cafés — experience Hanoi's famous coffee culture",
+  "Street food — discover northern Vietnamese flavours"
+ ],
+ note:"Some attractions have entry fees or restricted visiting hours. Check current access before your visit."
+},
+{
+ title:"Ha Long Bay",label:"Chapter 04 · Natural wonder",
+ heading:"Sail through emerald waters",
+ image:"photo-1528127269322-539801943592",
+ caption:"Limestone islands rising from Ha Long Bay",
+ text:"Ha Long Bay is celebrated for its dramatic limestone formations, calm-looking emerald waters and scenic boat journeys. A cruise offers a different perspective on Vietnam's natural beauty.",
+ items:[
+  "Cruise among limestone islands",
+  "Enjoy scenic deck views and photography",
+  "Explore selected caves or viewpoints where available",
+  "Consider an overnight cruise for more time on the water"
+ ],
+ note:"Cruise routes and activities depend on the operator, weather and local safety conditions."
+},
+{
+ title:"Hoi An",label:"Chapter 05 · Heritage and lanterns",
+ heading:"Step into a storybook town",
+ image:"photo-1559592413-7cec4d0cae2b",
+ caption:"Hoi An's colourful lantern-lit streets",
+ text:"Hoi An is loved for its preserved old town, traditional buildings, riverside atmosphere and colourful lanterns. Wander through its streets and discover local crafts and regional cuisine.",
+ items:[
+  "Hoi An Ancient Town — historic architecture and narrow lanes",
+  "Lantern-lined streets — especially atmospheric in the evening",
+  "Japanese Covered Bridge — a famous town landmark",
+  "Local markets — discover crafts and regional food",
+  "Optional countryside cycling or cooking experiences"
+ ],
+ note:"Old Town entry rules and fees may apply. Confirm guided activities and transport separately."
+},
+{
+ title:"Ho Chi Minh City",label:"Chapter 06 · Southern Vietnam",
+ heading:"Experience the city's vibrant energy",
+ image:"photo-1583417319070-4a69db38a482",
+ caption:"Ho Chi Minh City's energetic urban landscape",
+ text:"Ho Chi Minh City is a lively destination filled with historic landmarks, busy markets, contemporary cafés and a dynamic food scene.",
+ items:[
+  "War Remnants Museum — historical exhibits",
+  "Central Post Office — a notable architectural landmark",
+  "Ben Thanh Market — shopping and local flavours",
+  "Nguyen Hue Walking Street — a lively city promenade",
+  "Local cafés and restaurants — explore southern cuisine"
+ ],
+ note:"Check museum opening hours and local conditions. Attraction entry tickets may be additional."
+},
+{
+ title:"Best time to travel",label:"Chapter 07 · Choose your season",
+ heading:"Plan around regional weather",
+ image:"photo-1470770841072-f978cf4d019e",
+ caption:"Beautiful scenery across Vietnam",
+ text:"Vietnam stretches across different climate zones, so weather can vary between northern, central and southern regions. Your travel dates may affect which experiences are most comfortable.",
+ items:[
+  "North — cooler winters and warmer, humid summers",
+  "Central region — seasonal rain can affect coastal plans",
+  "South — generally tropical, with wetter and drier seasons",
+  "Cruises and outdoor trips — always check local forecasts"
+ ],
+ note:"There is no single perfect season for every region. Check conditions for your exact destinations and dates."
+},
+{
+ title:"Taste of Vietnam",label:"Chapter 08 · At the table",
+ heading:"A journey of unforgettable flavours",
+ image:"photo-1555939594-58d7cb561ad1",
+ caption:"Discover Vietnamese food and local flavours",
+ text:"Vietnamese cuisine is known for fresh herbs, balanced flavours, rice dishes, noodles and regional specialities. Food is an important part of discovering local culture.",
+ items:[
+  "Pho — aromatic noodle soup",
+  "Banh mi — a popular Vietnamese sandwich",
+  "Fresh spring rolls — a light local favourite",
+  "Bun cha — a Hanoi speciality",
+  "Vietnamese coffee — enjoy traditional coffee styles"
+ ],
+ note:"Ask about ingredients, allergens and preparation if you have dietary restrictions."
+},
+{
+ title:"Packing checklist",label:"Chapter 09 · Be prepared",
+ heading:"Pack for cities and coastlines",
+ image:"photo-1500530855697-b586d89ba3ee",
+ caption:"Prepare for a multi-region Vietnam journey",
+ text:"With city exploration, boat cruises and heritage walks on the itinerary, pack comfortable essentials and clothing suitable for changing weather.",
+ checklist:[
+  "Passport and travel documents",
+  "Visa or entry authorisation, if required",
+  "Comfortable walking shoes",
+  "Lightweight clothing",
+  "Rain jacket or compact umbrella",
+  "Sun protection and insect repellent",
+  "Personal medicines and toiletries",
+  "Travel insurance and booking confirmations"
+ ],
+ note:"Check entry requirements for your nationality and the forecast for each region before departure."
+},
+{
+ title:"Suggested itinerary",label:"Chapter 10 · Make it yours",
+ heading:"A journey from north to south",
+ image:"photo-1528127269322-539801943592",
+ caption:"Explore Vietnam's diverse destinations",
+ text:"This sample itinerary links the four requested destinations. Since the country is long, allow enough time for flights or other transfers between regions.",
+ items:[
+  "Days 1–2: Arrive in Hanoi and explore the capital",
+  "Day 3: Travel to Ha Long Bay for a scenic cruise",
+  "Days 4–5: Fly or transfer to central Vietnam and explore Hoi An",
+  "Days 6–7: Travel south and discover Ho Chi Minh City",
+  "Day 8: Free time and departure"
+ ],
+ note:"This is a sample route, not a confirmed schedule. Actual duration, flight arrangements and activities must be confirmed."
+},
+{
+ title:"Your Vietnam story",label:"Final chapter · Begin your journey",
+ heading:"Ready to discover Vietnam?",
+ image:"photo-1528127269322-539801943592",
+ caption:"Your Vietnamese adventure starts here",
+ text:"From Hanoi's heritage and Ha Long Bay's spectacular scenery to Hoi An's lantern-lit streets and Ho Chi Minh City's vibrant energy, Vietnam offers a remarkable journey.",
+ items:[
+  "Choose your travel dates and departure city",
+  "Select your preferred hotels and room type",
+  "Confirm flights and intercity transfers",
+  "Check cruise arrangements and sightseeing inclusions",
+  "Request your final package quotation"
+ ],
+ note:"Contact Orlon Sky Holiday to confirm availability, dates, package price and all inclusions."
+}
+];
+
+let current=0;
+let opened=false;
+
+const book=document.getElementById("book");
+const left=document.getElementById("leftPage");
+const right=document.getElementById("rightPage");
+const prev=document.getElementById("prevBtn");
+const next=document.getElementById("nextBtn");
+const status=document.getElementById("status");
+const progress=document.getElementById("progressBar");
+const chapterMenu=document.getElementById("chapters");
+
+function safe(value){
+ return String(value).replace(/[&<>"']/g,c=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ })[c]);
+}
+function imageUrl(id){
+ return "https://images.unsplash.com/"+id+"?auto=format&fit=crop&w=1100&q=85";
+}
+
+function render(){
+ const c=chapters[current];
+
+ left.innerHTML=`
+  <div class="page-label">${safe(c.label)}</div>
+  <h2>${safe(c.heading)}</h2>
+  <p>${safe(c.text)}</p>
+  ${c.checklist?`
+   <div class="checklist">
+    ${c.checklist.map(item=>`<label><input type="checkbox"> ${safe(item)}</label>`).join("")}
+   </div>`:`
+   <ul>${c.items.map(item=>`<li>${safe(item)}</li>`).join("")}</ul>`}
+  <p><small>${safe(c.note)}</small></p>
+  <div class="page-no">${current*2+1}</div>
+ `;
+
+ right.innerHTML=`
+  <div class="photo-wrap">
+   <img class="photo" src="${imageUrl(c.image)}" alt="${safe(c.caption)}"
+    onerror="this.onerror=null;this.style.background='#237D78';this.removeAttribute('src')">
+   <div class="caption">${safe(c.caption)}</div>
+  </div>
+  ${current===chapters.length-1?`
+`:""}
+  <div class="page-no">${current*2+2}</div>
+ `;
+
+ prev.disabled=current===0;
+ next.disabled=current===chapters.length-1;
+ next.textContent=current===chapters.length-1?"End of Book":"Next Chapter →";
+ status.textContent=c.title+" · "+(current+1)+" of "+chapters.length;
+ progress.style.width=((current+1)/chapters.length*100)+"%";
+
+ document.querySelectorAll(".chapters button").forEach((btn,i)=>{
+  btn.classList.toggle("active",i===current);
+ });
+
+ const plan=document.getElementById("planBtn");
+ if(plan){
+  plan.onclick=()=>{
+   const subject=encodeURIComponent("Vietnam holiday enquiry");
+   const body=encodeURIComponent(
+    "Hello Orlon Sky Holiday,\n"+
+    "I am interested in the Vietnam holiday package starting from ₹41,999 per person.\n"+
+    "Destinations: Hanoi, Ha Long Bay, Hoi An and Ho Chi Minh City.\n"+
+    "Please share the itinerary, package inclusions, travel dates and availability."
+   );
+   // Replace with your real business email.
+   window.location.href="mailto:YOUR-EMAIL@example.com?subject="+subject+"&body="+body;
+  };
+ }
+ const restart=document.getElementById("restartBtn");
+ if(restart)restart.onclick=()=>{current=0;render()};
+}
+
+function goTo(index){
+ if(index<0||index>=chapters.length)return;
+ current=index;
+ render();
+}
+function openBook(){
+ opened=true;
+ book.classList.add("open");
+ setTimeout(render,300);
+}
+
+chapters.forEach((c,i)=>{
+ const btn=document.createElement("button");
+ btn.textContent=c.title;
+ btn.onclick=()=>{
+  if(!opened)openBook();
+  goTo(i);
+  book.scrollIntoView({behavior:"smooth",block:"center"});
+ };
+ chapterMenu.appendChild(btn);
+});
+
+document.getElementById("openBtn").addEventListener("click",openBook);
+prev.addEventListener("click",()=>goTo(current-1));
+next.addEventListener("click",()=>goTo(current+1));
+
+document.addEventListener("keydown",event=>{
+ if(!opened||event.target.matches("input,textarea"))return;
+ if(event.key==="ArrowRight")goTo(current+1);
+ if(event.key==="ArrowLeft")goTo(current-1);
+});
+render();
+</script>
+</body>
+</html>

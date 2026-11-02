@@ -1,0 +1,681 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discover Sri Lanka | Orlon Sky Holiday</title>
+<style>
+:root {
+  --ocean: #073B4C;
+  --teal: #087E83;
+  --aqua: #75D6CB;
+  --sand: #F2D6A2;
+  --cream: #FFF9ED;
+  --ink: #24434A;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+  background: var(--ocean);
+}
+button { font: inherit; cursor: pointer; }
+.scene {
+  min-height: 100vh;
+  padding-bottom: 35px;
+  background:
+    linear-gradient(125deg, #032D40E8, #087E83B8, #043B4BD9),
+    url("https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&w=2000&q=85")
+    center/cover fixed;
+}
+header {
+  max-width: 1200px;
+  margin: auto;
+  padding: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ffffff35;
+}
+.brand {
+  font-family: Georgia, serif;
+  font-weight: bold;
+  font-size: 19px;
+}
+.brand span { color: var(--sand); }
+.back {
+  color: white;
+  text-decoration: none;
+  border: 1px solid #ffffff65;
+  padding: 10px 15px;
+  border-radius: 30px;
+  font-size: 12px;
+}
+.intro { text-align: center; padding: 35px 15px 20px; }
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--sand);
+}
+.intro h1 {
+  font: clamp(38px, 6vw, 65px) Georgia, serif;
+  margin: 13px 0;
+}
+.intro p {
+  max-width: 680px;
+  margin: auto;
+  color: #e5fffa;
+  line-height: 1.7;
+}
+.book-area {
+  width: min(1000px, calc(100% - 30px));
+  margin: 25px auto 0;
+  perspective: 1800px;
+}
+.book {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  aspect-ratio: 1.6;
+  min-height: 450px;
+  filter: drop-shadow(0 25px 35px #0007);
+}
+.page {
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
+  color: var(--ink);
+  padding: clamp(20px, 3.5vw, 38px);
+  background:
+    radial-gradient(circle at top left, #75D6CB30, transparent 55%),
+    var(--cream);
+  border: 1px solid #c5d8c9;
+}
+.left {
+  border-radius: 8px 0 0 8px;
+  border-right: 1px solid #b5cfc8;
+}
+.right { border-radius: 0 8px 8px 0; }
+.book::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 18px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  background: linear-gradient(90deg, #234b4433, #b5cfc8aa, #fff9ed, #527a6833);
+}
+.page-label {
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 15px;
+}
+.page h2 {
+  font: clamp(25px, 3.3vw, 36px) Georgia, serif;
+  line-height: 1.1;
+  color: var(--ocean);
+  margin: 0 0 15px;
+}
+.page p {
+  color: #536b6c;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.page ul { list-style: none; padding: 0; margin-top: 15px; }
+.page li {
+  border-bottom: 1px solid #073B4C16;
+  padding: 9px 0 9px 19px;
+  position: relative;
+  color: #36565b;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.page li::before {
+  content: "✦";
+  color: var(--teal);
+  position: absolute;
+  left: 0;
+}
+.photo-wrap { height: 100%; min-height: 300px; position: relative; }
+.photo {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  max-height: 480px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.caption {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  padding: 25px 12px 12px;
+  background: linear-gradient(transparent, #032d40ed);
+  color: white;
+  font: 15px Georgia, serif;
+}
+.page-no {
+  position: absolute;
+  bottom: 12px;
+  color: #64877c;
+  font-size: 10px;
+}
+.left .page-no { left: 25px; }
+.right .page-no { right: 25px; }
+.cover {
+  position: absolute;
+  z-index: 5;
+  inset: 0 50% 0 0;
+  transform-origin: left center;
+  transition: transform 1.3s cubic-bezier(.2,.7,.2,1);
+  backface-visibility: hidden;
+  border-radius: 8px 0 0 8px;
+  background:
+    linear-gradient(140deg, #073B4CD9, #087E83D9),
+    url("https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&w=1000&q=85")
+    center/cover;
+  border: 2px solid #F2D6A299;
+  box-shadow: inset -10px 0 20px #0004;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 25px;
+}
+.cover::after {
+  content: "";
+  position: absolute;
+  inset: 13px;
+  border: 1px solid var(--sand);
+  pointer-events: none;
+}
+.cover-content { position: relative; z-index: 1; }
+.cover h2 {
+  color: var(--cream);
+  font: clamp(30px, 4vw, 48px) Georgia, serif;
+  margin: 18px 0 12px;
+}
+.cover p { font-size: 12px; color: #e5fffa; line-height: 1.7; }
+.price {
+  font-weight: bold;
+  font-size: 15px !important;
+  color: var(--sand) !important;
+}
+.primary {
+  background: var(--sand);
+  color: var(--ocean);
+  border: none;
+  padding: 13px 17px;
+  margin-top: 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.primary:hover { background: #fff0c8; }
+.book.open .cover { transform: rotateY(-170deg); pointer-events: none; }
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 22px;
+}
+.nav-btn {
+  background: #ffffff12;
+  color: white;
+  border: 1px solid #ffffff65;
+  border-radius: 30px;
+  padding: 11px 17px;
+  font-size: 12px;
+}
+.nav-btn:hover:not(:disabled) { background: #ffffff30; }
+.nav-btn:disabled { opacity: .35; cursor: not-allowed; }
+.status {
+  min-width: 150px;
+  text-align: center;
+  font-size: 11px;
+  color: #e5fffa;
+}
+.progress {
+  width: min(260px, 70%);
+  height: 3px;
+  background: #ffffff30;
+  margin: 15px auto;
+}
+.progress div {
+  height: 100%;
+  width: 0;
+  background: var(--sand);
+  transition: width .3s;
+}
+.chapters {
+  max-width: 950px;
+  margin: 25px auto;
+  padding: 0 15px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chapters button {
+  background: #ffffff10;
+  border: 1px solid #ffffff45;
+  color: white;
+  padding: 9px 12px;
+  border-radius: 25px;
+  font-size: 10px;
+}
+.chapters button.active {
+  border-color: var(--sand);
+  color: var(--sand);
+  background: #F2D6A21C;
+}
+.checklist {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 20px;
+}
+.checklist label { color: #36565b; font-size: 12px; }
+.checklist input { accent-color: var(--teal); }
+.footer {
+  text-align: center;
+  color: #ffffff9c;
+  font-size: 11px;
+  padding: 10px;
+}
+.footer span { color: var(--sand); }
+
+@media(max-width:700px) {
+  header { padding: 17px; }
+  .brand { font-size: 15px; }
+  .intro { padding-top: 25px; }
+  .book {
+    display: flex;
+    flex-direction: column;
+    aspect-ratio: auto;
+    min-height: 0;
+  }
+  .book::after { display: none; }
+  .left, .right { border-radius: 5px; }
+  .left { border-right: 1px solid #b5cfc8; }
+  .right { margin-top: 8px; }
+  .page { padding: 23px; }
+  .photo-wrap { min-height: 240px; }
+  .photo { min-height: 240px; max-height: 330px; }
+  .cover {
+    inset: 0;
+    transform-origin: center bottom;
+    border-radius: 5px;
+  }
+  .book.open .cover { transform: rotateX(90deg); }
+  .cover h2 { font-size: 38px; }
+  .controls { gap: 8px; }
+  .nav-btn { padding: 10px 12px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  *, *::before, *::after { transition: none !important; }
+}
+</style>
+</head>
+
+<body>
+<div class="scene">
+<header>
+  <div class="brand"><span>✧</span> Orlon Sky Holiday</div>
+<a class="back" href="javascript:history.back()">← Back to Destinations</a>
+</header>
+
+<section class="intro">
+  <div class="eyebrow">South Asia · Island escape</div>
+  <h1>Discover Sri Lanka</h1>
+  <p>Ancient rock fortresses, misty hill-country railways, sacred temples and golden beaches — discover the magic of Sri Lanka through your own travel book.</p>
+</section>
+
+<main class="book-area">
+  <div class="book" id="book">
+    <section class="page left" id="leftPage"></section>
+    <section class="page right" id="rightPage"></section>
+    <div class="cover">
+      <div class="cover-content">
+        <div class="eyebrow">Orlon Sky Holiday presents</div>
+        <h2>Discover<br>Sri Lanka</h2>
+        <p>Sigiriya · Kandy<br>Ella · Mirissa Beaches</p>
+        <p class="price">From ₹34,999 / person*</p>
+        <button class="primary" id="openBtn">Open Your Travel Book ↗</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="nav-btn" id="prevBtn" disabled>← Previous</button>
+    <div class="status" id="status">Your journey awaits</div>
+    <button class="nav-btn" id="nextBtn">Next Chapter →</button>
+  </div>
+  <div class="progress"><div id="progressBar"></div></div>
+</main>
+
+<nav class="chapters" id="chapters"></nav>
+<div class="footer">Discover more. Travel beautifully. <br><br><span>Orlon Sky Holiday</span></div>
+</div>
+
+<script>
+const chapters = [
+{
+ title:"Welcome to Sri Lanka",
+ label:"Chapter 01 · The destination",
+ heading:"A little island, a thousand stories",
+ image:"photo-1516690561799-46d8f74f9abf",
+ caption:"Sri Lanka's tropical landscapes",
+ text:"Sri Lanka brings together ancient heritage, lush tea country, scenic train journeys, wildlife and a beautiful Indian Ocean coastline. Explore cultural landmarks inland before unwinding beside the sea.",
+ items:[
+  "Sigiriya — the iconic ancient rock fortress",
+  "Kandy — temples and cultural traditions",
+  "Ella — misty mountains and scenic train rides",
+  "Mirissa — sandy beaches and ocean views"
+ ],
+ note:"Plan your route around road journeys and train schedules."
+},
+{
+ title:"Why visit Sri Lanka?",
+ label:"Chapter 02 · Find your experience",
+ heading:"Four kinds of adventure",
+ image:"photo-1477587458883-47145ed94245",
+ caption:"Culture, mountains and tropical coastlines",
+ text:"Sri Lanka is a wonderful choice for travellers seeking a mixture of history, nature, local cuisine and relaxation without choosing just one kind of holiday.",
+ items:[
+  "Culture — historic sites and sacred temples",
+  "Nature — green hills, waterfalls and wildlife",
+  "Adventure — hiking trails and scenic rail journeys",
+  "Relaxation — beach days and coastal sunsets"
+ ],
+ note:"Choose activities and walking routes suited to your fitness and travel plans."
+},
+{
+ title:"Places to visit",
+ label:"Chapter 03 · The highlights",
+ heading:"Four unforgettable destinations",
+ image:"photo-1588598198321-9735fd524f25",
+ caption:"Discover the landmarks of Sri Lanka",
+ text:"These four highlights create a varied journey from the island's cultural heart to the highlands and southern coast.",
+ items:[
+  "Sigiriya — climb the famous Lion Rock and explore its surroundings",
+  "Kandy — visit the Temple of the Sacred Tooth Relic",
+  "Ella — discover Nine Arch Bridge and Little Adam's Peak",
+  "Mirissa — relax on the beach and enjoy coastal scenery"
+ ],
+ note:"Check attraction hours, entry fees and weather before setting out."
+},
+{
+ title:"Best time to travel",
+ label:"Chapter 04 · Choose your season",
+ heading:"Follow the island's seasons",
+ image:"photo-1501785888041-af3ef285b470",
+ caption:"Green hills and tropical scenery",
+ text:"Sri Lanka has different weather patterns across its coasts and central highlands. The southwest is generally drier from December to March, while the east coast often has better weather from around May to September.",
+ items:[
+  "Sigiriya — often visited during the drier months",
+  "Kandy — expect changing conditions in the hills",
+  "Ella — pack a light rain layer year-round",
+  "Mirissa — December to March is popular for the south coast"
+ ],
+ note:"Seasonal patterns vary. Check forecasts and local advice for your exact travel dates."
+},
+{
+ title:"Budget & prices",
+ label:"Chapter 05 · Plan your spend",
+ heading:"Your Sri Lanka holiday budget",
+ image:"photo-1556742049-0cfed4f6a45d",
+ caption:"Plan a trip that suits your budget",
+ text:"The advertised starting price is ₹34,999 per person. Your final cost depends on your travel dates, departure city, flights, hotel category, transfers, meals and activities.",
+ items:[
+  "Starting package price: ₹34,999 per person",
+  "Confirm flights, baggage and airport transfers",
+  "Check hotel category and meal inclusions",
+  "Budget extra for attraction tickets, train reservations and excursions"
+ ],
+ note:"₹34,999 is the supplied starting price, not a guaranteed live quote. Confirm package inclusions and availability before booking."
+},
+{
+ title:"History & culture",
+ label:"Chapter 06 · Stories of Sri Lanka",
+ heading:"A heritage shaped over centuries",
+ image:"photo-1606293926075-69a00dbfde81",
+ caption:"Ancient architecture and cultural heritage",
+ text:"Sri Lanka's heritage reflects ancient kingdoms, Buddhist traditions, historic trade routes and distinctive regional customs. Its archaeological sites, temples and traditional arts offer a window into the island's past.",
+ items:[
+  "Explore the ancient city and fortress area of Sigiriya",
+  "Learn about Kandy's religious and royal heritage",
+  "Respect customs at Buddhist temples",
+  "Ask permission before photographing people or ceremonies"
+ ],
+ note:"Follow dress requirements and visitor instructions at sacred places."
+},
+{
+ title:"Taste of Sri Lanka",
+ label:"Chapter 07 · At the table",
+ heading:"A delicious island food journey",
+ image:"photo-1547592180-85f173990554",
+ caption:"Colourful local flavours and fresh ingredients",
+ text:"Sri Lankan cuisine is known for aromatic spices, coconut, rice, curries and fresh tropical produce. Regional dishes and family recipes make meals part of the travel experience.",
+ items:[
+  "Rice and curry — a classic local meal",
+  "Hoppers — bowl-shaped pancakes",
+  "Kottu roti — chopped roti stir-fried with vegetables",
+  "Pol sambol — a coconut-based accompaniment"
+ ],
+ note:"Ask about chilli levels and confirm ingredients if you have food allergies."
+},
+{
+ title:"Packing checklist",
+ label:"Chapter 08 · Be prepared",
+ heading:"Pack for hills and beaches",
+ image:"photo-1553062407-98eeb64c6a62",
+ caption:"Pack smart for your island adventure",
+ text:"Sri Lanka's climate is tropical, while the central highlands can be cooler and rainy. Comfortable clothing and a few versatile layers will help you prepare for different regions.",
+ checklist:[
+  "Lightweight breathable clothing",
+  "Comfortable walking shoes",
+  "Sandals and swimwear",
+  "Sunscreen and sunglasses",
+  "Insect repellent",
+  "Light rain jacket or umbrella",
+  "Modest temple-visit clothing",
+  "Passport and booking details"
+ ],
+ note:"Keep shoulders and knees covered when required at religious sites."
+},
+{
+ title:"Suggested itinerary",
+ label:"Chapter 09 · Make it yours",
+ heading:"From ancient rocks to ocean waves",
+ image:"photo-1501785888041-af3ef285b470",
+ caption:"A journey through the island's varied landscapes",
+ text:"A multi-stop holiday can connect Sri Lanka's cultural triangle, hill country and southern beaches. Allow enough time for scenic but sometimes lengthy road journeys.",
+ items:[
+  "Days 1–2: Sigiriya and nearby cultural attractions",
+  "Days 3–4: Kandy and its heritage",
+  "Days 5–6: Ella, mountain views and scenic walks",
+  "Days 7–8: Mirissa beaches and coastal relaxation"
+ ],
+ note:"This is a sample 8-day route. Adjust nights and transfers to fit your flights and budget."
+},
+{
+ title:"Travel thoughtfully",
+ label:"Chapter 10 · Travel with care",
+ heading:"Protect the island you explore",
+ image:"photo-1477587458883-47145ed94245",
+ caption:"Keep Sri Lanka's natural beauty thriving",
+ text:"Responsible travel helps preserve Sri Lanka's wildlife, beaches, cultural landmarks and local communities. Small choices can make your visit more respectful and sustainable.",
+ items:[
+  "Avoid littering on beaches and hiking trails",
+  "Follow wildlife viewing rules",
+  "Respect temple customs and local traditions",
+  "Use marked trails and follow safety notices",
+  "Support local guides, craftspeople and businesses"
+ ],
+ note:"Follow current local guidance, especially around wildlife and the sea."
+},
+{
+ title:"Your Sri Lanka story",
+ label:"Final chapter · Begin your journey",
+ heading:"Ready to discover Sri Lanka?",
+ image:"photo-1516690561799-46d8f74f9abf",
+ caption:"Your island adventure starts here",
+ text:"From the remarkable rock fortress at Sigiriya to Kandy's cultural landmarks, Ella's misty hills and Mirissa's beaches, Sri Lanka offers a holiday full of variety.",
+ items:[
+  "Choose your travel dates and departure city",
+  "Select your preferred hotels and destinations",
+  "Confirm package price and inclusions",
+  "Arrange transfers, activities and beach time"
+ ],
+ note:"Use your website's actual booking or enquiry process to confirm dates and availability."
+}
+];
+
+let current = 0;
+let opened = false;
+
+const book = document.getElementById("book");
+const left = document.getElementById("leftPage");
+const right = document.getElementById("rightPage");
+const prev = document.getElementById("prevBtn");
+const next = document.getElementById("nextBtn");
+const status = document.getElementById("status");
+const progress = document.getElementById("progressBar");
+const chapterMenu = document.getElementById("chapters");
+
+function safe(value) {
+  return String(value).replace(/[&<>"']/g, c => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;",
+    '"':"&quot;", "'":"&#39;"
+  })[c]);
+}
+
+function imageUrl(id) {
+  return "https://images.unsplash.com/" + id +
+    "?auto=format&fit=crop&w=1100&q=85";
+}
+
+function render() {
+  const c = chapters[current];
+
+  left.innerHTML = `
+    <div class="page-label">${safe(c.label)}</div>
+    <h2>${safe(c.heading)}</h2>
+    <p>${safe(c.text)}</p>
+    ${c.checklist ? `
+      <div class="checklist">
+        ${c.checklist.map(item => `
+          <label><input type="checkbox"> ${safe(item)}</label>
+        `).join("")}
+      </div>
+    ` : `
+      <ul>${c.items.map(item => `<li>${safe(item)}</li>`).join("")}</ul>
+    `}
+    <p><small>${safe(c.note)}</small></p>
+    <div class="page-no">${current * 2 + 1}</div>
+  `;
+
+  right.innerHTML = `
+    <div class="photo-wrap">
+      <img class="photo"
+        src="${imageUrl(c.image)}"
+        alt="${safe(c.caption)}"
+        onerror="this.onerror=null;this.style.background='#087E83';this.removeAttribute('src')">
+      <div class="caption">${safe(c.caption)}</div>
+    </div>
+    ${current === chapters.length - 1 ? `
+
+    ` : ""}
+    <div class="page-no">${current * 2 + 2}</div>
+  `;
+
+  prev.disabled = current === 0;
+  next.disabled = current === chapters.length - 1;
+  next.textContent = current === chapters.length - 1
+    ? "End of Book" : "Next Chapter →";
+
+  status.textContent = c.title + " · " +
+    (current + 1) + " of " + chapters.length;
+
+  progress.style.width =
+    ((current + 1) / chapters.length * 100) + "%";
+
+  document.querySelectorAll(".chapters button").forEach((btn, i) => {
+    btn.classList.toggle("active", i === current);
+  });
+
+  const plan = document.getElementById("planBtn");
+  if (plan) {
+    plan.onclick = () => {
+      const subject = encodeURIComponent("Sri Lanka holiday enquiry");
+      const body = encodeURIComponent(
+        "Hello Orlon Sky Holiday,\n" +
+        "I am interested in the Sri Lanka tour starting from ₹34,999 per person.\n" +
+        "Please share the itinerary, package inclusions, dates and availability."
+      );
+
+      // Replace with your actual business email.
+      window.location.href =
+        "mailto:YOUR-EMAIL@example.com?subject=" + subject + "&body=" + body;
+    };
+  }
+
+  const restart = document.getElementById("restartBtn");
+  if (restart) restart.onclick = () => {
+    current = 0;
+    render();
+  };
+}
+
+function goTo(index) {
+  if (index < 0 || index >= chapters.length) return;
+  current = index;
+  render();
+}
+
+function openBook() {
+  opened = true;
+  book.classList.add("open");
+  setTimeout(render, 300);
+}
+
+chapters.forEach((c, i) => {
+  const btn = document.createElement("button");
+  btn.textContent = c.title;
+  btn.onclick = () => {
+    if (!opened) openBook();
+    goTo(i);
+    book.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
+  chapterMenu.appendChild(btn);
+});
+
+document.getElementById("openBtn").addEventListener("click", openBook);
+prev.addEventListener("click", () => goTo(current - 1));
+next.addEventListener("click", () => goTo(current + 1));
+
+document.addEventListener("keydown", event => {
+  if (!opened || event.target.matches("input, textarea")) return;
+  if (event.key === "ArrowRight") goTo(current + 1);
+  if (event.key === "ArrowLeft") goTo(current - 1);
+});
+
+render();
+</script>
+</body>
+</html>

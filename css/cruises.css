@@ -1,0 +1,1723 @@
+/* ==========================================================================
+   ORION SKY HOLIDAY — CRUISE BOOKINGS STYLES (css/cruises.css)
+   Theme: Luxury Ocean & Marine, Deep Navy, Royal Blue, Gold & Pure White
+   ========================================================================== */
+
+:root {
+  --cruise-navy: #07172C;
+  --cruise-navy-light: #0D2342;
+  --cruise-navy-card: #0F2D54;
+  --cruise-royal: #1B4D89;
+  --cruise-ocean: #0284C7;
+  --cruise-ocean-light: #38BDF8;
+  --cruise-sky: #E0F2FE;
+  --cruise-sky-light: #F0F9FF;
+  --cruise-gold: #D4AF37;
+  --cruise-gold-hover: #B89628;
+  --cruise-gold-light: #FFF8E7;
+  --cruise-gold-glow: rgba(212, 175, 55, 0.25);
+  --cruise-white: #FFFFFF;
+  --cruise-grey-light: #F8FAFC;
+  --cruise-grey-border: #E2E8F0;
+  --cruise-text-main: #1E293B;
+  --cruise-text-muted: #64748B;
+  --cruise-shadow-sm: 0 4px 12px rgba(7, 23, 44, 0.06);
+  --cruise-shadow-md: 0 10px 30px rgba(7, 23, 44, 0.1);
+  --cruise-shadow-lg: 0 20px 45px rgba(7, 23, 44, 0.16);
+  --cruise-shadow-gold: 0 8px 24px rgba(212, 175, 55, 0.35);
+  --cruise-radius-sm: 8px;
+  --cruise-radius-md: 14px;
+  --cruise-radius-lg: 20px;
+  --cruise-radius-pill: 9999px;
+  --cruise-transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   1. HERO SECTION – CINEMATIC OCEAN BANNER
+   ========================================================================== */
+.cruise-hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--cruise-navy);
+  color: var(--cruise-white);
+  padding: calc(var(--header-height, 80px) + 40px) 24px 100px;
+  overflow: hidden;
+}
+
+.cruise-hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.cruise-hero__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  transform: scale(1.02);
+  transition: transform 8s ease;
+}
+
+.cruise-hero:hover .cruise-hero__bg img {
+  transform: scale(1.06);
+}
+
+.cruise-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(7, 23, 44, 0.6) 0%,
+    rgba(7, 23, 44, 0.75) 45%,
+    rgba(7, 23, 44, 0.94) 100%
+  );
+  z-index: 1;
+}
+
+.cruise-hero__content {
+  position: relative;
+  z-index: 2;
+  max-width: 980px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.cruise-hero__pill-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
+.cruise-hero__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--cruise-radius-pill);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--cruise-gold-light);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.cruise-hero__pill-icon {
+  color: var(--cruise-gold);
+  font-size: 1rem;
+}
+
+.cruise-hero__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5.5vw, 4.4rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: var(--cruise-white);
+  margin-bottom: 18px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.cruise-hero__title span {
+  background: linear-gradient(135deg, #FFFFFF 20%, #BAE6FD 60%, var(--cruise-gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cruise-hero__subheading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.15rem, 2.2vw, 1.6rem);
+  font-weight: 500;
+  color: #E2E8F0;
+  margin-bottom: 16px;
+  line-height: 1.4;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.cruise-hero__desc {
+  font-size: clamp(0.95rem, 1.2vw, 1.12rem);
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 720px;
+  margin: 0 auto 36px;
+  line-height: 1.7;
+}
+
+.cruise-hero__cta-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+/* Hero Wave Divider */
+.cruise-hero__wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.cruise-hero__wave svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 58px;
+  fill: var(--cruise-grey-light);
+}
+
+/* ==========================================================================
+   2. LUXURY BUTTONS
+   ========================================================================== */
+.cruise-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 28px;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  border-radius: var(--cruise-radius-sm);
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--cruise-transition);
+  border: 2px solid transparent;
+  white-space: nowrap;
+}
+
+.cruise-btn--gold {
+  background: linear-gradient(135deg, #E5A93C 0%, #D4AF37 50%, #C49B24 100%);
+  color: var(--cruise-navy);
+  box-shadow: 0 4px 18px rgba(212, 175, 55, 0.4);
+  border-color: #F1C40F;
+}
+
+.cruise-btn--gold:hover {
+  background: linear-gradient(135deg, #F5BA4C 0%, #E5BE42 50%, #D4AF37 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.55);
+  color: var(--cruise-navy);
+}
+
+.cruise-btn--primary {
+  background: var(--cruise-royal);
+  color: var(--cruise-white);
+  border-color: var(--cruise-royal);
+  box-shadow: 0 4px 16px rgba(27, 77, 137, 0.35);
+}
+
+.cruise-btn--primary:hover {
+  background: #143C6B;
+  border-color: #143C6B;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(27, 77, 137, 0.45);
+  color: var(--cruise-white);
+}
+
+.cruise-btn--outline-white {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--cruise-white);
+  border-color: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(8px);
+}
+
+.cruise-btn--outline-white:hover {
+  background: var(--cruise-white);
+  color: var(--cruise-navy);
+  border-color: var(--cruise-white);
+  transform: translateY(-2px);
+}
+
+.cruise-btn--whatsapp {
+  background: #25D366;
+  color: #FFFFFF;
+  border-color: #25D366;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+}
+
+.cruise-btn--whatsapp:hover {
+  background: #1FB855;
+  border-color: #1FB855;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(37, 211, 102, 0.45);
+  color: #FFFFFF;
+}
+
+.cruise-btn--sm {
+  padding: 10px 18px;
+  font-size: 0.82rem;
+}
+
+.cruise-btn--full {
+  width: 100%;
+}
+
+/* ==========================================================================
+   3. SECTION BASICS & TYPOGRAPHY
+   ========================================================================== */
+.cruise-section {
+  padding: 90px 0;
+  position: relative;
+}
+
+.cruise-section--alt {
+  background-color: var(--cruise-white);
+}
+
+.cruise-section--grey {
+  background-color: var(--cruise-grey-light);
+}
+
+.cruise-section--navy {
+  background: radial-gradient(circle at 50% 20%, var(--cruise-navy-card) 0%, var(--cruise-navy) 100%);
+  color: var(--cruise-white);
+}
+
+.cruise-section__header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 52px;
+}
+
+.cruise-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cruise-royal);
+  background: var(--cruise-sky);
+  padding: 6px 14px;
+  border-radius: var(--cruise-radius-pill);
+  margin-bottom: 14px;
+}
+
+.cruise-section--navy .cruise-tag {
+  color: var(--cruise-gold);
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.cruise-section__title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.9rem, 3.2vw, 2.8rem);
+  font-weight: 700;
+  color: var(--cruise-navy);
+  margin-bottom: 14px;
+  line-height: 1.2;
+}
+
+.cruise-section--navy .cruise-section__title {
+  color: var(--cruise-white);
+}
+
+.cruise-section__desc {
+  font-size: 1.05rem;
+  color: var(--cruise-text-muted);
+  line-height: 1.7;
+}
+
+.cruise-section--navy .cruise-section__desc {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* ==========================================================================
+   4. INTRODUCTION SECTION (SPLIT LAYOUT)
+   ========================================================================== */
+.cruise-intro-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.cruise-intro__content h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.4vw, 2.7rem);
+  color: var(--cruise-navy);
+  line-height: 1.25;
+  margin-bottom: 20px;
+}
+
+.cruise-intro__content p {
+  font-size: 1.05rem;
+  color: var(--cruise-text-main);
+  line-height: 1.8;
+  margin-bottom: 18px;
+}
+
+.cruise-intro__features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 28px 0 32px;
+}
+
+.cruise-intro__feat-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  background: var(--cruise-white);
+  border: 1px solid var(--cruise-grey-border);
+  border-radius: var(--cruise-radius-sm);
+  box-shadow: var(--cruise-shadow-sm);
+}
+
+.cruise-intro__feat-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--cruise-sky);
+  color: var(--cruise-royal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.cruise-intro__feat-text h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--cruise-navy);
+  margin-bottom: 2px;
+}
+
+.cruise-intro__feat-text p {
+  font-size: 0.82rem;
+  color: var(--cruise-text-muted);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.cruise-intro__image-wrap {
+  position: relative;
+}
+
+.cruise-intro__img-card {
+  position: relative;
+  border-radius: var(--cruise-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--cruise-shadow-lg);
+  aspect-ratio: 4 / 5;
+}
+
+.cruise-intro__img-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cruise-intro__badge-float {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  background: rgba(7, 23, 44, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--cruise-radius-md);
+  padding: 18px 22px;
+  color: var(--cruise-white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cruise-intro__badge-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--cruise-gold);
+}
+
+.cruise-intro__badge-sub {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ==========================================================================
+   5. EXPLORE CRUISE HOLIDAY CATEGORIES (6 CARDS)
+   ========================================================================== */
+.cruise-cats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.cruise-cat-card {
+  position: relative;
+  background: var(--cruise-white);
+  border-radius: var(--cruise-radius-md);
+  overflow: hidden;
+  border: 1px solid var(--cruise-grey-border);
+  box-shadow: var(--cruise-shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: var(--cruise-transition);
+}
+
+.cruise-cat-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--cruise-shadow-lg);
+  border-color: var(--cruise-ocean-light);
+}
+
+.cruise-cat-card__media {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+  background-color: var(--cruise-navy);
+}
+
+.cruise-cat-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cruise-cat-card:hover .cruise-cat-card__media img {
+  transform: scale(1.08);
+}
+
+.cruise-cat-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(7, 23, 44, 0.75) 100%);
+}
+
+.cruise-cat-card__badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(7, 23, 44, 0.8);
+  backdrop-filter: blur(8px);
+  color: var(--cruise-gold);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--cruise-radius-pill);
+}
+
+.cruise-cat-card__body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.cruise-cat-card__title {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--cruise-navy);
+  margin-bottom: 8px;
+}
+
+.cruise-cat-card__desc {
+  font-size: 0.92rem;
+  color: var(--cruise-text-muted);
+  line-height: 1.6;
+  margin-bottom: 14px;
+  flex: 1;
+}
+
+.cruise-cat-card__destinations {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--cruise-royal);
+  background: var(--cruise-sky-light);
+  padding: 6px 12px;
+  border-radius: var(--cruise-radius-sm);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cruise-cat-card__btn {
+  align-self: flex-start;
+  color: var(--cruise-royal);
+  font-weight: 600;
+  font-size: 0.88rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--cruise-transition);
+}
+
+.cruise-cat-card__btn:hover {
+  color: var(--cruise-ocean);
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   6. FEATURED CRUISE PACKAGE SECTION (CORDELIA SKY CRUISE – DIWALI 2026)
+   ========================================================================== */
+.cruise-featured-banner {
+  background: linear-gradient(145deg, #07172C 0%, #0F2D54 60%, #0A223E 100%);
+  border-radius: var(--cruise-radius-lg);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 0 25px 60px rgba(7, 23, 44, 0.4);
+  padding: 44px;
+  color: var(--cruise-white);
+  position: relative;
+  overflow: hidden;
+}
+
+.cruise-featured-banner::before {
+  content: "";
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.cruise-featured-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  margin-bottom: 36px;
+}
+
+.cruise-featured-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(90deg, #D4AF37 0%, #F59E0B 100%);
+  color: var(--cruise-navy);
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: var(--cruise-radius-pill);
+  box-shadow: var(--cruise-shadow-gold);
+}
+
+.cruise-featured-status {
+  font-size: 0.85rem;
+  color: var(--cruise-ocean-light);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cruise-featured-status::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #38BDF8;
+  box-shadow: 0 0 8px #38BDF8;
+}
+
+.cruise-featured-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.cruise-featured-media {
+  position: relative;
+  border-radius: var(--cruise-radius-md);
+  overflow: hidden;
+  box-shadow: var(--cruise-shadow-md);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.cruise-featured-media img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.cruise-featured-banner:hover .cruise-featured-media img {
+  transform: scale(1.04);
+}
+
+.cruise-featured-route-tag {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  background: rgba(7, 23, 44, 0.88);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--cruise-radius-sm);
+  padding: 12px 16px;
+  font-size: 0.88rem;
+  color: var(--cruise-gold-light);
+}
+
+.cruise-featured-route-tag strong {
+  color: var(--cruise-white);
+  display: block;
+  font-size: 0.95rem;
+  margin-top: 2px;
+}
+
+.cruise-featured-info h3 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+  color: var(--cruise-white);
+  margin-bottom: 6px;
+  letter-spacing: 0.02em;
+}
+
+.cruise-featured-meta-bar {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+  font-size: 0.88rem;
+  color: var(--cruise-ocean-light);
+}
+
+.cruise-featured-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Pricing Table */
+.cruise-price-table-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--cruise-radius-md);
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.cruise-price-table-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--cruise-gold);
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cruise-price-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cruise-price-table th {
+  text-align: left;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cruise-text-muted);
+  padding: 8px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.cruise-price-table td {
+  padding: 10px;
+  font-size: 0.92rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.cruise-price-table tr:last-child td {
+  border-bottom: none;
+}
+
+.cruise-price-table .price-val {
+  font-weight: 700;
+  color: var(--cruise-white);
+  font-size: 1.05rem;
+  text-align: right;
+}
+
+.cruise-upgrade-box {
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px dashed rgba(212, 175, 55, 0.4);
+  border-radius: var(--cruise-radius-sm);
+  padding: 12px 16px;
+  margin-top: 14px;
+  font-size: 0.88rem;
+  color: var(--cruise-gold-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cruise-upgrade-box strong {
+  color: var(--cruise-gold);
+  font-size: 0.95rem;
+}
+
+/* Highlights Grid */
+.cruise-highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 16px;
+  margin-bottom: 26px;
+}
+
+.cruise-highlight-pill {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cruise-highlight-pill svg {
+  color: #38BDF8;
+  flex-shrink: 0;
+}
+
+/* Actions */
+.cruise-featured-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.cruise-disclaimer-notice {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.65);
+  background: rgba(0, 0, 0, 0.25);
+  padding: 10px 14px;
+  border-radius: var(--cruise-radius-sm);
+  border-left: 3px solid var(--cruise-gold);
+  line-height: 1.5;
+}
+
+/* Detailed Schedule Modal / Expandable Details */
+.cruise-itinerary-expandable {
+  margin-top: 24px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--cruise-radius-md);
+  padding: 24px;
+  display: none;
+}
+
+.cruise-itinerary-expandable.is-open {
+  display: block;
+  animation: fadeUp 0.4s ease;
+}
+
+.cruise-itin-days-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.cruise-itin-day-item {
+  background: rgba(7, 23, 44, 0.7);
+  padding: 14px;
+  border-radius: var(--cruise-radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cruise-itin-day-item .day-tag {
+  color: var(--cruise-gold);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.cruise-itin-day-item h5 {
+  font-size: 0.95rem;
+  color: var(--cruise-white);
+  margin: 4px 0 6px;
+}
+
+.cruise-itin-day-item p {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* ==========================================================================
+   7. CRUISE DESTINATIONS SECTION
+   ========================================================================== */
+.cruise-dest-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 36px;
+}
+
+.cruise-dest-tab-btn {
+  padding: 10px 24px;
+  border-radius: var(--cruise-radius-pill);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border: 2px solid var(--cruise-royal);
+  background: transparent;
+  color: var(--cruise-royal);
+  transition: var(--cruise-transition);
+}
+
+.cruise-dest-tab-btn.is-active,
+.cruise-dest-tab-btn:hover {
+  background: var(--cruise-royal);
+  color: var(--cruise-white);
+  box-shadow: 0 4px 14px rgba(27, 77, 137, 0.25);
+}
+
+.cruise-dest-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.cruise-dest-card {
+  background: var(--cruise-white);
+  border-radius: var(--cruise-radius-md);
+  overflow: hidden;
+  border: 1px solid var(--cruise-grey-border);
+  box-shadow: var(--cruise-shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: var(--cruise-transition);
+}
+
+.cruise-dest-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--cruise-shadow-lg);
+  border-color: var(--cruise-ocean-light);
+}
+
+.cruise-dest-card__media {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+}
+
+.cruise-dest-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.cruise-dest-card:hover .cruise-dest-card__media img {
+  transform: scale(1.08);
+}
+
+.cruise-dest-card__region-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(7, 23, 44, 0.85);
+  backdrop-filter: blur(6px);
+  color: var(--cruise-gold-light);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--cruise-radius-pill);
+}
+
+.cruise-dest-card__body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.cruise-dest-card__title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  color: var(--cruise-navy);
+  margin-bottom: 6px;
+}
+
+.cruise-dest-card__desc {
+  font-size: 0.86rem;
+  color: var(--cruise-text-muted);
+  line-height: 1.55;
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.cruise-dest-card__btn {
+  align-self: flex-start;
+  color: var(--cruise-royal);
+  font-weight: 600;
+  font-size: 0.82rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: var(--cruise-transition);
+}
+
+.cruise-dest-card__btn:hover {
+  color: var(--cruise-ocean);
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   8. LIFE ONBOARD – CRUISE EXPERIENCES (6 CARDS)
+   ========================================================================== */
+.cruise-onboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.cruise-onboard-card {
+  position: relative;
+  height: 320px;
+  border-radius: var(--cruise-radius-md);
+  overflow: hidden;
+  box-shadow: var(--cruise-shadow-md);
+  cursor: pointer;
+  transition: var(--cruise-transition);
+}
+
+.cruise-onboard-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--cruise-shadow-lg);
+}
+
+.cruise-onboard-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cruise-onboard-card:hover img {
+  transform: scale(1.1);
+}
+
+.cruise-onboard-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(7, 23, 44, 0.15) 0%,
+    rgba(7, 23, 44, 0.6) 50%,
+    rgba(7, 23, 44, 0.95) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 28px;
+  color: var(--cruise-white);
+}
+
+.cruise-onboard-card__num {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--cruise-gold);
+  letter-spacing: 0.12em;
+  margin-bottom: 6px;
+}
+
+.cruise-onboard-card__title {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--cruise-white);
+  margin-bottom: 8px;
+}
+
+.cruise-onboard-card__desc {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ==========================================================================
+   9. CRUISE CABIN OPTIONS
+   ========================================================================== */
+.cruise-cabins-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.cruise-cabin-card {
+  background: var(--cruise-white);
+  border-radius: var(--cruise-radius-md);
+  overflow: hidden;
+  border: 1px solid var(--cruise-grey-border);
+  box-shadow: var(--cruise-shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: var(--cruise-transition);
+}
+
+.cruise-cabin-card:hover {
+  transform: translateY(-7px);
+  box-shadow: var(--cruise-shadow-lg);
+  border-color: var(--cruise-royal);
+}
+
+.cruise-cabin-card__media {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.cruise-cabin-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.cruise-cabin-card:hover .cruise-cabin-card__media img {
+  transform: scale(1.08);
+}
+
+.cruise-cabin-card__body {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.cruise-cabin-card__title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  color: var(--cruise-navy);
+  margin-bottom: 8px;
+}
+
+.cruise-cabin-card__desc {
+  font-size: 0.88rem;
+  color: var(--cruise-text-muted);
+  line-height: 1.6;
+  margin-bottom: 18px;
+  flex: 1;
+}
+
+.cruise-cabins-note {
+  max-width: 760px;
+  margin: 36px auto 0;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--cruise-text-muted);
+  background: var(--cruise-sky-light);
+  padding: 14px 20px;
+  border-radius: var(--cruise-radius-sm);
+  border: 1px solid var(--cruise-sky);
+}
+
+/* ==========================================================================
+   10. WHY CHOOSE ORION SKY HOLIDAY? (8 ADVANTAGES)
+   ========================================================================== */
+.cruise-why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.cruise-why-card {
+  background: var(--cruise-white);
+  padding: 28px 22px;
+  border-radius: var(--cruise-radius-md);
+  border: 1px solid var(--cruise-grey-border);
+  box-shadow: var(--cruise-shadow-sm);
+  transition: var(--cruise-transition);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.cruise-why-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--cruise-shadow-md);
+  border-color: var(--cruise-ocean-light);
+}
+
+.cruise-why-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--cruise-radius-sm);
+  background: var(--cruise-sky);
+  color: var(--cruise-royal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+  transition: var(--cruise-transition);
+}
+
+.cruise-why-card:hover .cruise-why-icon {
+  background: var(--cruise-royal);
+  color: var(--cruise-white);
+}
+
+.cruise-why-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--cruise-navy);
+  margin-bottom: 8px;
+}
+
+.cruise-why-desc {
+  font-size: 0.88rem;
+  color: var(--cruise-text-muted);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ==========================================================================
+   11. HOW CRUISE BOOKING WORKS (TIMELINE)
+   ========================================================================== */
+.cruise-timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  position: relative;
+  margin-top: 40px;
+}
+
+.cruise-timeline::before {
+  content: "";
+  position: absolute;
+  top: 36px;
+  left: 60px;
+  right: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cruise-royal), var(--cruise-ocean-light));
+  z-index: 0;
+}
+
+.cruise-timeline-step {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cruise-timeline-num {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--cruise-navy);
+  border: 4px solid var(--cruise-white);
+  box-shadow: 0 4px 20px rgba(7, 23, 44, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--cruise-gold);
+  margin-bottom: 20px;
+  transition: var(--cruise-transition);
+}
+
+.cruise-timeline-step:hover .cruise-timeline-num {
+  background: var(--cruise-royal);
+  color: var(--cruise-white);
+  transform: scale(1.08);
+}
+
+.cruise-timeline-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--cruise-navy);
+  margin-bottom: 8px;
+}
+
+.cruise-timeline-desc {
+  font-size: 0.88rem;
+  color: var(--cruise-text-muted);
+  line-height: 1.6;
+  max-width: 240px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   12. CRUISE ENQUIRY FORM SECTION
+   ========================================================================== */
+.cruise-form-card {
+  background: var(--cruise-white);
+  border-radius: var(--cruise-radius-lg);
+  box-shadow: var(--cruise-shadow-lg);
+  border: 1px solid var(--cruise-grey-border);
+  padding: 44px 48px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cruise-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.cruise-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.cruise-form-group--full {
+  grid-column: 1 / -1;
+}
+
+.cruise-form-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--cruise-navy);
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cruise-form-label .req {
+  color: #DC2626;
+}
+
+.cruise-form-input,
+.cruise-form-select,
+.cruise-form-textarea {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1px solid var(--cruise-grey-border);
+  border-radius: var(--cruise-radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--cruise-text-main);
+  background-color: var(--cruise-grey-light);
+  transition: var(--cruise-transition);
+}
+
+.cruise-form-input:focus,
+.cruise-form-select:focus,
+.cruise-form-textarea:focus {
+  outline: none;
+  background-color: var(--cruise-white);
+  border-color: var(--cruise-royal);
+  box-shadow: 0 0 0 4px rgba(27, 77, 137, 0.12);
+}
+
+.cruise-form-textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.cruise-form-error {
+  color: #DC2626;
+  font-size: 0.78rem;
+  margin-top: 4px;
+  display: none;
+}
+
+.cruise-form-group.has-error .cruise-form-input,
+.cruise-form-group.has-error .cruise-form-select {
+  border-color: #DC2626;
+  background-color: #FEF2F2;
+}
+
+.cruise-form-group.has-error .cruise-form-error {
+  display: block;
+}
+
+.cruise-form-actions {
+  grid-column: 1 / -1;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Submission Result Card */
+.cruise-success-card {
+  display: none;
+  background: linear-gradient(145deg, #F0FDF4 0%, #DCFCE7 100%);
+  border: 2px solid #22C55E;
+  border-radius: var(--cruise-radius-md);
+  padding: 32px;
+  text-align: center;
+  margin-top: 24px;
+  animation: fadeUp 0.4s ease;
+}
+
+.cruise-success-card.is-visible {
+  display: block;
+}
+
+.cruise-success-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #22C55E;
+  color: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin-bottom: 14px;
+}
+
+.cruise-success-title {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  color: #14532D;
+  margin-bottom: 8px;
+}
+
+.cruise-success-text {
+  font-size: 0.95rem;
+  color: #166534;
+  max-width: 540px;
+  margin: 0 auto 20px;
+  line-height: 1.6;
+}
+
+.cruise-ref-pill {
+  display: inline-block;
+  background: #FFFFFF;
+  border: 1px solid #86EFAC;
+  padding: 6px 16px;
+  border-radius: var(--cruise-radius-pill);
+  font-weight: 700;
+  color: #15803D;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+/* ==========================================================================
+   13. WHATSAPP & CALL NOW INTEGRATION
+   ========================================================================== */
+.cruise-floating-call {
+  position: fixed;
+  bottom: 92px;
+  right: 24px;
+  z-index: 890;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--cruise-navy);
+  color: var(--cruise-white);
+  padding: 10px 18px;
+  border-radius: var(--cruise-radius-pill);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  transition: var(--cruise-transition);
+}
+
+.cruise-floating-call:hover {
+  background: var(--cruise-royal);
+  color: var(--cruise-white);
+  transform: scale(1.05);
+}
+
+/* ==========================================================================
+   14. FREQUENTLY ASKED QUESTIONS (ACCORDION)
+   ========================================================================== */
+.cruise-faq-wrap {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.cruise-faq-item {
+  background: var(--cruise-white);
+  border: 1px solid var(--cruise-grey-border);
+  border-radius: var(--cruise-radius-sm);
+  margin-bottom: 14px;
+  overflow: hidden;
+  box-shadow: var(--cruise-shadow-sm);
+  transition: var(--cruise-transition);
+}
+
+.cruise-faq-item:hover {
+  border-color: var(--cruise-royal);
+}
+
+.cruise-faq-trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--cruise-navy);
+  text-align: left;
+  cursor: pointer;
+  gap: 16px;
+  transition: color 0.2s ease;
+}
+
+.cruise-faq-trigger:hover,
+.cruise-faq-item.is-open .cruise-faq-trigger {
+  color: var(--cruise-royal);
+}
+
+.cruise-faq-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--cruise-sky);
+  color: var(--cruise-royal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.cruise-faq-item.is-open .cruise-faq-icon {
+  transform: rotate(180deg);
+  background: var(--cruise-royal);
+  color: var(--cruise-white);
+}
+
+.cruise-faq-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0 24px;
+}
+
+.cruise-faq-item.is-open .cruise-faq-content {
+  padding: 0 24px 22px;
+}
+
+.cruise-faq-content p {
+  font-size: 0.95rem;
+  color: var(--cruise-text-muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ==========================================================================
+   15. FINAL CALL-TO-ACTION SECTION (SUNSET OCEAN BANNER)
+   ========================================================================== */
+.cruise-final-cta {
+  position: relative;
+  padding: 110px 24px;
+  background-color: var(--cruise-navy);
+  color: var(--cruise-white);
+  text-align: center;
+  overflow: hidden;
+}
+
+.cruise-final-cta__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.cruise-final-cta__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cruise-final-cta__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(7, 23, 44, 0.72) 0%,
+    rgba(7, 23, 44, 0.88) 100%
+  );
+  z-index: 1;
+}
+
+.cruise-final-cta__content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cruise-final-cta__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.1rem, 4.2vw, 3.4rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--cruise-white);
+  margin-bottom: 18px;
+  line-height: 1.15;
+}
+
+.cruise-final-cta__desc {
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.7;
+  max-width: 660px;
+  margin: 0 auto 36px;
+}
+
+.cruise-final-cta__actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   16. RESPONSIVE BREAKPOINTS (DESKTOP, TABLET, MOBILE)
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .cruise-intro-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .cruise-cats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cruise-featured-main-grid {
+    grid-template-columns: 1fr;
+  }
+  .cruise-featured-banner {
+    padding: 32px;
+  }
+  .cruise-dest-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cruise-cabins-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cruise-why-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cruise-onboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .cruise-section {
+    padding: 60px 0;
+  }
+  .cruise-cats-grid {
+    grid-template-columns: 1fr;
+  }
+  .cruise-dest-grid {
+    grid-template-columns: 1fr;
+  }
+  .cruise-onboard-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .cruise-cabins-grid {
+    grid-template-columns: 1fr;
+  }
+  .cruise-why-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .cruise-timeline {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .cruise-timeline::before {
+    top: 40px;
+    bottom: 40px;
+    left: 36px;
+    right: auto;
+    width: 2px;
+    height: auto;
+  }
+  .cruise-timeline-step {
+    flex-direction: row;
+    text-align: left;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .cruise-timeline-num {
+    width: 58px;
+    height: 58px;
+    font-size: 1.15rem;
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+  .cruise-timeline-desc {
+    margin: 0;
+    max-width: 100%;
+  }
+  .cruise-form-card {
+    padding: 28px 20px;
+  }
+  .cruise-form-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .cruise-itin-days-grid {
+    grid-template-columns: 1fr;
+  }
+  .cruise-highlights-grid {
+    grid-template-columns: 1fr;
+  }
+  .cruise-floating-call {
+    display: none; /* Keep mobile screen clean for main WhatsApp button */
+  }
+  .cruise-hero__cta-group {
+    flex-direction: column;
+    width: 100%;
+  }
+  .cruise-hero__cta-group .cruise-btn {
+    width: 100%;
+  }
+}
+
