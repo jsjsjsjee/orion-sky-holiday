@@ -823,14 +823,33 @@
   }
 }
 
-/* --- WhatsApp Float Mobile --- */
+/* --- Header logo + floating buttons on mobile --- */
 @media (max-width: 768px) {
+  .header__logo-icon,
+  .header__logo-icon img,
+  .header__logo-mark-img,
+  .logo-icon img {
+    width: 56px;
+    height: 56px;
+  }
+
+  .footer__brand-logo img,
+  .footer-brand .logo-icon img {
+    width: 56px;
+    height: 56px;
+  }
+
   .whatsapp-float {
     bottom: 20px;
     right: 20px;
     width: 56px;
     height: 56px;
     font-size: 1.5rem;
+  }
+
+  .scroll-top-btn {
+    right: 20px;
+    bottom: 88px;
   }
 }
 
@@ -857,5 +876,4 @@
   .newsletter-form .btn {
     width: 100%;
   }
-}
 }

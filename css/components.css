@@ -33,15 +33,24 @@
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   text-decoration: none;
   flex-shrink: 0;
 }
 
 .logo-icon {
-  font-size: 1.4rem;
-  color: var(--coral);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
   line-height: 1;
+}
+
+.logo-icon img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  display: block;
 }
 
 .logo-text {
@@ -351,13 +360,15 @@
 .header__logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   font-family: var(--font-heading);
   font-size: 1.35rem;
   font-weight: 700;
   color: var(--white);
   z-index: 2;
   transition: color var(--transition-base);
+  text-decoration: none;
+  flex-shrink: 0;
 }
 
 .header--solid .header__logo {
@@ -365,16 +376,32 @@
 }
 
 .header__logo-icon {
-  width: 36px;
-  height: 36px;
+  width: 64px;
+  height: 64px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .header__logo-icon svg {
   width: 100%;
   height: 100%;
+}
+
+.header__logo-icon img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  display: block;
+}
+
+.header__logo-mark-img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
 }
 
 /* Desktop Nav */
@@ -699,7 +726,7 @@
    ===================== */
 .whatsapp-float {
   position: fixed;
-  z-index: var(--z-whatsapp);
+  z-index: 1200;
   bottom: 24px;
   right: 24px;
   width: 56px;
@@ -709,9 +736,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
   transition: transform var(--transition-base), box-shadow var(--transition-base);
   cursor: pointer;
+  pointer-events: auto;
 }
 
 .whatsapp-float:hover {
@@ -750,6 +778,65 @@
 }
 
 /* =====================
+   SCROLL UP BUTTON
+   ===================== */
+.scroll-top-btn {
+  position: fixed;
+  z-index: 1200;
+  right: 24px;
+  bottom: 92px;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--primary);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(15, 76, 92, 0.35);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity var(--transition-base), transform var(--transition-base), background-color var(--transition-fast),
+    visibility var(--transition-base);
+  cursor: pointer;
+  pointer-events: none;
+}
+
+.scroll-top-btn.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.scroll-top-btn:hover {
+  background-color: var(--coral);
+  color: var(--white);
+}
+
+.scroll-top-btn svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  display: block;
+  fill: currentColor;
+}
+
+.scroll-top-btn:focus-visible {
+  outline: 2px solid var(--coral);
+  outline-offset: 3px;
+}
+
+.scroll-top-btn[aria-hidden="true"] {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* =====================
    FOOTER
    ===================== */
 .footer {
@@ -778,7 +865,15 @@
   margin-bottom: 16px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+}
+
+.footer__brand-logo img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
 }
 
 .footer__brand p {
@@ -1133,9 +1228,10 @@
 .trust-bar__item {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   justify-content: center;
   text-align: left;
+  min-width: 0;
 }
 
 .trust-bar__icon {
@@ -1144,7 +1240,12 @@
   flex-shrink: 0;
   display: flex;
   align-items: center;
+  justify-content: center;
   line-height: 1;
+  width: 36px;
+  min-height: 36px;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .trust-bar__text {
@@ -1156,6 +1257,11 @@
 .trust-bar__text strong {
   display: block;
   font-weight: 700;
+  white-space: nowrap;
+}
+
+.trust-bar__text {
+  white-space: nowrap;
 }
 
 /* =====================
@@ -3352,6 +3458,16 @@
   color: #fff;
 }
 
+.footer-brand .logo-icon img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+
+
+
 .footer-tagline {
   font-size: 0.92rem;
   line-height: 1.65;
@@ -3996,12 +4112,24 @@
 .header__logo-icon {
   display: flex;
   align-items: center;
+  justify-content: center;
   color: var(--coral);
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
 }
 
 .header__logo-icon svg {
   width: 32px;
   height: 32px;
+}
+
+.header__logo-icon img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
 }
 
 /* --- Desktop Nav --- */
@@ -4621,18 +4749,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  text-align: center;
+  gap: 14px;
+  text-align: left;
+  min-width: 0;
 }
 
 .trust-bar__icon {
   font-size: 1rem;
   color: var(--coral);
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  width: 36px;
+  min-height: 36px;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .trust-bar__icon svg {
   color: var(--primary);
+  flex-shrink: 0;
 }
 
 .trust-bar__text {
@@ -4645,6 +4783,7 @@
 .trust-bar__text strong {
   color: var(--primary-dark);
   display: block;
+  white-space: nowrap;
 }
 
 
@@ -5188,9 +5327,8 @@
    INSTAGRAM SECTION WITH QR CODE
    ======================================== */
 .insta-showcase {
-  display: grid;
-  grid-template-columns: 1fr 340px;
-  gap: 36px;
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
@@ -5235,6 +5373,14 @@
   width: 170px;
   height: 170px;
   border-radius: 8px;
+}
+
+.qr-code-img {
+  display: block;
+  width: 170px;
+  height: 170px;
+  border-radius: 8px;
+  object-fit: contain;
 }
 
 .insta-qr-handle {
@@ -5333,7 +5479,8 @@
 .team-photo-wrap img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   transition: transform 0.3s ease;
 }
 
@@ -5347,6 +5494,56 @@
   font-weight: 700;
   color: var(--primary-dark);
   margin: 0;
+}
+
+/* ========================================
+   LEGAL / NARROW CONTENT
+   ======================================== */
+.container--narrow {
+  max-width: 860px;
+}
+
+.legal-content h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  color: var(--text-dark);
+  margin: 38px 0 14px;
+}
+
+.legal-content h2:first-child {
+  margin-top: 0;
+}
+
+.legal-content h3 {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  color: var(--text-dark);
+  margin: 26px 0 10px;
+}
+
+.legal-content p {
+  color: var(--text-body);
+  margin-bottom: 14px;
+}
+
+.legal-content ul {
+  margin: 0 0 16px 22px;
+}
+
+.legal-content ul li {
+  margin-bottom: 8px;
+  color: var(--text-body);
+}
+
+.legal-content a {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.legal-updated {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
 }
 
 /* ========================================

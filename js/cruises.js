@@ -256,7 +256,7 @@
         (enquiryData.requirements ? '*Notes:* ' + enquiryData.requirements + '\n' : '') +
         '\nPlease share pricing, cabin availability and booking details. Thank you!';
 
-      var waUrl = 'https://wa.me/917990829583?text=' + encodeURIComponent(waMsg);
+      var waUrl = 'https://wa.me/919428301111?text=' + encodeURIComponent(waMsg);
 
       // Display Success Card
       if (refPill) refPill.textContent = 'Reference ID: ' + refCode;

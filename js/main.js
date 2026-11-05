@@ -10,6 +10,7 @@
     initSmoothScroll();
     initCurrentYear();
     initActiveNavLink();
+    initScrollTop();
   });
 
   /* --- Set 100vh properly on mobile --- */
@@ -57,6 +58,29 @@
       if (href && href.includes(currentPage) && currentPage !== '') {
         link.classList.add('is-active');
       }
+    });
+  }
+
+  /* --- Scroll Up / Back to Top Button --- */
+  function initScrollTop() {
+    var btn = document.getElementById('scrollTopBtn');
+    if (!btn) return;
+
+    function toggle() {
+      if (window.scrollY > 300) {
+        btn.classList.add('is-visible');
+        btn.setAttribute('aria-hidden', 'false');
+      } else {
+        btn.classList.remove('is-visible');
+        btn.setAttribute('aria-hidden', 'true');
+      }
+    }
+
+    window.addEventListener('scroll', toggle, { passive: true });
+    toggle();
+
+    btn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 })();
